@@ -13,7 +13,7 @@ module.exports = {
         password,
         database,
         host,
-        dialect: 'postgres',
+        dialect: 'sqlite',
         seederStorage: 'sequelize'
     },
     production: {
