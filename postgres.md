@@ -7,7 +7,7 @@ In the backend/package.json, you will see some scripts to help manage postgres
 1. create a user
 
 ```sh
-psql -c "CREATE USER <user> WITH PASSWORD 'password'"
+psql -c "CREATE USER <user> WITH PASSWORD 'password' CREATEDB"
 ```
 
 2. create a database
