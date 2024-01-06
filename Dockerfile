@@ -49,13 +49,20 @@ ENV JWT_SECRET=${JWT_SECRET}
 ARG JWT_EXPIRES_IN=60400
 ENV JWT_EXPIRES_IN=${JWT_EXPIRES_IN}
 
+#AWS
+ARG AWS_ACCESS_KEY_ID
+ENV AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+ARG AWS_SECRET_ACCESS_KEY
+ENV AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+ARG AWS_BUCKET_NAME
+ENV AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+
 WORKDIR /var/www
 
 COPY /backend/package.json .
 COPY /backend/.sequelizerc .
 
 COPY --from=frontend frontend/dist ./frontend/dist
-# COPY --from=frontend frontend/public .frontend/public
 
 RUN npm install --only=production
 
