@@ -37,7 +37,6 @@ ARG SCHEMA=skely
 ENV SCHEMA=${SCHEMA}
 
 # Fill this out on render using internal db url, or external url if running locally on docker
-ARG DATABASE_URL=postgres://anthony_database_user:7gPQb5LJmzndygVlo33nArPsaJwwyNXl@dpg-clihn6lkt82s73fctb90-a.ohio-postgres.render.com/anthony_database
 #schema for render
 ENV DATABASE_URL=${DATABASE_URL}
 
