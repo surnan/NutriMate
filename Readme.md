@@ -1,3 +1,5 @@
+<!-- "Frondend > Backend > AWS > Backend > Database > Backend > Frontend" -->
+
 # Calorie Mate
 
 ## Database Schema Design

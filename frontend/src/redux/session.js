@@ -71,6 +71,40 @@ export const thunkLogout = () => async (dispatch) => {
     dispatch(removeUser());
 };
 
+export const updateUserThunk = (userId, form) => async (dispatch) => {
+    const { img_url } = form
+    try{
+
+        const formData = new FormData();
+
+        formData.append('userId', userId)
+        formData.append("image", img_url);
+
+        const option = {
+            method: "PUT",
+            headers: { 'Content-Type': 'multipart/form-data' },
+            body: formData
+        }
+
+        const response = await csrfFetch(`/api/users/${userId}/update`, option);
+        if (response.ok) {
+            const user = await response.json();
+            dispatch(editUser(user));
+
+        } else if (response.status < 500) {
+            const data = await response.json();
+            if (data.errors) {
+                return data
+            } else {
+                throw new Error('An error occured. Please try again.')
+            }
+        }
+        return response;
+    } catch(e){
+        return e
+    }
+}
+
 
 const initialState = { user: null };
 
