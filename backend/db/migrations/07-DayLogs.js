@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'FoodFacts';
+options.tableName = 'DayLogs';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,53 +15,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-      },
-      calories: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      servingSize: {
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-      },
-      servingUnit: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-      },
-      quantity: {
-        type: Sequelize.DECIMAL,
-        allowNull: true,
-      },
-      protein: {
+      userId:{
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      fats: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      carbs: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      sugar: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      company: {
-        type: Sequelize.INTEGER,
+      day:{
+        type: Sequelize.DATE,
         allowNull: true,
       },
       description: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING(512),
         allowNull: true,
       },
-      iconId: {
+      excerciseTimeId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: true
+      },
+      foodTimeId: {
+        type: Sequelize.INTEGER,
+        allowNull: true
       },
       createdAt: {
         allowNull: false,
