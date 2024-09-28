@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Users';
+options.tableName = 'FoodFacts';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,24 +15,53 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      name: {
         type: Sequelize.STRING(30),
         allowNull: false,
-        unique: true
       },
-      email: {
-        type: Sequelize.STRING(256),
+      calories: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true
       },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
-      },
-      profileImg: {
-        type: Sequelize.STRING(255),
+      servingSize: {
+        type: Sequelize.DECIMAL,
         allowNull: false,
-        defaultValue: ""
+      },
+      servingUnit: {
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      quantity: {
+        type: Sequelize.DECIMAL,
+        allowNull: true,
+      },
+      protein: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      fats: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      carbs: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      sugar: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      company: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.STRING(150),
+        allowNull: true,
+      },
+      iconId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
