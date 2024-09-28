@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Users';
+options.tableName = 'Icons';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,21 +15,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
+      name:{
         type: Sequelize.STRING(30),
-        allowNull: false,
-        unique: true
+        allowNull: true,
       },
-      email: {
-        type: Sequelize.STRING(255),
-        allowNull: false,
-        unique: true
-      },
-      hashedPassword: {
-        type: Sequelize.STRING.BINARY,
-        allowNull: false
-      },
-      profileImg: {
+      url: {
         type: Sequelize.STRING(255),
         allowNull: false,
         defaultValue: ""
