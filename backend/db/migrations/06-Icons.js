@@ -17,12 +17,11 @@ module.exports = {
       },
       name:{
         type: Sequelize.STRING(30),
-        allowNull: true,
+        allowNull: false,
       },
       url: {
         type: Sequelize.STRING(255),
-        allowNull: false,
-        defaultValue: ""
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

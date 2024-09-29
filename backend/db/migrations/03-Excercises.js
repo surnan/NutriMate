@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false
       },
       description: {
-        type: Sequelize.STRING(150),
+        type: Sequelize.STRING(500),
         allowNull: true,
       },
       excerciseImg: {
@@ -34,7 +34,7 @@ module.exports = {
       },
       ownerId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

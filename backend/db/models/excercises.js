@@ -4,7 +4,7 @@ const {
   Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Excercise extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,47 +14,49 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    username: {
+  Excercise.init({
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [4, 30],
-        isNotEmail(value) {
-          if (Validator.isEmail(value)) {
-            throw new Error('Cannot be an email.');
+        len: [2, 30],
+        isNameValid(value) {
+          if (value < 2) {
+            throw new Error('Name too short.');
+          } else if (value > 30) {
+            throw new Error('Name too long.');
           }
         }
       }
     },
-    email: {
+    description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
-        len: [3, 256]
+        len: [0, 500]
       }
     },
-    hashedPassword: {
-      // type: DataTypes.STRING.BINARY,
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [60, 60]
-      }
-    },
-    profileImg: {
+    excerciseImg: {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: ''
+    },
+    iconId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    ownerId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     }
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'Excercise',
     defaultScope: {
       attributes: {
-        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        exclude: ["createdAt", "updatedAt"]
       }
     }
   });
-  return User;
+  return Excercise;
 };

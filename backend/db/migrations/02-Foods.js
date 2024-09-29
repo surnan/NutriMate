@@ -19,12 +19,12 @@ module.exports = {
         type: Sequelize.STRING(30),
         allowNull: false
       },
-      servingUnit: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-      },
       servingSize: {
         type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      servingUnit: {
+        type: Sequelize.STRING(30),
         allowNull: false,
       },
       calories: {
@@ -48,7 +48,7 @@ module.exports = {
         allowNull: true,
       },
       company: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(30),
         allowNull: true,
       },
       description: {
