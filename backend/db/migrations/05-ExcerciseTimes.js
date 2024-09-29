@@ -17,23 +17,23 @@ module.exports = {
       },
       excerciseId:{
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       timestamp:{
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       calories: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       units: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       unitType: {
         type: Sequelize.STRING(30),
-        allowNull: true,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

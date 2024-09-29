@@ -17,15 +17,15 @@ module.exports = {
       },
       foodId:{
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       timestamp:{
         type: Sequelize.DATE,
-        allowNull: true,
+        allowNull: false,
       },
       quantity: {
         type: Sequelize.INTEGER,
-        allowNull: true,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
