@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Icons';
+options.tableName = 'WorkoutImages';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,13 +15,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name:{
-        type: Sequelize.STRING(30),
-        allowNull: false,
-      },
       url: {
         type: Sequelize.STRING(255),
-        allowNull: true
+        allowNull: false
+      },
+      foodId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      ownerId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Users' },
+        onDelete: 'CASCADE'
+      },
+      workoutId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Workouts' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

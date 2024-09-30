@@ -4,7 +4,7 @@ const {
   Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class ExcerciseTimes extends Model {
+  class ExcerciseTime extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  ExcerciseTimes.init({
+  ExcerciseTime.init({
     excerciseId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -37,12 +37,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'ExcerciseTimes',
+    modelName: 'ExcerciseTime',
     defaultScope: {
       attributes: {
         exclude: ["createdAt", "updatedAt"]
       }
     }
   });
-  return ExcerciseTimes;
+  return ExcerciseTime;
 };

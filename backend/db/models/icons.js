@@ -4,7 +4,7 @@ const {
   Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Icons extends Model {
+  class Icon extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Icons.init({
+  Icon.init({
     name: {
       type: DataTypes.STRING(30),
       allowNull: false
@@ -25,12 +25,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Icons',
+    modelName: 'Icon',
     defaultScope: {
       attributes: {
         exclude: ["createdAt", "updatedAt"]
       }
     }
   });
-  return Icons;
+  return Icon;
 };
