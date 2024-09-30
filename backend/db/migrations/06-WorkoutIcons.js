@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'Foods';
+options.tableName = 'WorkoutIcons';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,50 +15,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(30),
+      url: {
+        type: Sequelize.STRING(255),
         allowNull: false
       },
-      servingSize: {
-        type: Sequelize.DECIMAL,
-        allowNull: false,
-      },
-      servingUnit: {
-        type: Sequelize.STRING(30),
-        allowNull: false,
-      },
-      calories: {
+      foodId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      protein: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      fats: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      carbs: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      sugar: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      company: {
-        type: Sequelize.STRING(30),
-        allowNull: true,
-      },
-      description: {
-        type: Sequelize.STRING(500),
-        allowNull: true,
       },
       ownerId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         references: { model: 'Users' },
-        allowNull: true,
+        onDelete: 'CASCADE'
+      },
+      workoutId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Workouts' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

@@ -11,10 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
       DayLog.belongsTo(models.User, { foreignKey: 'userId' });
-      DayLog.belongsTo(models.ExerciseTime, { foreignKey: 'excerciseTimeId' });
-      DayLog.belongsTo(models.FoodTime, { foreignKey: 'foodTimeId' });
     }
   }
   DayLog.init({
