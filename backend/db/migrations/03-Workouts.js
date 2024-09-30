@@ -1,7 +1,7 @@
 'use strict';
 
 let options = {};
-options.tableName = 'DayLogs';
+options.tableName = 'Workouts';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -15,25 +15,19 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId:{
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      day:{
-        type: Sequelize.DATE,
-        allowNull: true,
+      name: {
+        type: Sequelize.STRING(30),
+        allowNull: false
       },
       description: {
-        type: Sequelize.STRING(512),
+        type: Sequelize.STRING(500),
         allowNull: true,
       },
-      excerciseTimeId: {
+      ownerId: {
         type: Sequelize.INTEGER,
-        allowNull: true
-      },
-      foodTimeId: {
-        type: Sequelize.INTEGER,
-        allowNull: true
+        allowNull: false,
+        references: { model: 'Users' },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
