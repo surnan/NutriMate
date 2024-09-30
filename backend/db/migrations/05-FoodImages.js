@@ -1,3 +1,4 @@
+// backend/db/05-FoodImages.js
 'use strict';
 
 let options = {};
@@ -25,7 +26,7 @@ module.exports = {
         references: { model: 'Foods' },
         onDelete: 'CASCADE'
       },
-      ownerId: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Users' },

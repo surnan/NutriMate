@@ -1,3 +1,4 @@
+// backend/db/03-Workouts.js
 'use strict';
 
 let options = {};
@@ -23,10 +24,10 @@ module.exports = {
         type: Sequelize.STRING(500),
         allowNull: true,
       },
-      ownerId: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: 'Users' },
+        allowNull: false,
         onDelete: 'CASCADE'
       },
       createdAt: {
