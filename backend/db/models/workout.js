@@ -4,7 +4,7 @@ const {
   Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Excercise extends Model {
+  class Workout extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,9 +12,13 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Workout.hasMany(models.WorkoutIcon, { foreignKey: 'workoutId' })
+      Workout.hasMany(models.WorkoutImage, { foreignKey: 'workoutId' })
+      Workout.hasMany(models.DayLog, { foreignKey: 'workoutId' })
+      Workout.belongsTo(models.User, { foreignKey: 'userId' })
     }
   }
-  Excercise.init({
+  Workout.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -36,27 +40,19 @@ module.exports = (sequelize, DataTypes) => {
         len: [0, 500]
       }
     },
-    excerciseImg: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      defaultValue: ''
-    },
-    iconId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
-    ownerId: {
+    userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    }
+      references: { model: 'Users' }
+    },
   }, {
     sequelize,
-    modelName: 'Excercise',
+    modelName: 'Workout',
     defaultScope: {
       attributes: {
         exclude: ["createdAt", "updatedAt"]
       }
     }
   });
-  return Excercise;
+  return Workout;
 };

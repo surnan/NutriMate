@@ -1,3 +1,4 @@
+// backend/db/07-WorkoutImages.js
 'use strict';
 
 let options = {};
@@ -19,20 +20,16 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false
       },
-      foodId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-      },
-      ownerId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Users' },
-        onDelete: 'CASCADE'
-      },
       workoutId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Workouts' },
+        onDelete: 'CASCADE'
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: { model: 'Users' },
         onDelete: 'CASCADE'
       },
       createdAt: {
