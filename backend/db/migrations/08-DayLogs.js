@@ -1,3 +1,4 @@
+// backend/db/08-DayLogs.js
 'use strict';
 
 let options = {};
@@ -15,7 +16,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      ownerId: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Users' },
@@ -23,15 +24,13 @@ module.exports = {
       },
       foodId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Foods' },
-        onDelete: 'CASCADE'
+        allowNull: true,
+        references: { model: 'Foods' }
       },
       workoutId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Workouts' },
-        onDelete: 'CASCADE'
+        allowNull: true,
+        references: { model: 'Workouts' }
       },
       timestamp: {
         type: Sequelize.DATE,

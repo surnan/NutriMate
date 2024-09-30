@@ -1,3 +1,4 @@
+// backend/db/02-Foods.js
 'use strict';
 
 let options = {};
@@ -55,10 +56,11 @@ module.exports = {
         type: Sequelize.STRING(500),
         allowNull: true,
       },
-      ownerId: {
+      userId: {
         type: Sequelize.INTEGER,
         references: { model: 'Users' },
-        allowNull: true,
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

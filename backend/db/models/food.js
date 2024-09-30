@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Food.hasMany(models.FoodIcon, { foreignKey: 'foodId' })
+            Food.hasMany(models.FoodImage, { foreignKey: 'foodId' })
+            Food.hasMany(models.DayLog, { foreignKey: 'foodId' })
+            Food.belongsTo(models.User, { foreignKey: 'userId' })
         }
     }
     Food.init({
@@ -20,10 +24,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 len: [1, 30],
-                isNameValid(value) {
-                    if (value < 1) {
-                        throw new Error('Name too short.');
-                    } else if (value > 30) {
+                isNameLengthValid(value) {
+                    if (value > 30) {
                         throw new Error('Name too long.');
                     }
                 }
@@ -34,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 isServingSizeValid(value) {
-                    if (value <= 0) {
+                    if (value < 0) {
                         throw new Error('servingSize must be greater than zero');
                     }
                 }
@@ -48,6 +50,11 @@ module.exports = (sequelize, DataTypes) => {
                 isNotEmptyAndNoLeadingWhitespace(value) {
                     if (value.length > 1 && /^\s/.test(value)) {
                         throw new Error('The first character cannot be a space or any whitespace.');
+                    }
+                },
+                isNameLengthValid(value) {
+                    if (value > 30) {
+                        throw new Error('Name too long.');
                     }
                 }
             }
@@ -69,7 +76,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 isProteinValid(value) {
                     if (value !== null && value < 0) {
-                        throw new Error('protein must be at least zero if provided');
+                        throw new Error('if protein has value then it must be at least zero');
                     }
                 }
             }
@@ -80,7 +87,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 isFatsValid(value) {
                     if (value !== null && value <= 0) {
-                        throw new Error('fats must be at least zero if provided');
+                        throw new Error('if fats has value then it must be at least zero if provided');
                     }
                 }
             }
@@ -124,26 +131,18 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 len: [0, 500],
-                isDescriptionLengthValid(value){
+                isDescriptionLengthValid(value) {
                     if (value.length > 500) {
                         throw new Error('The description length can not exceed 500');
                     }
                 }
             }
         },
-        foodImg: {
-            type: DataTypes.STRING(255),
+        userId: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: ''
+            references: { model: 'Users' }
         },
-        iconId: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        },
-        ownerId: {
-            type: DataTypes.INTEGER,
-            allowNull: true
-        }
     }, {
         sequelize,
         modelName: 'Food',
