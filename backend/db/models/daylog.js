@@ -12,29 +12,43 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       DayLog.belongsTo(models.User, { foreignKey: 'userId' });
+      DayLog.belongsTo(models.User, { foreignKey: 'userId' });
+      DayLog.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
   DayLog.init({
     userId: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {model: 'Users'}
     },
-    day: {
+    foodId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {model: 'Foods'}
+    },
+    workoutId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {model: 'Workouts'}
+    },
+    timestamp: {
       type: DataTypes.DATE,
       allowNull: false
     },
-    description: {
-      type: DataTypes.STRING(512),
-      allowNull: true
-    },
-    excerciseTimeId: {
+    calories: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    foodTimeId: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
+    units: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    unitType: {
+      type: DataTypes.STRING(15),
+      allowNull: true
+    },
+
   }, {
     sequelize,
     modelName: 'DayLog',
