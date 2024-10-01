@@ -38,15 +38,15 @@ module.exports = {
       },
       calories: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       units: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: true,
       },
       unitType: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
+        type: Sequelize.STRING(15),
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,
