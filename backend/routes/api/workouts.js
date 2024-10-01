@@ -13,5 +13,4 @@ router.get('/hello/world', (req, res) => {
     res.send('api/routes/workouts ---> Hello World!');
 });
 
-
 module.exports = router;
