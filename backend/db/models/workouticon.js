@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   WorkoutIcon.init({
-    name: {
-      type: DataTypes.STRING(30),
-      allowNull: false
-    },
     url: {
       type: DataTypes.STRING(255),
       allowNull: true
