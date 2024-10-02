@@ -29,6 +29,9 @@ router.get('/', async (req, res, next) => {
                 },
                 { 
                     model: WorkoutIcon,
+                },
+                { 
+                    model: WorkoutImage,
                 }
             ],
             attributes: {
