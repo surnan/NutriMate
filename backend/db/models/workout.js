@@ -12,9 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      // Workout.hasMany(models.DayLog, { foreignKey: 'workoutId' })
       Workout.hasMany(models.WorkoutIcon, { foreignKey: 'workoutId' })
       Workout.hasMany(models.WorkoutImage, { foreignKey: 'workoutId' })
-      Workout.hasMany(models.DayLog, { foreignKey: 'workoutId' })
       Workout.belongsTo(models.User, { foreignKey: 'userId' })
     }
   }
