@@ -4,7 +4,7 @@ const {
   Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class FoodIcon extends Model {
+  class GrubIcon extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,15 +12,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      FoodIcon.belongsTo(models.User, { foreignKey: 'userId' })
-      FoodIcon.belongsTo(models.Food, { foreignKey: 'foodId' })
+      GrubIcon.belongsTo(models.User, { foreignKey: 'userId' })
+      GrubIcon.belongsTo(models.Grub, { foreignKey: 'grubId' })
     }
   }
-  FoodIcon.init({
-    name: {
-      type: DataTypes.STRING(30),
-      allowNull: false
-    },
+  GrubIcon.init({
     url: {
       type: DataTypes.STRING(255),
       allowNull: true
@@ -30,19 +26,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       references: { model: 'Users' }
     },
-    foodId: {
+    grubId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: { model: 'Foods' }
+      references: { model: 'Grubs' }
     }
   }, {
     sequelize,
-    modelName: 'FoodIcon',
+    modelName: 'GrubIcon',
     defaultScope: {
       attributes: {
         exclude: ["createdAt", "updatedAt"]
       }
     }
   });
-  return FoodIcon;
+  return GrubIcon;
 };

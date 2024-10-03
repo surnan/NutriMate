@@ -1,7 +1,7 @@
 'use strict';
 
 // const {User, Sequelize} = require('../models');
-const { Food, Sequelize } = require('../models');
+const { grub, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 // options.tableName = 'Users';
@@ -20,8 +20,8 @@ module.exports = {
         return queryInterface.bulkInsert(options, [
             {
                 userId: 1,
-                foodId: 1,
-                workoutId: null,
+                // grubId: 1,
+                // workoutId: null,
                 timestamp: new Date('2023-05-01T07:00:00Z'),
                 calories: 300,
                 units: 5,
@@ -29,8 +29,8 @@ module.exports = {
             },
             {
                 userId: 2,
-                foodId: null,
-                workoutId: 1,
+                // grubId: null,
+                // workoutId: 1,
                 timestamp: new Date('2023-05-01T09:00:00Z'),
                 calories: 400,
                 units: 120,
@@ -38,8 +38,8 @@ module.exports = {
             },
             {
                 userId: 1,
-                foodId: 3,
-                workoutId: null,
+                // grubId: 3,
+                // workoutId: null,
                 timestamp: new Date('2023-05-01T08:00:00Z'),
                 calories: 100,
                 units: 2,
@@ -47,8 +47,8 @@ module.exports = {
             },
             {
                 userId: 2,
-                foodId: null,
-                workoutId: 3,
+                // grubId: null,
+                // workoutId: 3,
                 timestamp: new Date('2023-05-01T06:00:00Z'),
                 calories: 500,
                 units: 500,
@@ -56,8 +56,8 @@ module.exports = {
             },
             {
                 userId: 1,
-                foodId: 4,
-                workoutId: null,
+                // grubId: 4,
+                // workoutId: null,
                 timestamp: new Date('2023-05-01T03:00:00Z'),
                 calories: 250,
                 units: 10,
@@ -65,8 +65,8 @@ module.exports = {
             },
             {
                 userId: 2,
-                foodId: 5,
-                workoutId: null,
+                // grubId: 5,
+                // workoutId: null,
                 timestamp: new Date('2023-05-01T04:00:00Z'),
                 calories: 350,
                 units: 5,
@@ -74,8 +74,8 @@ module.exports = {
             },
             {
                 userId: 2,
-                foodId: null,
-                workoutId: 2,
+                // grubId: null,
+                // workoutId: 2,
                 timestamp: new Date('2023-05-01T02:00:00Z'),
                 calories: 650,
                 units: 5,

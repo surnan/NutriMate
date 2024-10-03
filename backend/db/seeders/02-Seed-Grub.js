@@ -1,11 +1,11 @@
 'use strict';
 
 // const {User, Sequelize} = require('../models');
-const {Food, Sequelize} = require('../models');
+const {Grub, Sequelize} = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 // options.tableName = 'Users';
-options.tableName = 'Foods';
+options.tableName = 'Grubs';
 
 
 
@@ -16,7 +16,7 @@ if(process.env.NODE_ENV === 'production'){
 module.exports = {
     up: async (queryInterface, Sequelize) => {
     //   options.tableName = "Users";
-      options.tableName = "Foods";
+      options.tableName = "Grubs";
       return queryInterface.bulkInsert(options, [
         {
           name: 'hamburger',
@@ -104,7 +104,7 @@ module.exports = {
 
     down: async (queryInterface, Sequelize) => {
     //   options.tableName = "Users";
-      options.tableName = "Foods";
+      options.tableName = "Grubs";
       const Op = Sequelize.Op;
       return queryInterface.bulkDelete(options, {
         username: {[Op.in]: []}
