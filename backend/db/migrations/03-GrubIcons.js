@@ -1,8 +1,8 @@
-// backend/db/04-FoodIcons.js
+// backend/db/04-GrubIcons.js
 'use strict';
 
 let options = {};
-options.tableName = 'FoodIcons';
+options.tableName = 'GrubIcons';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -20,10 +20,10 @@ module.exports = {
         type: Sequelize.STRING(255),
         allowNull: false
       },
-      foodId: {
+      grubId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Foods' }
+        references: { model: 'Grubs' }
       },
       userId: {
         type: Sequelize.INTEGER,
