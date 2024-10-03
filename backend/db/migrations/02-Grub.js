@@ -1,8 +1,8 @@
-// backend/db/05-FoodImages.js
+// backend/db/02-Grubs.js
 'use strict';
 
 let options = {};
-options.tableName = 'FoodImages';
+options.tableName = 'Grubs';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -16,20 +16,50 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      url: {
-        type: Sequelize.STRING(255),
+      name: {
+        type: Sequelize.STRING(30),
         allowNull: false
       },
-      foodId: {
+      servingSize: {
+        type: Sequelize.DECIMAL,
+        allowNull: false,
+      },
+      servingUnit: {
+        type: Sequelize.STRING(30),
+        allowNull: false,
+      },
+      calories: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Foods' },
-        onDelete: 'CASCADE'
+      },
+      protein: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      fats: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      carbs: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      sugar: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      company: {
+        type: Sequelize.STRING(30),
+        allowNull: true,
+      },
+      description: {
+        type: Sequelize.STRING(500),
+        allowNull: true,
       },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: { model: 'Users' },
+        allowNull: false,
         onDelete: 'CASCADE'
       },
       createdAt: {

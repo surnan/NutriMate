@@ -17,6 +17,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
+// sequelize.sync({ force: true })
+//   .then(() => {
+//     console.log('Database synced and all tables recreated.');
+//   })
+//   .catch(err => {
+//     console.error('Error syncing the database:', err);
+//   });
+
+
 // Security Middleware
 if (!isProduction) {
     // enable cors only in development

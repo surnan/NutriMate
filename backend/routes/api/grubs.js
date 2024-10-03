@@ -12,42 +12,44 @@ const router = express.Router();
 
 
 router.get('/hello/world', (req, res) => {
-    res.send('api/routes/workouts ---> Hello World!');
+    res.send('api/routes/food ---> Hello World!');
 });
 
 router.get('/', async (req, res, next) => {
-    // console.log('\n\nentered get route!!!\n\n')
-
+    
     try {
-        const workouts = await Workout.findAll({
+        const allGrubs = await Grub.findAll({
             include: [
-                { 
+                {
                     model: User,
                     attributes: {
                         exclude: ['id', 'hashedPassword', 'updatedAt']
                     } 
                 },
                 { 
-                    model: WorkoutIcon,
+                    model: GrubIcon,
                 },
                 { 
-                    model: WorkoutImage,
+                    model: GrubImage,
                 }
             ],
             attributes: {
                 exclude: ['userId']
             }
-        });
-
-        const answer = workouts.map(e=>{
+        })
+        
+        
+        const answer = allGrubs.map(e=>{
             const workoutJSON = e.toJSON();
             console.log('\n--> e = ', workoutJSON)
             return workoutJSON
         })
         // res.send('entered TRY-Block')       
-        res.json({Workouts: answer})
+        res.json({Grubs: answer})
+
+
     } catch (e) {
-        console.log('Route Error: ', e)
+        // console.log('Route Error: ', e)
         next(e)
     }
 });

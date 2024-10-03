@@ -22,16 +22,16 @@ module.exports = {
         references: { model: 'Users' },
         onDelete: 'CASCADE'
       },
-      foodId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: { model: 'Foods' }
-      },
-      workoutId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: { model: 'Workouts' }
-      },
+      // foodId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: true,
+      //   references: { model: 'Foods' }
+      // },
+      // workoutId: {
+      //   type: Sequelize.INTEGER,
+      //   allowNull: true,
+      //   references: { model: 'Workouts' }
+      // },
       timestamp: {
         type: Sequelize.DATE,
         allowNull: false,
