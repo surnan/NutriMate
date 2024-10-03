@@ -107,6 +107,7 @@ router.put('/:workoutId', async (req, res, next) => {
 
     try {
 
+        console.log("===> A")
         const workoutId = parseInt(req.params.workoutId)
         const currentWorkout = await Workout.findByPk(workoutId)
 
@@ -116,6 +117,7 @@ router.put('/:workoutId', async (req, res, next) => {
             })
         }
 
+        console.log("===> B")
         const {name, description, userId} = req.body
 
         const userIdINT = parseInt(userId)
@@ -128,10 +130,15 @@ router.put('/:workoutId', async (req, res, next) => {
             }
         )
 
-        let res = currentWorkout.toJSON();
+        console.log("===> C")
+        let currentWorkoutJSON = currentWorkout.toJSON();
 
-        response.json(res)
-        
+
+        console.log("===> D")
+
+        // response.json(res)
+        return res.status(201).json(currentWorkoutJSON)
+        console.log("===> E")
  
     } catch (e){
         console.log('Route Error: ', e)
