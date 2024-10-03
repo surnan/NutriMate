@@ -3,9 +3,9 @@
 const router = require('express').Router();
 const { restoreUser } = require('../../utils/auth.js');
 const daylogsRouter = require('./daylogs.js')
-const foodRouter = require('./food.js')
-const foodiconsRouter = require('./foodicons.js')
-const foodimagesRouter = require('./foodimages.js')
+const grubRouter = require('./grubs.js')
+const grubiconsRouter = require('./grubicons.js')
+const grubimagesRouter = require('./grubimages.js')
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const workouticonsRouter = require('./workoutIcons.js');
@@ -26,9 +26,9 @@ router.get('/hello/world', (req, res) => {
 router.use(restoreUser);
 
 router.use('/daylogs', daylogsRouter);
-router.use('/food', foodRouter);
-router.use('/foodicons', foodiconsRouter);
-router.use('/foodimages', foodimagesRouter);
+router.use('/grubs', grubRouter);
+router.use('/grubicons', grubiconsRouter);
+router.use('/grubimages', grubimagesRouter);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/workouticons', workouticonsRouter);
