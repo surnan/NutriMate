@@ -5,7 +5,8 @@ const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require('sequelize')
-const { User, DayLog, Grub, GrubIcon, GrubImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
+const { User, DayLog, Food, FoodIcon, FoodImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
+const { response } = require('../../app');
 
 
 const router = express.Router();
@@ -16,8 +17,7 @@ router.get('/hello/world', (req, res) => {
 });
 
 router.get('/', async (req, res, next) => {
-    // console.log('\n\nentered get route!!!\n\n')
-
+    console.log('\n\nentered get route!!!\n\n')
     try {
         const workouts = await Workout.findAll({
             include: [
@@ -51,6 +51,96 @@ router.get('/', async (req, res, next) => {
         next(e)
     }
 });
+
+router.delete('/:workoutId', async (req, res, next) => {
+    try {
+        const workoutId = parseInt(req.params.workoutId)
+        const currentWorkout = await Workout.findByPk(workoutId)
+
+        if (!currentWorkout){
+            res.status(404).json({
+                message: "Workout couldn't be found"
+            })
+        }
+
+        currentWorkout.destroy();
+        res.json({"message": "Successfully deleted"})
+    } catch (e){
+        console.log('Route Error: ', e)
+        next(e)
+    }
+})
+
+router.post('/', async (req, res, next) => {
+    // res.send('HELLO FROM post')
+
+    try {
+
+        const {name, description, User} = req.body
+
+        const newWorkout = await Workout.create(
+            {
+                name,
+                description,
+                userId: 2
+            }
+        )
+
+        let newWorkoutJSON = newWorkout.toJSON();
+
+        let responseBody = {...newWorkoutJSON}
+        responseBody.createdAt = newWorkoutJSON.createdAt
+        responseBody.updatedAt = newWorkoutJSON.updatedAt
+
+        return res.status(201).json(responseBody)
+
+        
+ 
+    } catch (e){
+        console.log('Route Error: ', e)
+        next(e)
+    }
+})
+
+router.put('/:workoutId', async (req, res, next) => {
+    // res.send('HELLO FROM put')
+
+    try {
+
+        const workoutId = parseInt(req.params.workoutId)
+        const currentWorkout = await Workout.findByPk(workoutId)
+
+        if (!currentWorkout){
+            res.status(404).json({
+                message: "Workout couldn't be found"
+            })
+        }
+
+        const {name, description, userId} = req.body
+
+        const userIdINT = parseInt(userId)
+
+        await currentWorkout.update(
+            {
+                name,
+                description,
+                userId: userIdINT
+            }
+        )
+
+        let res = currentWorkout.toJSON();
+
+        response.json(res)
+        
+ 
+    } catch (e){
+        console.log('Route Error: ', e)
+        next(e)
+    }
+
+
+})
+
 
 
 module.exports = router;
