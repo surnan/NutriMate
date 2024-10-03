@@ -16,6 +16,7 @@ router.get('/hello/world', (req, res) => {
     res.send('api/routes/workouts ---> Hello World!');
 });
 
+//all 
 router.get('/', async (req, res, next) => {
     console.log('\n\nentered get route!!!\n\n')
     try {
@@ -51,6 +52,55 @@ router.get('/', async (req, res, next) => {
         next(e)
     }
 });
+
+
+//one
+router.get('/:workoutId', async (req, res, next) => {
+    try {
+        const workoutId = parseInt(req.params.workoutId)
+        const currentWorkout = await Workout.findByPk(workoutId, {
+            include: [
+                { 
+                    model: User,
+                    attributes: {
+                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                    } 
+                },
+                { 
+                    model: WorkoutIcon,
+                },
+                { 
+                    model: WorkoutImage,
+                }
+            ],
+            attributes: {
+                exclude: ['userId']
+            }})
+
+        if (!currentWorkout){
+            res.status(404).json({
+                message: "Workout couldn't be found"
+            })
+        }
+
+        const currentWorkoutJSON = currentWorkout.toJSON()
+
+        // currentWorkout.destroy();
+        // res.json({"message": "Successfully deleted"})
+
+        return res.status(201).json(currentWorkoutJSON)
+
+
+    } catch (e){
+        console.log('Route Error: ', e)
+        next(e)
+    }
+});
+
+
+
+
+
 
 router.delete('/:workoutId', async (req, res, next) => {
     try {
