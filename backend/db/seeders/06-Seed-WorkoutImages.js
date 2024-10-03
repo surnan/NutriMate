@@ -1,7 +1,7 @@
 'use strict';
 
 // const {User, Sequelize} = require('../models');
-const { Food, Sequelize } = require('../models');
+const { Grub, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 // options.tableName = 'Users';
