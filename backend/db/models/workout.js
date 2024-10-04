@@ -23,14 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [2, 30],
-        isNameValid(value) {
-          if (value < 2) {
-            throw new Error('Name too short.');
-          } else if (value > 30) {
-            throw new Error('Name too long.');
-          }
-        }
+        len: [2, 30]
       }
     },
     description: {
