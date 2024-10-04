@@ -95,8 +95,6 @@ router.get('/:grubId', async (req, res, next) => {
 
 
 router.post('/', async (req, res, next) => {
-    // return res.send('HELLO FROM post')
-
     try {
 
         const {name, description} = req.body
