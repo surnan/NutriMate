@@ -8,6 +8,7 @@ const grubiconsRouter = require('./grubicons.js')
 const grubimagesRouter = require('./grubimages.js')
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const weightsRouter = require('./weights.js');
 const workouticonsRouter = require('./workoutIcons.js');
 const workoutimagesRouter = require('./workoutImages.js');
 const workoutsRouter = require('./workouts.js');
@@ -31,6 +32,7 @@ router.use('/grubicons', grubiconsRouter);
 router.use('/grubimages', grubimagesRouter);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/weights', weightsRouter);
 router.use('/workouticons', workouticonsRouter);
 router.use('/workoutimages', workoutimagesRouter);                                                                                                                                                                                            
 router.use('/workouts', workoutsRouter);
