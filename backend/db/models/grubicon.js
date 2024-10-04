@@ -12,19 +12,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      GrubIcon.belongsTo(models.User, { foreignKey: 'userId' })
       GrubIcon.belongsTo(models.Grub, { foreignKey: 'grubId' })
     }
   }
   GrubIcon.init({
-    url: {
-      type: DataTypes.STRING(255),
+    name: {
+      type: DataTypes.STRING(55),
       allowNull: true
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: 'Users' }
+    url: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
     grubId: {
       type: DataTypes.INTEGER,
