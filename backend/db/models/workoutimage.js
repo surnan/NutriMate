@@ -12,19 +12,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      WorkoutImage.belongsTo(models.User, { foreignKey: 'userId' })
       WorkoutImage.belongsTo(models.Workout, { foreignKey: 'workoutId' })
     }
   }
   WorkoutImage.init({
-    url: {
-      type: DataTypes.STRING(255),
+    name: {
+      type: DataTypes.STRING(55),
       allowNull: true
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: 'Users' }
+    url: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
     workoutId: {
       type: DataTypes.INTEGER,

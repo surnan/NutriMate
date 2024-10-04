@@ -1,8 +1,8 @@
-// backend/db/08-DayLogs.js
+// backend/db/08-Weights.js
 'use strict';
 
 let options = {};
-options.tableName = 'DayLogs';
+options.tableName = 'Weights';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -16,37 +16,31 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userId: {
+      metricSystem: {
+        type: Sequelize.BOOLEAN,
+        allowNull: true,
+      },
+      start: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      goal: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      current: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: { model: 'Users' },
-        onDelete: 'CASCADE'
       },
-      // foodId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: { model: 'Foods' }
-      // },
-      // workoutId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: true,
-      //   references: { model: 'Workouts' }
-      // },
-      timestamp: {
+      day: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      calories: {
+      userId: {
         type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      units: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-      },
-      unitType: {
-        type: Sequelize.STRING(15),
-        allowNull: true,
+        references: { model: 'Users' },
+        allowNull: false,
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

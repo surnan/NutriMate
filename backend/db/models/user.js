@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       User.hasMany(models.Grub, {foreignKey: 'userId'})
       User.hasMany(models.Workout, {foreignKey: 'userId'})
-      User.hasMany(models.DayLog, {foreignKey: 'userId'})
     }
   }
   User.init({
@@ -38,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     hashedPassword: {
-      // type: DataTypes.STRING.BINARY,
-      type: DataTypes.STRING,
+      type: DataTypes.STRING.BINARY,
+      // type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [60, 60]

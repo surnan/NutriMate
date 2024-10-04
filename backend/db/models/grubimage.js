@@ -12,20 +12,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      GrubImage.belongsTo(models.User, {foreignKey: 'userId' })
       GrubImage.belongsTo(models.Grub, {foreignKey: 'grubId'})
     }
   }
   GrubImage.init({
+    name: {
+      type: DataTypes.STRING(55),
+      allowNull: true
+    },
     url: {
       type: DataTypes.STRING(255),
       allowNull: true
     },
-    userId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: { model: 'Users' }
-  },
     grubId: {
       type: DataTypes.INTEGER,
       allowNull: false,
