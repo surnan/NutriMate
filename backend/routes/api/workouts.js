@@ -98,10 +98,6 @@ router.get('/:workoutId', async (req, res, next) => {
 });
 
 
-
-
-
-
 router.delete('/:workoutId', async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
@@ -126,13 +122,13 @@ router.post('/', async (req, res, next) => {
 
     try {
 
-        const {name, description, User} = req.body
+        const {name, description, userId} = req.body
 
         const newWorkout = await Workout.create(
             {
                 name,
                 description,
-                userId: 2
+                userId
             }
         )
 
