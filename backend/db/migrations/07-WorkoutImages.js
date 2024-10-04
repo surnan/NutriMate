@@ -16,6 +16,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      name: {
+        type: Sequelize.STRING(55),
+        allowNull: true
+      },
       url: {
         type: Sequelize.STRING(255),
         allowNull: false
@@ -24,12 +28,6 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: { model: 'Workouts' },
-        onDelete: 'CASCADE'
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Users' },
         onDelete: 'CASCADE'
       },
       createdAt: {
