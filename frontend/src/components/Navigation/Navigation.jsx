@@ -8,13 +8,13 @@ function Navigation() {
 
 
   return (
-    <ul>
-      <li>
+    <div className="h-grid">
+      
         <NavLink to="/">Home</NavLink>
-      </li>
-      <li>
+      
+      
         <ProfileButton />
-      </li>
+      
       {user && (
         <li>
           {user.profileImg?
@@ -24,7 +24,7 @@ function Navigation() {
           />: null}
         </li>
       )}
-    </ul>
+    </div>
   );
 }
 
