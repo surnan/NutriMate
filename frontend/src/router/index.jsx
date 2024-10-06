@@ -5,6 +5,13 @@ import Layout from './Layout';
 import Splash from '../components/Splash';
 import WeightPage from '../components/WeightPage';
 
+import WorkoutPage_ from '../components/WorkoutPage_'
+import WeightPage_ from '../components/WeightPage_'
+import FoodPage_ from '../components/FoodPage_'
+
+
+
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
