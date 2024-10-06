@@ -1,3 +1,21 @@
 .profile-dropdown {
     position: absolute;
 }
+
+.hFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+.ltYellow {
+    background-color: lightyellow;
+}
+
+.profile-dropdown {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
