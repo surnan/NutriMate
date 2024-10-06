@@ -1,6 +1,10 @@
 // frontend/src/components/Splash/Splash.jsx
 
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import { useState } from 'react';
+
+
+
 import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -25,6 +29,7 @@ const Splash = () => {
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setPreviewUrl(reader.result);
+      console.log(e)
     }
     setImgUrl(file);
     setShowUpload(false);
@@ -34,7 +39,8 @@ const Splash = () => {
     e.preventDefault();
     const img_url = imgUrl;
     const form = {img_url};
-    const updateUser = await dispatch(updateUserThunk(user.id, form))
+    // const updateUser = await dispatch(updateUserThunk(user.id, form))
+    await dispatch(updateUserThunk(user.id, form))
   }
 
 
