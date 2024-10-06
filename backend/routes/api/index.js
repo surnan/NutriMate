@@ -2,6 +2,7 @@
 
 const router = require('express').Router();
 const { restoreUser } = require('../../utils/auth.js');
+const { requireAuth } = require("../../utils/auth.js");
 const daylogsRouter = require('./daylogs.js')
 const grubRouter = require('./grubs.js')
 const grubiconsRouter = require('./grubicons.js')
@@ -18,7 +19,7 @@ const workoutsRouter = require('./workouts.js');
 
 router.get('/hello/world', (req, res) => {
     console.log("=== HERE I AM 2 ===")
-    res.send('api/routes ---> Hello World!');
+    res.send('api/routes ---> Hello World! password -2');
 });
 
 //You can use requireAuth as middleware for routes that require sign in

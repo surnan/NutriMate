@@ -18,7 +18,7 @@ const removeUser = () => ({
 
 export const thunkAuthenticate = () => async (dispatch) => {
     try{
-        const response = await csrfFetch("/api/restore-user");
+        const response = await csrfFetch("/api/csrf/restore");
         if (response.ok) {
             const data = await response.json();
             dispatch(setUser(data));
@@ -109,7 +109,7 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
-    let newState;
+    // let newState;
     switch (action.type) {
         case SET_USER:
             return { ...state, user: action.payload };
