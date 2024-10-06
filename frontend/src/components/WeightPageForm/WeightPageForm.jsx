@@ -1,14 +1,14 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./WeightPageForm.css";
-// import { getWeightsAllThunk } from "../../redux/weight";
+import { postWeightsOneThunk } from "../../redux/weight";
 
 
 function WeightPageForm() {
     const nav = useNavigate();
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const [form, setForm] = useState({
         height: '',
@@ -31,11 +31,11 @@ function WeightPageForm() {
 
         const allKeys = ["height", "heightUnit", "start", "goal", "current", "day", "weightUnit", "userId"];
 
-        for (let key of allKeys) {
-            if (!form[key]) {
-                newErrors[key] = capitalizeFirstLetter(`${key} is required`);
-            }
-        }
+        // for (let key of allKeys) {
+        //     if (!form[key]) {
+        //         newErrors[key] = capitalizeFirstLetter(`${key} is required`);
+        //     }
+        // }
 
         if (clickedSubmitBtn) {
             setErrors(newErrors)
@@ -55,21 +55,25 @@ function WeightPageForm() {
         const { height, heightUnit, start, goal, current, day, weightUnit, userId } = form;
 
         const body = {
-            height: parseInt(height),
-            heightUnit,
-            start: parseInt(start),
-            goal: parseInt(goal),
-            current: parseInt(current),
-            day,
-            weightUnit,
-            userId: parseInt(height),
+            height: 222,
+            heightUnit: "inches",
+            start: 333,
+            goal: 111,
+            current: 222,
+            day: Date.now(),
+            weightUnit: "pounds",
+            userId: 1,
         }
 
         const submit = async () => {
             try {
-                nav(`/weights`);
-                console.log('body = ', body)
-                console.log('userId = ', userId)
+                const result = await dispatch(postWeightsOneThunk(id, body))
+
+                if (result) {
+                    nav(`/weights`);
+                    console.log('body = ', body)
+                    console.log('userId = ', userId)
+                }
             } catch (error) {
                 console.error('Error adding weight:', error);
             }
