@@ -8,21 +8,17 @@ function Navigation() {
 
 
   return (
-    <div className="h-grid">
-      
+    <div className="hFlex ltYellow">
         <NavLink to="/">Home</NavLink>
-      
-      
         <ProfileButton />
-      
       {user && (
-        <li>
+        <div>
           {user.profileImg?
           <img
             src={user.profileImg}
             style={{height: "70px", width: '70px', borderRadius: "50%"}}
           />: null}
-        </li>
+        </div>
       )}
     </div>
   );
