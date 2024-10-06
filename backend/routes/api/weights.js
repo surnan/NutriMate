@@ -18,7 +18,7 @@ router.get('/hello/world', (req, res) => {
 
 //all 
 router.get('/', async (req, res, next) => {
-    console.log('\n\nentered get route!!!\n\n')
+    // console.log('\n\nentered get route!!!\n\n')
     try {
         const workouts = await Weight.findAll({
             include: [
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
 
         const answer = workouts.map(e=>{
             const workoutJSON = e.toJSON();
-            console.log('\n--> e = ', workoutJSON)
+            // console.log('\n--> e -> weights = ', workoutJSON)
             return workoutJSON
         })
         // res.send('entered TRY-Block')       
