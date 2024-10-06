@@ -76,6 +76,8 @@ export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
         body: JSON.stringify(body)
     })
 
+    console.log("============> postWeightsOneThunk ===> ", JSON.stringify(body))
+
     if (response.ok) {
         const weightData = await response.json()
         await dispatch(postWeightsOne(weightData))
