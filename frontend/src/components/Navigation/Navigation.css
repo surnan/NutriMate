@@ -1,5 +1,13 @@
 .profile-dropdown {
     position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.h-grid{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .hFlex {
