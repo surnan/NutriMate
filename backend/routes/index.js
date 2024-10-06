@@ -10,7 +10,7 @@ router.use('/api', apiRouter);
 router.get('/hello/world', function (req, res) {
     res.cookie('XSRF-TOKEN', req.csrfToken());
     console.log("=== HERE I AM 1 ===")
-    res.send('/routes ---> Hello World!');
+    res.send('/routes ---> Hello World! -1');
 });
 
 
