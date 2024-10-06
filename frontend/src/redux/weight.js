@@ -1,3 +1,4 @@
+
 import { csrfFetch } from "./csrf";
 
 const LOAD_WEIGHTS_ALL = "weights/loadWeightsAll"
@@ -58,10 +59,11 @@ function avoidingErrors(){
 // Thunks
 export const getWeightsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/weights')
-
     if (response.ok){
+        // console.log("===> response = ", response)
         const data = await response.json();
-        dispatch(loadWeightsAll)
+        // console.log("===> getWeightsAllThunk data = ", data)
+        dispatch(loadWeightsAll(data))
         return data
     }
 }
@@ -81,6 +83,16 @@ const weightsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_WEIGHTS_ALL: {
             let newState = {...state}
+
+            // thunk returns JSON with key named: 'Weights'
+            // thunk returns JSON with values is array of Weight
+
+            newState.allWeights = action.payload.Weights;
+
+            for (let weight of action.payload.Weights) {
+                newState.byId[weight.id] = weight
+            }
+
             return newState
         }
         case LOAD_WEIGHTS_USER: {
@@ -105,10 +117,15 @@ const weightsReducer = (state = initialState, action) => {
         }
         default: {
             avoidingErrors()
-            console.log(initialState)
             return initialState
         }
     }
 }
 
 export default weightsReducer;
+
+
+// console.log("++++ =======>")
+// console.log("state ==> ", state)
+// console.log("action ==> ", action)
+// console.log("newState ==> ", newState)

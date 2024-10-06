@@ -1,3 +1,3 @@
-import WeightPage from './WeightPage';
+import WeightPage_ from './WeightPage_';
 
-export default WeightPage;
+export default WeightPage_;

@@ -1,4 +1,4 @@
-// frontend/src/componenets/WeightPage_/WeightPage.jsx
+// frontend/src/componenets/WeightPage_/WeightPage_.jsx
 
 import "./WeightPage.css";
 import { useEffect } from "react";
@@ -8,7 +8,7 @@ import { getWeightsAllThunk } from "../../redux/weight";
 import { useDispatch } from "react-redux";
 // import WeightCard from "../WeightCard_";
 
-function WeightPage() {
+function WeightPage_() {
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -19,12 +19,11 @@ function WeightPage() {
 
   const sessionUser = useSelector((state) => state.session.user);
   // Handle early return before calling hooks
-  if (sessionUser) {
-    return <Navigate to="/" replace={true} />;
-  }
-
-
+  if (sessionUser) {return <Navigate to="/" replace={true} />}
   const weightsArr = useSelector(state => state.weights.allWeights);
+
+  
+  console.log("====> weightsArr: ", weightsArr);
 
   return (
     <>
@@ -43,19 +42,4 @@ function WeightPage() {
   );
 }
 
-export default WeightPage;
-
-
-
-
-
-// {
-//   weightsArr.map((weight, idx) => (
-//     <div
-//     key={`${weight.id}`}
-//     >
-//       <WeightCard/>
-
-//     </div>
-//   ))
-// }
+export default WeightPage_;
