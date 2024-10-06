@@ -6,9 +6,11 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
+import weightsReducer from "./weight";
 
 const rootReducer = combineReducers({
     session: sessionReducer,
+    weights: weightsReducer
 });
 
 let enhancer;
