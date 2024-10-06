@@ -1,17 +1,21 @@
-// frontend/src/componenets/WeightPage_/WeightPage.jsx
-// import "./WeightCard.css";
+// frontend/src/componenets/WeightCard/WeightCard.jsx
+import "./WeightCard.css";
 // import { useEffect, useState } from "react";
 // import { useDispatch, useSelector } from "react-redux";
 // import { Navigate, useNavigate } from "react-router-dom";
 // import { getWeightsAllThunk } from "../../redux/weight";
 
 
-function WeightCard() {
+function WeightCard({ weight }) {
+
+  // const { height, heightUnit, start, goal } = weight
+  // const { current, day, weightUnit, userId } = weight
+  const { current, start, goal } = weight
 
   return (
-    <>
-      <h1>!!  WeightCard.jsx  !!</h1>
-    </>
+    <div>
+      <p> Start Wt: {start} ... Current Wt: {current} ... Goal Wt:  {goal}</p>
+    </div>
   );
 }
 
