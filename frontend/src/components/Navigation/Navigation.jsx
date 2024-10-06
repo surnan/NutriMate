@@ -8,24 +8,19 @@ function Navigation() {
 
 
   return (
-    <ul>
-      <li>
+    <div className="hFlex ltYellow">
         <NavLink to="/">Home</NavLink>
-      </li>
-
-      <li>
         <ProfileButton />
-      </li>
       {user && (
-        <li>
+        <div>
           {user.profileImg?
           <img
             src={user.profileImg}
             style={{height: "70px", width: '70px', borderRadius: "50%"}}
           />: null}
-        </li>
+        </div>
       )}
-    </ul>
+    </div>
   );
 }
 
