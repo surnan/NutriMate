@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 //Constants
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
+const EDIT_USER = "session/editUser";
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -13,26 +14,33 @@ const removeUser = () => ({
     type: REMOVE_USER
 });
 
+const editUser = (user) => {
+    return {
+        type: SET_USER,
+        payload: user
+    }
+}
 
 
 
 export const thunkAuthenticate = () => async (dispatch) => {
-    try{
+    try {
+        // const response = await csrfFetch("/api/restore-user");
         const response = await csrfFetch("/api/csrf/restore");
         if (response.ok) {
             const data = await response.json();
             dispatch(setUser(data));
         }
-    } catch (e){
+    } catch (e) {
         return e
     }
 };
 
 export const thunkLogin = (credentials) => async dispatch => {
-    const {email, password} = credentials
+    const { email, password } = credentials
     const response = await csrfFetch("/api/session", {
         method: "POST",
-        body: JSON.stringify({credential: email, password})
+        body: JSON.stringify({ credential: email, password })
     });
 
     if (response.ok) {
@@ -73,7 +81,7 @@ export const thunkLogout = () => async (dispatch) => {
 
 export const updateUserThunk = (userId, form) => async (dispatch) => {
     const { img_url } = form
-    try{
+    try {
 
         const formData = new FormData();
 
@@ -90,6 +98,7 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
         if (response.ok) {
             const user = await response.json();
             dispatch(editUser(user));
+            // dispatch(setUser(user));
 
         } else if (response.status < 500) {
             const data = await response.json();
@@ -100,7 +109,7 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
             }
         }
         return response;
-    } catch(e){
+    } catch (e) {
         return e
     }
 }
@@ -109,12 +118,13 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
 const initialState = { user: null };
 
 function sessionReducer(state = initialState, action) {
-    // let newState;
     switch (action.type) {
         case SET_USER:
             return { ...state, user: action.payload };
         case REMOVE_USER:
             return { ...state, user: null };
+        case EDIT_USER:
+            return { ...state, user: action.payload };
         default:
             return state;
     }

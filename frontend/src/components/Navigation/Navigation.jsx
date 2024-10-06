@@ -12,13 +12,13 @@ function Navigation() {
         <NavLink to="/">Home</NavLink>
         <ProfileButton />
       {user && (
-        <div>
+        <>
           {user.profileImg?
           <img
             src={user.profileImg}
             style={{height: "70px", width: '70px', borderRadius: "50%"}}
           />: null}
-        </div>
+        </>
       )}
     </div>
   );
