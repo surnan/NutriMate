@@ -3,14 +3,8 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import Splash from '../components/Splash';
-import WeightCard from '../components/WeightCard';
-
-import WorkoutPage_ from '../components/WorkoutPage_'
-import WeightPage_ from '../components/WeightPage_'
 import WeightPage from '../components/WeightPage'
-import FoodPage_ from '../components/FoodPage_'
-
-
+import WeightPageForm from '../components/WeightPageForm/WeightPageForm';
 
 
 export const router = createBrowserRouter([
@@ -21,7 +15,7 @@ export const router = createBrowserRouter([
       {path: "login", element: <LoginFormPage />},
       {path: "signup", element: <SignupFormPage />},
       {path: "weights", element: <WeightPage />},
-      {path: "weights_", element: <WeightPage_ />},
+      {path: "weightform", element: <WeightPageForm />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
