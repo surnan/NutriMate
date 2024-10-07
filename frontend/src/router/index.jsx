@@ -4,8 +4,10 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import Splash from '../components/Splash';
 import WeightPage from '../components/WeightPage'
-import WorkoutPage from '../components/WorkoutPage'
 import WeightPageForm from '../components/WeightPageForm/WeightPageForm';
+import WorkoutPage from '../components/WorkoutPage'
+import WorkoutPageForm from '../components/WorkoutPageForm'
+
 
 
 export const router = createBrowserRouter([
@@ -18,6 +20,7 @@ export const router = createBrowserRouter([
       {path: "weights", element: <WeightPage />},
       {path: "weightform", element: <WeightPageForm />},
       {path: "workouts", element: <WorkoutPage />},
+      {path: "workoutform", element: <WorkoutPageForm />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
