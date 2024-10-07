@@ -6,6 +6,7 @@ const LOAD_WEIGHTS_USER = "weights/loadWeightsUser"
 const LOAD_WEIGHTS_ONE = "weights/loadWeightsOne"
 
 const POST_WEIGHTS_ONE = "weights/postWeightsOne"
+const UPDATE_WEIGHTS_ONE = "weights/updateWeightsOne"
 const REMOVE_WEIGHTS_ONE = "weights/removeWeightsOne"
 const REMOVE_WEIGHTS_USER = "weights/removeWeightsUser"
 
@@ -18,6 +19,12 @@ const loadWeightsAll = (data) => {
 }
 
 const postWeightsOne = (data) => {
+    return {
+        type: POST_WEIGHTS_ONE,
+        payload: data
+    }
+}
+const updateWeightsOne = (data) => {
     return {
         type: POST_WEIGHTS_ONE,
         payload: data
@@ -61,18 +68,13 @@ function avoidingErrors() {
 export const getWeightsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/weights')
     if (response.ok) {
-        // console.log("===> response = ", response)
         const data = await response.json();
-        // console.log("===> getWeightsAllThunk data = ", data)
         await dispatch(loadWeightsAll(data))
         return data
     }
 }
 
 export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
-
-    console.log("=11===========> postWeightsOneThunk ===> ", JSON.stringify(body))
-
     const response = await csrfFetch('/api/weights', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -81,27 +83,37 @@ export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
 
     if (response.ok) {
         const weightData = await response.json()
-        console.log("=22===========> postWeightsOneThunk ===> ", weightData)
         await dispatch(postWeightsOne(weightData))
         return weightData
     }
 }
 
 export const deleteWeightThunkById = (id) => async (dispatch) => {
-    // console.log("1 - ====> (ID = ", id)
     const res = await csrfFetch(`/api/weights/${id}`, {
         method: 'DELETE',
         header: { 'Content-Type': 'application/json' }
-    }) 
-
-    console.log("2 - ====> (ID = ", id)
+    })
 
     if (res.ok) {
         const reviewData = await res.json();
         await dispatch(removeWeightsOne(id));
         return reviewData;
     }
-} 
+}
+
+export const updateWeightThunkById = ({ body }) => async (dispatch) => {
+    const response = await csrfFetch(`/api/weights/${body.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+        const weightData = await response.json()
+        await dispatch(postWeightsOne(weightData))
+        return weightData
+    }
+}
 
 
 // State object
