@@ -17,16 +17,16 @@ const loadWeightsAll = (data) => {
     }
 }
 
-const removeWeightsOne = (data) => {
+const postWeightsOne = (data) => {
     return {
-        type: REMOVE_WEIGHTS_ONE,
+        type: POST_WEIGHTS_ONE,
         payload: data
     }
 }
 
-const postWeightsOne = (data) => {
+const removeWeightsOne = (data) => {
     return {
-        type: POST_WEIGHTS_ONE,
+        type: REMOVE_WEIGHTS_ONE,
         payload: data
     }
 }
@@ -70,16 +70,18 @@ export const getWeightsAllThunk = () => async (dispatch) => {
 }
 
 export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
+
+    console.log("=11===========> postWeightsOneThunk ===> ", JSON.stringify(body))
+
     const response = await csrfFetch('/api/weights', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     })
 
-    console.log("============> postWeightsOneThunk ===> ", JSON.stringify(body))
-
     if (response.ok) {
         const weightData = await response.json()
+        console.log("=22===========> postWeightsOneThunk ===> ", weightData)
         await dispatch(postWeightsOne(weightData))
         return weightData
     }
@@ -132,7 +134,14 @@ const weightsReducer = (state = initialState, action) => {
             return newState
         }
         case POST_WEIGHTS_ONE: {
-            let newState = { ...newState }
+            let newState = { ...state }
+
+            console.log("==== weightsReducer.ACTION ====> ", action)
+
+
+            newState.allWeights = [action.payload, ...newState.allWeights]
+            newState.byId[action.payload.id] = action.payload;
+
             return newState
         }
         case REMOVE_WEIGHTS_ONE: {
