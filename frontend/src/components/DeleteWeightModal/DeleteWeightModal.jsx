@@ -1,18 +1,29 @@
 //frontend/src/components/DeleteReviewModal/DeleteReviewModal.jsx
-// import { useDispatch } from 'react-redux';
-import './DeleteWeightModal.css'
 
-const DeleteWeightModal = ({ review, onClose }) => {
-    // const dispatch = useDispatch();
-    console.log(review)
+import './DeleteWeightModal.css'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { deleteWeightThunkById } from '../../redux/weight';
+
+
+
+
+const DeleteWeightModal = ({ weight, onClose }) => {
+    // console.log(weight)
+    const dispatch = useDispatch();
+
     const handleDelete = async () => {
         try {
-            console.log('handleDelete async')
+            // console.log('===> weight ==> ', weight)
+            // console.log('===> weight.id ==> ', weight.id)
+            await dispatch(deleteWeightThunkById(weight.id))
             onClose();
         } catch (error) {
-            console.error('Error deleting review:', error);
+            console.error('Error deleting weight:', error);
         }
     };
+
     return (
         <div className="confirmDeleteModal">
             <div className="modalContent">

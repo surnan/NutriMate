@@ -88,10 +88,13 @@ export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
 }
 
 export const deleteWeightThunkById = (id) => async (dispatch) => {
+    // console.log("1 - ====> (ID = ", id)
     const res = await csrfFetch(`/api/weights/${id}`, {
         method: 'DELETE',
         header: { 'Content-Type': 'application/json' }
     }) 
+
+    console.log("2 - ====> (ID = ", id)
 
     if (res.ok) {
         const reviewData = await res.json();
