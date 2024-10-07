@@ -1,9 +1,7 @@
 //frontend/src/components/DeleteReviewModal/DeleteReviewModal.jsx
 
 import './DeleteWeightModal.css'
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { deleteWeightThunkById } from '../../redux/weight';
 
 
@@ -15,8 +13,6 @@ const DeleteWeightModal = ({ weight, onClose }) => {
 
     const handleDelete = async () => {
         try {
-            // console.log('===> weight ==> ', weight)
-            // console.log('===> weight.id ==> ', weight.id)
             await dispatch(deleteWeightThunkById(weight.id))
             onClose();
         } catch (error) {
