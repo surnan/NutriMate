@@ -18,7 +18,7 @@ router.get('/hello/world', (req, res) => {
 
 //all 
 router.get('/', async (req, res, next) => {
-    // console.log('\n\nentered get route!!!\n\n')
+    console.log('\n\nentered get route!!!\n\n')
     try {
         const workouts = await Weight.findAll({
             include: [
@@ -36,7 +36,7 @@ router.get('/', async (req, res, next) => {
 
         const answer = workouts.map(e=>{
             const workoutJSON = e.toJSON();
-            // console.log('\n--> e -> weights = ', workoutJSON)
+            console.log('\n--> e = ', workoutJSON)
             return workoutJSON
         })
         // res.send('entered TRY-Block')       
@@ -83,7 +83,7 @@ router.get('/:workoutId', async (req, res, next) => {
 router.delete('/:workoutId', async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
-        const currentWorkout = await Weight.findByPk(workoutId)
+        const currentWorkout = await Workout.findByPk(workoutId)
 
         if (!currentWorkout){
             res.status(404).json({
@@ -104,16 +104,17 @@ router.post('/', async (req, res, next) => {
 
     try {
 
-        const {metricSystem, start, goal, current, userId} = req.body
+        const {metricSystem, start, goal, current, day, userId} = req.body
 
+        console.log("=====> From  Backend Route == (req.body))===> ", req.body)
         const newWorkout = await Weight.create(
             {
-                metricSystem, 
-                start, 
-                goal, 
-                current, 
-                day: new Date('2023-10-01'), 
-                userId
+                metricSystem: true, 
+                start: parseInt(start), 
+                goal: parseInt(goal), 
+                current: parseInt(current), 
+                day: Date.now(), 
+                userId: parseInt(userId)
             }
         )
 
@@ -122,11 +123,7 @@ router.post('/', async (req, res, next) => {
         let responseBody = {...newWorkoutJSON}
         responseBody.createdAt = newWorkoutJSON.createdAt
         responseBody.updatedAt = newWorkoutJSON.updatedAt
-
         return res.status(201).json(responseBody)
-
-        
- 
     } catch (e){
         console.log('Route Error: ', e)
         next(e)
@@ -140,7 +137,7 @@ router.put('/:workoutId', async (req, res, next) => {
 
         console.log("===> A")
         const workoutId = parseInt(req.params.workoutId)
-        const currentWorkout = await Weight.findByPk(workoutId)
+        const currentWorkout = await Workout.findByPk(workoutId)
 
         if (!currentWorkout){
             res.status(404).json({
@@ -149,17 +146,14 @@ router.put('/:workoutId', async (req, res, next) => {
         }
 
         console.log("===> B")
-        const {metricSystem, start, goal, current, userId} = req.body
+        const {name, description, userId} = req.body
 
         const userIdINT = parseInt(userId)
 
         await currentWorkout.update(
             {
-                metricSystem, 
-                start, 
-                goal, 
-                current, 
-                day: new Date('2023-10-01'), 
+                name,
+                description,
                 userId: userIdINT
             }
         )
