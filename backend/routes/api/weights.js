@@ -137,7 +137,7 @@ router.put('/:workoutId', async (req, res, next) => {
 
         console.log("===> A")
         const workoutId = parseInt(req.params.workoutId)
-        const currentWorkout = await Workout.findByPk(workoutId)
+        const currentWorkout = await Weight.findByPk(workoutId)
 
         if (!currentWorkout){
             res.status(404).json({
