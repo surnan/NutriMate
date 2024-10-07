@@ -151,13 +151,9 @@ const weightsReducer = (state = initialState, action) => {
         }
         case POST_WEIGHTS_ONE: {
             let newState = { ...state }
-
             console.log("==== weightsReducer.ACTION ====> ", action)
-
-
             newState.allWeights = [action.payload, ...newState.allWeights]
             newState.byId[action.payload.id] = action.payload;
-
             return newState
         }
         case REMOVE_WEIGHTS_ONE: {

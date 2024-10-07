@@ -17,6 +17,8 @@ const WorkoutPage = () => {
 
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
 
+  const handleNewWorkout = () => {nav('/workoutform')}
+
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
   }, [dispatch])
@@ -27,6 +29,7 @@ const WorkoutPage = () => {
     <div>
   
     <h3>WorkoutPage.jsx</h3>
+    <button onClick={handleNewWorkout}>CREATE</button>
     <br/>
     <br/>
     {
