@@ -75,6 +75,11 @@ function WeightPageForm() {
         submit();
     }
 
+    const handleCancel = (e) => {
+        e.preventDefault();
+        nav(-1);  // This navigates back to the previous page
+    };
+
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
@@ -146,6 +151,14 @@ function WeightPageForm() {
                 className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
             >
                 Create Spot
+            </button>
+
+            <button
+                type="cancel"
+                onClick={handleCancel}
+                className="formBtn"
+            >
+                Cancel
             </button>
 
             <br />
