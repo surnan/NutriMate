@@ -1,15 +1,14 @@
-// frontend/src/components/WeightPage/WeightPage.jsx
+// frontend/src/components/WorkoutPage/WorkoutPage.jsx
 
 import "./WorkoutPage.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import WorkoutCard from "../WorkoutCard";
 
-// import { getWeightsAllThunk } from "../../redux/weight";
+
 import { getWorkoutsAllThunk } from "../../redux/workouts"
 import { useNavigate } from "react-router-dom"
 
-// import WeightCard from "../WeightCard";
-// import DeleteWeightModal from '../DeleteWeightModal'
 
 
 const WorkoutPage = () => {
@@ -31,12 +30,12 @@ const WorkoutPage = () => {
     <br/>
     <br/>
     {
-      workoutsArr.map((weight, idx) => (
+      workoutsArr.map((workout, idx) => (
         <div
-          key={`${idx}-weight`}
-          onClick={ e => handleDeleteBtn(e, weight)}
+          key={`${idx}-workout`}
         >
-          <p>{weight.name}</p>
+          {/* <p>{workout.name}</p> */}
+          <WorkoutCard workout = {workout} />
           <br/>
         </div>
       ))
