@@ -35,11 +35,15 @@ const WeightPage = () => {
     dispatch(getWeightsAllThunk())
   }, [dispatch, showDeletetModal, showUpdateModal, showPostModal])
 
+  const handleNewWeight = () => {
+    nav('/weightform')
+  }
 
   return (
     <div>
   
       <h1>!! Weight Page !!</h1>
+      <button onClick={handleNewWeight}>CLICK ME</button>
       {
         weightsArr.map((weight, idx) => (
           <div
