@@ -11,11 +11,13 @@ function WeightPageForm() {
     const dispatch = useDispatch();
 
     const [form, setForm] = useState({
-        metricSystem: true,
+        height: '',
+        heightUnit: '',
         start: '',
         goal: '',
         current: '',
         day: '',
+        weightUnit: '',
         userId: ''
     });
 
@@ -27,13 +29,13 @@ function WeightPageForm() {
     useEffect(() => {
         const newErrors = {};
 
-        const allKeys = ["start", "goal", "current", "day", "userId"];
+        const allKeys = ["height", "heightUnit", "start", "goal", "current", "day", "weightUnit", "userId"];
 
-        for (let key of allKeys) {
-            if (!form[key]) {
-                newErrors[key] = capitalizeFirstLetter(`${key} is required`);
-            }
-        }
+        // for (let key of allKeys) {
+        //     if (!form[key]) {
+        //         newErrors[key] = capitalizeFirstLetter(`${key} is required`);
+        //     }
+        // }
 
         if (clickedSubmitBtn) {
             setErrors(newErrors)
@@ -50,13 +52,23 @@ function WeightPageForm() {
         e.preventDefault();
         setClickedSubmitBtn(true);
 
-        const { start, goal, current, day, userId } = form;
+        const { height, heightUnit, start, goal, current, day, weightUnit, userId } = form;
+
+        const body2 = {
+            "metricSystem": true,
+            "start": 888,
+            "goal": 888,
+            "current": 111,
+            "day": Date.now(),
+            "userId": 2,
+        }
+
 
         const body = {
             "metricSystem": true,
-            "start": parseInt(start),
-            "goal": parseInt(goal),
-            "current": parseInt(current),
+            "start": 888,
+            "goal": 888,
+            "current": 111,
             "day": Date.now(),
             "userId": 2,
         }
@@ -67,6 +79,8 @@ function WeightPageForm() {
 
                 if (result) {
                     nav(`/weights`);
+                    console.log('body = ', body)
+                    console.log('userId = ', userId)
                 }
             } catch (error) {
                 console.error('Error adding weight:', error);
@@ -82,6 +96,30 @@ function WeightPageForm() {
     return (
         <form className="weightForm">
             <h3>Create a new Weight</h3>
+            <br />
+
+            <label>
+                Height &#160;&#160;{errors.height && <span style={{ color: 'red' }}>{errors.height}</span>}
+            </label>
+            <input
+                type="text"
+                name="height"
+                onChange={updateSetForm}
+                placeholder="number"
+            />
+
+            <br />
+            <label>
+                Height Units &#160;&#160;{errors.heightUnit && <span style={{ color: 'red' }}>{errors.heightUnit}</span>}
+            </label>
+            <input
+                type="text"
+                name="heightUnit"
+                onChange={updateSetForm}
+                placeholder="cm or inches"
+            />
+
+            <br />
             <label>
                 Start &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
             </label>
@@ -91,6 +129,9 @@ function WeightPageForm() {
                 onChange={updateSetForm}
                 placeholder="starting weight"
             />
+
+            {/*  */}
+            {/*  */}
 
             <br />
             <label>
@@ -125,6 +166,20 @@ function WeightPageForm() {
                 placeholder="day"
             />
 
+            {/*  */}
+            {/*  */}
+
+            <br />
+            <label>
+                Weight Unit &#160;&#160;{errors.height && <span style={{ color: 'red' }}>{errors.weightUnit}</span>}
+            </label>
+            <input
+                type="text"
+                name="weightUnit"
+                onChange={updateSetForm}
+                placeholder="weightUnit"
+            />
+
             <br />
             <label>
                 User Id &#160;&#160;{errors.userId && <span style={{ color: 'red' }}>{errors.userId}</span>}
@@ -143,6 +198,7 @@ function WeightPageForm() {
                 type="submit"
                 disabled={hasError()}
                 onClick={handleSubmit}
+                // className="formBtn submitButton "
                 className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
             >
                 Create Spot
