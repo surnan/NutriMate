@@ -9,7 +9,7 @@ import WeightCard from "../WeightCard";
 import DeleteWeightModal from '../DeleteWeightModal'
 
 
-const WeightPage = ({currentWeight}) => {
+const WeightPage = () => {
   const dispatch = useDispatch()
   const nav = useNavigate();
   

@@ -50,6 +50,7 @@ const loadWeightsOne = (data) => {
         payload: data
     }
 }
+
 const removeWeightsUser = (data) => {
     return {
         type: REMOVE_WEIGHTS_USER,

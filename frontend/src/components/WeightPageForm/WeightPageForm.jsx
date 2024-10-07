@@ -50,7 +50,8 @@ function WeightPageForm() {
         e.preventDefault();
         setClickedSubmitBtn(true);
 
-        const { start, goal, current, day, userId } = form;
+        // const { start, goal, current, day, userId } = form;
+        const { start, goal, current } = form;
 
         const body = {
             "metricSystem": true,
