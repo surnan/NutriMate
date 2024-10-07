@@ -72,6 +72,24 @@ export const getWorkoutsAllThunk = () => async (dispatch) => {
     }
 }
 
+export const postWorkoutsOneThunk = ({ body }) => async (dispatch) => {
+    console.log("\n\n")
+    console.log("=====> postWorkoutsOneThunk.body ==> ", body)
+    console.log("\n\n")
+
+    const response = await csrfFetch('/api/workouts', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+        const workoutData = await response.json()
+        await dispatch(postWorkoutsOne(workoutData))
+        return workoutData
+    }
+}
+
 //Reducers
 const workoutsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -99,6 +117,9 @@ const workoutsReducer = (state = initialState, action) => {
         }
         case POST_WORKOUTS_ONE: {
             let newState = {...state}
+            console.log("==== workoutsReducer.ACTION ====> ", action)
+            newState.allWorkouts = [action.payload, ...newState.allWorkouts]
+            newState.byId[action.payload.id] = action.payload;
             return newState
         }
         case UPDATE_WORKOUTS_ONE: {
