@@ -1,28 +1,94 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./WeightPageForm.css";
-import { postWeightsOneThunk } from "../../redux/weight";
+import { postWeightsOneThunk, updateWeightThunkById } from "../../redux/weight";
+import DeleteWeightModal from '../DeleteWeightModal'
 
 
 function WeightPageForm() {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
+    const location = useLocation();
+    const { newWeight, exampleData } = location.state || {};
+
+    const [showDeletetModal, setShowDeletetModal] = useState(false);
+    const [selectedWeight, setSelectedWeight] = useState(null);
+
+    const handleDeleteBtn = (e, grub) => {
+        e.preventDefault();
+        setSelectedWeight(exampleData);
+        console.log("===> e ==> ", e)
+        console.log("===> exampleData ==> ", exampleData)
+        setShowDeletetModal(true)
+    }
+
+    const handleModalClose = () => {
+        setShowDeletetModal(false)
+        setSelectedWeight(null)
+        nav(-1)
+    };
+
     const [form, setForm] = useState({
+        id: exampleData?.id,
         metricSystem: true,
-        start: '',
-        goal: '',
-        current: '',
-        day: '',
-        userId: ''
+        start: exampleData?.start || '',
+        goal: exampleData?.goal || '',
+        current: exampleData?.current || '',
+        day: exampleData?.day || '2023-11-01T00:00:00.000Z',
+        userId: exampleData?.userId || 1
     });
 
     const [errors, setErrors] = useState({})
     const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
     const hasError = () => (Object.keys(errors).length !== 0)
 
+    const handleCancel = (e) => {
+        e.preventDefault();
+        nav(-1);  // This navigates back to the previous page
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setClickedSubmitBtn(true);
+
+        const { id, metricSystem, start, goal, current, day, userId } = form;
+
+        const body = {
+            "id": parseInt(id),
+            "metricSystem": true,
+            "start": parseInt(start),
+            "goal": parseInt(goal),
+            "current": parseInt(current),
+            "day": Date.now(),
+            "userId": 2,
+        }
+
+        console.log("++++ ======> newWeight = ", newWeight)
+        console.log("++++ ======> exampleData = ", exampleData)
+        console.log("++++ ======> handleSubmit.body ", body)
+
+        const submit = async () => {
+            try {
+                const result = newWeight
+                ? await dispatch(updateWeightThunkById({ body }))
+                : await dispatch(postWeightsOneThunk({ body }))
+
+                if (result) {
+                    nav(`/weights`);
+                }
+            } catch (error) {
+                console.error('Error adding weight:', error);
+            }
+        }
+        submit();
+    }
+
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
 
     useEffect(() => {
         const newErrors = {};
@@ -46,44 +112,9 @@ function WeightPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setClickedSubmitBtn(true);
 
-        // const { start, goal, current, day, userId } = form;
-        const { start, goal, current } = form;
-
-        const body = {
-            "metricSystem": true,
-            "start": parseInt(start),
-            "goal": parseInt(goal),
-            "current": parseInt(current),
-            "day": Date.now(),
-            "userId": 2,
-        }
-
-        const submit = async () => {
-            try {
-                const result = await dispatch(postWeightsOneThunk({body}))
-
-                if (result) {
-                    nav(`/weights`);
-                }
-            } catch (error) {
-                console.error('Error adding weight:', error);
-            }
-        }
-        submit();
-    }
-
-    const handleCancel = (e) => {
-        e.preventDefault();
-        nav(-1);  // This navigates back to the previous page
-    };
-
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    // console.log("++++ ======> newWeight = ", newWeight)
+    // console.log("++++ ======> exampleData = ", exampleData)
 
     return (
         <form className="weightForm">
@@ -96,6 +127,7 @@ function WeightPageForm() {
                 name="start"
                 onChange={updateSetForm}
                 placeholder="starting weight"
+                value={form.start || ""}
             />
 
             <br />
@@ -107,6 +139,7 @@ function WeightPageForm() {
                 name="goal"
                 onChange={updateSetForm}
                 placeholder="goal"
+                value={form.goal || ""}
             />
 
             <br />
@@ -118,6 +151,7 @@ function WeightPageForm() {
                 name="current"
                 onChange={updateSetForm}
                 placeholder="current"
+                value={form.current || ""}
             />
 
             <br />
@@ -129,6 +163,7 @@ function WeightPageForm() {
                 name="day"
                 onChange={updateSetForm}
                 placeholder="day"
+                value={form.day || ""}
             />
 
             <br />
@@ -140,6 +175,7 @@ function WeightPageForm() {
                 name="useId"
                 onChange={updateSetForm}
                 placeholder="userId"
+                value={form.userId || ""}
             />
 
 
@@ -161,8 +197,27 @@ function WeightPageForm() {
             >
                 Cancel
             </button>
-
             <br />
+            <button
+                type="cancel"
+                onClick={handleDeleteBtn}
+                className="formBtn"
+            >
+                DELETE
+            </button>
+            {showDeletetModal && (
+                <DeleteWeightModal
+                    onClose={handleModalClose}
+                    onSubmit={handleDeleteBtn}
+                    weight={selectedWeight}
+                />
+            )}
+
+
+
+
+
+
         </form>
     );
 }
