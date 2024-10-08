@@ -1,19 +1,40 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./WorkoutPageForm.css";
-import { postWorkoutsOneThunk } from "../../redux/workouts"
+import { postWorkoutsOneThunk, updateWorkoutsOneThunk } from "../../redux/workouts"
+import DeleteWorkoutModal from "../DeleteWorkoutModal";
 
 
 function WorkoutPageForm() {
     const nav = useNavigate();
     const dispatch = useDispatch();
 
+    const location = useLocation();
+    const { newWorkout, exampleData } = location.state || {};
+
+    const [showDeletetModal, setShowDeletetModal] = useState(false);
+    const [selectedWorkout, setSelectedWorkout] = useState(null);
+
+    const handleDeleteBtn = (e, grub) => {
+        e.preventDefault();
+        setSelectedWorkout(exampleData);
+        console.log("===> e ==> ", e)
+        console.log("===> exampleData ==> ", exampleData)
+        setShowDeletetModal(true)
+    }
+
+    const handleModalClose = () => {
+        setShowDeletetModal(false)
+        setSelectedWorkout(null)
+        nav(-1)
+    };
+
     const [form, setForm] = useState({
-        name: "",
-        description: '',
-        userId: ''
+        name: exampleData?.name || "",
+        description: exampleData?.description || '',
+        userId: exampleData?.userId || 1
     });
 
     const [errors, setErrors] = useState({})
@@ -33,23 +54,36 @@ function WorkoutPageForm() {
         const { name, description } = form;
 
         const body = {
+            id: parseInt(exampleData?.id),
             name,
             description,
-            userId: 2
+            userId: 1
         }
 
+
+
+
+
+
+
+
+
+
+        console.log("++++ ======> newWorkout = ", newWorkout)
+        console.log("++++ ======> exampleData = ", exampleData)
         console.log("++++ ======> handleSubmit.body ", body)
 
         const submit = async () => {
             try {
-                const result = await dispatch(postWorkoutsOneThunk({body}))
-                // const result = true
+                const result = newWorkout
+                    ? await dispatch(updateWorkoutsOneThunk({ body }))
+                    : await dispatch(postWorkoutsOneThunk({ body }))
 
                 if (result) {
                     nav(`/workouts`);
                 }
             } catch (error) {
-                console.error('Error adding weight:', error);
+                console.error('Error adding workout:', error);
             }
         }
         submit();
@@ -61,7 +95,6 @@ function WorkoutPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-
         const allKeys = ["name", "description"];
 
         for (let key of allKeys) {
@@ -84,7 +117,6 @@ function WorkoutPageForm() {
     return (
         <div>
             <h1>WorkoutPageForm.jsx</h1>
-
             <label>
                 Name &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
             </label>
@@ -93,6 +125,7 @@ function WorkoutPageForm() {
                 name="name"
                 onChange={updateSetForm}
                 placeholder="enter name"
+                value={form.name || ""}
             />
 
             <br />
@@ -104,6 +137,7 @@ function WorkoutPageForm() {
                 name="description"
                 onChange={updateSetForm}
                 placeholder="enter description"
+                value={form.description || ""}
             />
 
             <br />
@@ -124,6 +158,21 @@ function WorkoutPageForm() {
             >
                 Cancel
             </button>
+            <br />
+            <button
+                type="cancel"
+                onClick={handleDeleteBtn}
+                className="formBtn"
+            >
+                DELETE
+            </button>
+            {showDeletetModal && (
+                <DeleteWorkoutModal
+                    onClose={handleModalClose}
+                    onSubmit={handleDeleteBtn}
+                    workout={selectedWorkout}
+                />
+            )}
         </div>
     );
 }
