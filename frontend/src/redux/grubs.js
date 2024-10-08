@@ -7,54 +7,39 @@ const LOAD_GRUBS_ONE = "grubs/loadGrubsOne"
 const POST_GRUBS_ONE = "grubs/postGrubsOne"
 const UPDATE_GRUBS_ONE = "grubs/updateGrubsOne"
 const REMOVE_GRUBS_ONE = "grubs/removeGrubsOne"
-const REMOVE_GRUBS_USER = "grubs/removeGrubsUser"
+
 
 //Actions
-
 const loadGrubsAll = (data) => ({
     type: LOAD_GRUBS_ALL,
     payload: data
 });
 
-const removeGrubsOne = (data) => {
-    return {
-        type: REMOVE_GRUBS_ONE,
-        payload: data
-    }
-}
+const removeGrubsOne = (data) => ({
+    type: REMOVE_GRUBS_ONE,
+    payload: data
+})
 
-const postGrubsOne = (data) => {
-    return {
-        type: POST_GRUBS_ONE,
-        payload: data
-    }
-}
-const updateGrubsOne = (data) => {
-    return {
-        type: UPDATE_GRUBS_ONE,
-        payload: data
-    }
-}
+const postGrubsOne = (data) => ({
+    type: POST_GRUBS_ONE,
+    payload: data
+})
 
-const loadGrubsUser = (data) => {
-    return {
-        type: LOAD_GRUB_USER,
-        payload: data
-    }
-}
-const loadGrubsOne = (data) => {
-    return {
-        type: LOAD_GRUBS_ONE,
-        payload: data
-    }
-}
 
-const removeGrubsUser = (data) => {
-    return {
-        type: REMOVE_GRUBS_USER,
-        payload: data
-    }
-}
+const updateGrubsOne = (data) => ({
+    type: UPDATE_GRUBS_ONE,
+    payload: data
+})
+
+const loadGrubsUser = (data) => ({
+    type: LOAD_GRUB_USER,
+    payload: data
+})
+
+const loadGrubsOne = (data) => ({
+    type: LOAD_GRUBS_ONE,
+    payload: data
+})
 
 // Thunks
 export const getGrubsAllThunk = () => async (dispatch) => {
@@ -66,11 +51,7 @@ export const getGrubsAllThunk = () => async (dispatch) => {
     }
 }
 
-
-export const postGrubsOneThunk = ({body} ) => async (dispatch) => {
-
-    console.log('\n--> INSIDE: postGrubsOneThunk --> ', body)
-
+export const postGrubsOneThunk = ({ body }) => async (dispatch) => {
     const response = await csrfFetch('/api/grubs', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -84,7 +65,7 @@ export const postGrubsOneThunk = ({body} ) => async (dispatch) => {
     }
 }
 
-export const updateGrubsOneThunk = ({body}) => async (dispatch) => {
+export const updateGrubsOneThunk = ({ body }) => async (dispatch) => {
     console.log('\n--> INSIDE: updateGrubsOneThunk --> ', body)
     const response = await csrfFetch(`/api/grubs/${body.id}`, {
         method: "PUT",
@@ -124,7 +105,7 @@ const initialState = {
 const grubsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_GRUBS_ALL: {
-            let newState = {...state}
+            let newState = { ...state }
             newState.allGrubs = action.payload.Grubs;
             for (let grub of action.payload.Grubs) {
                 newState.byId[grub.id] = grub
@@ -132,20 +113,21 @@ const grubsReducer = (state = initialState, action) => {
             return newState
         }
         case POST_GRUBS_ONE: {
-            let newState = {...state}
+            let newState = { ...state }
             newState.allGrubs = [action.payload, ...newState.allGrubs]
             newState.byId[action.payload.id] = action.payload;
             return newState
         }
         case REMOVE_GRUBS_ONE: {
-            let newState = {...state}
+            let newState = { ...state }
+            // newState.allWeights = newState.allWeights.filter(currentWeight => currentWeight.id !== action.payload);
+            // delete newState.byId[action.payload]
             newState.allGrubs = newState.allGrubs.filter(currentGrub => currentGrub.id !== action.payload);
             delete newState.byId[action.payload.id]
             return newState
         }
         case UPDATE_GRUBS_ONE: {
-            let newState = {...state}
-
+            let newState = { ...state }
 
             // const grubId = action.payload.id
             // const newAllGrubs = []
@@ -158,7 +140,6 @@ const grubsReducer = (state = initialState, action) => {
             //         newAllGrubs.push(currentGrub)
             //     }
             // }
-            
 
             newState.allGrubs = [action.payload, ...newState.allGrubs]
             newState.byId[action.payload.id] = action.payload;
