@@ -8,7 +8,6 @@ import { deleteWeightThunkById } from '../../redux/weight';
 
 
 const DeleteWeightModal = ({ weight, onClose }) => {
-    // console.log(weight)
     const dispatch = useDispatch();
 
     const handleDelete = async () => {

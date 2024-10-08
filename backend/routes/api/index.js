@@ -18,7 +18,6 @@ const workoutsRouter = require('./workouts.js');
 
 
 router.get('/hello/world', (req, res) => {
-    console.log("=== HERE I AM 2 ===")
     res.send('api/routes ---> Hello World! password -2');
 });
 
