@@ -1,13 +1,9 @@
 'use strict';
 
-// const {User, Sequelize} = require('../models');
 const { Grub, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
-// options.tableName = 'Users';
 options.tableName = 'Weights';
-
-
 
 if (process.env.NODE_ENV === 'production') {
     options.schema = process.env.SCHEMA;
@@ -15,7 +11,6 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        //   options.tableName = "Users";
         options.tableName = "Weights";
         return queryInterface.bulkInsert(options, [
             {
@@ -70,7 +65,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        //   options.tableName = "Users";
         options.tableName = "Weights";
         const Op = Sequelize.Op;
         return queryInterface.bulkDelete(options, {

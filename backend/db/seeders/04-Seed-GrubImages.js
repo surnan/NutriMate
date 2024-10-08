@@ -13,7 +13,6 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        //   options.tableName = "Users";
         options.tableName = "GrubImages";
         return queryInterface.bulkInsert(options, [
             {
@@ -51,7 +50,6 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        //   options.tableName = "Users";
         options.tableName = "GrubImages";
         const Op = Sequelize.Op;
         return queryInterface.bulkDelete(options, {
