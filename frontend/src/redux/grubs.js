@@ -16,18 +16,13 @@ const loadGrubsAll = (data) => ({
     payload: data
 });
 
-const loadGrubsUser = (data) => {
+const removeGrubsOne = (data) => {
     return {
-        type: LOAD_GRUB_USER,
+        type: REMOVE_GRUBS_ONE,
         payload: data
     }
 }
-const loadGrubsOne = (data) => {
-    return {
-        type: LOAD_GRUBS_ONE,
-        payload: data
-    }
-}
+
 const postGrubsOne = (data) => {
     return {
         type: POST_GRUBS_ONE,
@@ -40,12 +35,20 @@ const updateGrubsOne = (data) => {
         payload: data
     }
 }
-const removeGrubsOne = (data) => {
+
+const loadGrubsUser = (data) => {
     return {
-        type: REMOVE_GRUBS_ONE,
+        type: LOAD_GRUB_USER,
         payload: data
     }
 }
+const loadGrubsOne = (data) => {
+    return {
+        type: LOAD_GRUBS_ONE,
+        payload: data
+    }
+}
+
 const removeGrubsUser = (data) => {
     return {
         type: REMOVE_GRUBS_USER,
@@ -58,17 +61,13 @@ export const getGrubsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/grubs')
     if (response.ok) {
         const data = await response.json();
-        console.log("======> getGrubsAllThunk ===> ", data)
         await dispatch(loadGrubsAll(data))
         return data
     }
 }
 
 
-export const postGrubsOneThunk = ({ body }) => async (dispatch) => {
-    console.log("\n\n")
-    console.log("=====> postGrubsOneThunk.body ==> ", body)
-    console.log("\n\n")
+export const postGrubsOneThunk = ({body} ) => async (dispatch) => {
 
     const response = await csrfFetch('/api/grubs', {
         method: "POST",
@@ -79,6 +78,20 @@ export const postGrubsOneThunk = ({ body }) => async (dispatch) => {
     if (response.ok) {
         const grubData = await response.json()
         await dispatch(postGrubsOne(grubData))
+        return grubData
+    }
+}
+
+export const updateGrubsOneThunk = ({body}) => async (dispatch) => {
+    const response = await csrfFetch(`/api/grubs/${body.id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+
+    if (response.ok) {
+        const grubData = await response.json()
+        await dispatch(updateGrubsOne(grubData))
         return grubData
     }
 }
@@ -117,24 +130,38 @@ const grubsReducer = (state = initialState, action) => {
         }
         case POST_GRUBS_ONE: {
             let newState = {...state}
-            console.log("==== grubsReducer.ACTION ====> ", action)
             newState.allGrubs = [action.payload, ...newState.allGrubs]
             newState.byId[action.payload.id] = action.payload;
             return newState
         }
         case REMOVE_GRUBS_ONE: {
             let newState = {...state}
-            
-            // newState.allWeights = newState.allWeights.filter(currentWeight => currentWeight.id !== action.payload);
             newState.allGrubs = newState.allGrubs.filter(currentGrub => currentGrub.id !== action.payload);
-            
-            // delete newState.byId[action.payload]
             delete newState.byId[action.payload.id]
+            return newState
+        }
+        case UPDATE_GRUBS_ONE: {
+            let newState = {...state}
+
+
+            // const grubId = action.payload.id
+            // const newAllGrubs = []
+            // const maxLoop = newState.allGrubs.length
+            // for (let i = 0; i < maxLoop; i++){
+            //     let currentGrub = newState.allGrubs[i]
+            //     if (currentGrub.id === grubId){
+            //         newAllGrubs.push(action.payload)
+            //     } else {
+            //         newAllGrubs.push(currentGrub)
+            //     }
+            // }
             
+
+            newState.allGrubs = [action.payload, ...newState.allGrubs]
+            newState.byId[action.payload.id] = action.payload;
             return newState
         }
         default: {
-            REMOVE_GRUBS_ONE
             return initialState
         }
     }
