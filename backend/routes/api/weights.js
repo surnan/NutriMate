@@ -18,7 +18,6 @@ router.get('/hello/world', (req, res) => {
 
 //all 
 router.get('/', async (req, res, next) => {
-    console.log('\n\nentered get route!!!\n\n')
     try {
         const workouts = await Weight.findAll({
             include: [
@@ -36,10 +35,8 @@ router.get('/', async (req, res, next) => {
 
         const answer = workouts.map(e=>{
             const workoutJSON = e.toJSON();
-            console.log('\n--> e = ', workoutJSON)
             return workoutJSON
-        })
-        // res.send('entered TRY-Block')       
+        })     
         res.json({Weights: answer})
     } catch (e) {
         console.log('Route Error: ', e)
@@ -79,7 +76,7 @@ router.get('/:workoutId', async (req, res, next) => {
     }
 });
 
-
+//delete
 router.delete('/:workoutId', async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
@@ -102,12 +99,11 @@ router.delete('/:workoutId', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     // res.send('HELLO FROM post')
 
+    let newWorkout
+
     try {
-
         const {metricSystem, start, goal, current, day, userId} = req.body
-
-        console.log("=====> From  Backend Route == (req.body))===> ", req.body)
-        const newWorkout = await Weight.create(
+        newWorkout = await Weight.create(
             {
                 metricSystem: true, 
                 start: parseInt(start), 
@@ -130,50 +126,39 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:workoutId', async (req, res, next) => {
-    // res.send('HELLO FROM put')
+router.put('/:weightId', async (req, res, next) => {
+    console.log('HELLO FROM put')
+
+    let currentWeight
 
     try {
+        const weightId = req.params.weightId
+        currentWeight = await Weight.findByPk(weightId)
 
-        console.log("===> A")
-        const workoutId = parseInt(req.params.workoutId)
-        const currentWorkout = await Weight.findByPk(workoutId)
-
-        if (!currentWorkout){
+        if (!currentWeight){
             res.status(404).json({
-                message: "Workout couldn't be found"
+                message: "Weight couldn't be found"
             })
         }
+        const {metricSystem, start, goal, current, day, userId} = req.body
 
-        console.log("===> B")
-        const {name, description, userId} = req.body
-
-        const userIdINT = parseInt(userId)
-
-        await currentWorkout.update(
+        await currentWeight.update(
             {
-                name,
-                description,
-                userId: userIdINT
+                metricSystem,
+                start: parseInt(start),
+                goal: parseInt(goal),
+                current: parseInt(current),
+                day,
+                userId: parseInt(userId)
             }
         )
 
-        console.log("===> C")
-        let currentWorkoutJSON = currentWorkout.toJSON();
-
-
-        console.log("===> D")
-
-        // response.json(res)
-        return res.status(201).json(currentWorkoutJSON)
-        console.log("===> E")
- 
+        let currentWeightJSON = currentWeight.toJSON();
+        return res.status(201).json(currentWeightJSON)
     } catch (e){
         console.log('Route Error: ', e)
         next(e)
     }
-
-
 })
 
 
