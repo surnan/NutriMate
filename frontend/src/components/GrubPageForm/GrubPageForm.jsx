@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk } from "../../redux/grubs"
 import DeleteGrubModal from '../DeleteGrubModal'
-// import { useLocation } from 'react-router-dom';
+
 
 function GrubPageForm() {
     const nav = useNavigate();
@@ -80,7 +80,6 @@ function GrubPageForm() {
 
         const submit = async () => {
             try {
-
                 const result = newGrub
                     ? await dispatch(updateGrubsOneThunk({ body }))
                     : await dispatch(postGrubsOneThunk({ body }))
@@ -89,7 +88,7 @@ function GrubPageForm() {
                     nav(`/grubs`);
                 }
             } catch (error) {
-                console.error('Error adding weight:', error);
+                console.error('Error adding grub:', error);
             }
         }
         submit();
@@ -123,7 +122,6 @@ function GrubPageForm() {
     return (
         <div>
             <h1>GrubForm.jsx</h1>
-            <br />
             <label>
                 Name &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.name}</span>}
             </label>
