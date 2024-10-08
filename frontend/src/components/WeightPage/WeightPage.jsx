@@ -6,65 +6,43 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
 import WeightCard from "../WeightCard";
-import DeleteWeightModal from '../DeleteWeightModal'
-
 
 const WeightPage = () => {
   const dispatch = useDispatch()
   const nav = useNavigate();
-  
+
   const weightsArr = useSelector(state => state.weights.allWeights);
-
-  const [showDeletetModal, setShowDeletetModal] = useState(false);
-  const [selectedWeight, setSelectedWeight] = useState(null);
-
-
-  const handleNewWeight = () => {nav('/weightform')}
-
-  const handleDeleteBtn = (e, weight) => {
-    e.preventDefault();
-    setSelectedWeight(weight); 
-    setShowDeletetModal(true)
+  const handleNewWeight = () => {
+    //need to pass in userId
+    // nav('/grubform', { state: { newGrub: false, exampleData: grub} }); 
+    nav('/weightform')
   }
 
-  const handleModalClose = () => {
-    setShowDeletetModal(false)
-    setSelectedWeight(null)
-};
-
-  
   useEffect(() => {
     dispatch(getWeightsAllThunk())
-  }, [dispatch, showDeletetModal])
+  }, [dispatch])
 
-
+  const somethingDifferent = (e, weight) => {
+    e.preventDefault();
+    nav('/weightform', { state: { newWeight: true, exampleData: weight } });
+  }
 
   return (
     <div>
-  
       <h3>WeightPage.jsx</h3>
       <button onClick={handleNewWeight}>CREATE</button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       {
         weightsArr.map((weight, idx) => (
           <div
             key={`${idx}-weight`}
-            onClick={ e => handleDeleteBtn(e, weight)}
+            onClick={e => somethingDifferent(e, weight)}
           >
-            <WeightCard weight = {weight} />
-            <br/>
+            <WeightCard weight={weight} />
+            <br />
           </div>
         ))
-      }
-
-      {showDeletetModal && (
-                <DeleteWeightModal
-                    onClose={handleModalClose}
-                    onSubmit={handleDeleteBtn}
-                    weight={selectedWeight}
-                />
-            )
       }
     </div>
   );
