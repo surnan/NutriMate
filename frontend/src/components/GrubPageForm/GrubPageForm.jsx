@@ -49,7 +49,7 @@ function GrubPageForm() {
 
     const handleCancel = (e) => {
         e.preventDefault();
-        nav(-1);  // This navigates back to the previous page
+        nav(-1);  
     };
 
     const handleSubmit = async (e) => {
