@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 
 
 let options = {};
-// options.tableName = 'Users';
 options.tableName = 'Workouts';
 
 if(process.env.NODE_ENV === 'production'){
@@ -13,10 +12,7 @@ if(process.env.NODE_ENV === 'production'){
 }
 
 module.exports = {
-
-
     up: async (queryInterface, Sequelize) => {
-    //   options.tableName = "Users";
       options.tableName = "Workouts";
       return queryInterface.bulkInsert(options, [
         {
@@ -50,7 +46,6 @@ module.exports = {
 
 
     down: async (queryInterface, Sequelize) => {
-    //   options.tableName = "Users";
       options.tableName = "Workouts";
       const Op = Sequelize.Op;
       return queryInterface.bulkDelete(options, {

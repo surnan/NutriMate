@@ -119,27 +119,12 @@ const grubsReducer = (state = initialState, action) => {
         }
         case REMOVE_GRUBS_ONE: {
             let newState = { ...state }
-            // newState.allWeights = newState.allWeights.filter(currentWeight => currentWeight.id !== action.payload);
-            // delete newState.byId[action.payload]
             newState.allGrubs = newState.allGrubs.filter(currentGrub => currentGrub.id !== action.payload);
             delete newState.byId[action.payload.id]
             return newState
         }
         case UPDATE_GRUBS_ONE: {
             let newState = { ...state }
-
-            // const grubId = action.payload.id
-            // const newAllGrubs = []
-            // const maxLoop = newState.allGrubs.length
-            // for (let i = 0; i < maxLoop; i++){
-            //     let currentGrub = newState.allGrubs[i]
-            //     if (currentGrub.id === grubId){
-            //         newAllGrubs.push(action.payload)
-            //     } else {
-            //         newAllGrubs.push(currentGrub)
-            //     }
-            // }
-
             newState.allGrubs = [action.payload, ...newState.allGrubs]
             newState.byId[action.payload.id] = action.payload;
             return newState
