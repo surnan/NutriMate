@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./GrubPageForm.css";
-import { postGrubsOneThunk } from "../../redux/grubs"
+import { postGrubsOneThunk, updateGrubsOneThunk } from "../../redux/grubs"
 
 import { useLocation } from 'react-router-dom';
 
@@ -15,23 +15,23 @@ function GrubPageForm() {
     const location = useLocation();
     const { newGrub, exampleData } = location.state || {};
 
-    console.log("newGrub = ", newGrub)
-    console.log("exampleData = ", exampleData)
+    // console.log("newGrub = ", newGrub)
+    // console.log("exampleData = ", exampleData)
 
 
 
     const [form, setForm] = useState({
-        name: "",
-        servingUnit: '',
-        servingSize: '',
-        calories: '',
-        protein: '',
-        fats: '',
-        carbs: '',
-        sugar: '',
-        company: '',
-        description: '',
-        userId: 1
+        name: exampleData?.name || "",
+        servingUnit: exampleData?.servingUnit || '',
+        servingSize: exampleData?.servingSize || '',
+        calories: exampleData?.calories || '',
+        protein: exampleData?.protein || '',
+        fats: exampleData?.fats || '',
+        carbs: exampleData?.carbs || '',
+        sugar: exampleData?.sugar || '',
+        company: exampleData?.company || '',
+        description: exampleData?.description || '',
+        userId: exampleData?.userId || 1
     });
 
     const [errors, setErrors] = useState({})
@@ -53,6 +53,7 @@ function GrubPageForm() {
 
 
         const body = {
+            id: parseInt(exampleData?.id) || 20,
             name,
             servingUnit,
             servingSize: parseInt(servingSize),
@@ -70,8 +71,13 @@ function GrubPageForm() {
 
         const submit = async () => {
             try {
-                const result = await dispatch(postGrubsOneThunk({ body }))
-                // const result = true
+
+                let result
+                if (newGrub){
+                    result = await dispatch(updateGrubsOneThunk({ body }))
+                } else {
+                    result = await dispatch(postGrubsOneThunk({ body }))
+                }
 
                 if (result) {
                     nav(`/grubs`);
@@ -122,6 +128,7 @@ function GrubPageForm() {
                 name="name"
                 onChange={updateSetForm}
                 placeholder="enter name"
+                value={form.name || ""}
             />
 
             <br />
@@ -133,6 +140,7 @@ function GrubPageForm() {
                 name="servingUnit"
                 onChange={updateSetForm}
                 placeholder="enter serving Unit"
+                value={form.servingUnit || ""}
             />
 
             <br />
@@ -144,6 +152,7 @@ function GrubPageForm() {
                 name="servingSize"
                 onChange={updateSetForm}
                 placeholder="enter serving size"
+                value={form.servingSize || ""}
             />
 
 
@@ -156,6 +165,7 @@ function GrubPageForm() {
                 name="calories"
                 onChange={updateSetForm}
                 placeholder="enter calories"
+                value={form.calories || ""}
             />
 
             <br />
@@ -167,6 +177,7 @@ function GrubPageForm() {
                 name="protein"
                 onChange={updateSetForm}
                 placeholder="enter protein"
+                value={form.protein || ""}
             />
 
             <br />
@@ -178,6 +189,7 @@ function GrubPageForm() {
                 name="fats"
                 onChange={updateSetForm}
                 placeholder="enter fats"
+                value={form.fats || ""}
             />
 
             <br />
@@ -189,6 +201,7 @@ function GrubPageForm() {
                 name="carbs"
                 onChange={updateSetForm}
                 placeholder="enter carbs"
+                value={form.carbs || ""}
             />
 
             <br />
@@ -200,6 +213,7 @@ function GrubPageForm() {
                 name="sugar"
                 onChange={updateSetForm}
                 placeholder="enter sugar"
+                value={form.sugar || ""}
             />
 
             <br />
@@ -211,6 +225,7 @@ function GrubPageForm() {
                 name="company"
                 onChange={updateSetForm}
                 placeholder="enter company name"
+                value={form.company || ""}
             />
 
             <br />
@@ -222,6 +237,7 @@ function GrubPageForm() {
                 name="description"
                 onChange={updateSetForm}
                 placeholder="enter description"
+                value={form.description || ""}
             />
 
             <br />
