@@ -2,15 +2,14 @@
 
 // import React, { useState } from 'react';
 import { useState } from 'react';
-
-
-
+import { useNavigate } from 'react-router-dom';
 import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Splash = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user)
+  const nav = useNavigate()
 
   //image url to send to aws
   const [imgUrl, setImgUrl] = useState("");
@@ -37,40 +36,74 @@ const Splash = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const img_url = imgUrl;
-    const form = {img_url};
+    const form = { img_url };
     // const updateUser = await dispatch(updateUserThunk(user.id, form))
     await dispatch(updateUserThunk(user.id, form))
   }
 
+  const handleWeightsBtn = () => {
+    nav("/weights")
+  }
 
+  const handleWorkoutsBtn = () => {
+    nav("/workouts")
+  }
+
+  const handleGrubsBtn = () => {
+    nav("/grubs")
+  }
+
+  const sessionUser = useSelector(state => state.session.user)
+
+  console.log("\n\nsessionUser = ", sessionUser, "\n\n")
+  console.log("\n\nsessionUser.user = ", sessionUser?.user, "\n\n")
 
   return (
     <div>
-        <h1>Welcome</h1>
-        <form onSubmit={handleSubmit}>
-          <div>
-            {showUpload && (
-              <label htmlFor='file-upload'> Select From Computer
-                <input
-                  type='file'
-                  id='file-upload'
-                  name="img_url"
-                  onChange={updateImage}
-                  accept='.jpg, .jpeg, .png, .gif'
-                  />
-                </label>
-            )}
-            {!showUpload && (
-              <div>
-                <img
-                  src={previewUrl}
-                  alt="preview"
-                />
-                <button>Change Profile</button>
-              </div>
-            )}
-          </div>
-        </form>
+      <h1>Welcome</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          {/* FALSE to avoid AWS for now */}
+          {showUpload && false && (
+            <label htmlFor='file-upload'> Select From Computer
+              <input
+                type='file'
+                id='file-upload'
+                name="img_url"
+                onChange={updateImage}
+                accept='.jpg, .jpeg, .png, .gif'
+              />
+            </label>
+          )}
+          {!showUpload && (
+            <div>
+              <img
+                src={previewUrl}
+                alt="preview"
+              />
+              <button>Change Profile</button>
+            </div>
+          )}
+        </div>
+      </form>
+
+      <br />
+      <br />
+      <br />
+      {sessionUser && sessionUser.user && (
+        <div>
+          <h3>Login User = {sessionUser.user.email}</h3>
+          <h3>Login UserId = {sessionUser.user.id}</h3>
+        </div>
+      )}
+      <br />
+      <button onClick={handleWeightsBtn}>weights</button>
+      <br />
+      <br />
+      <button onClick={handleWorkoutsBtn}>workouts</button>
+      <br />
+      <br />
+      <button onClick={handleGrubsBtn}>grubs</button>
     </div>
   );
 }
