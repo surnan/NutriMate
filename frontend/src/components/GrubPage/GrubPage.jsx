@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGrubsAllThunk } from "../../redux/grubs";
 import { useNavigate } from "react-router-dom"
-
-// import WeightCard from "../WeightCard";
 import GrubCard from "../GrubCard/GrubCard";
 
 // import DeleteWeightModal from '../DeleteWeightModal'
