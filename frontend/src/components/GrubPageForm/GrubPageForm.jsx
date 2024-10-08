@@ -73,11 +73,6 @@ function GrubPageForm() {
             description,
             userId: 1,
         }
-
-        console.log("++++ ======> newGrub = ", newGrub)
-        console.log("++++ ======> exampleData = ", exampleData)
-        console.log("++++ ======> handleSubmit.body ", body)
-
         const submit = async () => {
             try {
                 const result = newGrub

@@ -26,35 +26,24 @@ router.get('/', async (req, res, next) => {
             const workoutJSON = e.toJSON();
             console.log('\n--> e = ', workoutJSON)
             return workoutJSON
-        })
-        // res.send('entered TRY-Block')       
+        })   
         res.json({GrubImages: answer})
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
         next(e)
     }
 });
 
 //one
 router.get('/:grubId', async (req, res, next) => {
-    
     try {
-
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await GrubImage.findByPk(grubId, {
             include: [{model: Grub}]
         })
-        
-        
         const currentGrubJSON = currentGrub.toJSON()
-
         return res.status(201).json(currentGrubJSON)
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
+        console.log('Route Error: ', e)
         next(e)
     }
 });
@@ -62,9 +51,7 @@ router.get('/:grubId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-
         const {url, grubId, name} = req.body
-
         const newGrub = await GrubImage.create(
             {
                 url,
@@ -72,9 +59,7 @@ router.post('/', async (req, res, next) => {
                 grubId: parseInt(grubId)
             }
         )
-
         let newWorkoutJSON = newGrub.toJSON();
-
         let responseBody = {...newWorkoutJSON}
         responseBody.createdAt = newWorkoutJSON.createdAt
         responseBody.updatedAt = newWorkoutJSON.updatedAt
@@ -106,25 +91,15 @@ router.delete('/:grubId', async (req, res, next) => {
 
 
 router.put('/:GrubImageId', async (req, res, next) => {
-    // res.send('HELLO FROM put')
-
     try {
-
-        console.log("===> A")
         const GrubImageId = parseInt(req.params.GrubImageId)
         const currentGrubImage = await GrubImage.findByPk(GrubImageId)
-
         if (!currentGrubImage){
             res.status(404).json({
                 message: "GrubImage couldn't be found"
             })
         }
-
-        console.log("===> B")
-
         const {url, grubId, name} = req.body
-
-
         await currentGrubImage.update(
             {
                 name,
@@ -132,17 +107,8 @@ router.put('/:GrubImageId', async (req, res, next) => {
                 grubId: parseInt(grubId)
             }
         )
-
-        console.log("===> C")
         let currentGrubImageJSON = currentGrubImage.toJSON();
-
-
-        console.log("===> D")
-
-        // response.json(res)
         return res.status(201).json(currentGrubImageJSON)
-        console.log("===> E")
- 
     } catch (e){
         console.log('Route Error: ', e)
         next(e)

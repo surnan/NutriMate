@@ -17,44 +17,30 @@ router.get('/hello/world', (req, res) => {
 
 //all
 router.get('/', async (req, res, next) => {
-    
     try {
         const allGrubs = await WorkoutImage.findAll()
-        
-        
         const answer = allGrubs.map(e=>{
             const workoutJSON = e.toJSON();
-            console.log('\n--> e = ', workoutJSON)
             return workoutJSON
-        })
-        // res.send('entered TRY-Block')       
+        }) 
         res.json({WorkoutImages: answer})
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
+        console.log('Route Error: ', e)
         next(e)
     }
 });
 
 //one
 router.get('/:grubId', async (req, res, next) => {
-    
     try {
-
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await WorkoutImage.findByPk(grubId, {
             include: [{model: Workout}]
         })
-        
-        
         const currentGrubJSON = currentGrub.toJSON()
-
         return res.status(201).json(currentGrubJSON)
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
+        console.log('Route Error: ', e)
         next(e)
     }
 });
@@ -62,9 +48,7 @@ router.get('/:grubId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     try {
-
         const {url, workoutId, name} = req.body
-
         const newGrub = await WorkoutImage.create(
             {
                 url,
@@ -72,9 +56,7 @@ router.post('/', async (req, res, next) => {
                 workoutId: parseInt(workoutId)
             }
         )
-
         let newWorkoutJSON = newGrub.toJSON();
-
         let responseBody = {...newWorkoutJSON}
         responseBody.createdAt = newWorkoutJSON.createdAt
         responseBody.updatedAt = newWorkoutJSON.updatedAt
@@ -89,13 +71,11 @@ router.delete('/:grubId', async (req, res, next) => {
     try {
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await WorkoutImage.findByPk(grubId)
-
         if (!currentGrub){
             res.status(404).json({
                 message: "Grub couldn't be found"
             })
         }
-
         currentGrub.destroy();
         res.json({"message": "Successfully deleted"})
     } catch (e){
@@ -106,25 +86,15 @@ router.delete('/:grubId', async (req, res, next) => {
 
 
 router.put('/:WorkoutImageId', async (req, res, next) => {
-    // res.send('HELLO FROM put')
-
     try {
-
-        console.log("===> A")
         const WorkoutImageId = parseInt(req.params.WorkoutImageId)
         const currentWorkoutImage = await WorkoutImage.findByPk(WorkoutImageId)
-
         if (!currentWorkoutImage){
             res.status(404).json({
                 message: "WorkoutImage couldn't be found"
             })
         }
-
-        console.log("===> B")
-
         const {url, grubId, name} = req.body
-
-
         await currentWorkoutImage.update(
             {
                 name,
@@ -132,17 +102,8 @@ router.put('/:WorkoutImageId', async (req, res, next) => {
                 grubId: parseInt(grubId)
             }
         )
-
-        console.log("===> C")
         let currentWorkoutImageJSON = currentWorkoutImage.toJSON();
-
-
-        console.log("===> D")
-
-        // response.json(res)
         return res.status(201).json(currentWorkoutImageJSON)
-        console.log("===> E")
- 
     } catch (e){
         console.log('Route Error: ', e)
         next(e)
