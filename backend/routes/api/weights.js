@@ -127,13 +127,9 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/:weightId', async (req, res, next) => {
-    console.log('HELLO FROM put')
-
-    let currentWeight
-
     try {
         const weightId = req.params.weightId
-        currentWeight = await Weight.findByPk(weightId)
+        const currentWeight = await Weight.findByPk(weightId)
 
         if (!currentWeight){
             res.status(404).json({

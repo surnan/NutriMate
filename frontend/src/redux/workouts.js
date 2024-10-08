@@ -82,9 +82,6 @@ export const updateWorkoutsOneThunk = ({body}) => async (dispatch) => {
 }
 
 export const deleteWorkoutThunkById = (id) => async (dispatch) => {
-    console.log(`===> deleteWorkoutThunkById ==> link= /api/workouts/${id}` )
-    console.log(`===> link= /api/workouts/${id}` )
-
     const res = await csrfFetch(`/api/workouts/${id}`, {
         method: 'DELETE',
         header: { 'Content-Type': 'application/json' }
