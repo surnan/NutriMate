@@ -69,6 +69,8 @@ export const getGrubsAllThunk = () => async (dispatch) => {
 
 export const postGrubsOneThunk = ({body} ) => async (dispatch) => {
 
+    console.log('\n--> INSIDE: postGrubsOneThunk --> ', body)
+
     const response = await csrfFetch('/api/grubs', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,6 +85,7 @@ export const postGrubsOneThunk = ({body} ) => async (dispatch) => {
 }
 
 export const updateGrubsOneThunk = ({body}) => async (dispatch) => {
+    console.log('\n--> INSIDE: updateGrubsOneThunk --> ', body)
     const response = await csrfFetch(`/api/grubs/${body.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },

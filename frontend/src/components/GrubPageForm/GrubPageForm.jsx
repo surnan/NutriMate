@@ -1,12 +1,11 @@
 // frontend/src/componenets/GrubPageForm/GrubPageForm.jsx
+import "./GrubPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import "./GrubPageForm.css";
+import { useLocation, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk } from "../../redux/grubs"
-
-import { useLocation } from 'react-router-dom';
-
+import DeleteGrubModal from '../DeleteGrubModal'
+// import { useLocation } from 'react-router-dom';
 
 function GrubPageForm() {
     const nav = useNavigate();
@@ -15,10 +14,20 @@ function GrubPageForm() {
     const location = useLocation();
     const { newGrub, exampleData } = location.state || {};
 
-    // console.log("newGrub = ", newGrub)
-    // console.log("exampleData = ", exampleData)
+    const [showDeletetModal, setShowDeletetModal] = useState(false);
+    const [selectedGrub, setSelectedGrub] = useState(null);
 
+    const handleDeleteBtn = (e, grub) => {
+        e.preventDefault();
+        setSelectedGrub(exampleData);
+        setShowDeletetModal(true)
+    }
 
+    const handleModalClose = () => {
+        setShowDeletetModal(false)
+        setSelectedGrub(null)
+        nav(-1)
+    };
 
     const [form, setForm] = useState({
         name: exampleData?.name || "",
@@ -47,13 +56,11 @@ function GrubPageForm() {
         e.preventDefault();
         setClickedSubmitBtn(true);
 
-
         const { name, servingUnit, servingSize, calories, protein, fats } = form
         const { carbs, sugar, company, description } = form
 
-
         const body = {
-            id: parseInt(exampleData?.id) || 20,
+            id: parseInt(exampleData?.id),
             name,
             servingUnit,
             servingSize: parseInt(servingSize),
@@ -67,17 +74,16 @@ function GrubPageForm() {
             userId: 1,
         }
 
+        console.log("++++ ======> newGrub = ", newGrub)
+        console.log("++++ ======> exampleData = ", exampleData)
         console.log("++++ ======> handleSubmit.body ", body)
 
         const submit = async () => {
             try {
 
-                let result
-                if (newGrub){
-                    result = await dispatch(updateGrubsOneThunk({ body }))
-                } else {
-                    result = await dispatch(postGrubsOneThunk({ body }))
-                }
+                const result = newGrub
+                    ? await dispatch(updateGrubsOneThunk({ body }))
+                    : await dispatch(postGrubsOneThunk({ body }))
 
                 if (result) {
                     nav(`/grubs`);
@@ -95,9 +101,6 @@ function GrubPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-
-
-        // const allKeys = ["name", "description"];
         const allKeys = ["name", "servingUnit", "servingSize", "calories", "protein", "fats", "carbs", "sugar", "company", "description"];
 
         for (let key of allKeys) {
@@ -109,7 +112,8 @@ function GrubPageForm() {
         if (clickedSubmitBtn) {
             setErrors(newErrors)
         }
-    }, [form, clickedSubmitBtn])
+    }, [form, clickedSubmitBtn, showDeletetModal])
+
 
     const updateSetForm = (e) => {
         const { name, value } = e.target;
@@ -259,6 +263,25 @@ function GrubPageForm() {
             >
                 Cancel
             </button>
+            <br />
+            <button
+                type="cancel"
+                onClick={handleDeleteBtn}
+                className="formBtn"
+            >
+                DELETE
+            </button>
+
+
+            {showDeletetModal && (
+                <DeleteGrubModal
+                    onClose={handleModalClose}
+                    onSubmit={handleDeleteBtn}
+                    grub={selectedGrub}
+                />
+            )
+            }
+
         </div>
 
     );
