@@ -37,6 +37,13 @@ const GrubPage = () => {
     dispatch(getGrubsAllThunk())
   }, [dispatch, showDeletetModal])
 
+  const somethingDifferent = (e, grub) => {
+    e.preventDefault();
+    // nav('/grubform')
+
+    nav('/grubform', { state: { newGrub: true, exampleData: grub} }); 
+
+  }
 
 
   return (
@@ -45,18 +52,22 @@ const GrubPage = () => {
       <button onClick={handleNewWorkout}>CREATE</button>
       <br />
       <br />
+
+      {/* const handleNewWorkout = () => {nav('/grubform')} */}
+
       {
         grubArr.map((grub, idx) => (
           <div
             key={`${idx}-grub`}
-            onClick={ e => handleDeleteBtn(e, grub)}
+            // onClick={e => handleDeleteBtn(e, grub)}
+            onClick={e => somethingDifferent(e, grub)}
           >
-            {/* <p>{grub.name}</p> */}
             <GrubCard grub={grub} />
             <br />
           </div>
         ))
       }
+
 
       {showDeletetModal && (
         <DeleteGrubModal
@@ -73,17 +84,3 @@ const GrubPage = () => {
 }
 
 export default GrubPage;
-
-
-
-// return (
-//   <div>
-//     <h1> GrubPage.jsx </h1>
-//     {
-//       grubArr.map((grub, idx) => (
-//         <p> {grub.name} </p>
-//       ))
-//     }
-//   </div>
-
-// );
