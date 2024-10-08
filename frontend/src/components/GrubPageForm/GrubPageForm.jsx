@@ -5,10 +5,20 @@ import { useNavigate } from "react-router-dom";
 import "./GrubPageForm.css";
 import { postGrubsOneThunk } from "../../redux/grubs"
 
+import { useLocation } from 'react-router-dom';
+
 
 function GrubPageForm() {
     const nav = useNavigate();
     const dispatch = useDispatch();
+
+    const location = useLocation();
+    const { newGrub, exampleData } = location.state || {};
+
+    console.log("newGrub = ", newGrub)
+    console.log("exampleData = ", exampleData)
+
+
 
     const [form, setForm] = useState({
         name: "",
@@ -21,7 +31,7 @@ function GrubPageForm() {
         sugar: '',
         company: '',
         description: '',
-        userId: ''
+        userId: 1
     });
 
     const [errors, setErrors] = useState({})
@@ -48,9 +58,9 @@ function GrubPageForm() {
             servingSize: parseInt(servingSize),
             calories: parseInt(calories),
             protein: parseInt(protein),
-            fats: parseInt(protein),
-            carbs: parseInt(protein),
-            sugar: parseInt(protein),
+            fats: parseInt(fats),
+            carbs: parseInt(carbs),
+            sugar: parseInt(sugar),
             company,
             description,
             userId: 1,
@@ -187,7 +197,7 @@ function GrubPageForm() {
             </label>
             <input
                 type="text"
-                name="srgar"
+                name="sugar"
                 onChange={updateSetForm}
                 placeholder="enter sugar"
             />
