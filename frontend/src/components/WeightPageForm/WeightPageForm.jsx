@@ -10,18 +10,14 @@ import DeleteWeightModal from '../DeleteWeightModal'
 function WeightPageForm() {
     const nav = useNavigate();
     const dispatch = useDispatch();
-
     const location = useLocation();
     const { newWeight, exampleData } = location.state || {};
-
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWeight, setSelectedWeight] = useState(null);
 
     const handleDeleteBtn = (e, grub) => {
         e.preventDefault();
         setSelectedWeight(exampleData);
-        console.log("===> e ==> ", e)
-        console.log("===> exampleData ==> ", exampleData)
         setShowDeletetModal(true)
     }
 
@@ -66,10 +62,6 @@ function WeightPageForm() {
             "userId": 2,
         }
 
-        console.log("++++ ======> newWeight = ", newWeight)
-        console.log("++++ ======> exampleData = ", exampleData)
-        console.log("++++ ======> handleSubmit.body ", body)
-
         const submit = async () => {
             try {
                 const result = newWeight
@@ -111,10 +103,6 @@ function WeightPageForm() {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
-
-
-    // console.log("++++ ======> newWeight = ", newWeight)
-    // console.log("++++ ======> exampleData = ", exampleData)
 
     return (
         <form className="weightForm">

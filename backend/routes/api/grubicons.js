@@ -17,44 +17,30 @@ router.get('/hello/world', (req, res) => {
 
 //all
 router.get('/', async (req, res, next) => {
-    
     try {
         const allGrubs = await GrubIcon.findAll()
-        
-        
         const answer = allGrubs.map(e=>{
             const workoutJSON = e.toJSON();
-            console.log('\n--> e = ', workoutJSON)
             return workoutJSON
-        })
-        // res.send('entered TRY-Block')       
+        })  
         res.json({GrubIcons: answer})
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
+        console.log('Route Error: ', e)
         next(e)
     }
 });
 
 //one
 router.get('/:grubId', async (req, res, next) => {
-    
     try {
-
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await GrubIcon.findByPk(grubId, {
             include: [{model: Grub}]
         })
-        
-        
         const currentGrubJSON = currentGrub.toJSON()
-
         return res.status(201).json(currentGrubJSON)
-
-
     } catch (e) {
-        // console.log('Route Error: ', e)
+        console.log('Route Error: ', e)
         next(e)
     }
 });
@@ -106,25 +92,15 @@ router.delete('/:grubId', async (req, res, next) => {
 
 
 router.put('/:grubIconId', async (req, res, next) => {
-    // res.send('HELLO FROM put')
-
     try {
-
-        console.log("===> A")
         const grubIconId = parseInt(req.params.grubIconId)
         const currentGrubIcon = await GrubIcon.findByPk(grubIconId)
-
         if (!currentGrubIcon){
             res.status(404).json({
                 message: "GrubIcon couldn't be found"
             })
         }
-
-        console.log("===> B")
-
         const {url, grubId, name} = req.body
-
-
         await currentGrubIcon.update(
             {
                 name,
@@ -132,17 +108,8 @@ router.put('/:grubIconId', async (req, res, next) => {
                 grubId: parseInt(grubId)
             }
         )
-
-        console.log("===> C")
         let currentGrubIconJSON = currentGrubIcon.toJSON();
-
-
-        console.log("===> D")
-
-        // response.json(res)
         return res.status(201).json(currentGrubIconJSON)
-        console.log("===> E")
- 
     } catch (e){
         console.log('Route Error: ', e)
         next(e)

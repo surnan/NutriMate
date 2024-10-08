@@ -7,12 +7,7 @@ import {deleteGrubThunkById } from '../../redux/grubs'
 
 
 const DeleteWorkoutModal = ({ grub, onClose }) => {
-    // console.log(grub)
     const dispatch = useDispatch();
-
-    console.log("\n\n")
-    console.log("====> DeleteWorkoutModal (grub) ==> ", grub)
-    console.log("\n\n")
     const handleDelete = async () => {
         try {
             await dispatch(deleteGrubThunkById(grub.id))
