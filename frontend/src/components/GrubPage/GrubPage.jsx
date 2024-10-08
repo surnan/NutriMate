@@ -49,6 +49,7 @@ const GrubPage = () => {
         grubArr.map((grub, idx) => (
           <div
             key={`${idx}-grub`}
+            onClick={ e => handleDeleteBtn(e, grub)}
           >
             {/* <p>{grub.name}</p> */}
             <GrubCard grub={grub} />
@@ -61,7 +62,7 @@ const GrubPage = () => {
         <DeleteGrubModal
           onClose={handleModalClose}
           onSubmit={handleDeleteBtn}
-          workout={selectedGrub}
+          grub={selectedGrub}
         />
       )
       }
