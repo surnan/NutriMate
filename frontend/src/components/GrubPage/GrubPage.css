@@ -1,0 +1,19 @@
+body {
+    background: lightpink;
+}
+
+.grub_card_hFlex{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    justify-content: space-between;
+    padding: 10px;
+    border: 2px black solid;
+    max-width: 1100px;
+}
+
+.grubCard_hFlex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
