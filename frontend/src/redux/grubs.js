@@ -1,7 +1,7 @@
 // frontend/src/redux/workouts.js
 import { csrfFetch } from "./csrf";
 
-const LOAD_GRUBS_ALL = "weights/loadGrubsAll"
+const LOAD_GRUBS_ALL = "grubs/loadGrubsAll"
 
 //Actions
 const loadGrubsAll = (data) => {
@@ -12,6 +12,17 @@ const loadGrubsAll = (data) => {
 }
 
 
+// Thunks
+export const getGrubsAllThunk = () => async (dispatch) => {
+    const response = await csrfFetch('/api/grubs')
+    if (response.ok) {
+        const data = await response.json();
+        console.log("======> getGrubsAllThunk ===> ", data)
+        await dispatch(loadGrubsAll(data))
+        return data
+    }
+}
+
 // State object
 const initialState = {
     allGrubs: [],
@@ -19,22 +30,14 @@ const initialState = {
     currentGrub: {}
 }
 
-
-// Thunks
-export const getGrubsAllThunk = () => async (dispatch) => {
-    const response = await csrfFetch('/api/grubs')
-    if (response.ok) {
-        const data = await response.json();
-        await dispatch(loadGrubsAll(data))
-        return data
-    }
-}
-
-
 //Reducers
 const grubsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_GRUBS_ALL: {
+
+            // console.log("======> LOAD_GRUBS_ALL (action) ===> ", action)
+
+
             let newState = {...state}
 
             // thunk returns JSON with key named: 'Grubs'
@@ -45,6 +48,8 @@ const grubsReducer = (state = initialState, action) => {
             for (let grub of action.payload.Grubs) {
                 newState.byId[grub.id] = grub
             }
+
+            console.log("======> LOAD_GRUBS_ALL (newState) ===> ", newState)
 
             return newState
         }
