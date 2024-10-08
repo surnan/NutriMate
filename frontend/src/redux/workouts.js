@@ -90,6 +90,19 @@ export const postWorkoutsOneThunk = ({ body }) => async (dispatch) => {
     }
 }
 
+export const deleteWorkoutThunkById = (id) => async (dispatch) => {
+    const res = await csrfFetch(`/api/workouts/${id}`, {
+        method: 'DELETE',
+        header: { 'Content-Type': 'application/json' }
+    })
+
+    if (res.ok) {
+        const reviewData = await res.json();
+        await dispatch(removeWorkoutsOne(id));
+        return reviewData;
+    }
+}
+
 //Reducers
 const workoutsReducer = (state = initialState, action) => {
     switch (action.type) {
