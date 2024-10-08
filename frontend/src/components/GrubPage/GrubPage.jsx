@@ -7,6 +7,8 @@ import { getGrubsAllThunk } from "../../redux/grubs";
 import { useNavigate } from "react-router-dom"
 
 // import WeightCard from "../WeightCard";
+import GrubCard from "../GrubCard/GrubCard";
+
 // import DeleteWeightModal from '../DeleteWeightModal'
 
 
@@ -27,12 +29,33 @@ const GrubPage = () => {
       <h1> GrubPage.jsx </h1>
       {
         grubArr.map((grub, idx) => (
-          <p> {grub.name} </p>
+          <div
+            key={`${idx}-grub`}
+          >
+            {/* <p>{grub.name}</p> */}
+            <GrubCard grub={grub} />
+            <br />
+          </div>
         ))
       }
+
     </div>
 
   );
 }
 
 export default GrubPage;
+
+
+
+// return (
+//   <div>
+//     <h1> GrubPage.jsx </h1>
+//     {
+//       grubArr.map((grub, idx) => (
+//         <p> {grub.name} </p>
+//       ))
+//     }
+//   </div>
+
+// );
