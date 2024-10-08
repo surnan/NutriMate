@@ -8,6 +8,7 @@ import WeightPageForm from '../components/WeightPageForm/WeightPageForm';
 import WorkoutPage from '../components/WorkoutPage'
 import WorkoutPageForm from '../components/WorkoutPageForm'
 import GrubPage from '../components/GrubPage'
+import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
 
 
 
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       {path: "workouts", element: <WorkoutPage />},
       {path: "workoutform", element: <WorkoutPageForm />},
       {path: "grubs", element: <GrubPage />},
+      {path: "grubform", element: <GrubPageForm />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
