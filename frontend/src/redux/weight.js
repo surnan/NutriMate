@@ -160,7 +160,8 @@ const weightsReducer = (state = initialState, action) => {
             let newState = { ...state }
             // newState.allReviews = newState.allReviews.filter(review => review.id !== action.payload);
             newState.allWeights = newState.allWeights.filter(currentWeight => currentWeight.id !== action.payload);
-            delete newState.byId[action.payload];
+            // delete newState.byId[action.payload];
+            delete newState.byId[action.payload.id];
             return newState;
         }
         case REMOVE_WEIGHTS_USER: {

@@ -141,6 +141,13 @@ const workoutsReducer = (state = initialState, action) => {
         }
         case REMOVE_WORKOUTS_ONE: {
             let newState = {...state}
+            
+            // newState.allWeights = newState.allWeights.filter(currentWeight => currentWeight.id !== action.payload);
+            newState.allWorkouts = newState.allWorkouts.filter(currentWorkout => currentWorkout.id !== action.payload);
+            
+            // delete newState.byId[action.payload]
+            delete newState.byId[action.payload.id]
+            
             return newState
         }
         case REMOVE_WORKOUTS_USER: {
