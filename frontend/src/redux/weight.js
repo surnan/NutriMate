@@ -76,7 +76,6 @@ export const getWeightsAllThunk = () => async (dispatch) => {
 }
 
 export const postWeightsOneThunk = ({ body }) => async (dispatch) => {
-    console.log("==> inside postWeightsOneThunk ==> ", body)
     const response = await csrfFetch('/api/weights', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -104,7 +103,6 @@ export const deleteWeightThunkById = (id) => async (dispatch) => {
 }
 
 export const updateWeightThunkById = ({ body }) => async (dispatch) => {
-    console.log("==> inside updateWeightThunkById ==> ", body)
     const response = await csrfFetch(`/api/weights/${body.id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -175,9 +173,3 @@ const weightsReducer = (state = initialState, action) => {
 }
 
 export default weightsReducer;
-
-
-// console.log("++++ =======>")
-// console.log("state ==> ", state)
-// console.log("action ==> ", action)
-// console.log("newState ==> ", newState)
