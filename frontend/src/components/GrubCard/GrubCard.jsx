@@ -22,7 +22,6 @@ const GrubCard = ({ grub }) => {
       </div>
       <p>Description: {description}</p>
     </div>
-
   );
 }
 
