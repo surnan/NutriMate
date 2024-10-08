@@ -2,20 +2,23 @@
 
 import './DeleteGrubModal.css'
 import { useDispatch } from 'react-redux';
-// import {deleteWorkoutThunkById } from '../../redux/workouts'
+import {deleteGrubThunkById } from '../../redux/grubs'
 
 
 
-const DeleteWorkoutModal = ({ workout, onClose }) => {
-    // console.log(workout)
+const DeleteWorkoutModal = ({ grub, onClose }) => {
+    // console.log(grub)
     const dispatch = useDispatch();
 
+    console.log("\n\n")
+    console.log("====> DeleteWorkoutModal (grub) ==> ", grub)
+    console.log("\n\n")
     const handleDelete = async () => {
         try {
-            // await dispatch(deleteWorkoutThunkById(workout.id))
+            await dispatch(deleteGrubThunkById(grub.id))
             onClose();
         } catch (error) {
-            console.error('Error deleting workout:', error);
+            console.error('Error deleting grub:', error);
         }
     };
 
