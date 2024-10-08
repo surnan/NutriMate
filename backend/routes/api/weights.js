@@ -97,13 +97,9 @@ router.delete('/:workoutId', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-    // res.send('HELLO FROM post')
-
-    let newWorkout
-
     try {
         const {metricSystem, start, goal, current, day, userId} = req.body
-        newWorkout = await Weight.create(
+        const newWorkout = await Weight.create(
             {
                 metricSystem: true, 
                 start: parseInt(start), 
@@ -113,9 +109,7 @@ router.post('/', async (req, res, next) => {
                 userId: parseInt(userId)
             }
         )
-
         let newWorkoutJSON = newWorkout.toJSON();
-
         let responseBody = {...newWorkoutJSON}
         responseBody.createdAt = newWorkoutJSON.createdAt
         responseBody.updatedAt = newWorkoutJSON.updatedAt

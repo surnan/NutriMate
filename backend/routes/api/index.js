@@ -21,8 +21,8 @@ router.get('/hello/world', (req, res) => {
     res.send('api/routes ---> Hello World! password -2');
 });
 
-//You can use requireAuth as middleware for routes that require sign in
-//You can use setTokenCookie as a func to set cookie for user
+//requireAuth as middleware for routes that require sign in
+//setTokenCookie as a func to set cookie for user
 
 router.use(restoreUser);
 
