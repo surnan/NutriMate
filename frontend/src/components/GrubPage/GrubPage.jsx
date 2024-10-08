@@ -6,45 +6,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGrubsAllThunk } from "../../redux/grubs";
 import { useNavigate } from "react-router-dom"
 import GrubCard from "../GrubCard/GrubCard";
-import DeleteGrubModal from '../DeleteGrubModal'
-
 
 const GrubPage = () => {
   const dispatch = useDispatch()
   const nav = useNavigate();
 
   const grubArr = useSelector(state => state.grubs.allGrubs);
+  const handleNewWorkout = () => {
+    //need to pass in userId
+    // nav('/grubform', { state: { newGrub: false, exampleData: grub} }); 
+    nav('/grubform')
 
-  const [showDeletetModal, setShowDeletetModal] = useState(false);
-  const [selectedGrub, setSelectedGrub] = useState(null);
-
-
-  const handleNewWorkout = () => { nav('/grubform') }
-
-  const handleDeleteBtn = (e, grub) => {
-    e.preventDefault();
-    setSelectedGrub(grub);
-    setShowDeletetModal(true)
   }
-
-  const handleModalClose = () => {
-    setShowDeletetModal(false)
-    setSelectedGrub(null)
-  };
-
 
   useEffect(() => {
     dispatch(getGrubsAllThunk())
-  }, [dispatch, showDeletetModal])
+  }, [dispatch])
 
   const somethingDifferent = (e, grub) => {
     e.preventDefault();
-    // nav('/grubform')
-
-    nav('/grubform', { state: { newGrub: true, exampleData: grub} }); 
-
+    nav('/grubform', { state: { newGrub: true, exampleData: grub } });
   }
-
 
   return (
     <div>
@@ -52,14 +34,10 @@ const GrubPage = () => {
       <button onClick={handleNewWorkout}>CREATE</button>
       <br />
       <br />
-
-      {/* const handleNewWorkout = () => {nav('/grubform')} */}
-
       {
         grubArr.map((grub, idx) => (
           <div
             key={`${idx}-grub`}
-            // onClick={e => handleDeleteBtn(e, grub)}
             onClick={e => somethingDifferent(e, grub)}
           >
             <GrubCard grub={grub} />
@@ -67,19 +45,7 @@ const GrubPage = () => {
           </div>
         ))
       }
-
-
-      {showDeletetModal && (
-        <DeleteGrubModal
-          onClose={handleModalClose}
-          onSubmit={handleDeleteBtn}
-          grub={selectedGrub}
-        />
-      )
-      }
-
     </div>
-
   );
 }
 
