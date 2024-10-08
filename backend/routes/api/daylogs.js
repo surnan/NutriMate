@@ -9,7 +9,6 @@ const router = express.Router();
 
 
 router.get('/hello/world', (req, res) => {
-    console.log("=== HERE I AM 3 ===")
     res.send('api/routes/workouts ---> Hello World!');
 });
 

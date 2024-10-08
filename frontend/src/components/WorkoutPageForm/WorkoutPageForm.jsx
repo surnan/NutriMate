@@ -20,8 +20,6 @@ function WorkoutPageForm() {
     const handleDeleteBtn = (e, grub) => {
         e.preventDefault();
         setSelectedWorkout(exampleData);
-        console.log("===> e ==> ", e)
-        console.log("===> exampleData ==> ", exampleData)
         setShowDeletetModal(true)
     }
 
@@ -59,19 +57,6 @@ function WorkoutPageForm() {
             description,
             userId: 1
         }
-
-
-
-
-
-
-
-
-
-
-        console.log("++++ ======> newWorkout = ", newWorkout)
-        console.log("++++ ======> exampleData = ", exampleData)
-        console.log("++++ ======> handleSubmit.body ", body)
 
         const submit = async () => {
             try {

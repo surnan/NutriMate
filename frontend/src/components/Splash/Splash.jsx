@@ -29,7 +29,6 @@ const Splash = () => {
     reader.readAsDataURL(file);
     reader.onload = (e) => {
       setPreviewUrl(reader.result);
-      console.log(e)
     }
     setImgUrl(file);
     setShowUpload(false);
