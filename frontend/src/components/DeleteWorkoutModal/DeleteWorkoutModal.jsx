@@ -2,7 +2,6 @@
 
 import './DeleteWorkoutModal.css'
 import { useDispatch } from 'react-redux';
-// import { deleteWeightThunkById } from '../../redux/weight';
 import {deleteWorkoutThunkById } from '../../redux/workouts'
 
 
@@ -10,6 +9,10 @@ import {deleteWorkoutThunkById } from '../../redux/workouts'
 const DeleteWorkoutModal = ({ workout, onClose }) => {
     // console.log(workout)
     const dispatch = useDispatch();
+
+    console.log("\n\n")
+    console.log("====> DeleteWorkoutModal (workout) ==> ", workout)
+    console.log("\n\n")
 
     const handleDelete = async () => {
         try {
