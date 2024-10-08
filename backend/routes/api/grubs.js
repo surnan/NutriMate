@@ -33,10 +33,7 @@ router.get('/', async (req, res, next) => {
                 { 
                     model: GrubImage,
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }
+            ]
         })
         
         
@@ -75,10 +72,7 @@ router.get('/:grubId', async (req, res, next) => {
                 { 
                     model: GrubImage,
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }
+            ]
         })
         
         
