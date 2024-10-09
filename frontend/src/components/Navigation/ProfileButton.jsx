@@ -5,10 +5,12 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
+import { useNavigate } from "react-router-dom"
 
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
+  const nav = useNavigate();
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
