@@ -17,7 +17,7 @@ function WorkoutPageForm() {
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
 
-    const handleDeleteBtn = (e, grub) => {
+    const handleDeleteBtn = (e) => {
         e.preventDefault();
         setSelectedWorkout(exampleData);
         setShowDeletetModal(true)

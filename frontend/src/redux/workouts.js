@@ -2,8 +2,8 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_WORKOUTS_ALL = "weights/loadWorkoutsAll"
-const LOAD_WORKOUTS_USER = "weights/loadWorkoutsUser"
-const LOAD_WORKOUTS_ONE = "weights/loadWorkoutsOne"
+// const LOAD_WORKOUTS_USER = "weights/loadWorkoutsUser"
+// const LOAD_WORKOUTS_ONE = "weights/loadWorkoutsOne"
 const POST_WORKOUTS_ONE = "weights/postWorkoutsOne"
 const UPDATE_WORKOUTS_ONE = "weights/updateWorkoutsOne"
 const REMOVE_WORKOUTS_ONE = "weights/removeWorkoutsOne"
@@ -31,15 +31,15 @@ const updateWorkoutsOne = (data) => ({
     payload: data
 })
 
-const loadWorkoutsOne = (data) => ({
-        type: LOAD_WORKOUTS_ONE,
-        payload: data
-})
+// const loadWorkoutsOne = (data) => ({
+//         type: LOAD_WORKOUTS_ONE,
+//         payload: data
+// })
 
-const loadWorkoutsUser = (data) => ({
-        type: LOAD_WORKOUTS_USER,
-        payload: data
-})
+// const loadWorkoutsUser = (data) => ({
+//         type: LOAD_WORKOUTS_USER,
+//         payload: data
+// })
 
 
 

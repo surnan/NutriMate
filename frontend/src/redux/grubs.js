@@ -2,8 +2,8 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_GRUBS_ALL = "grubs/loadGrubsAll"
-const LOAD_GRUB_USER = "grubs/loadGrubsUser"
-const LOAD_GRUBS_ONE = "grubs/loadGrubsOne"
+// const LOAD_GRUB_USER = "grubs/loadGrubsUser"
+// const LOAD_GRUBS_ONE = "grubs/loadGrubsOne"
 const POST_GRUBS_ONE = "grubs/postGrubsOne"
 const UPDATE_GRUBS_ONE = "grubs/updateGrubsOne"
 const REMOVE_GRUBS_ONE = "grubs/removeGrubsOne"
@@ -31,15 +31,15 @@ const updateGrubsOne = (data) => ({
     payload: data
 })
 
-const loadGrubsUser = (data) => ({
-    type: LOAD_GRUB_USER,
-    payload: data
-})
+// const loadGrubsUser = (data) => ({
+//     type: LOAD_GRUB_USER,
+//     payload: data
+// })
 
-const loadGrubsOne = (data) => ({
-    type: LOAD_GRUBS_ONE,
-    payload: data
-})
+// const loadGrubsOne = (data) => ({
+//     type: LOAD_GRUBS_ONE,
+//     payload: data
+// })
 
 // Thunks
 export const getGrubsAllThunk = () => async (dispatch) => {
