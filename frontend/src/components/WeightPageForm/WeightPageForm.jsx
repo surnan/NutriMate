@@ -15,7 +15,7 @@ function WeightPageForm() {
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWeight, setSelectedWeight] = useState(null);
 
-    const handleDeleteBtn = (e, grub) => {
+    const handleDeleteBtn = (e) => {
         e.preventDefault();
         setSelectedWeight(exampleData);
         setShowDeletetModal(true)
