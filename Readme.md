@@ -1,4 +1,4 @@
-<!-- "Frondend > Backend > AWS > Backend > Database > Backend > Frontend" -->
+<!-- "Frontend > Backend > AWS > Backend > Database > Backend > Frontend" -->
 
 # Calorie Mate
 
