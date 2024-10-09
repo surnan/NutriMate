@@ -61,6 +61,8 @@ const Splash = () => {
   return (
     <div>
       <h1>Welcome</h1>
+      <h2>SessionUser is null = {sessionUser === null ? "TRUE" : "FALSE"}</h2>
+
       <form onSubmit={handleSubmit}>
         <div>
           {/* FALSE to avoid AWS for now */}
