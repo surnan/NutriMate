@@ -100,65 +100,63 @@ function WorkoutPageForm() {
     }
 
     return (
-        <div>
+        <>
             <h1>WorkoutPageForm.jsx</h1>
-            <label>
-                Name &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
-            </label>
-            <input
-                type="text"
-                name="name"
-                onChange={updateSetForm}
-                placeholder="enter name"
-                value={form.name || ""}
-            />
-
-            <br />
-            <label>
-                Desciption &#160;&#160;{errors.goal && <span style={{ color: 'red' }}>{errors.goal}</span>}
-            </label>
-            <input
-                type="text"
-                name="description"
-                onChange={updateSetForm}
-                placeholder="enter description"
-                value={form.description || ""}
-            />
-
-            <br />
-            <button
-                type="submit"
-                // disabled={hasError()}
-                onClick={handleSubmit}
-                className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
-            >
-                Create Spot
-            </button>
-
-            <br />
-            <button
-                type="cancel"
-                onClick={handleCancel}
-                className="formBtn"
-            >
-                Cancel
-            </button>
-            <br />
-            <button
-                type="cancel"
-                onClick={handleDeleteBtn}
-                className="formBtn"
-            >
-                DELETE
-            </button>
-            {showDeletetModal && (
-                <DeleteWorkoutModal
-                    onClose={handleModalClose}
-                    onSubmit={handleDeleteBtn}
-                    workout={selectedWorkout}
+            <div className="workout_page_form_grid">
+                <label>
+                    Name &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
+                </label>
+                <input
+                    type="text"
+                    name="name"
+                    onChange={updateSetForm}
+                    placeholder="enter name"
+                    value={form.name || ""}
                 />
-            )}
-        </div>
+                <label>
+                    Desciption &#160;&#160;{errors.goal && <span style={{ color: 'red' }}>{errors.goal}</span>}
+                </label>
+                <input
+                    type="text"
+                    name="description"
+                    onChange={updateSetForm}
+                    placeholder="enter description"
+                    value={form.description || ""}
+                />               
+                {showDeletetModal && (
+                    <DeleteWorkoutModal
+                        onClose={handleModalClose}
+                        onSubmit={handleDeleteBtn}
+                        workout={selectedWorkout}
+                    />
+                )}
+            </div>
+            <button
+                    type="submit"
+                    // disabled={hasError()}
+                    onClick={handleSubmit}
+                    className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
+                >
+                    Create Spot
+                </button>
+
+                <br />
+                <button
+                    type="cancel"
+                    onClick={handleCancel}
+                    className="formBtn"
+                >
+                    Cancel
+                </button>
+                <br />
+                <button
+                    type="cancel"
+                    onClick={handleDeleteBtn}
+                    className="formBtn"
+                >
+                    DELETE
+                </button>
+        </>
     );
 }
 
