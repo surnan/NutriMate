@@ -1,7 +1,7 @@
 // frontend/src/components/WorkoutPage/WorkoutPage.jsx
 
 import "./WorkoutPage.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkoutsAllThunk } from "../../redux/workouts"
 import { useNavigate } from "react-router-dom"
@@ -28,23 +28,22 @@ const WorkoutPage = () => {
   }
 
   return (
-    <div>
+    <>
       <h3>WorkoutPage.jsx</h3>
       <button onClick={handleNewWorkout}>CREATE</button>
-      <br />
-      <br />
-      {
-        workoutsArr.map((workout, idx) => (
-          <div
-            key={`${idx}-workout`}
-            onClick={e => somethingDifferent(e, workout)}
-          >
-            <WorkoutCard workout={workout} />
-            <br />
-          </div>
-        ))
-      }
-    </div>
+      <div className="workout_page_grid">
+        {
+          workoutsArr.map((workout, idx) => (
+            <div
+              key={`${idx}-workout`}
+              onClick={e => somethingDifferent(e, workout)}
+            >
+              <WorkoutCard workout={workout} />
+            </div>
+          ))
+        }
+      </div>
+    </>
   );
 }
 
