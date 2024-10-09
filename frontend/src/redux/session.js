@@ -122,7 +122,9 @@ function sessionReducer(state = initialState, action) {
         case SET_USER:
             return { ...state, user: action.payload };
         case REMOVE_USER:
-            return { ...state, user: null };
+            console.log("=======> Removing user: setting user to null")
+            // return { ...state, user: null };
+            return { user: null };
         case EDIT_USER:
             return { ...state, user: action.payload };
         default:
