@@ -9,6 +9,7 @@ const GrubCard = ({ grub }) => {
   const { name, servingUnit, servingSize, calories, protein } = grub
   const { fats, carbs, sugar, company, description, userId } = grub
 
+
   return (
     <div className="grub_card_hFlex">
       <p>Name: {company} {name}</p>
@@ -19,6 +20,7 @@ const GrubCard = ({ grub }) => {
         <p>Fat: {fats}</p>
         <p>Carbs: {carbs}</p>
         <p>Sugar: {sugar}</p>
+        <p>UserId: {userId}</p>
       </div>
       <p>Description: {description}</p>
     </div>
