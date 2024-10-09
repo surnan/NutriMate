@@ -24,7 +24,7 @@ router.get('/', async (req, res, next) => {
                 { 
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 },
                 { 
@@ -33,10 +33,7 @@ router.get('/', async (req, res, next) => {
                 { 
                     model: WorkoutImage,
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }
+            ]
         });
 
         const answer = workouts.map(e=>{
@@ -60,7 +57,7 @@ router.get('/:workoutId', async (req, res, next) => {
                 { 
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 },
                 { 
@@ -69,10 +66,8 @@ router.get('/:workoutId', async (req, res, next) => {
                 { 
                     model: WorkoutImage,
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }})
+            ]
+        })
 
         if (!currentWorkout){
             res.status(404).json({

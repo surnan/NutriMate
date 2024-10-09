@@ -94,16 +94,14 @@ const Splash = () => {
         <div>
           <h3>Login User = {sessionUser.user.email}</h3>
           <h3>Login UserId = {sessionUser.user.id}</h3>
+          <br />
+          <button onClick={handleWeightsBtn}>weights</button>
+          <br />
+          <button onClick={handleWorkoutsBtn}>workouts</button>
+          <br />
+          <button onClick={handleGrubsBtn}>grubs</button>
         </div>
       )}
-      <br />
-      <button onClick={handleWeightsBtn}>weights</button>
-      <br />
-      <br />
-      <button onClick={handleWorkoutsBtn}>workouts</button>
-      <br />
-      <br />
-      <button onClick={handleGrubsBtn}>grubs</button>
     </div>
   );
 }
