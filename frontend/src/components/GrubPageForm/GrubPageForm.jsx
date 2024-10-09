@@ -17,7 +17,7 @@ function GrubPageForm() {
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedGrub, setSelectedGrub] = useState(null);
 
-    const handleDeleteBtn = (e, grub) => {
+    const handleDeleteBtn = (e) => {
         e.preventDefault();
         setSelectedGrub(exampleData);
         setShowDeletetModal(true)
