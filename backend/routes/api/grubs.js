@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
                 {
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 },
                 { 
@@ -54,7 +54,7 @@ router.get('/:grubId', async (req, res, next) => {
                 {
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 },
                 { 
