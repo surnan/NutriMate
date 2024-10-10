@@ -11,19 +11,19 @@ function WorkoutPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const { newWorkout, exampleData } = location.state || {};
+    const { newWorkout, originalData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
-    const [isEditing, setIsEditing] = useState(!exampleData);
+    const [isEditing, setIsEditing] = useState(!originalData);
     // const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
     const [errors, setErrors] = useState({});
 
 
     const [form, setForm] = useState({
-        name: exampleData?.name || "",
-        description: exampleData?.description || '',
-        userId: exampleData?.userId || 1
+        name: originalData?.name || "",
+        description: originalData?.description || '',
+        userId: originalData?.userId || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -33,7 +33,7 @@ function WorkoutPageForm() {
 
 
     const handleDeleteBtn = () => {
-        setSelectedWorkout(exampleData);
+        setSelectedWorkout(originalData);
         setShowDeletetModal(true)
     }
 
@@ -55,7 +55,7 @@ function WorkoutPageForm() {
 
         const { name, description } = form;
         const body = {
-            id: parseInt(exampleData?.id),
+            id: parseInt(originalData?.id),
             name,
             description,
             userId: 1
@@ -74,8 +74,8 @@ function WorkoutPageForm() {
     const handleCancelBtn = () => {
         setIsEditing(false)
         setForm({
-            name: exampleData?.name || "",
-            description: exampleData?.description || ""
+            name: originalData?.name || "",
+            description: originalData?.description || ""
         });
     }
 
@@ -176,7 +176,7 @@ function WorkoutPageForm() {
 
 
             <div className="workout_page_btn_grid">
-                {exampleData && (
+                {originalData && (
                     <button
                         className="back_btn red"
                         type="button"
