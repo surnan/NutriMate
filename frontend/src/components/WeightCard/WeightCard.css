@@ -1,4 +1,4 @@
-/* WeightCard.css */
+/* weightcard.css */
 
 * {
     margin: 0;
@@ -8,15 +8,36 @@
     /* border: 2px red solid; */
     /* background-color: blueviolet; */
 }
+
+
 body {
-    background: lightgray;
+    background: lightpink;
 }
 
-.weight_card_hFlex{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 10px;
+.weight_card_grid{
+    display: grid;
+    padding: 5px;
     border: 2px black solid;
     max-width: 1100px;
+    background-color: orange;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
 }
+
+.weight_card_grid > :first-child {
+    background-color: aqua;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+
+    /* display: grid; */
+    /* place-content: center right; */
+}
+
+/* 
+.weight_card_grid > :nth-child(3) {
+    background-color: yellow;
+    grid-column: 1/3;
+} 
+*/
