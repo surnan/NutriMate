@@ -1,3 +1,5 @@
+/* grubcard.css */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,4 +7,40 @@
     font-family: sans-serif;
     /* border: 2px red solid; */
     /* background-color: blueviolet; */
+}
+
+
+body {
+    background: lightpink;
+}
+
+.grub_card_grid{
+    display: grid;
+    padding: 5px;
+    border: 2px black solid;
+    max-width: 1100px;
+    background-color: orange;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+/* .grub_card_grid:first-child { */
+.grub_card_grid > :first-child {
+    background-color: aqua;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.grub_card_grid > :nth-child(odd) {
+    display: grid;
+    place-content: center right;
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.grub_card_grid > :nth-child(5) {
+    background-color: yellow;
+    grid-column: 1/3;
+    /* grid-row: 2/3; */
 }

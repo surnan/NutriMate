@@ -24,7 +24,6 @@ body {
     gap: 0.5rem;
 }
 
-/* .workout_card_grid:first-child { */
 .workout_card_grid > :first-child {
     background-color: aqua;
     grid-column-start: 1;
@@ -33,18 +32,11 @@ body {
     grid-row-end: 2;
 
     display: grid;
-    /* align-content: center;
-    justify-content: right; */
     place-content: center right;
 }
 
 .workout_card_grid > :nth-child(3) {
     background-color: yellow;
-    /* grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3; */
-
     grid-column: 1/3;
-    grid-row: 2/3;
+    /* grid-row: 2/3; */
 }
