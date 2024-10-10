@@ -39,7 +39,7 @@ function ProfileButton() {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
-    nav("/weights")
+    nav("/")
   };
 
   return (
