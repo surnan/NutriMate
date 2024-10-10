@@ -3,7 +3,6 @@ import { csrfFetch } from './csrf';
 //Constants
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
-const EDIT_USER = "session/editUser";
 
 const setUser = (user) => ({
     type: SET_USER,
@@ -13,13 +12,6 @@ const setUser = (user) => ({
 const removeUser = () => ({
     type: REMOVE_USER
 });
-
-const editUser = (user) => {
-    return {
-        type: SET_USER,
-        payload: user
-    }
-}
 
 
 
@@ -120,11 +112,14 @@ const initialState = { user: null };
 function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
+            if (action.payload && Object.keys(action.payload).length === 0) {
+                return { user: null };
+            }
             return { ...state, user: action.payload };
         case REMOVE_USER:
-            return { ...state, user: null };
-        case EDIT_USER:
-            return { ...state, user: action.payload };
+            console.log("=======> Removing user: setting user to null")
+            // return { ...state, user: null };
+            return { user: null };
         default:
             return state;
     }
