@@ -1,8 +1,8 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
+import "./WorkoutPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./WorkoutPageForm.css";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk } from "../../redux/workouts"
 import DeleteWorkoutModal from "../DeleteWorkoutModal";
 
@@ -17,6 +17,31 @@ function WorkoutPageForm() {
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
 
+    const [form, setForm] = useState({
+        name: exampleData?.name || "",
+        description: exampleData?.description || '',
+        userId: exampleData?.userId || 1
+    });
+
+    const [originalValues, setOriginalValues] = useState({
+        name: exampleData?.name || "",
+        description: exampleData?.description || '',
+    })
+
+    const initialEditMode = !exampleData;
+    const [isEditing, setIsEditing] = useState(initialEditMode);
+    const [errors, setErrors] = useState({})
+    const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
+
+
+    const hasError = () => (Object.keys(errors).length !== 0)
+
+
+
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    };
+
     const handleDeleteBtn = (e) => {
         e.preventDefault();
         setSelectedWorkout(exampleData);
@@ -29,23 +54,14 @@ function WorkoutPageForm() {
         // nav(-1)
     };
 
-    const [form, setForm] = useState({
-        name: exampleData?.name || "",
-        description: exampleData?.description || '',
-        userId: exampleData?.userId || 1
-    });
-
-    const [errors, setErrors] = useState({})
-    const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
-    const hasError = () => (Object.keys(errors).length !== 0)
-
-    const handleCancel = (e) => {
+    const handleBack = (e) => {
         e.preventDefault();
         nav(-1);  // This navigates back to the previous page
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsEditing(false)
         setClickedSubmitBtn(true);
         const { name, description } = form;
         const body = {
@@ -70,9 +86,18 @@ function WorkoutPageForm() {
         submit();
     }
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
+    const handleCancelClick = () => {
+        setIsEditing(false)
+        setForm({
+            name: originalValues.name,
+            description: originalValues.description
+        });
+    }
+
+    const handleUpdateClick = () => {
+        setIsEditing(true)
+        console.log("handleUpdateclick")
+    }
 
     useEffect(() => {
         const newErrors = {};
@@ -90,6 +115,7 @@ function WorkoutPageForm() {
     }, [form, clickedSubmitBtn])
 
 
+
     const updateSetForm = (e) => {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
@@ -98,13 +124,28 @@ function WorkoutPageForm() {
     return (
         <>
             <h1>WorkoutPageForm.jsx</h1>
-            <button
-                className="back_btn"
-                type="cancel"
-                onClick={handleCancel}
-            >
-                BACK
-            </button>
+
+
+            <div className="workoutPageForm_hFlex">
+                <button
+                    className="back_btn"
+                    type="cancel"
+                    onClick={handleBack}
+                >
+                    BACK
+                </button>
+
+
+                {initialEditMode && (<button
+                    className="back_btn green"
+                    type="cancel"
+                    onClick={handleSubmit}
+                >
+                    SAVE
+                </button>)}
+            </div>
+
+
             <div className="workout_page_form_grid">
                 <label>
                     Name: &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
@@ -115,16 +156,18 @@ function WorkoutPageForm() {
                     onChange={updateSetForm}
                     placeholder="enter name"
                     value={form.name || ""}
+                    readOnly={!isEditing}
                 />
                 <label>
                     Desciption: &#160;&#160;{errors.goal && <span style={{ color: 'red' }}>{errors.goal}</span>}
                 </label>
                 <textarea
-                    type="text"
+                    maxLength="498"
                     name="description"
                     onChange={updateSetForm}
                     placeholder="enter description"
                     value={form.description || ""}
+                    readOnly={!isEditing}
                 />
                 {showDeletetModal && (
                     <DeleteWorkoutModal
@@ -137,33 +180,66 @@ function WorkoutPageForm() {
 
             <div className="workout_page_btn_grid">
 
-                {exampleData ?
-                    (
+                {exampleData ? (
+                    !initialEditMode ? (
+                        <button
+                            className="workout_page_btn green"
+                            type="cancel"
+                            onClick={handleUpdateClick}
+                        >
+                            UPDATE
+                        </button>
+                    ) : (
                         <button
                             className="workout_page_btn green"
                             type="cancel"
                             onClick={handleSubmit}
                         >
-                            UPDATE
+                            Save Changes
                         </button>
                     )
-                    :
-                    (<br />)
+                ) : (
+                    <br />
+                )
                 }
 
-
-
-
-                <button
+                {!initialEditMode && (<button
                     className="workout_page_btn red"
-                    type="cancel"
-                    onClick={handleDeleteBtn}
+                    type="button"
+                    onClick={isEditing ? handleCancelClick : handleDeleteBtn}
                 >
-                    DELETE
-                </button>
+                    {isEditing ? "CANCEL" : "DELETE"}
+                </button>)}
             </div>
         </>
     );
 }
 
 export default WorkoutPageForm;
+
+
+
+{/* <div className="workout_page_btn_grid">
+
+{exampleData ?
+    (
+        <button
+            className="workout_page_btn green"
+            type="cancel"
+            onClick={handleSubmit}
+        >
+            EDIT
+        </button>
+    )
+    :
+    (<br />)
+}
+
+<button
+    className="workout_page_btn red"
+    type="cancel"
+    onClick={handleDeleteBtn}
+>
+    DELETE
+</button>
+</div> */}
