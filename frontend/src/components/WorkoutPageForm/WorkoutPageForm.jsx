@@ -29,9 +29,6 @@ function WorkoutPageForm() {
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
-
-
-
     const handleDeleteBtn = () => {
         setSelectedWorkout(exampleData);
         setShowDeletetModal(true)
@@ -115,9 +112,6 @@ function WorkoutPageForm() {
                 >
                     BACK
                 </button>
-
-
-
 
                 {isEditing ? (
                     <button
