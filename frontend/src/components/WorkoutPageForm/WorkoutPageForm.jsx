@@ -26,7 +26,7 @@ function WorkoutPageForm() {
     const handleModalClose = () => {
         setShowDeletetModal(false)
         setSelectedWorkout(null)
-        nav(-1)
+        // nav(-1)
     };
 
     const [form, setForm] = useState({
@@ -47,10 +47,7 @@ function WorkoutPageForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setClickedSubmitBtn(true);
-
-
         const { name, description } = form;
-
         const body = {
             id: parseInt(exampleData?.id),
             name,
@@ -63,7 +60,6 @@ function WorkoutPageForm() {
                 const result = newWorkout
                     ? await dispatch(updateWorkoutsOneThunk({ body }))
                     : await dispatch(postWorkoutsOneThunk({ body }))
-
                 if (result) {
                     nav(`/workouts`);
                 }
@@ -102,9 +98,16 @@ function WorkoutPageForm() {
     return (
         <>
             <h1>WorkoutPageForm.jsx</h1>
+            <button
+                className="back_btn"
+                type="cancel"
+                onClick={handleCancel}
+            >
+                BACK
+            </button>
             <div className="workout_page_form_grid">
                 <label>
-                    Name &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
+                    Name: &#160;&#160;{errors.start && <span style={{ color: 'red' }}>{errors.start}</span>}
                 </label>
                 <input
                     type="text"
@@ -114,15 +117,15 @@ function WorkoutPageForm() {
                     value={form.name || ""}
                 />
                 <label>
-                    Desciption &#160;&#160;{errors.goal && <span style={{ color: 'red' }}>{errors.goal}</span>}
+                    Desciption: &#160;&#160;{errors.goal && <span style={{ color: 'red' }}>{errors.goal}</span>}
                 </label>
-                <input
+                <textarea
                     type="text"
                     name="description"
                     onChange={updateSetForm}
                     placeholder="enter description"
                     value={form.description || ""}
-                />               
+                />
                 {showDeletetModal && (
                     <DeleteWorkoutModal
                         onClose={handleModalClose}
@@ -131,31 +134,34 @@ function WorkoutPageForm() {
                     />
                 )}
             </div>
-            <button
-                    type="submit"
-                    // disabled={hasError()}
-                    onClick={handleSubmit}
-                    className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
-                >
-                    Create Spot
-                </button>
 
-                <br />
+            <div className="workout_page_btn_grid">
+
+                {exampleData ?
+                    (
+                        <button
+                            className="workout_page_btn green"
+                            type="cancel"
+                            onClick={handleSubmit}
+                        >
+                            UPDATE
+                        </button>
+                    )
+                    :
+                    (<br />)
+                }
+
+
+
+
                 <button
-                    type="cancel"
-                    onClick={handleCancel}
-                    className="formBtn"
-                >
-                    Cancel
-                </button>
-                <br />
-                <button
+                    className="workout_page_btn red"
                     type="cancel"
                     onClick={handleDeleteBtn}
-                    className="formBtn"
                 >
                     DELETE
                 </button>
+            </div>
         </>
     );
 }
