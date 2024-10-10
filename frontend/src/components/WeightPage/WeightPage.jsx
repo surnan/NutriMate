@@ -1,7 +1,7 @@
 // frontend/src/components/WeightPage/WeightPage.jsx
 
 import "./WeightPage.css";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
@@ -9,14 +9,9 @@ import WeightCard from "../WeightCard";
 
 const WeightPage = () => {
   const dispatch = useDispatch()
-  const nav = useNavigate();
+  const navigate = useNavigate();
 
   const weightsArr = useSelector(state => state.weights.allWeights);
-  const handleNewWeight = () => {
-    //need to pass in userId
-    // nav('/grubform', { state: { newGrub: false, exampleData: grub} }); 
-    nav('/weightform')
-  }
 
   useEffect(() => {
     dispatch(getWeightsAllThunk())
@@ -24,27 +19,35 @@ const WeightPage = () => {
 
   const somethingDifferent = (e, weight) => {
     e.preventDefault();
-    nav('/weightform', { state: { newWeight: true, exampleData: weight } });
+    navigate('/weightform', { state: { newWeight: true, exampleData: weight } });
+  }
+
+  const handleNewWeight = () => {
+    navigate('/weightform')
   }
 
   return (
-    <div>
+    <>
       <h3>WeightPage.jsx</h3>
-      <button onClick={handleNewWeight}>CREATE</button>
-      <br />
-      <br />
-      {
-        weightsArr.map((weight, idx) => (
-          <div
-            key={`${idx}-weight`}
-            onClick={e => somethingDifferent(e, weight)}
-          >
-            <WeightCard weight={weight} />
-            <br />
-          </div>
-        ))
-      }
-    </div>
+      <button
+        className="weightPage_createBtn"
+        onClick={handleNewWeight}
+      >
+        CREATE
+      </button>
+      <div className="weight_page_grid">
+        {
+          weightsArr.map((weight, idx) => (
+            <div
+              key={`${idx}-weight`}
+              onClick={e => somethingDifferent(e, weight)}
+            >
+              <WeightCard weight={weight} />
+            </div>
+          ))
+        }
+      </div>
+    </>
   );
 }
 
