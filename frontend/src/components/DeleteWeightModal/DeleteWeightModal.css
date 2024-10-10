@@ -1,5 +1,14 @@
 /* frontend/src/components/DeleteWeightModal/DeleteWeightModal.css */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    /* border: 2px red solid; */
+    /* background-color: blueviolet; */
+}
+
 .confirmDeleteModal {
     position: fixed;
     top: 0;
