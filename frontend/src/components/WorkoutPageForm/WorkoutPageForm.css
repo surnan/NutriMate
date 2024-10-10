@@ -18,6 +18,12 @@ input, textarea {
     border-radius: 8px;
 }
 
+textarea {
+    width: 325px; 
+    height: 125px;
+    resize: none; 
+}
+
 
 .workout_page_form_grid{
     display: grid;
@@ -74,6 +80,12 @@ input, textarea {
     width: 5rem;
     height: 2rem;
     border-radius: 5px;
+}
+
+.workoutPageForm_hFlex {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
 }
 
 .red {background-color: red}

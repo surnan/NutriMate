@@ -30,7 +30,11 @@ const WorkoutPage = () => {
   return (
     <>
       <h3>WorkoutPage.jsx</h3>
-      <button onClick={handleNewWorkout}>CREATE</button>
+      <button
+        className="WorkoutPage_createBtn"
+        onClick={handleNewWorkout}
+      >CREATE
+      </button>
       <div className="workout_page_grid">
         {
           workoutsArr.map((workout, idx) => (
