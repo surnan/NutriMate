@@ -30,20 +30,24 @@ const GrubPage = () => {
   return (
     <div>
       <h1> GrubPage.jsx </h1>
-      <button onClick={handleNewGrub}>CREATE</button>
+      <button
+        onClick={handleNewGrub}
+      >CREATE
+      </button>
       <br />
-      <br />
-      {
-        grubArr.map((grub, idx) => (
-          <div
-            key={`${idx}-grub`}
-            onClick={e => somethingDifferent(e, grub)}
-          >
-            <GrubCard grub={grub} />
-            <br />
-          </div>
-        ))
-      }
+      <div className="grub_page_grid">
+        {
+          grubArr.map((grub, idx) => (
+            <div
+              key={`${idx}-grub`}
+              onClick={e => somethingDifferent(e, grub)}
+            >
+              <GrubCard grub={grub} />
+              <br />
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }
