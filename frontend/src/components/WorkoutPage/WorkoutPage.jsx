@@ -12,11 +12,6 @@ const WorkoutPage = () => {
   const nav = useNavigate();
 
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
-  const handleNewWorkout = () => {
-    //need to pass in userId
-    // nav('/grubform', { state: { newGrub: false, exampleData: grub} }); 
-    nav('/workoutform')
-  }
 
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
@@ -25,6 +20,10 @@ const WorkoutPage = () => {
   const somethingDifferent = (e, workout) => {
     e.preventDefault();
     nav('/workoutform', { state: { newWorkout: true, exampleData: workout } });
+  }
+
+  const handleNewWorkout = () => {
+    nav('/workoutform')
   }
 
   return (

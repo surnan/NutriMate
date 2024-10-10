@@ -12,11 +12,6 @@ const GrubPage = () => {
   const nav = useNavigate();
 
   const grubArr = useSelector(state => state.grubs.allGrubs);
-  const handleNewGrub = () => {
-    //need to pass in userId
-    // nav('/grubform', { state: { newGrub: false, exampleData: grub} }); 
-    nav('/grubform')
-  }
 
   useEffect(() => {
     dispatch(getGrubsAllThunk())
@@ -27,10 +22,15 @@ const GrubPage = () => {
     nav('/grubform', { state: { newGrub: true, exampleData: grub } });
   }
 
+  const handleNewGrub = () => {
+    nav('/grubform')
+  }
+
   return (
     <div>
       <h1> GrubPage.jsx </h1>
       <button
+        className="grubPage_createBtn"
         onClick={handleNewGrub}
       >CREATE
       </button>
