@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
+import "./Splash.css"
 
 const Splash = () => {
   const dispatch = useDispatch();
@@ -60,7 +61,7 @@ const Splash = () => {
 
   return (
     <div>
-      <h1>Welcome</h1>
+      <h1>Splash.jsx</h1>
       <h2>SessionUser is null = {sessionUser === null ? "TRUE" : "FALSE"}</h2>
 
       <form onSubmit={handleSubmit}>
@@ -97,11 +98,11 @@ const Splash = () => {
           <h3>Login User = {sessionUser.user.email}</h3>
           <h3>Login UserId = {sessionUser.user.id}</h3>
           <br />
-          <button onClick={handleWeightsBtn}>weights</button>
+          <button className="splashButton green" onClick={handleWeightsBtn}>weights</button>
           <br />
-          <button onClick={handleWorkoutsBtn}>workouts</button>
+          <button className="splashButton orange" onClick={handleWorkoutsBtn}>workouts</button>
           <br />
-          <button onClick={handleGrubsBtn}>grubs</button>
+          <button className="splashButton blue" onClick={handleGrubsBtn}>grubs</button>
         </div>
       )}
     </div>
