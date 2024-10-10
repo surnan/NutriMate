@@ -1,4 +1,4 @@
-// frontend/src/componenets/WeightCard/WeightCard.jsx
+// frontend/src/componenets/WorkouttCard/WorkoutCard.jsx
 import "./WorkoutCard.css";
 
 function WorkoutCard({ workout }) {
