@@ -208,16 +208,6 @@ function WeightPageForm() {
                     readOnly={!isEditing}
                 />
             </div>
-
-            <button
-                type="submit"
-                disabled={hasError()}
-                onClick={handleSubmit}
-                className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
-            >
-                Create Spot
-            </button>
-
             <div className="weight_page_btn_grid">
                 {exampleData && (
                     <button
