@@ -36,6 +36,7 @@ export const thunkLogin = (credentials) => async dispatch => {
     });
 
     if (response.ok) {
+        console.log("====> response is ok")
         const data = await response.json();
         dispatch(setUser(data));
     } else if (response.status < 500) {
@@ -89,8 +90,8 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
         const response = await csrfFetch(`/api/users/${userId}/update`, option);
         if (response.ok) {
             const user = await response.json();
-            dispatch(editUser(user));
-            // dispatch(setUser(user));
+            // dispatch(editUser(user));
+            dispatch(setUser(user));
 
         } else if (response.status < 500) {
             const data = await response.json();
