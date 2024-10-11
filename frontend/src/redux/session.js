@@ -112,9 +112,9 @@ const initialState = { user: null };
 function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
-            if (action.payload && Object.keys(action.payload).length === 0) {
-                return { user: null };
-            }
+            // if (action.payload && Object.keys(action.payload).length === 0) {
+            //     return { user: null };
+            // }
             return { ...state, user: action.payload };
         case REMOVE_USER:
             console.log("=======> Removing user: setting user to null")
