@@ -3,26 +3,27 @@
 // import React, { useState } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateUserThunk } from '../../redux/session';
+// import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import "./Splash.css"
 
 const Splash = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user)
   const nav = useNavigate()
-
+  
   //image url to send to aws
   const [imgUrl, setImgUrl] = useState("");
   //telling us if we should show the image
   const [showUpload, setShowUpload] = useState(true);
   //img url we will load in react
   const [previewUrl, setPreviewUrl] = useState("");
-
+  
+  const user = useSelector((state) => state.session.user)
+  const sessionUser = useSelector(state => state.session.user)
+  
 
 
   //function to get image from local
-
   const updateImage = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -54,10 +55,8 @@ const Splash = () => {
     nav("/grubs")
   }
 
-  const sessionUser = useSelector(state => state.session.user)
 
-  console.log("\n\nsessionUser = ", sessionUser, "\n\n")
-  console.log("\n\nsessionUser.user = ", sessionUser?.user, "\n\n")
+
 
   return (
     <div>

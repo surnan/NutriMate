@@ -54,4 +54,11 @@ router.get("/api/csrf/restore", (req, res) => {
     });
 });
 
+// Restore user
+router.get('/restore-user', (req, res) => {
+    console.log("inside restore-user")
+    return res.json(req.user);
+});
+
+
 module.exports = router;
