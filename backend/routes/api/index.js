@@ -26,6 +26,13 @@ router.get('/hello/world', (req, res) => {
 
 router.use(restoreUser);
 
+// Restore user
+router.get('/restore-user', (req, res) => {
+    console.log("inside restore-user")
+    return res.json(req.user);
+});
+
+
 router.use('/daylogs', daylogsRouter);
 router.use('/grubs', grubRouter);
 router.use('/grubicons', grubiconsRouter);
