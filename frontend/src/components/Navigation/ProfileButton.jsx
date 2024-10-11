@@ -1,3 +1,5 @@
+// "useRef" & "ref={ulRef}" <=== create alias to DOM element
+// "e.target" <=== DOM element that was clicked.  You will always be a DOM element
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkLogout } from "../../redux/session";

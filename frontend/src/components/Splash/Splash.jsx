@@ -11,14 +11,14 @@ import { useDispatch } from 'react-redux';
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
-  
+
 
   const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
   const [showUpload, setShowUpload] = useState(true); //telling us if we should show the image
   const [previewUrl, setPreviewUrl] = useState(""); //img url we will load in react
-  
-  const sessionUser = useSelector(state => state.session.user)
-  const user = useSelector(state => state.session.user)
+
+  const sessionUser = useSelector(store => store.session.user)
+  // const user = useSelector(store => store.session.user)
 
   //function to get image from local
   const updateImage = async (e) => {
@@ -53,7 +53,8 @@ const Splash = () => {
   }
 
 
-
+  //If you don't see value, try refresh.  because hmtl won't auto-render on variable update
+  console.log("=======> sessionUser ====> ", sessionUser)
 
   return (
     <div>
@@ -87,10 +88,17 @@ const Splash = () => {
       </form>
 
       <br />
-      
 
-      <h3>Login User = {sessionUser?.user?.email}</h3>
-      <h3>Login UserId = {sessionUser?.user?.id}</h3>
+
+
+      {/* {user ? (
+            <>
+              {user.username}
+              {user.email} */}
+
+
+
+      <h3>Email = {sessionUser?.email}</h3>
       <br />
       {sessionUser && (
         <div>
