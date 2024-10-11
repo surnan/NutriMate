@@ -5,11 +5,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // import React from 'react';
-// import { updateUserThunk } from '../../redux/session';
-// import { useDispatch } from 'react-redux';
+import { updateUserThunk } from '../../redux/session';
+import { useDispatch } from 'react-redux';
 
 const Splash = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const nav = useNavigate()
   
 
@@ -18,6 +18,7 @@ const Splash = () => {
   const [previewUrl, setPreviewUrl] = useState(""); //img url we will load in react
   
   const sessionUser = useSelector(state => state.session.user)
+  const user = useSelector(state => state.session.user)
 
   //function to get image from local
   const updateImage = async (e) => {
@@ -36,7 +37,7 @@ const Splash = () => {
     const img_url = imgUrl;
     const form = { img_url };
     // const updateUser = await dispatch(updateUserThunk(user.id, form))
-    // await dispatch(updateUserThunk(user.id, form))
+    await dispatch(updateUserThunk(user.id, form))
   }
 
   const handleWeightsBtn = () => {
