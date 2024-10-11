@@ -13,7 +13,7 @@ function WeightCard({ weight }) {
 
   return (
     <div className="weight_card_grid">
-      <p><strong>Username:</strong> {User.username}</p>
+      <p><strong>Username:</strong> {User?.username}</p>
       <br/>
       <p><strong>Date:</strong> {formattedDate}</p>
       <p><strong>Start Wt:</strong> {start}</p>
