@@ -1,3 +1,5 @@
+/* weightPageForm.css */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,3 +8,77 @@
     /* border: 2px red solid; */
     /* background-color: blueviolet; */
 }
+
+body {
+    background: lightpink;
+}
+
+input, textarea {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+textarea {
+    width: 325px; 
+    height: 125px;
+    resize: none; 
+}
+
+
+.weight_page_form_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 5px;
+    border: 2px black solid;
+    max-width: 1100px;
+    background-color: orange;
+    gap: 2rem;
+}
+
+.weight_page_form_grid > :nth-child(odd){
+    display: grid;
+    align-items: center;
+    justify-content: right;
+    height: 3rem;
+}
+
+.weight_page_btn_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 5px;
+    max-width: 1100px;
+    gap: 2rem;
+}
+
+.weight_page_btn {
+    display: block;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 50px auto;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 5px;
+}
+
+.back_btn{
+    display: block;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+.weightPageForm_hFlex {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.red {background-color: red}
+.green {background-color: green}
+.blue {background-color: blue}
