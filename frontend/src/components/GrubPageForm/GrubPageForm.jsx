@@ -36,7 +36,7 @@ function GrubPageForm() {
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
-    const handleDeleteBtn = (e) => {
+    const handleDeleteBtn = () => {
         setSelectedGrub(exampleData);
         setShowDeletetModal(true)
     }
@@ -87,7 +87,7 @@ function GrubPageForm() {
         }
     }
 
-    const handleCancelBtn = (e) => {
+    const handleCancelBtn = () => {
         setIsEditing(false)
         setForm({
             name: exampleData?.name || "",
@@ -100,10 +100,7 @@ function GrubPageForm() {
             carbs: exampleData?.carbs,
             sugar: exampleData?.sugar,
             company: exampleData?.company,
-            description: exampleData?.description,
             userId: exampleData?.userId || 1
-
-
         });
     };
 
