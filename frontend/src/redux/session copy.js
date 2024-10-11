@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+//Action Creators
 const setUser = (user) => ({
     type: SET_USER,
     payload: user
@@ -14,7 +15,7 @@ const removeUser = () => ({
 });
 
 
-
+//Thunks
 export const thunkAuthenticate = () => async (dispatch) => {
     try {
         // const response = await csrfFetch("/api/restore-user");
@@ -36,7 +37,6 @@ export const thunkLogin = (credentials) => async dispatch => {
     });
 
     if (response.ok) {
-        console.log("====> response is ok")
         const data = await response.json();
         dispatch(setUser(data));
     } else if (response.status < 500) {
