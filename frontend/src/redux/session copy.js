@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
+//Action Creators
 const setUser = (user) => ({
     type: SET_USER,
     payload: user
@@ -14,11 +15,11 @@ const removeUser = () => ({
 });
 
 
-
+//Thunks
 export const thunkAuthenticate = () => async (dispatch) => {
     try {
-        const response = await csrfFetch("/api/restore-user");
-        // const response = await csrfFetch("/api/csrf/restore");
+        // const response = await csrfFetch("/api/restore-user");
+        const response = await csrfFetch("/api/csrf/restore");
         if (response.ok) {
             const data = await response.json();
             dispatch(setUser(data));
@@ -36,7 +37,6 @@ export const thunkLogin = (credentials) => async dispatch => {
     });
 
     if (response.ok) {
-        console.log("====> response is ok")
         const data = await response.json();
         dispatch(setUser(data));
     } else if (response.status < 500) {
@@ -72,41 +72,40 @@ export const thunkLogout = () => async (dispatch) => {
     dispatch(removeUser());
 };
 
+export const updateUserThunk = (userId, form) => async (dispatch) => {
+    const { img_url } = form
+    try {
 
-// export const updateUserThunk = (userId, form) => async (dispatch) => {
-//     const { img_url } = form
-//     try {
+        const formData = new FormData();
 
-//         const formData = new FormData();
+        formData.append('userId', userId)
+        formData.append("image", img_url);
 
-//         formData.append('userId', userId)
-//         formData.append("image", img_url);
+        const option = {
+            method: "PUT",
+            headers: { 'Content-Type': 'multipart/form-data' },
+            body: formData
+        }
 
-//         const option = {
-//             method: "PUT",
-//             headers: { 'Content-Type': 'multipart/form-data' },
-//             body: formData
-//         }
+        const response = await csrfFetch(`/api/users/${userId}/update`, option);
+        if (response.ok) {
+            const user = await response.json();
+            // dispatch(editUser(user));
+            dispatch(setUser(user));
 
-//         const response = await csrfFetch(`/api/users/${userId}/update`, option);
-//         if (response.ok) {
-//             const user = await response.json();
-//             dispatch(editUser(user));
-//             // dispatch(setUser(user));
-
-//         } else if (response.status < 500) {
-//             const data = await response.json();
-//             if (data.errors) {
-//                 return data
-//             } else {
-//                 throw new Error('An error occured. Please try again.')
-//             }
-//         }
-//         return response;
-//     } catch (e) {
-//         return e
-//     }
-// }
+        } else if (response.status < 500) {
+            const data = await response.json();
+            if (data.errors) {
+                return data
+            } else {
+                throw new Error('An error occured. Please try again.')
+            }
+        }
+        return response;
+    } catch (e) {
+        return e
+    }
+}
 
 
 const initialState = { user: null };
@@ -114,9 +113,9 @@ const initialState = { user: null };
 function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
-            // if (action.payload && Object.keys(action.payload).length === 0) {
-            //     return { user: null };
-            // }
+            if (action.payload && Object.keys(action.payload).length === 0) {
+                return { user: null };
+            }
             return { ...state, user: action.payload };
         case REMOVE_USER:
             console.log("=======> Removing user: setting user to null")
