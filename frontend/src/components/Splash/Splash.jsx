@@ -1,27 +1,23 @@
 // frontend/src/components/Splash/Splash.jsx
 
-// import React, { useState } from 'react';
+import "./Splash.css"
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+// import React from 'react';
 // import { updateUserThunk } from '../../redux/session';
-import { useDispatch, useSelector } from 'react-redux';
-import "./Splash.css"
+// import { useDispatch } from 'react-redux';
 
 const Splash = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const nav = useNavigate()
   
-  //image url to send to aws
-  const [imgUrl, setImgUrl] = useState("");
-  //telling us if we should show the image
-  const [showUpload, setShowUpload] = useState(true);
-  //img url we will load in react
-  const [previewUrl, setPreviewUrl] = useState("");
-  
-  const user = useSelector((state) => state.session.user)
-  const sessionUser = useSelector(state => state.session.user)
-  
 
+  const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+  const [showUpload, setShowUpload] = useState(true); //telling us if we should show the image
+  const [previewUrl, setPreviewUrl] = useState(""); //img url we will load in react
+  
+  const sessionUser = useSelector(state => state.session.user)
 
   //function to get image from local
   const updateImage = async (e) => {
@@ -40,7 +36,7 @@ const Splash = () => {
     const img_url = imgUrl;
     const form = { img_url };
     // const updateUser = await dispatch(updateUserThunk(user.id, form))
-    await dispatch(updateUserThunk(user.id, form))
+    // await dispatch(updateUserThunk(user.id, form))
   }
 
   const handleWeightsBtn = () => {
@@ -90,17 +86,15 @@ const Splash = () => {
       </form>
 
       <br />
+      
+
+      <h3>Login User = {sessionUser?.user?.email}</h3>
+      <h3>Login UserId = {sessionUser?.user?.id}</h3>
       <br />
-      <br />
-      {sessionUser && sessionUser.user && (
+      {sessionUser && (
         <div>
-          <h3>Login User = {sessionUser.user.email}</h3>
-          <h3>Login UserId = {sessionUser.user.id}</h3>
-          <br />
           <button className="splashButton green" onClick={handleWeightsBtn}>weights</button>
-          <br />
           <button className="splashButton orange" onClick={handleWorkoutsBtn}>workouts</button>
-          <br />
           <button className="splashButton blue" onClick={handleGrubsBtn}>grubs</button>
         </div>
       )}
