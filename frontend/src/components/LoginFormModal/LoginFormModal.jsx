@@ -2,7 +2,7 @@ import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginForm.css";
+import "./LoginFormModal.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ function LoginFormModal() {
         <button
           className="ltcoral"
           type="button"
-          onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
+          onClick={(e) => handleLogin(e, "user2@user.io", "password3")}
         >Demo 2
         </button>
       </form>
