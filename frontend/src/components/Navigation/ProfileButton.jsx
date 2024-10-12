@@ -58,7 +58,7 @@ function ProfileButton() {
                 <button onClick={logout}>Log Out</button>
             </>
           ) : (
-            <div>
+            <div className="popupDiv">
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}

@@ -29,11 +29,11 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login_modal_popup">
+      <form className="login_hGrid popupDiv" onSubmit={handleSubmit}>
+      <h1 className="center">Log In</h1>
         <label>
-          Email
+          Email:&nbsp;&nbsp;
           <input
             type="text"
             value={email}
@@ -43,7 +43,7 @@ function LoginFormModal() {
         </label>
         {errors.email && <p>{errors.email}</p>}
         <label>
-          Password
+          Password:&nbsp;&nbsp;
           <input
             type="password"
             value={password}
@@ -52,9 +52,11 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button className="mySubmitBtn orange" type="submit">Log In</button>
+        <button className="mySubmitBtn ltskyblue" type="submit">Demo 1</button>
+        <button className="mySubmitBtn ltcoral" type="submit">Demo 2</button>
       </form>
-    </>
+    </div>
   );
 }
 
