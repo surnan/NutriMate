@@ -1,12 +1,14 @@
 /* LoginFormModal.css */
 
+
+
 .login_hGrid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
     background-color: white;
     padding: 2rem 3rem;
-    border-radius: 3rem;
+    border-radius: 10rem;
 }
 
 .login_hGrid > * {
@@ -21,3 +23,4 @@
 
 .login_hGrid label {text-align: right}
 
+.login_hGrid button {width: 75%}
