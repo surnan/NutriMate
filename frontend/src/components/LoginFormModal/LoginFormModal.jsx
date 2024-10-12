@@ -13,6 +13,7 @@ function LoginFormModal() {
 
   const handleLogin = async (e, loginEmail, loginPassword) => {
     e.preventDefault();
+
     const serverResponse = await dispatch(
       thunkLogin({
         email: loginEmail || email,
@@ -28,14 +29,14 @@ function LoginFormModal() {
   };
 
   return (
-    <div className="login_modal_popup">
-      <form className="login_hGrid popupDiv" onSubmit={(e) => handleLogin(e)}>
+      <form className="login_hGrid" onSubmit={(e) => handleLogin(e)}>
         <h1 className="center">Log In</h1>
         <label>
           Email:&nbsp;&nbsp;
           <input
             type="text"
             value={email}
+            name="email"
             onChange={(e) => setEmail(e.target.value)}
             required
           />
@@ -45,6 +46,7 @@ function LoginFormModal() {
           <input
             type="password"
             value={password}
+            name="password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
@@ -68,7 +70,6 @@ function LoginFormModal() {
         >Demo 2
         </button>
       </form>
-    </div>
   );
 }
 

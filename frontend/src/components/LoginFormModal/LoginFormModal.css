@@ -7,11 +7,22 @@
     /* background-color: blueviolet; */
 }
 
+button {
+    cursor: pointer;
+}
+
+button:active{
+    filter: brightness(1.5);
+}
+
 
 .login_hGrid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 3rem;
 }
 
 .login_hGrid > * {
