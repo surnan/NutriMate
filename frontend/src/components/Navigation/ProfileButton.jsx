@@ -45,18 +45,17 @@ function ProfileButton() {
   };
 
   return (
-    <>
+    <div className="profile_anchor">
       <button className="profile_btn" onClick={toggleMenu}>
         <i className="fas fa-user-circle" />
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
-            <>
-              {user.username}
-              {user.email}
-                <button onClick={logout}>Log Out</button>
-            </>
+            <div className="profile_dropdown_grid">
+              <p>{user.email}</p>
+              <button onClick={logout}>Log Out</button>
+            </div>
           ) : (
             <div className="popupDiv">
               <OpenModalMenuItem
@@ -69,11 +68,11 @@ function ProfileButton() {
                 onItemClick={closeMenu}
                 modalComponent={<SignupFormModal />}
               />
-              </div>
+            </div>
           )}
         </ul>
       )}
-    </>
+    </div>
   );
 }
 
