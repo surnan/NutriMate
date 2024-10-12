@@ -36,3 +36,8 @@
     right: 25px;
     top: 25px;
 }
+
+.popupDiv {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
