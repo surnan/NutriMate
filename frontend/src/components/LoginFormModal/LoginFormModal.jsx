@@ -1,4 +1,3 @@
-//frontend/src/componenets/LoginFormModal/LoginFormModal.jsx
 import "./LoginFormModal.css";
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
@@ -12,28 +11,35 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+  // Modified handleLogin to use proper server response handling
   const handleLogin = async (e, loginEmail, loginPassword) => {
     e.preventDefault();
 
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email: loginEmail || email,
-        password: loginPassword || password
-      })
-    );
+    const credentials = {
+      email: loginEmail || email, // Demo email or the entered email
+      password: loginPassword || password, // Demo password or the entered password
+    };
 
-    if (serverResponse) {
+    const serverResponse = await dispatch(thunkLogin(credentials));
+
+    if (serverResponse?.errors) {
+      // If server responds with errors, set them to display in the UI
       setErrors(serverResponse);
     } else {
+      // Close modal on successful login
       closeModal();
     }
   };
+  
 
   return (
     <>
-      {errors.server && <p>{errors.server}</p>}
+      {/* Show server errors */}
+      {errors.server && <p className="error-message">{errors.server}</p>}
       <form className="login_hGrid" onSubmit={(e) => handleLogin(e)}>
         <h1 className="center">Log In</h1>
+        
+        {/* Email input */}
         <label>
           Email&nbsp;&nbsp;
           <input
@@ -44,6 +50,8 @@ function LoginFormModal() {
             required
           />
         </label>
+
+        {/* Password input */}
         <label>
           Password&nbsp;&nbsp;
           <input
@@ -54,11 +62,13 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button
-          className="orange"
-          type="submit">
+
+        {/* Log In button */}
+        <button className="orange" type="submit">
           Log In
         </button>
+
+        {/* Demo user buttons */}
         <button
           className="ltskyblue"
           type="button"
@@ -70,7 +80,8 @@ function LoginFormModal() {
           className="ltcoral"
           type="button"
           onClick={(e) => handleLogin(e, "user2@user.io", "password3")}
-        >Demo 2
+        >
+          Demo 2
         </button>
       </form>
     </>
