@@ -7,64 +7,44 @@
     /* background-color: blueviolet; */
 }
 
+
 .login_hGrid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
 }
 
-.login_hGrid > :nth-child(2) {
+.login_hGrid > * {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-    align-items: center;
+    align-items: center
 }
 
+.login_hGrid > :nth-child(2), 
 .login_hGrid > :nth-child(3) {
-    display: grid;
     grid-template-columns: 1fr 3fr;
-    align-items: center;
 }
-
 
 .login_hGrid > :nth-child(4) {
-    margin-top: 1rem;
+    margin-top: 1rem
 }
 
-.login_hGrid label {
-    text-align: right; 
-}
+.login_hGrid label {text-align: right}
 
 .login_hGrid input {
     padding-left: 1rem;
     height: 2rem;
 }
 
-.login_hGrid > :first-child {
-    display: flex;
-    justify-content: center;
-}
-
-
-/* .mySubmitBtn {
-    margin: 0 3rem;
-    height: 50px;
-} */
-
 .login_hGrid button{
-    height: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 20px;
     cursor: pointer;
     margin: 0 3rem;
-    height: 50px;
+    height: 3rem;
 }
 
 .orange {background-color: orange}
 .ltskyblue {background-color: lightskyblue}
 .ltcoral {background-color: lightcoral}
-
 
 .login_modal_popup {
     text-align: center;
@@ -73,5 +53,3 @@
     border-radius: 25px;
     padding: 2rem;
 }
-
-
