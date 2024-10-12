@@ -1,8 +1,9 @@
+//frontend/src/componenets/SignupFormModal/SignupFormModal.jsx
+import "./SignupForm.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
-import "./SignupForm.css";
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -42,7 +43,7 @@ function SignupFormModal() {
     <>
       {errors.server && <p>{errors.server}</p>}
       <form className="signup_hGrid" onSubmit={handleSubmit}>
-        <h1>Sign Up</h1>
+        <h1 className="center">Sign Up</h1>
         <label>
           Email
           <input
