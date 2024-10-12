@@ -9,6 +9,22 @@
     /* background-color: blueviolet; */
 }
 
+.splash_grid{
+    margin: auto;
+    display: grid;
+    gap: 20px;
+    background-color: pink;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash_showEmail{
+    font-size: x-large;
+    background-color: pink;
+    padding: 3rem 0 5rem 3rem;
+}
+
+
 .confirmDeleteModal {
     position: fixed;
     top: 0;
