@@ -17,6 +17,9 @@ if (import.meta.env.MODE !== "production") {
   window.sessionActions = sessionActions;
 }
 
+// Dispatch authenticate action when the app starts
+// store.dispatch(sessionActions.thunkAuthenticate());
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ReduxProvider store={store}>
