@@ -1,8 +1,9 @@
+//frontend/src/componenets/LoginFormModal/LoginFormModal.jsx
+import "./LoginFormModal.css";
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import "./LoginFormModal.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function LoginFormModal() {
     <>
       {errors.server && <p>{errors.server}</p>}
       <form className="login_hGrid" onSubmit={(e) => handleLogin(e)}>
-        <h1>Log In</h1>
+        <h1 className="center">Log In</h1>
         <label>
           Email&nbsp;&nbsp;
           <input
