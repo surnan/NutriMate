@@ -6,3 +6,63 @@
     /* border: 2px red solid; */
     /* background-color: blueviolet; */
 }
+
+button {
+    cursor: pointer;
+}
+
+button:active{
+    filter: brightness(1.5);
+}
+
+
+.signup_hGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    background-color: white;
+    padding: 2rem 3rem;
+    border-radius: 3rem;
+}
+
+.signup_hGrid > * {
+    display: grid;
+    align-items: center
+}
+
+.signup_hGrid > :nth-child(2), 
+.signup_hGrid > :nth-child(3),
+.signup_hGrid > :nth-child(4),
+.signup_hGrid > :nth-child(5){
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem
+}
+
+
+.signup_hGrid label {text-align: right}
+
+.signup_hGrid input {
+    padding-left: 1rem;
+    height: 2rem;
+    width: 15rem;
+}
+
+.signup_hGrid button{
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 0 3rem;
+    height: 3rem;
+}
+
+.orange {background-color: orange}
+.ltskyblue {background-color: lightskyblue}
+.ltcoral {background-color: lightcoral}
+
+.signup_modal_popup {
+    text-align: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2rem;
+}
+
+.orange {background-color: orange}

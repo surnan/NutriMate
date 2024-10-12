@@ -29,10 +29,12 @@ function LoginFormModal() {
   };
 
   return (
+    <>
+      {errors.server && <p>{errors.server}</p>}
       <form className="login_hGrid" onSubmit={(e) => handleLogin(e)}>
-        <h1 className="center">Log In</h1>
+        <h1>Log In</h1>
         <label>
-          Email:&nbsp;&nbsp;
+          Email&nbsp;&nbsp;
           <input
             type="text"
             value={email}
@@ -42,7 +44,7 @@ function LoginFormModal() {
           />
         </label>
         <label>
-          Password:&nbsp;&nbsp;
+          Password&nbsp;&nbsp;
           <input
             type="password"
             value={password}
@@ -70,6 +72,7 @@ function LoginFormModal() {
         >Demo 2
         </button>
       </form>
+    </>
   );
 }
 
