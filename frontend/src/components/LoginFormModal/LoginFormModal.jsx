@@ -36,7 +36,7 @@ function LoginFormModal() {
     <>
       {/* Show server errors */}
       {errors.server && <p className="error-message">{errors.server}</p>}
-      <form className="login_hGrid" onSubmit={(e) => handleLogin(e)}>
+      <form className="login_hGrid modal_css" onSubmit={(e) => handleLogin(e)}>
         <h1 className="center">Log In</h1>
         
         {/* Email input */}
