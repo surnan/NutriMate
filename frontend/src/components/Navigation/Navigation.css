@@ -7,6 +7,7 @@
     /* background-color: blueviolet; */
 }
 
+
 .profile-dropdown {
     position: absolute;
     right: 25px;
@@ -29,6 +30,10 @@
 
 .ltYellow {
     background-color: lightyellow;
+}
+
+.yellow {
+    background-color: yellow;
 }
 
 .profile-dropdown {
