@@ -11,13 +11,12 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e, loginEmail, loginPassword) => {
     e.preventDefault();
-
     const serverResponse = await dispatch(
       thunkLogin({
-        email,
-        password,
+        email: loginEmail || email,
+        password: loginPassword || password
       })
     );
 
@@ -30,8 +29,8 @@ function LoginFormModal() {
 
   return (
     <div className="login_modal_popup">
-      <form className="login_hGrid popupDiv" onSubmit={handleSubmit}>
-      <h1 className="center">Log In</h1>
+      <form className="login_hGrid popupDiv" onSubmit={(e) => handleLogin(e)}>
+        <h1 className="center">Log In</h1>
         <label>
           Email:&nbsp;&nbsp;
           <input
@@ -41,7 +40,6 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
         <label>
           Password:&nbsp;&nbsp;
           <input
@@ -51,10 +49,24 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button className="mySubmitBtn orange" type="submit">Log In</button>
-        <button className="mySubmitBtn ltskyblue" type="submit">Demo 1</button>
-        <button className="mySubmitBtn ltcoral" type="submit">Demo 2</button>
+        <button
+          className="orange"
+          type="submit">
+          Log In
+        </button>
+        <button
+          className="ltskyblue"
+          type="button"
+          onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
+        >
+          Demo 1
+        </button>
+        <button
+          className="ltcoral"
+          type="button"
+          onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
+        >Demo 2
+        </button>
       </form>
     </div>
   );
