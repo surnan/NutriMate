@@ -36,7 +36,6 @@ export const thunkLogin = (credentials) => async dispatch => {
     });
 
     if (response.ok) {
-        console.log("====> response is ok")
         const data = await response.json();
         dispatch(setUser(data));
     } else if (response.status < 500) {
@@ -84,7 +83,7 @@ export const updateUserThunk = (userId, form) => async (dispatch) => {
 
         const option = {
             method: "PUT",
-            headers: { 'Content-Type': 'multipart/form-data' },
+            // headers: { 'Content-Type': 'multipart/form-data' },
             body: formData
         }
 
@@ -117,6 +116,7 @@ function sessionReducer(state = initialState, action) {
             // if (action.payload && Object.keys(action.payload).length === 0) {
             //     return { user: null };
             // }
+            console.log("======> action.payload ====> ", action.payload)
             return { ...state, user: action.payload };
         case REMOVE_USER:
             console.log("=======> Removing user: setting user to null")
