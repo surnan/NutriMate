@@ -14,6 +14,10 @@
     top: 25px;
 }
 
+.profile_btn{
+    padding: 0 1rem;
+}
+
 .h-grid{
     display: flex;
     flex-direction: row;
@@ -38,8 +42,8 @@
 
 .profile-dropdown {
     position: absolute;
-    right: 25px;
-    top: 25px;
+    right: 4rem;
+    top: 4rem;
 }
 
 .popupDiv {
