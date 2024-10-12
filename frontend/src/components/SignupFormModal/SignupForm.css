@@ -1,20 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    /* border: 2px red solid; */
-    /* background-color: blueviolet; */
-}
-
-button {
-    cursor: pointer;
-}
-
-button:active{
-    filter: brightness(1.5);
-}
-
+/* SignUpForm.css */
 
 .signup_hGrid {
     display: grid;
@@ -41,28 +25,4 @@ button:active{
 
 .signup_hGrid label {text-align: right}
 
-.signup_hGrid input {
-    padding-left: 1rem;
-    height: 2rem;
-    width: 15rem;
-}
 
-.signup_hGrid button{
-    border-radius: 20px;
-    cursor: pointer;
-    margin: 0 3rem;
-    height: 3rem;
-}
-
-.orange {background-color: orange}
-.ltskyblue {background-color: lightskyblue}
-.ltcoral {background-color: lightcoral}
-
-.signup_modal_popup {
-    text-align: center;
-    background-color: white;
-    border-radius: 25px;
-    padding: 2rem;
-}
-
-.orange {background-color: orange}

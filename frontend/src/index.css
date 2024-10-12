@@ -1,1 +1,64 @@
 /* TODO: Add sitewide styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    /* border: 2px red solid; */
+    background-color: white;
+}
+
+body {
+    margin-bottom: 100px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.modal_css {
+    text-align: center;
+    background-color: white;
+    border-radius: 25px;
+    padding: 2rem;
+}
+
+button {
+    border-radius: 20px;
+    margin: 0 3rem;
+    height: 3rem;
+}
+
+input {
+    padding-left: 1rem;
+    height: 2rem;
+    width: 15rem;
+}
+
+.clickable {cursor: pointer}
+
+.errorMessage {color: red}
+
+.hidden {display: none}
+
+button:active {filter: brightness(1.15)}
+
+.center {text-align: center}
+
+
+
+.orange {background-color: orange}
+.ltskyblue {background-color: lightskyblue}
+.ltcoral {background-color: lightcoral}
+
+
+
+/* #root {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 30px;
+  } */
+
+  /* body {
+    background-color: white;
+  } */
+

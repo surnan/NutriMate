@@ -8,7 +8,7 @@ function Navigation() {
 
 
   return (
-    <div className="hFlex ltYellow">
+    <div className="hFlex yellow">
         <NavLink to="/">Home</NavLink>
         <ProfileButton />
       {user && (
