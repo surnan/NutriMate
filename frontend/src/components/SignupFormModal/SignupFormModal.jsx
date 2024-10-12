@@ -39,16 +39,18 @@ function SignupFormModal() {
   };
 
   return (
-    <div className="signup_modal_popup">
-      <h1>Sign Up</h1>
+    <>
       {errors.server && <p>{errors.server}</p>}
-      <form onSubmit={handleSubmit}>
+      <form className="signup_hGrid" onSubmit={handleSubmit}>
+        <h1>Sign Up</h1>
         <label>
           Email
           <input
             type="text"
             value={email}
+            name="email"
             onChange={(e) => setEmail(e.target.value)}
+            autoComplete="off"
             required
           />
         </label>
@@ -58,7 +60,9 @@ function SignupFormModal() {
           <input
             type="text"
             value={username}
+            name="username"
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="off"
             required
           />
         </label>
@@ -68,24 +72,27 @@ function SignupFormModal() {
           <input
             type="password"
             value={password}
+            name="password"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
         <label>
-          Confirm Password
+          Confirm <br/>Password
           <input
             type="password"
             value={confirmPassword}
+            name="confirmpassword"
             onChange={(e) => setConfirmPassword(e.target.value)}
+            autoComplete="off"
             required
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className="orange" type="submit">Sign Up</button>
       </form>
-    </div>
+    </>
   );
 }
 
