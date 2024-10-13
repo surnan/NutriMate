@@ -3,17 +3,25 @@ import "./GrubCard.css";
 
 const GrubCard = ({ grub }) => {
 
-  const { name, servingUnit, servingSize, calories} = grub
-  const { User, company, description, userId } = grub
+  const { name, servingUnit, servingSize, calories } = grub
+  const { User, company, description, userId, protein, carbs, fats } = grub
 
 
   return (
     <div className="grub_card_grid">
-      <p>{company} {name}</p>
-      <p>{description.length > 20 ? description.slice(0, 20) + "..." : description}</p>
-      <p>{servingSize} {servingUnit}</p>
-      <p>Calories: {calories}</p>
-      <p>User.id: {User?.id} &nbsp;&nbsp;&nbsp; userId: {userId}</p>
+      <p className="center">{company} {name}</p>
+      <div className="grub_card_flex">
+        <p><strong>Calories</strong>: {calories}</p>
+        <p>{servingSize} {servingUnit}</p>
+        <p></p>
+      </div>
+      <div className="grub_card_flex">
+        <p><strong>Protein:</strong> {protein}</p>
+        <p><strong>Carbs:</strong> {carbs}</p>
+        <p><strong>Fats:</strong> {fats}</p>
+      </div>
+      <p>{User?.email} </p>
+      <p>{description.length > 50 ? description.slice(0, 50) + "..." : description}</p>
     </div>
   );
 }
