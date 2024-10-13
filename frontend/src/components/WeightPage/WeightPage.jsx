@@ -45,20 +45,21 @@ const WeightPage = () => {
     <>
       <h3>WeightPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
-      <div className="weightPageForm_hFlex">
+      <div className="max_HFlex weight_btn_div">
         <button
-          className="back_btn"
+          className="blue"
           type="button"
           onClick={handleBackBtn}
         >
           BACK
         </button>
         <button
-          className="weightPage_createBtn"
+          className="green"
           onClick={handleNewWeight}
         >
           CREATE
         </button>
+
       </div>
       <div className="weight_page_grid">
         {

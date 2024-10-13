@@ -45,10 +45,7 @@ function GrubPageForm() {
         navigate(-1)
     };
 
-    const handleBackBtn = () => {
-        console.log("==> handleBackBtn")
-        navigate(-1)
-    };
+    const handleBackBtn = () => {navigate(-1)};
 
     const handleSubmit = async (e) => {
         if (hasError()) {
