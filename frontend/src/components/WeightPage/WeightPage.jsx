@@ -14,9 +14,30 @@ const WeightPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const weightsArr = useSelector(state => state.weights.allWeights);
 
+
+  console.log("==== WEIGHTS ARR ===== ")
+  console.log(weightsArr.map(weight => weight.day)); // To check how day is structured
+
   const filteredAndSortedArray = weightsArr
   .filter(weight => weight.userId === sessionUser.id)
-  .sort((a, b) => new Date(a.day) - new Date(b.day));
+  .sort((a, b) => {
+    const dateA = new Date(a.day).getTime();
+    const dateB = new Date(b.day).getTime();
+    
+    // Handle extremely old or future dates by pushing them to the end
+    if (dateA < new Date('1900-01-01').getTime()) return 1;
+    if (dateB < new Date('1900-01-01').getTime()) return -1;
+    if (dateA > new Date('2100-01-01').getTime()) return 1;
+    if (dateB > new Date('2100-01-01').getTime()) return -1;
+
+    return dateA - dateB;
+  });
+
+
+console.log("Sorted Array by Date:", filteredAndSortedArray.map(weight => weight.day));
+
+
+
 
   console.log("sessionUser = ", sessionUser)
   console.log("sortArray = ", filteredAndSortedArray)
