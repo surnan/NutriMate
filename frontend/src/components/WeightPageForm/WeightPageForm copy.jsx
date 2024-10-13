@@ -114,10 +114,6 @@ function WeightPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
-    const toggleEditMode = () => {
-        setIsEditing(prev => !prev); // Toggles editing mode
-    };
-
     return (
         <>
             <h1>WeightPageForm.jsx</h1>
@@ -132,7 +128,7 @@ function WeightPageForm() {
                     BACK
                 </button>
 
-                {/* {isEditing ? (
+                {isEditing ? (
                     <button
                         className="back_btn green"
                         type="button"
@@ -148,16 +144,7 @@ function WeightPageForm() {
                         onClick={handleUpdateBtn}>
                         UPDATE
                     </button>
-                )} */}
-
-                <button
-                    className={`back_btn ${isEditing ? 'green' : 'blue'}`}
-                    type="button"
-                    onClick={isEditing ? handleSubmit : toggleEditMode}
-                    disabled={isEditing && hasError()}
-                >
-                    {isEditing ? 'SAVE' : 'EDIT'}
-                </button>
+                )}
             </div>
 
             <div className="weight_page_form_grid">
@@ -166,7 +153,7 @@ function WeightPageForm() {
                 </label>
 
                 <input
-                    type="checkbox"
+                    type="text"
                     name="metricSystem"
                     onChange={updateSetForm}
                     placeholder="Enter name"
@@ -178,7 +165,7 @@ function WeightPageForm() {
                     {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} start
                 </label>
                 <input
-                    type="number"
+                    type="text"
                     name="start"
                     onChange={updateSetForm}
                     placeholder="Please enter starting weight"
@@ -190,7 +177,7 @@ function WeightPageForm() {
                     {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} goal
                 </label>
                 <input
-                    type="number"
+                    type="text"
                     name="goal"
                     onChange={updateSetForm}
                     placeholder="Please enter goal weight"
@@ -203,7 +190,7 @@ function WeightPageForm() {
                     {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} current
                 </label>
                 <input
-                    type="number"
+                    type="text"
                     name="current"
                     onChange={updateSetForm}
                     placeholder="Please enter current weight"
@@ -216,7 +203,7 @@ function WeightPageForm() {
                     {errors.day && <span style={{ color: 'red' }}>{errors.day}&nbsp;&nbsp;</span>} Day
                 </label>
                 <input
-                    type="date"
+                    type="text"
                     name="day"
                     onChange={updateSetForm}
                     placeholder="Please enter your goal weight"
@@ -224,26 +211,16 @@ function WeightPageForm() {
                     readOnly={!isEditing}
                 />
             </div>
-            <div className="weightPageForm_hFlex">
-                <button
-                    className="back_btn green"
-                    type="button"
-                    onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
-                >
-                    RESTORE
-                </button>
-
+            <div className="weight_page_btn_grid">
                 {exampleData && (
                     <button
                         className="back_btn red"
                         type="button"
-                        onClick={handleDeleteBtn}
+                        onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
                     >
-                        DELETE
+                        {isEditing ? "CANCEL" : "DELETE"}
                     </button>
                 )}
-
-
             </div>
             {showDeletetModal && (
                 <DeleteWeightModal
