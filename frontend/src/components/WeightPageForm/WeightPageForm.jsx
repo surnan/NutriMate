@@ -21,7 +21,7 @@ function WeightPageForm() {
 
     const [form, setForm] = useState({
         id: exampleData?.id,
-        metricSystem: true,
+        metricSystem: exampleData?.metricSystem || false,
         start: exampleData?.start || '',
         goal: exampleData?.goal || '',
         current: exampleData?.current || '',
@@ -29,11 +29,41 @@ function WeightPageForm() {
         userId: exampleData?.userId || sessionUser.id
     });
 
+    const updateSetForm = (e) => {
+        const { name, type, value, checked } = e.target;
+        setForm(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    useEffect(() => {
+        const newErrors = {};
+        const allKeys = ["start", "goal", "current", "day"];
+
+        allKeys.forEach((key) => {
+            if (!form[key]) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
+            }
+        });
+        setErrors(newErrors);
+    }, [form])
+
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
+    const formatDate = (dateString) => {
+        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    };
 
+    //Delete Button & Modal -- start
     const handleDeleteBtn = () => {
+        if (!exampleData?.id) {
+            alert('Record cannot be deleted because it has not been saved yet.');
+            return;
+        }
         setSelectedWeight(exampleData);
         setShowDeletetModal(true)
     }
@@ -43,11 +73,13 @@ function WeightPageForm() {
         setSelectedWeight(null)
         navigate(-1)
     };
+    //Delete Button & Modal -- end
+
 
     const handleBackBtn = () => { navigate(-1) };
-
     const handleSubmit = async (e) => {
         if (hasError()) {
+            console.log("===> ERRORS = ", errors)
             return
         }
 
@@ -74,46 +106,18 @@ function WeightPageForm() {
             console.error('Error adding weight:', error);
         }
     }
-
-
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
-    };
-
-    const handleCancelBtn = () => {
+    const handleResetBtn = () => {
         setForm({
             metricSystem: exampleData?.metricSystem || false,
-            start: exampleData?.start || 0,
-            goal: exampleData?.goal || 0,
-            current: exampleData?.current || 0,
+            start: exampleData?.start || '',
+            goal: exampleData?.goal || '',
+            current: exampleData?.current || '',
             day: formatDate(exampleData?.day),
             userId: exampleData?.userId || sessionUser.id
         });
         // navigate(-1);  // This navigateigates back to the previous page
     };
 
-    useEffect(() => {
-        const newErrors = {};
-
-        const allKeys = ["metricSystem", "start", "goal", "current", "day", "userId"];
-
-        allKeys.forEach((key) => {
-            if (!form[key]) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
-            }
-        });
-        setErrors(newErrors);
-    }, [form])
-
-
-    const updateSetForm = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }))
-    }
-
-    console.log("=====> exampleData.day ", exampleData?.day)
     return (
         <>
             <h1>WeightPageForm.jsx</h1>
@@ -128,29 +132,36 @@ function WeightPageForm() {
                     BACK
                 </button>
 
-                <button
-                    className={`back_btn green`}
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={hasError()}
-                >
-                    SAVE
-                </button>
+                <div className="weightPageForm_hFlex">
+                    <button
+                        className="back_btn blue"
+                        type="button"
+                        onClick={handleResetBtn}
+                    >
+                        RESET
+                    </button>
+                    <button
+                        className={`back_btn green`}
+                        type="button"
+                        onClick={handleSubmit}
+                        disabled={hasError()}
+                    >
+                        SAVE
+                    </button>
 
-
+                </div>
             </div>
 
             <div className="weight_page_form_grid">
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.metricSystem && <span style={{ color: 'red' }}>{errors.metricSystem}&nbsp;&nbsp;</span>} metricSystem:
+                    metricSystem:
                 </label>
 
                 <input
                     type="checkbox"
                     name="metricSystem"
                     onChange={updateSetForm}
-                    placeholder="Enter name"
-                    value={form.metricSystem}
+                    checked={form.metricSystem}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
@@ -201,16 +212,16 @@ function WeightPageForm() {
             </div>
             <div className="weightPageForm_hFlex">
                 <button
-                    className="back_btn green"
+                    className="back_btn red"
                     type="button"
-                    onClick={handleCancelBtn}
+                    onClick={handleDeleteBtn}
                 >
-                    RESTORE
+                    DELETE
                 </button>
 
                 {exampleData && (
                     <button
-                        className="back_btn red"
+                        className="back_btn"
                         type="button"
                         onClick={handleDeleteBtn}
                     >
