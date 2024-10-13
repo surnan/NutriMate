@@ -15,15 +15,15 @@ const WorkoutPage = () => {
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
 
   const filteredAndSortedArray = workoutsArr
-  .filter(workout => workout.userId === sessionUser.id)
-  .sort((a, b) => {
-    const nameA = a.name.toLowerCase(); 
-    const nameB = b.name.toLowerCase(); 
-    if (nameA < nameB) return -1;       
-    if (nameA > nameB) return 1;        
-    return 0;                           
-  });
-  
+    .filter(workout => workout.userId === sessionUser.id)
+    .sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
+
   console.log("===> filteredArray ==> ", filteredAndSortedArray)
 
 
@@ -36,20 +36,30 @@ const WorkoutPage = () => {
     nav('/workoutform', { state: { newWorkout: true, exampleData: workout } });
   }
 
-  const handleNewWorkout = () => {
-    nav('/workoutform')
-  }
+  const handleNewWorkout = () => { nav('/workoutform') }
+  const handleBackBtn = () => { nav(-1) };
 
   return (
     <>
       <h3>WorkoutPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
 
-      <button
-        className="WorkoutPage_createBtn"
-        onClick={handleNewWorkout}
-      >CREATE
-      </button>
+      <div className="workoutPageForm_hFlex">
+        <button
+          className="back_btn"
+          type="button"
+          onClick={handleBackBtn}
+        >
+          BACK
+        </button>
+
+        <button
+          className="WorkoutPage_createBtn"
+          onClick={handleNewWorkout}
+        >CREATE
+        </button>
+      </div>
+
       <div className="workout_page_grid">
         {
           filteredAndSortedArray.map((workout, idx) => (

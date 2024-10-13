@@ -15,14 +15,14 @@ const GrubPage = () => {
   const grubArr = useSelector(state => state.grubs.allGrubs);
 
   const filteredAndSortedArray = grubArr
-  .filter(grub => grub.userId === sessionUser.id)
-  .sort((a, b) => {
-    const nameA = a.name.toLowerCase(); 
-    const nameB = b.name.toLowerCase(); 
-    if (nameA < nameB) return -1;       
-    if (nameA > nameB) return 1;        
-    return 0;                           
-  });
+    .filter(grub => grub.userId === sessionUser.id)
+    .sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
+      return 0;
+    });
 
   useEffect(() => {
     dispatch(getGrubsAllThunk())
@@ -33,19 +33,28 @@ const GrubPage = () => {
     nav('/grubform', { state: { newGrub: true, exampleData: grub } });
   }
 
-  const handleNewGrub = () => {
-    nav('/grubform')
-  }
+  const handleNewGrub = () => { nav('/grubform') }
+  const handleBackBtn = () => { nav(-1) };
 
   return (
     <div>
       <h1> GrubPage.jsx </h1>
       <h3 >Email = {sessionUser?.email}</h3>
-      <button
-        className="grubPage_createBtn"
-        onClick={handleNewGrub}
-      >CREATE
-      </button>
+
+      <div className="grubPageForm_hFlex">
+        <button
+          className="back_btn"
+          type="button"
+          onClick={handleBackBtn}
+        >
+          BACK
+        </button>
+        <button
+          className="grubPage_createBtn"
+          onClick={handleNewGrub}
+        >CREATE
+        </button>
+      </div>
       <br />
       <div className="grub_page_grid">
         {

@@ -1,42 +1,24 @@
 /* weightPageForm.css */
 
-input {
-    padding: 1rem;
-    border-radius: 8px;
-}
-
-textarea {
-    width: 325px; 
-    height: 125px;
-    resize: none; 
-}
-
 
 .weight_page_form_grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 5px;
-    border: 2px black solid;
     max-width: 1100px;
     min-width: 600px;
-    background-color: orange;
-    gap: 2rem;
+    gap: 1rem;
+    margin: 15px 30px;
+}
+
+.weight_page_form_grid > * {
+    display: grid;
+    align-items: center;
 }
 
 .weight_page_form_grid > :nth-child(odd){
-    display: grid;
-    align-items: center;
     justify-content: right;
-    height: 3rem;
 }
-
-.weight_page_form_grid > :nth-child(2){
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    width: 15%;
-}
-
 
 .weight_page_btn_grid{
     display: grid;
@@ -44,17 +26,6 @@ textarea {
     padding: 0 5px;
     max-width: 1100px;
     gap: 2rem;
-}
-
-.weight_page_btn {
-    display: block;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 50px auto;
-    width: 10rem;
-    height: 3rem;
-    border-radius: 5px;
 }
 
 .back_btn{
@@ -75,16 +46,21 @@ textarea {
     padding: 0 20px;
 }
 
-
-
-/* .weight_page_form_grid label[for="metricSystem"] {
-    margin-right: 10px;
+.weight_page_form_grid select, 
+.weight_page_form_grid input {
+    width: 8rem;
+    text-align: center;
 }
 
 .weight_page_form_grid input[type="checkbox"] {
-    margin-left: 5px; 
-} */
+    justify-self: left;  
+    align-self: center;  
+    margin-left: 10px;   
+    width: 1rem;
+}
 
-.red {background-color: red}
-.green {background-color: green}
-.blue {background-color: blue}
+.weight_page_form_grid input[type="date"] {
+    display: flex;
+    align-self: center;
+    text-align: center;  
+}
