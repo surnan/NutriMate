@@ -1,9 +1,5 @@
 /* workoutPage.css */
 
-body {
-    background: lightpink;
-}
-
 .workout_page_grid{
     display: grid;
     grid-template-columns: 1fr 1fr;

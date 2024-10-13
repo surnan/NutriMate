@@ -1,18 +1,5 @@
 /* weightcard.css */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    /* border: 2px red solid; */
-    /* background-color: blueviolet; */
-}
-
-
-body {
-    background: lightpink;
-}
 
 .weight_card_grid{
     display: grid;
@@ -40,10 +27,3 @@ body {
     justify-items: center; 
     align-items: center;   
 }
-
-/* 
-.weight_card_grid > :nth-child(3) {
-    background-color: yellow;
-    grid-column: 1/3;
-} 
-*/
