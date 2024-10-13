@@ -24,16 +24,13 @@ const WorkoutPage = () => {
       return 0;
     });
 
-  console.log("===> filteredArray ==> ", filteredAndSortedArray)
-
-
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
   }, [dispatch])
 
   const somethingDifferent = (e, workout) => {
     e.preventDefault();
-    nav('/workoutform', { state: { newWorkout: true, exampleData: workout } });
+    nav('/workoutform', { state: { newWorkout: true, currentData: workout } });
   }
 
   const handleNewWorkout = () => { nav('/workoutform') }
@@ -44,9 +41,9 @@ const WorkoutPage = () => {
       <h3>WorkoutPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
 
-      <div className="workoutPageForm_hFlex">
+      <div className="max_HFlex workout_btn_div">
         <button
-          className="back_btn"
+          className="blue"
           type="button"
           onClick={handleBackBtn}
         >
@@ -54,7 +51,7 @@ const WorkoutPage = () => {
         </button>
 
         <button
-          className="WorkoutPage_createBtn"
+          className="green"
           onClick={handleNewWorkout}
         >CREATE
         </button>
