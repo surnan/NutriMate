@@ -15,10 +15,6 @@
 }
 
 
-
-/* weightPageForm.css */
-
-
 .weight_page_form_grid{
     display: grid;
     grid-template-columns: 1fr 1fr;

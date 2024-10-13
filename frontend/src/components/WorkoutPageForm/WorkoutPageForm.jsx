@@ -12,8 +12,7 @@ function WorkoutPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
-
-    const { newWorkout, exampleData } = location.state || {};
+    const { newWorkout, currentData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -21,16 +20,16 @@ function WorkoutPageForm() {
 
 
     const [form, setForm] = useState({
-        name: exampleData?.name || "",
-        description: exampleData?.description || '',
-        userId: exampleData?.userId || sessionUser?.id || 1
+        name: currentData?.name || "",
+        description: currentData?.description || '',
+        userId: currentData?.userId || sessionUser?.id || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
     const handleDeleteBtn = () => {
-        setSelectedWorkout(exampleData);
+        setSelectedWorkout(currentData);
         setShowDeletetModal(true)
     }
 
@@ -51,7 +50,7 @@ function WorkoutPageForm() {
 
         const { name, description, userId } = form;
         const body = {
-            id: parseInt(exampleData?.id),
+            id: parseInt(currentData?.id),
             name,
             description,
             userId
@@ -71,8 +70,8 @@ function WorkoutPageForm() {
 
     const handleresetBtn = () => {
         setForm({
-            name: exampleData?.name || "",
-            description: exampleData?.description || ""
+            name: currentData?.name || "",
+            description: currentData?.description || ""
         });
     }
 
@@ -100,32 +99,31 @@ function WorkoutPageForm() {
             <h1>WorkoutPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
-            <div className="workoutPageForm_hFlex">
+            <div className="max_HFlex">
                 <button
-                    className="back_btn"
+                    className="blue"
                     type="button"
                     onClick={handleBackBtn}
                 >
                     BACK
                 </button>
 
-                <div className="workoutPageForm_hFlex">
+                <div className="wokoutPageForm_hFlex">
                     <button
-                        className="back_btn blue"
+                        className="orange"
                         type="button"
                         onClick={handleresetBtn}
                     >
                         RESET
                     </button>
                     <button
-                        className="back_btn green"
+                        className="green"
                         type="button"
                         onClick={handleSubmit}
                         disabled={hasError()}
                     >
                         SAVE
                     </button>
-
                 </div>
 
             </div>
@@ -164,7 +162,7 @@ function WorkoutPageForm() {
             </div>
             
             <button
-                className="back_btn red"
+                className="red"
                 type="button"
                 onClick={handleDeleteBtn}
             >
