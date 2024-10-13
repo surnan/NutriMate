@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 isFatsValid(value) {
-                    if (value !== null && value <= 0) {
+                    if (value !== null && value < 0) {
                         throw new Error('if fats has value then it must be at least zero if provided');
                     }
                 }
@@ -96,7 +96,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 isCarbsValid(value) {
-                    if (value !== null && value <= 0) {
+                    if (value !== null && value < 0) {
                         throw new Error('carbs must be at least zero if provided');
                     }
                 }
@@ -107,7 +107,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             validate: {
                 isSugarValid(value) {
-                    if (value !== null && value <= 0) {
+                    if (value !== null && value < 0) {
                         throw new Error('sugar must be at least zero if provided');
                     }
                 }
@@ -117,10 +117,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(30),
             allowNull: true,
             validate: {
-                len: [1, 30],
-                isNotEmptyAndNoLeadingWhitespace(value) {
-                    if (value.length > 1 && /^\s/.test(value)) {
-                        throw new Error('The first character cannot be a space or any whitespace.');
+                len: [0, 30],
+                isLessThan30(value) {
+                    if (value.length > 30) {
+                        throw new Error('Company Name can not exceed 30');
                     }
                 }
             }

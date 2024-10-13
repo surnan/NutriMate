@@ -3,7 +3,7 @@
 const express = require('express');
 const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
-const { check } = require('express-validator');
+const { check, body } = require('express-validator');
 const { Op } = require('sequelize')
 const { User, DayLog, Grub, GrubIcon, GrubImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
 
@@ -85,15 +85,20 @@ router.post('/', async (req, res, next) => {
                 servingSize: parseInt(servingSize),
                 servingUnit,
                 calories: parseInt(calories),
-                protein: parseInt(protein),
-                fats: parseInt(fats),
-                carbs: parseInt(carbs),
-                sugar: parseInt(sugar),
+                protein: parseInt(protein) || 0,
+                fats: parseInt(fats) || 0,
+                carbs: parseInt(carbs) || 0,
+                sugar: parseInt(sugar) || 0,
                 company,
                 description,
                 userId: parseInt(userId)
             }
         )
+        console.log("")
+        console.log("")
+        console.log("body ====> ", body)
+        console.log("")
+        console.log("")
         let newWorkoutJSON = newGrub.toJSON();
         let responseBody = {...newWorkoutJSON}
         responseBody.createdAt = newWorkoutJSON.createdAt
