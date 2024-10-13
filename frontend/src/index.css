@@ -27,6 +27,7 @@ button {
     height: 3rem;
     min-width: 6rem;
     color: white;
+    cursor: pointer;
 }
 
 .max_HFlex {
@@ -44,7 +45,7 @@ input {padding-left: 1rem}
 .clickable {cursor: pointer}
 .errorMessage {color: red}
 .hidden {display: none}
-button:active {filter: brightness(1.15)}
+button:active {filter: brightness(1.33)}
 .center {text-align: center}
 .shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
 
