@@ -11,7 +11,18 @@ const GrubPage = () => {
   const dispatch = useDispatch()
   const nav = useNavigate();
 
+  const sessionUser = useSelector((state) => state.session.user);
   const grubArr = useSelector(state => state.grubs.allGrubs);
+
+  const filteredAndSortedArray = grubArr
+  .filter(grub => grub.userId === sessionUser.id)
+  .sort((a, b) => {
+    const nameA = a.name.toLowerCase(); 
+    const nameB = b.name.toLowerCase(); 
+    if (nameA < nameB) return -1;       
+    if (nameA > nameB) return 1;        
+    return 0;                           
+  });
 
   useEffect(() => {
     dispatch(getGrubsAllThunk())
@@ -29,6 +40,7 @@ const GrubPage = () => {
   return (
     <div>
       <h1> GrubPage.jsx </h1>
+      <h3 >Email = {sessionUser?.email}</h3>
       <button
         className="grubPage_createBtn"
         onClick={handleNewGrub}
@@ -37,7 +49,7 @@ const GrubPage = () => {
       <br />
       <div className="grub_page_grid">
         {
-          grubArr.map((grub, idx) => (
+          filteredAndSortedArray.map((grub, idx) => (
             <div
               key={`${idx}-grub`}
               onClick={e => somethingDifferent(e, grub)}
