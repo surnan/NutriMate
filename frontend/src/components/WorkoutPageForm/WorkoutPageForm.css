@@ -1,18 +1,5 @@
 /* workoutPageForm.css */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    /* border: 2px red solid; */
-    /* background-color: blueviolet; */
-}
-
-body {
-    background: lightpink;
-}
-
 input, textarea {
     padding: 1rem;
     border-radius: 8px;
@@ -26,12 +13,11 @@ textarea {
 
 
 .workout_page_form_grid{
+    margin-top: 30px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 5px;
-    border: 2px black solid;
     max-width: 1100px;
-    background-color: orange;
     gap: 2rem;
 }
 
