@@ -14,10 +14,6 @@ const WeightPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const weightsArr = useSelector(state => state.weights.allWeights);
 
-
-  console.log("==== WEIGHTS ARR ===== ")
-  console.log(weightsArr.map(weight => weight.day)); // To check how day is structured
-
   const filteredAndSortedArray = weightsArr
   .filter(weight => weight.userId === sessionUser.id)
   .sort((a, b) => {
@@ -32,15 +28,6 @@ const WeightPage = () => {
 
     return dateA - dateB;
   });
-
-
-console.log("Sorted Array by Date:", filteredAndSortedArray.map(weight => weight.day));
-
-
-
-
-  console.log("sessionUser = ", sessionUser)
-  console.log("sortArray = ", filteredAndSortedArray)
 
   useEffect(() => {
     dispatch(getWeightsAllThunk())
