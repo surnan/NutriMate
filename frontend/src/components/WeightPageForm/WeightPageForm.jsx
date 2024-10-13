@@ -165,36 +165,36 @@ function WeightPageForm() {
                 />
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} start
+                    {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} Starting Weight (number):
                 </label>
                 <input
                     type="number"
                     name="start"
                     onChange={updateSetForm}
-                    placeholder="Please enter starting weight"
+                    placeholder="Please enter starting weight as integer"
                     value={form.start}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} goal
+                    {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} Goal Weight (number):
                 </label>
                 <input
                     type="number"
                     name="goal"
                     onChange={updateSetForm}
-                    placeholder="Please enter goal weight"
+                    placeholder="Please enter goal weight as integer"
                     value={form.goal}
                 />
 
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} current
+                    {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} Current Weight (number):
                 </label>
                 <input
                     type="number"
                     name="current"
                     onChange={updateSetForm}
-                    placeholder="Please enter current weight"
+                    placeholder="Please enter current weight as integer"
                     value={form.current}
                 />
 
@@ -218,18 +218,6 @@ function WeightPageForm() {
                 >
                     DELETE
                 </button>
-
-                {exampleData && (
-                    <button
-                        className="back_btn"
-                        type="button"
-                        onClick={handleDeleteBtn}
-                    >
-                        DELETE
-                    </button>
-                )}
-
-
             </div>
             {showDeletetModal && (
                 <DeleteWeightModal
