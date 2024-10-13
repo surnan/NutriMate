@@ -123,7 +123,7 @@ function WeightPageForm() {
             <h1>WeightPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
-            <div className="max_HFlex weight_btn_div">
+            <div className="max_HFlex">
                 <button
                     className="blue"
                     type="button"
