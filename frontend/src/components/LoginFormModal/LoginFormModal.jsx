@@ -72,7 +72,7 @@ function LoginFormModal() {
         <button
           className="ltskyblue"
           type="button"
-          onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
+          onClick={(e) => handleLogin(e, "demo@user.io", "password")}
         >
           Demo 1
         </button>

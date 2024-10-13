@@ -24,13 +24,10 @@ router.get('/', async (req, res, next) => {
                 { 
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }
+            ]
         });
 
         const answer = workouts.map(e=>{
@@ -54,13 +51,11 @@ router.get('/:workoutId', async (req, res, next) => {
                 { 
                     model: User,
                     attributes: {
-                        exclude: ['id', 'hashedPassword', 'updatedAt']
+                        exclude: ['hashedPassword', 'updatedAt']
                     } 
                 }
-            ],
-            attributes: {
-                exclude: ['userId']
-            }})
+            ]
+        })
 
         if (!currentWorkout){
             res.status(404).json({
@@ -105,7 +100,7 @@ router.post('/', async (req, res, next) => {
                 start: parseInt(start), 
                 goal: parseInt(goal), 
                 current: parseInt(current), 
-                day: Date.now(), 
+                day: day, 
                 userId: parseInt(userId)
             }
         )

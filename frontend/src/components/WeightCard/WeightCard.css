@@ -18,9 +18,9 @@ body {
     display: grid;
     padding: 5px;
     border: 2px black solid;
-    max-width: 1100px;
+    max-width: 500px;
     background-color: orange;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
 }
 
@@ -33,6 +33,12 @@ body {
 
     /* display: grid; */
     /* place-content: center right; */
+}
+
+.weight_card_div {
+    display: grid;
+    justify-items: center; 
+    align-items: center;   
 }
 
 /* 

@@ -11,7 +11,15 @@ const WeightPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
+  const sessionUser = useSelector((state) => state.session.user);
   const weightsArr = useSelector(state => state.weights.allWeights);
+
+  const filteredAndSortedArray = weightsArr
+  .filter(weight => weight.userId === sessionUser.id)
+  .sort((a, b) => new Date(a.day) - new Date(b.day));
+
+  console.log("sessionUser = ", sessionUser)
+  console.log("sortArray = ", filteredAndSortedArray)
 
   useEffect(() => {
     dispatch(getWeightsAllThunk())
@@ -29,6 +37,7 @@ const WeightPage = () => {
   return (
     <>
       <h3>WeightPage.jsx</h3>
+      <h3 >Email = {sessionUser?.email}</h3>
       <button
         className="weightPage_createBtn"
         onClick={handleNewWeight}
@@ -37,8 +46,10 @@ const WeightPage = () => {
       </button>
       <div className="weight_page_grid">
         {
-          weightsArr.map((weight, idx) => (
+          
+          filteredAndSortedArray.map((weight, idx) => (
             <div
+              className="weight_card_div"
               key={`${idx}-weight`}
               onClick={e => somethingDifferent(e, weight)}
             >
