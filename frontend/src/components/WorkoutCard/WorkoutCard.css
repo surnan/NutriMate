@@ -5,25 +5,21 @@
     padding: 5px;
     border: 2px black solid;
     max-width: 1100px;
-    background-color: orange;
     grid-template-columns: 1fr;
     gap: 0.5rem;
 }
 
 .workout_card_grid > :first-child {
-    background-color: yellow;
     display: grid;
     font-size: 1.5rem;
 }
 
 .workout_card_grid > :nth-child(2) {
-    background-color: yellow;
     display: grid;
     height: 3rem;
 }
 
 .workout_card_grid > :nth-child(3) {
-    background-color: yellow;
     display: grid;
     justify-content: right;
     
