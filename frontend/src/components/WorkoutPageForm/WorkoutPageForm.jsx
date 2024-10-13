@@ -1,7 +1,7 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import "./WorkoutPageForm.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk } from "../../redux/workouts"
 import DeleteWorkoutModal from "../DeleteWorkoutModal";
@@ -11,6 +11,8 @@ function WorkoutPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
+    const sessionUser = useSelector((state) => state.session.user);
+
     const { newWorkout, exampleData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
@@ -23,7 +25,7 @@ function WorkoutPageForm() {
     const [form, setForm] = useState({
         name: exampleData?.name || "",
         description: exampleData?.description || '',
-        userId: exampleData?.userId || 1
+        userId: exampleData?.userId || sessionUser.id || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -50,12 +52,12 @@ function WorkoutPageForm() {
         e.preventDefault();
         setIsEditing(false)
 
-        const { name, description } = form;
+        const { name, description, userId } = form;
         const body = {
             id: parseInt(exampleData?.id),
             name,
             description,
-            userId: 1
+            userId
         }
 
         try {
@@ -103,6 +105,7 @@ function WorkoutPageForm() {
     return (
         <>
             <h1>WorkoutPageForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="workoutPageForm_hFlex">
                 <button
