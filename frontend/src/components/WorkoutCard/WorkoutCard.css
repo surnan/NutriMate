@@ -14,7 +14,6 @@
     background-color: yellow;
     display: grid;
     font-size: 1.5rem;
-    
 }
 
 .workout_card_grid > :nth-child(2) {

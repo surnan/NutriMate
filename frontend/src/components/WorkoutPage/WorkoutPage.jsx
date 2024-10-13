@@ -17,11 +17,11 @@ const WorkoutPage = () => {
   const filteredAndSortedArray = workoutsArr
   .filter(workout => workout.userId === sessionUser.id)
   .sort((a, b) => {
-    const nameA = a.name.toLowerCase(); // Ignore case by converting to lowercase
-    const nameB = b.name.toLowerCase(); // Ignore case by converting to lowercase
-    if (nameA < nameB) return -1;       // Sort `a` before `b`
-    if (nameA > nameB) return 1;        // Sort `b` before `a`
-    return 0;                           // Keep original order if names are the same
+    const nameA = a.name.toLowerCase(); 
+    const nameB = b.name.toLowerCase(); 
+    if (nameA < nameB) return -1;       
+    if (nameA > nameB) return 1;        
+    return 0;                           
   });
   
   console.log("===> filteredArray ==> ", filteredAndSortedArray)
