@@ -12,31 +12,31 @@ function GrubPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
-    const { newGrub, exampleData } = location.state || {};
+    const { newGrub, currentData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedGrub, setSelectedGrub] = useState(null);
     const [errors, setErrors] = useState({});
 
     const [form, setForm] = useState({
-        name: exampleData?.name || "",
-        servingUnit: exampleData?.servingUnit || '',
-        servingSize: exampleData?.servingSize || '',
-        calories: exampleData?.calories || '',
-        protein: exampleData?.protein || '',
-        fats: exampleData?.fats || '',
-        carbs: exampleData?.carbs || '',
-        sugar: exampleData?.sugar || '',
-        company: exampleData?.company || '',
-        description: exampleData?.description || '',
-        userId: exampleData?.userId || sessionUser?.id || 1
+        name: currentData?.name || "",
+        servingUnit: currentData?.servingUnit || '',
+        servingSize: currentData?.servingSize || '',
+        calories: currentData?.calories || '',
+        protein: currentData?.protein || '',
+        fats: currentData?.fats || '',
+        carbs: currentData?.carbs || '',
+        sugar: currentData?.sugar || '',
+        company: currentData?.company || '',
+        description: currentData?.description || '',
+        userId: currentData?.userId || sessionUser?.id || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
     const handleDeleteBtn = () => {
-        setSelectedGrub(exampleData);
+        setSelectedGrub(currentData);
         setShowDeletetModal(true)
     }
 
@@ -59,7 +59,7 @@ function GrubPageForm() {
         const { carbs, sugar, company, description, userId } = form
 
         const body = {
-            id: parseInt(exampleData?.id),
+            id: parseInt(currentData?.id),
             name,
             servingUnit,
             servingSize: parseInt(servingSize),
@@ -86,17 +86,17 @@ function GrubPageForm() {
 
     const handleCancelBtn = () => {
         setForm({
-            name: exampleData?.name || "",
-            description: exampleData?.description,
-            servingUnit: exampleData?.servingUnit,
-            servingSize: exampleData?.servingSize,
-            calories: exampleData?.calories,
-            protein: exampleData?.protein,
-            fats: exampleData?.fats,
-            carbs: exampleData?.carbs,
-            sugar: exampleData?.sugar,
-            company: exampleData?.company,
-            userId: exampleData?.userId || 1
+            name: currentData?.name || "",
+            description: currentData?.description,
+            servingUnit: currentData?.servingUnit,
+            servingSize: currentData?.servingSize,
+            calories: currentData?.calories,
+            protein: currentData?.protein,
+            fats: currentData?.fats,
+            carbs: currentData?.carbs,
+            sugar: currentData?.sugar,
+            company: currentData?.company,
+            userId: currentData?.userId || 1
         });
     };
 
