@@ -17,15 +17,13 @@ function WorkoutPageForm() {
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
-    const [isEditing, setIsEditing] = useState(!exampleData);
-    // const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
     const [errors, setErrors] = useState({});
 
 
     const [form, setForm] = useState({
         name: exampleData?.name || "",
         description: exampleData?.description || '',
-        userId: exampleData?.userId || sessionUser.id || 1
+        userId: exampleData?.userId || sessionUser?.id || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,12 +43,11 @@ function WorkoutPageForm() {
     const handleBackBtn = () => { navigate(-1) };
 
     const handleSubmit = async (e) => {
-        if (hasError()){
+        if (hasError()) {
             return
         }
 
         e.preventDefault();
-        setIsEditing(false)
 
         const { name, description, userId } = form;
         const body = {
@@ -59,6 +56,8 @@ function WorkoutPageForm() {
             description,
             userId
         }
+
+        console.log("===> line 56 ===> body = ", body)
 
         try {
             const result = newWorkout
@@ -70,30 +69,24 @@ function WorkoutPageForm() {
         }
     }
 
-    const handleCancelBtn = () => {
-        setIsEditing(false)
+    const handleresetBtn = () => {
         setForm({
             name: exampleData?.name || "",
             description: exampleData?.description || ""
         });
     }
 
-    const handleUpdateBtn = () => {
-        setIsEditing(true);
-    };
 
     useEffect(() => {
-        // if (clickedSubmitBtn) {
-            const newErrors = {};
-            const allKeys = ["name", "description"];
+        const newErrors = {};
+        const allKeys = ["name", "description"];
 
-            allKeys.forEach((key) => {
-                if (!form[key]) {
-                    newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
-                }
-            });
-            setErrors(newErrors);
-        // }
+        allKeys.forEach((key) => {
+            if (!form[key]) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
+            }
+        });
+        setErrors(newErrors);
     }, [form])
 
 
@@ -116,7 +109,14 @@ function WorkoutPageForm() {
                     BACK
                 </button>
 
-                {isEditing ? (
+                <div className="workoutPageForm_hFlex">
+                    <button
+                        className="back_btn blue"
+                        type="button"
+                        onClick={handleresetBtn}
+                    >
+                        RESET
+                    </button>
                     <button
                         className="back_btn green"
                         type="button"
@@ -125,20 +125,15 @@ function WorkoutPageForm() {
                     >
                         SAVE
                     </button>
-                ) : (
-                    <button
-                        className="back_btn blue"
-                        type="button"
-                        onClick={handleUpdateBtn}>
-                        UPDATE
-                    </button>
-                )}
+
+                </div>
+
             </div>
 
 
             <div className="workout_page_form_grid">
-                <label style={{display: 'inline-flex'}}>
-                {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name: 
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
                 </label>
 
                 <input
@@ -147,11 +142,10 @@ function WorkoutPageForm() {
                     onChange={updateSetForm}
                     placeholder="Enter name"
                     value={form.name}
-                    readOnly={!isEditing}
                 />
 
-                <label style={{display: 'inline-flex'}}>
-                {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description: 
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description:
                 </label>
                 <textarea
                     maxLength="498"
@@ -159,7 +153,6 @@ function WorkoutPageForm() {
                     onChange={updateSetForm}
                     placeholder="Enter description"
                     value={form.description}
-                    readOnly={!isEditing}
                 />
                 {showDeletetModal && (
                     <DeleteWorkoutModal
@@ -169,20 +162,15 @@ function WorkoutPageForm() {
                     />
                 )}
             </div>
+            
+            <button
+                className="back_btn red"
+                type="button"
+                onClick={handleDeleteBtn}
+            >
+                DELETE
+            </button>
 
-
-
-            <div className="workout_page_btn_grid">
-                {exampleData && (
-                    <button
-                        className="back_btn red"
-                        type="button"
-                        onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
-                    >
-                        {isEditing ? "CANCEL" : "DELETE"}
-                    </button>
-                )}
-            </div>
         </>
     );
 }
