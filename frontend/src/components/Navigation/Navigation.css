@@ -22,7 +22,6 @@
     gap: 1rem;
     align-items: center;
     justify-content: center;
-    background-color: pink;
 }
 
 .profile_dropdown_grid > :first-child{

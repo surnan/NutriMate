@@ -15,8 +15,6 @@ function GrubPageForm() {
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedGrub, setSelectedGrub] = useState(null);
-    const [isEditing, setIsEditing] = useState(!exampleData);
-    // const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
     const [errors, setErrors] = useState({});
 
     const [form, setForm] = useState({
@@ -57,7 +55,6 @@ function GrubPageForm() {
             return
         }
         e.preventDefault();
-        setIsEditing(false)
 
         const { name, servingUnit, servingSize, calories, protein, fats } = form
         const { carbs, sugar, company, description } = form
@@ -88,7 +85,6 @@ function GrubPageForm() {
     }
 
     const handleCancelBtn = () => {
-        setIsEditing(false)
         setForm({
             name: exampleData?.name || "",
             description: exampleData?.description,
@@ -102,10 +98,6 @@ function GrubPageForm() {
             company: exampleData?.company,
             userId: exampleData?.userId || 1
         });
-    };
-
-    const handleUpdateBtn = () => {
-        setIsEditing(true);
     };
 
     useEffect(() => {
@@ -139,7 +131,15 @@ function GrubPageForm() {
                     BACK
                 </button>
 
-                {isEditing ? (
+                <div className="grubPageForm_hFlex">
+                    <button
+                        className="back_btn blue"
+                        type="button"
+                        onClick={handleCancelBtn}
+                    >
+                        RESET
+                    </button>
+
                     <button
                         className="back_btn green"
                         type="button"
@@ -148,19 +148,11 @@ function GrubPageForm() {
                     >
                         SAVE
                     </button>
-                ) : (
-                    <button
-                        className="back_btn blue"
-                        type="button"
-                        onClick={handleUpdateBtn}>
-                        UPDATE
-                    </button>
-                )}
+                </div>
             </div>
 
 
             <div className="grub_page_form_grid">
-
                 <label style={{ display: 'inline-flex' }}>
                     {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
                 </label>
@@ -170,7 +162,6 @@ function GrubPageForm() {
                     onChange={updateSetForm}
                     placeholder="enter name"
                     value={form.name || ""}
-                    readOnly={!isEditing}
                 />
 
                 <div>
@@ -180,7 +171,6 @@ function GrubPageForm() {
                         onChange={updateSetForm}
                         placeholder="enter serving size"
                         value={form.servingSize || ""}
-                        readOnly={!isEditing}
                     />
                 </div>
                 <select
@@ -196,9 +186,6 @@ function GrubPageForm() {
                     <option value="grams">Grams</option>
                 </select>
 
-
-
-
                 <label style={{ display: 'inline-flex' }}>
                     {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
                 </label>
@@ -208,7 +195,6 @@ function GrubPageForm() {
                     onChange={updateSetForm}
                     placeholder="enter calories"
                     value={form.calories || ""}
-                    readOnly={!isEditing}
                 />
 
                 <div>
@@ -223,7 +209,6 @@ function GrubPageForm() {
                             onChange={updateSetForm}
                             placeholder="enter protein"
                             value={form.protein || ""}
-                            readOnly={!isEditing}
                         />
                     </div>
 
@@ -238,7 +223,6 @@ function GrubPageForm() {
                             onChange={updateSetForm}
                             placeholder="enter fats"
                             value={form.fats || ""}
-                            readOnly={!isEditing}
                         />
                     </div>
 
@@ -253,7 +237,6 @@ function GrubPageForm() {
                             onChange={updateSetForm}
                             placeholder="enter carbs"
                             value={form.carbs || ""}
-                            readOnly={!isEditing}
                         />
                     </div>
 
@@ -268,7 +251,6 @@ function GrubPageForm() {
                             onChange={updateSetForm}
                             placeholder="enter sugar"
                             value={form.sugar || ""}
-                            readOnly={!isEditing}
                         />
                     </div>
                 </div>
@@ -283,7 +265,6 @@ function GrubPageForm() {
                     onChange={updateSetForm}
                     placeholder="enter company name"
                     value={form.company || ""}
-                    readOnly={!isEditing}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
@@ -294,22 +275,18 @@ function GrubPageForm() {
                     onChange={updateSetForm}
                     placeholder="enter description"
                     value={form.description || ""}
-                    readOnly={!isEditing}
                 />
 
 
                 <div >
-                    {exampleData && (
-                        <button
-                            className="back_btn red"
-                            type="button"
-                            onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
-                        >
-                            {isEditing ? "CANCEL" : "DELETE"}
-                        </button>
-                    )}
+                    <button
+                        className="back_btn red"
+                        type="button"
+                        onClick={handleDeleteBtn}
+                    >
+                        DELETE
+                    </button>
                 </div>
-
             </div>
 
             {showDeletetModal && (
@@ -318,42 +295,9 @@ function GrubPageForm() {
                     onSubmit={handleDeleteBtn}
                     grub={selectedGrub}
                 />
-            )
-            }
-
+            )}
         </div>
-
     );
 }
 
 export default GrubPageForm;
-
-
-
-
-{/* <button
-type="submit"
-// disabled={hasError()}
-onClick={handleSubmit}
-className={`formBtn submitButton ${!hasError() ? 'enabledButton' : ''}`}
->
-Create Grub
-</button>
-
-
-<br />
-<button
-type="cancel"
-onClick={handleCancel}
-className="formBtn"
->
-Cancel
-</button>
-<br />
-<button
-type="cancel"
-onClick={handleDeleteBtn}
-className="formBtn"
->
-DELETE
-</button> */}

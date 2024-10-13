@@ -1,8 +1,5 @@
 /* grubPage.css */
 
-body {
-    background: lightpink;
-}
 
 .grub_page_grid{
     display: grid;
@@ -10,7 +7,6 @@ body {
     padding: 0 5px;
     border: 2px black solid;
     max-width: 1100px;
-    background-color: orange;
     gap: 2rem;
 
     /* min-height: 400px; */
