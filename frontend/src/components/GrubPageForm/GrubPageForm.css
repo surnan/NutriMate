@@ -1,17 +1,6 @@
 /* grubPageForm.css */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    /* border: 2px red solid; */
-    /* background-color: blueviolet; */
-}
 
-body {
-    background: lightpink;
-}
 
 input, textarea {
     padding: 1rem;
@@ -24,18 +13,28 @@ textarea {
     resize: none; 
 }
 
+.grub_page_form_grid select, 
+.grub_page_form_grid input {
+    width: 8rem;
+    text-align: center;
+}
 
 .grub_page_form_grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 0 5px;
-    border: 2px black solid;
     max-width: 1100px;
-    background-color: orange;
     gap: 2rem;
+    margin: auto;
+    margin-top: 30px;
+
 }
 
-.grub_page_form_grid > :nth-child(odd){
+.grub_page_form_grid > :nth-child(1),
+.grub_page_form_grid > :nth-child(3),
+.grub_page_form_grid > :nth-child(5),
+.grub_page_form_grid > :nth-child(8),
+.grub_page_form_grid > :nth-child(10){
     display: grid;
     align-items: center;
     justify-content: right;
@@ -44,15 +43,32 @@ textarea {
 
 .grub_page_form_grid > :nth-child(4){
     display: grid;
-    align-items: center;
     justify-content: right;
-    height: 8rem;
-    margin-bottom: 1rem
+    align-items: center;
+    background-color: beige;
+}
+
+.grub_page_form_grid > :nth-child(7){
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 10rem;
+}
+
+
+.grub_page_form_grid > :nth-child(7){
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    /* background-color: aqua; */
+    /* border: 3px red dashed; */
 }
 
 .grub_page_btn_grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     padding: 0 5px;
     border: 2px black solid;
     max-width: 1100px;
@@ -86,6 +102,12 @@ textarea {
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
+}
+.grubVflex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .red {background-color: red}
