@@ -16,7 +16,7 @@ function WeightCard({ weight }) {
       <p><strong>Date:</strong> {formattedDate}</p>
       <p><strong>Current Wt:</strong> {current}</p>
       <br/>
-      <p><strong>Username:</strong> {User?.username}</p>
+      <p><strong>User Email:</strong> {User?.email}</p>
     </div>
   );
 }
