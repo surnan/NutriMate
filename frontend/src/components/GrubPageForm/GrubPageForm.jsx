@@ -1,7 +1,7 @@
 // frontend/src/componenets/GrubPageForm/GrubPageForm.jsx
 import "./GrubPageForm.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk } from "../../redux/grubs"
 import DeleteGrubModal from '../DeleteGrubModal'
@@ -11,6 +11,7 @@ function GrubPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
+    const sessionUser = useSelector((state) => state.session.user);
     const { newGrub, exampleData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
@@ -28,7 +29,7 @@ function GrubPageForm() {
         sugar: exampleData?.sugar || '',
         company: exampleData?.company || '',
         description: exampleData?.description || '',
-        userId: exampleData?.userId || 1
+        userId: exampleData?.userId || sessionUser?.id || 1
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -45,16 +46,17 @@ function GrubPageForm() {
         navigate(-1)
     };
 
-    const handleBackBtn = () => {navigate(-1)};
+    const handleBackBtn = () => { navigate(-1) };
 
     const handleSubmit = async (e) => {
+        console.log("====> hasErrors ==> ", hasError())
         if (hasError()) {
             return
         }
         e.preventDefault();
 
         const { name, servingUnit, servingSize, calories, protein, fats } = form
-        const { carbs, sugar, company, description } = form
+        const { carbs, sugar, company, description, userId } = form
 
         const body = {
             id: parseInt(exampleData?.id),
@@ -62,15 +64,16 @@ function GrubPageForm() {
             servingUnit,
             servingSize: parseInt(servingSize),
             calories: parseInt(calories),
-            protein: parseInt(protein),
-            fats: parseInt(fats),
-            carbs: parseInt(carbs),
-            sugar: parseInt(sugar),
-            company,
-            description,
-            userId: 1,
+            protein: parseInt(protein) || 0,
+            fats: parseInt(fats) || 0,
+            carbs: parseInt(carbs) || 0,
+            sugar: parseInt(sugar) || 0,
+            company: company || "",
+            description: description || "",
+            userId: parseInt(userId) || 1,
         }
 
+        console.log("=====> body ==> ", body)
         try {
             const result = newGrub
                 ? await dispatch(updateGrubsOneThunk({ body }))
@@ -101,13 +104,50 @@ function GrubPageForm() {
         const newErrors = {};
         const allKeys = ["name", "servingUnit", "servingSize", "calories", "protein", "fats", "carbs", "sugar", "company", "description"];
 
-        allKeys.forEach((key) => {
+        const mandatory = ["name", "servingUnit", "servingSize", "calories"];
+        const minZero = ["protein", "fats", "carbs", "sugar"]
+        const minOne = ["servingSize", "calories"]
+        const optionalMinZero = ["protein", "fats", "carbs", "sugar"]
+
+        mandatory.forEach((key) => {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
             }
         });
+
+        minZero.forEach(key => {
+            if (isNaN(form[key])) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
+                return
+            }
+            if (form[key] < 0) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} min is 0`;
+            }
+        })
+
+        minOne.forEach(key => {
+            if (isNaN(form[key])) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
+                return
+            }
+            if (form[key] < 1) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} min is 1`;
+            }
+        })
+
+        optionalMinZero.forEach(key => {
+            if (isNaN(form[key])) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
+                return
+            }
+            if (form[key] < 0) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} min is 0`;
+            }
+        })
+
         setErrors(newErrors);
     }, [form])
+
 
 
     const updateSetForm = (e) => {
@@ -118,10 +158,11 @@ function GrubPageForm() {
     return (
         <div>
             <h1>GrubForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="grubPageForm_hFlex">
                 <button
-                    className="back_btn"
+                    className="orange"
                     type="button"
                     onClick={handleBackBtn}
                 >
@@ -130,7 +171,7 @@ function GrubPageForm() {
 
                 <div className="grubPageForm_hFlex">
                     <button
-                        className="back_btn blue"
+                        className="blue"
                         type="button"
                         onClick={handleCancelBtn}
                     >
@@ -138,7 +179,7 @@ function GrubPageForm() {
                     </button>
 
                     <button
-                        className="back_btn green"
+                        className="green"
                         type="button"
                         onClick={handleSubmit}
                         disabled={hasError()}
@@ -162,27 +203,37 @@ function GrubPageForm() {
                 />
 
                 <div>
+                    {errors.servingSize && <span style={{ color: 'red' }}>{errors.servingSize}&nbsp;&nbsp;</span>}
+                    <p>
+                        Per Serving
+                    </p>
                     <input
                         type="Number"
                         name="servingSize"
                         onChange={updateSetForm}
-                        placeholder="enter serving size"
+                        placeholder="Quantity"
                         value={form.servingSize || ""}
                     />
                 </div>
-                <select
-                    name="servingUnit"
-                    onChange={updateSetForm}
-                    value={form.servingUnit || ""}
-                >
-                    <option value="">Select Serving Unit</option>
-                    <option value="each">Each</option>
-                    <option value="Table Spoon">Table Spoon</option>
-                    <option value="Tea Spoon">Tea Spoon</option>
-                    <option value="oz">Oz</option>
-                    <option value="grams">Grams</option>
-                </select>
-
+                <div>
+                    <select
+                        name="servingUnit"
+                        onChange={updateSetForm}
+                        value={form.servingUnit || ""}
+                        selectedoption="each"
+                    >
+                        <option value="">Quantity Type</option>
+                        <option value="each">each</option>
+                        <option value="Table Spoon">tablespoon</option>
+                        <option value="Tea Spoon">teaspoon</option>
+                        <option value="oz">ounces</option>
+                        <option value="grams">grams</option>
+                        <option value="cups">grams</option>
+                        <option value="bowls">grams</option>
+                        <option value="grams">grams</option>
+                    </select>
+                    {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit}&nbsp;&nbsp;</span>}
+                </div>
                 <label style={{ display: 'inline-flex' }}>
                     {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
                 </label>
@@ -198,7 +249,7 @@ function GrubPageForm() {
                     {/* protein */}
                     <div className="grubVflex">
                         <label style={{ display: 'inline-flex' }}>
-                            Protein
+                            Protein (g)
                         </label>
                         <input
                             type="Number"
@@ -207,12 +258,13 @@ function GrubPageForm() {
                             placeholder="enter protein"
                             value={form.protein || ""}
                         />
+                        {errors.protein && <p style={{ color: 'red' }}>{errors.protein}&nbsp;&nbsp;</p>}
                     </div>
 
                     {/* fats */}
                     <div className="grubVflex">
                         <label style={{ display: 'inline-flex' }}>
-                            Fats
+                            Fats (g)
                         </label>
                         <input
                             type="Number"
@@ -221,12 +273,13 @@ function GrubPageForm() {
                             placeholder="enter fats"
                             value={form.fats || ""}
                         />
+                        {errors.fats && <p style={{ color: 'red' }}>{errors.fats}&nbsp;&nbsp;</p>}
                     </div>
 
                     {/* carbs */}
                     <div className="grubVflex">
                         <label style={{ display: 'inline-flex' }}>
-                            Carbs
+                            Carbs (g)
                         </label>
                         <input
                             type="Number"
@@ -235,12 +288,13 @@ function GrubPageForm() {
                             placeholder="enter carbs"
                             value={form.carbs || ""}
                         />
+                        {errors.carbs && <p style={{ color: 'red' }}>{errors.carbs}&nbsp;&nbsp;</p>}
                     </div>
 
                     {/* sugar */}
                     <div className="grubVflex">
                         <label style={{ display: 'inline-flex' }}>
-                            Sugar
+                            Sugar (g)
                         </label>
                         <input
                             type="Number"
@@ -249,12 +303,13 @@ function GrubPageForm() {
                             placeholder="enter sugar"
                             value={form.sugar || ""}
                         />
+                        {errors.sugar && <p style={{ color: 'red' }}>{errors.sugar}&nbsp;&nbsp;</p>}
                     </div>
                 </div>
 
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.company && <span style={{ color: 'red' }}>{errors.company}&nbsp;&nbsp;</span>} Company
+                    Company
                 </label>
                 <input
                     type="text"
@@ -265,7 +320,7 @@ function GrubPageForm() {
                 />
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description
+                    Description
                 </label>
                 <textarea
                     name="description"
@@ -277,7 +332,7 @@ function GrubPageForm() {
 
                 <div >
                     <button
-                        className="back_btn red"
+                        className="red"
                         type="button"
                         onClick={handleDeleteBtn}
                     >
