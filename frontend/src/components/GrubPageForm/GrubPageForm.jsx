@@ -47,9 +47,9 @@ function GrubPageForm() {
         navigate(-1)
     };
 
-    const handleBackBtn = () => { 
+    const handleBackBtn = () => {
         console.log("==> handleBackBtn")
-        navigate(-1) 
+        navigate(-1)
     };
 
     const handleSubmit = async (e) => {
@@ -173,34 +173,37 @@ function GrubPageForm() {
                     readOnly={!isEditing}
                 />
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit} &nbsp;&nbsp; </span>}Serving Unit
-                </label>
-                <input
-                    type="text"
+                <div>
+                    <input
+                        type="Number"
+                        name="servingSize"
+                        onChange={updateSetForm}
+                        placeholder="enter serving size"
+                        value={form.servingSize || ""}
+                        readOnly={!isEditing}
+                    />
+                </div>
+                <select
                     name="servingUnit"
                     onChange={updateSetForm}
-                    placeholder="enter serving Unit"
                     value={form.servingUnit || ""}
-                    readOnly={!isEditing}
-                />
+                >
+                    <option value="">Select Serving Unit</option>
+                    <option value="each">Each</option>
+                    <option value="Table Spoon">Table Spoon</option>
+                    <option value="Tea Spoon">Tea Spoon</option>
+                    <option value="oz">Oz</option>
+                    <option value="grams">Grams</option>
+                </select>
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.servingSize && <span style={{ color: 'red' }}>{errors.servingSize}&nbsp;&nbsp;</span>} Serving Size
-                </label>
-                <input
-                    type="text"
-                    name="servingSize"
-                    onChange={updateSetForm}
-                    placeholder="enter serving size"
-                    value={form.servingSize || ""}
-                    readOnly={!isEditing}
-                />
+
+
+
                 <label style={{ display: 'inline-flex' }}>
                     {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
                 </label>
                 <input
-                    type="text"
+                    type="Number"
                     name="calories"
                     onChange={updateSetForm}
                     placeholder="enter calories"
@@ -208,53 +211,68 @@ function GrubPageForm() {
                     readOnly={!isEditing}
                 />
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.protein && <span style={{ color: 'red' }}>{errors.protein}&nbsp;&nbsp;</span>} Protein
-                </label>
-                <input
-                    type="text"
-                    name="protein"
-                    onChange={updateSetForm}
-                    placeholder="enter protein"
-                    value={form.protein || ""}
-                    readOnly={!isEditing}
-                />
+                <div>
+                    {/* protein */}
+                    <div className="grubVflex">
+                        <label style={{ display: 'inline-flex' }}>
+                            Protein
+                        </label>
+                        <input
+                            type="Number"
+                            name="protein"
+                            onChange={updateSetForm}
+                            placeholder="enter protein"
+                            value={form.protein || ""}
+                            readOnly={!isEditing}
+                        />
+                    </div>
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.fats && <span style={{ color: 'red' }}>{errors.fats}&nbsp;&nbsp;</span>} Fats
-                </label>
-                <input
-                    type="text"
-                    name="fats"
-                    onChange={updateSetForm}
-                    placeholder="enter fats"
-                    value={form.fats || ""}
-                    readOnly={!isEditing}
-                />
+                    {/* fats */}
+                    <div className="grubVflex">
+                        <label style={{ display: 'inline-flex' }}>
+                            Fats
+                        </label>
+                        <input
+                            type="Number"
+                            name="fats"
+                            onChange={updateSetForm}
+                            placeholder="enter fats"
+                            value={form.fats || ""}
+                            readOnly={!isEditing}
+                        />
+                    </div>
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.carbs && <span style={{ color: 'red' }}>{errors.carbs}</span>} Carbs
-                </label>
-                <input
-                    type="text"
-                    name="carbs"
-                    onChange={updateSetForm}
-                    placeholder="enter carbs"
-                    value={form.carbs || ""}
-                    readOnly={!isEditing}
-                />
+                    {/* carbs */}
+                    <div className="grubVflex">
+                        <label style={{ display: 'inline-flex' }}>
+                            Carbs
+                        </label>
+                        <input
+                            type="Number"
+                            name="carbs"
+                            onChange={updateSetForm}
+                            placeholder="enter carbs"
+                            value={form.carbs || ""}
+                            readOnly={!isEditing}
+                        />
+                    </div>
 
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.sugar && <span style={{ color: 'red' }}>{errors.sugar}&nbsp;&nbsp;</span>}Sugar
-                </label>
-                <input
-                    type="text"
-                    name="sugar"
-                    onChange={updateSetForm}
-                    placeholder="enter sugar"
-                    value={form.sugar || ""}
-                    readOnly={!isEditing}
-                />
+                    {/* sugar */}
+                    <div className="grubVflex">
+                        <label style={{ display: 'inline-flex' }}>
+                            Sugar
+                        </label>
+                        <input
+                            type="Number"
+                            name="sugar"
+                            onChange={updateSetForm}
+                            placeholder="enter sugar"
+                            value={form.sugar || ""}
+                            readOnly={!isEditing}
+                        />
+                    </div>
+                </div>
+
 
                 <label style={{ display: 'inline-flex' }}>
                     {errors.company && <span style={{ color: 'red' }}>{errors.company}&nbsp;&nbsp;</span>} Company
@@ -271,29 +289,28 @@ function GrubPageForm() {
                 <label style={{ display: 'inline-flex' }}>
                     {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description
                 </label>
-                <input
-                    type="text"
+                <textarea
                     name="description"
                     onChange={updateSetForm}
                     placeholder="enter description"
                     value={form.description || ""}
                     readOnly={!isEditing}
                 />
+
+
+                <div >
+                    {exampleData && (
+                        <button
+                            className="back_btn red"
+                            type="button"
+                            onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
+                        >
+                            {isEditing ? "CANCEL" : "DELETE"}
+                        </button>
+                    )}
+                </div>
+
             </div>
-
-            <div className="workout_page_btn_grid">
-                {exampleData && (
-                    <button
-                        className="back_btn red"
-                        type="button"
-                        onClick={isEditing ? handleCancelBtn : handleDeleteBtn}
-                    >
-                        {isEditing ? "CANCEL" : "DELETE"}
-                    </button>
-                )}
-            </div>
-
-
 
             {showDeletetModal && (
                 <DeleteGrubModal
@@ -313,7 +330,7 @@ export default GrubPageForm;
 
 
 
-            
+
 {/* <button
 type="submit"
 // disabled={hasError()}
