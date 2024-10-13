@@ -30,7 +30,7 @@ const GrubPage = () => {
 
   const somethingDifferent = (e, grub) => {
     e.preventDefault();
-    nav('/grubform', { state: { newGrub: true, exampleData: grub } });
+    nav('/grubform', { state: { newGrub: true, currentData: grub } });
   }
 
   const handleNewGrub = () => { nav('/grubform') }
