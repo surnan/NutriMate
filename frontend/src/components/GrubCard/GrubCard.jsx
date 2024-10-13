@@ -21,7 +21,6 @@ const GrubCard = ({ grub }) => {
         <p><strong>Fats:</strong> {fats}</p>
       </div>
       <p>{User?.email} </p>
-      <p>{description.length > 50 ? description.slice(0, 50) + "..." : description}</p>
     </div>
   );
 }
