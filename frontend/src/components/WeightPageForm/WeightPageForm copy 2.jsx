@@ -1,6 +1,6 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import "./WeightPageForm.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postWeightsOneThunk, updateWeightThunkById } from "../../redux/weight";
@@ -21,9 +21,11 @@ function WeightPageForm() {
     // const [clickedSubmitBtn, setClickedSubmitBtn] = useState(false);
     const [errors, setErrors] = useState({});
 
+    const formRef = useRef(null);
+
     const [form, setForm] = useState({
         id: exampleData?.id,
-        metricSystem: true,
+        metricSystem: exampleData?.metricSystem || false,
         start: exampleData?.start || '',
         goal: exampleData?.goal || '',
         current: exampleData?.current || '',
@@ -59,13 +61,13 @@ function WeightPageForm() {
         const { id, metricSystem, start, goal, current, day, userId } = form;
 
         const body = {
-            "id": parseInt(id),
-            "metricSystem": metricSystem || false,
-            "start": parseInt(start),
-            "goal": parseInt(goal),
-            "current": parseInt(current),
-            "day": day || Date.now(),
-            "userId": parseInt(userId),
+            id: parseInt(id),
+            metricSystem: metricSystem,
+            start: parseInt(start),
+            goal: parseInt(goal),
+            current: parseInt(current),
+            day: day || Date.now(),
+            userId: parseInt(userId),
         }
 
         try {
@@ -79,28 +81,6 @@ function WeightPageForm() {
     }
 
 
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
-    };
-
-    const handleCancelBtn = () => {
-        setIsEditing(false)
-        setForm({
-            metricSystem: exampleData?.metricSystem || false,
-            start: exampleData?.start || 0,
-            goal: exampleData?.goal || 0,
-            current: exampleData?.current || 0,
-            day: formatDate(exampleData?.day),
-            userId: exampleData?.userId || sessionUser.id
-        });
-        // navigate(-1);  // This navigateigates back to the previous page
-    };
-
-    const handleUpdateBtn = () => {
-        setIsEditing(true);
-    };
 
     useEffect(() => {
         const newErrors = {};
@@ -115,23 +95,41 @@ function WeightPageForm() {
         setErrors(newErrors);
     }, [form])
 
-
     const updateSetForm = (e) => {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
     const toggleEditMode = () => {
-        setIsEditing(prev => !prev); // Toggles editing mode
-    };
+        setIsEditing(prev => !prev)
+    }
 
-    console.log("=====> exampleData.day ", exampleData.day)
+    // const handleCancelBtn = () => {
+    //     setIsEditing(false)
+    //     setForm({
+    //         metricSystem: exampleData?.metricSystem || false,
+    //         start: exampleData?.start || 0,
+    //         goal: exampleData?.goal || 0,
+    //         current: exampleData?.current || 0,
+    //         day: exampleData?.day || Date.now() || '2023-11-01T00:00:00.000Z',
+    //         userId: exampleData?.userId || sessionUser.id
+    //     });
+    //     // navigate(-1);  // This navigateigates back to the previous page
+    // };
+
+    // const handleUpdateBtn = () => {
+    //     setIsEditing(true);
+    // };
+
+
+
     return (
         <>
             <h1>WeightPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
-            <div className="weightPageForm_hFlex">
+            {/* <div className="weightPageForm_hFlex"> */}
+            <form className="weightPageForm_hFlex">
                 <button
                     className="back_btn"
                     type="button"
@@ -166,7 +164,8 @@ function WeightPageForm() {
                 >
                     {isEditing ? 'SAVE' : 'EDIT'}
                 </button>
-            </div>
+            {/* </div> */}
+            </form>
 
             <div className="weight_page_form_grid">
                 <label style={{ display: 'inline-flex' }}>
@@ -228,7 +227,7 @@ function WeightPageForm() {
                     name="day"
                     onChange={updateSetForm}
                     placeholder="Please enter your goal weight"
-                    value={formatDate(form.day)}
+                    value={form.day || Date.now()}
                     readOnly={!isEditing}
                 />
             </div>
