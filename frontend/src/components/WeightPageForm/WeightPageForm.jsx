@@ -1,7 +1,7 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
 import "./WeightPageForm.css";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postWeightsOneThunk, updateWeightThunkById } from "../../redux/weight";
 import DeleteWeightModal from '../DeleteWeightModal'
@@ -11,6 +11,8 @@ function WeightPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
+    const sessionUser = useSelector((state) => state.session.user);
+
     const { newWeight, exampleData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
@@ -25,8 +27,8 @@ function WeightPageForm() {
         start: exampleData?.start || '',
         goal: exampleData?.goal || '',
         current: exampleData?.current || '',
-        day: exampleData?.day || '2023-11-01T00:00:00.000Z',
-        userId: exampleData?.userId || 1
+        day: exampleData?.day || Date.now(),
+        userId: exampleData?.userId || sessionUser.id
     });
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
@@ -83,8 +85,8 @@ function WeightPageForm() {
             start: exampleData?.start || 0,
             goal: exampleData?.goal || 0,
             current: exampleData?.current || 0,
-            day: exampleData?.day || '2023-11-01T00:00:00.000Z',
-            userId: exampleData?.userId || 1
+            day: exampleData?.day || Date.now() || '2023-11-01T00:00:00.000Z',
+            userId: exampleData?.userId || sessionUser.id
         });
         // navigate(-1);  // This navigateigates back to the previous page
     };
@@ -115,6 +117,7 @@ function WeightPageForm() {
     return (
         <>
             <h1>WeightPageForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="weightPageForm_hFlex">
                 <button
