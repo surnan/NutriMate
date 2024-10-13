@@ -3,17 +3,9 @@
 .workout_page_grid{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding: 0 5px;
-    border: 2px black solid;
     max-width: 1100px;
-    background-color: orange;
+    padding: 5px;
     gap: 2rem;
-
-    /* min-height: 400px; */
-    /* grid-auto-rows: minmax(40px, auto); setting min & maximum heights */
-    /* grid-auto-rows: 40px; */
-
-    row-gap: 1rem;
     column-gap: 1rem;
 }
 
@@ -29,3 +21,5 @@
     height: 2rem;
     border-radius: 5px;
 }
+
+.workout_btn_div{padding: 30px}
