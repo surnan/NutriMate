@@ -1,14 +1,5 @@
 /* frontend/src/components/DeleteWeightModal/DeleteWeightModal.css */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-    /* border: 2px red solid; */
-    /* background-color: blueviolet; */
-}
-
 .splash_grid{
     margin: auto;
     display: grid;
@@ -57,19 +48,10 @@
     border: black solid 2px;
     margin-right: 10px;
     cursor: pointer;
-    /* margin: auto; */
     margin-left: 20px;
     width: 100%;
     border-radius: 5px;
     height: 3rem;
     width: 20rem;
-
-    /* min-height: 400px; */
-    /* grid-auto-rows: minmax(20px, auto);*/ /* setting min & maximum heights */
-    /* row-gap: 1rem;
-    column-gap: 1rem;  */
 }
 
-.blue {background-color: rgba(0, 115, 255, 0.665)}
-.green {background-color: rgba(0, 247, 255, 0.665)}
-.orange {background-color: rgba(255, 191, 0, 0.665)}
