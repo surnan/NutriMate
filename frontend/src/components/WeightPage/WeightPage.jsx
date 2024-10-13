@@ -15,7 +15,7 @@ const WeightPage = () => {
   const weightsArr = useSelector(state => state.weights.allWeights);
 
   const filteredAndSortedArray = weightsArr
-  // .filter(weight => weight.User.id === sessionUser.id)
+  .filter(weight => weight.userId === sessionUser.id)
   .sort((a, b) => new Date(a.day) - new Date(b.day));
 
   console.log("sessionUser = ", sessionUser)
