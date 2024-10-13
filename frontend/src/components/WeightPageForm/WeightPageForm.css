@@ -13,7 +13,7 @@ body {
     background: lightpink;
 }
 
-input, textarea {
+input {
     padding: 1rem;
     border-radius: 8px;
 }

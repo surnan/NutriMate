@@ -35,6 +35,10 @@ input {
     width: 15rem;
 }
 
+label {
+    height: 2rem;
+}
+
 .clickable {cursor: pointer}
 
 .errorMessage {color: red}
