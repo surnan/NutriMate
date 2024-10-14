@@ -4,7 +4,7 @@ import "./GrubCard.css";
 const GrubCard = ({ grub }) => {
 
   const { name, servingUnit, servingSize, calories } = grub
-  const { User, company, description, userId, protein, carbs, fats } = grub
+  const { User, company, protein, carbs, fats } = grub
 
 
   return (

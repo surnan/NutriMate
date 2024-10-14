@@ -3,7 +3,7 @@ import "./WorkoutCard.css";
 
 function WorkoutCard({ workout }) {
 
-  const { name, description, userId, User } = workout
+  const { name, description, User } = workout
 
   return (
     <>
