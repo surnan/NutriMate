@@ -83,7 +83,7 @@ router.get('/:workoutId', async (req, res, next) => {
 });
 
 
-router.delete('/:workoutId', async (req, res, next) => {
+router.delete('/:workoutId', requireAuth, async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
         const currentWorkout = await Workout.findByPk(workoutId)
@@ -100,7 +100,7 @@ router.delete('/:workoutId', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
     try {
         const {name, description, userId} = req.body
         const newWorkout = await Workout.create(
@@ -121,7 +121,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:workoutId', async (req, res, next) => {
+router.put('/:workoutId', requireAuth, async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
         const currentWorkout = await Workout.findByPk(workoutId)
