@@ -72,7 +72,7 @@ router.get('/:workoutId', async (req, res, next) => {
 });
 
 //delete
-router.delete('/:workoutId', async (req, res, next) => {
+router.delete('/:workoutId', requireAuth, async (req, res, next) => {
     try {
         const workoutId = parseInt(req.params.workoutId)
         const currentWorkout = await Weight.findByPk(workoutId)
@@ -91,7 +91,7 @@ router.delete('/:workoutId', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
     try {
         const {metricSystem, start, goal, current, day, userId} = req.body
         const newWorkout = await Weight.create(
@@ -115,7 +115,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.put('/:weightId', async (req, res, next) => {
+router.put('/:weightId', requireAuth, async (req, res, next) => {
     try {
         const weightId = req.params.weightId
         const currentWeight = await Weight.findByPk(weightId)
