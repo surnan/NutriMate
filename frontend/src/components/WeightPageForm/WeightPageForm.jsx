@@ -13,20 +13,20 @@ function WeightPageForm() {
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
 
-    const { newWeight, exampleData } = location.state || {};
+    const { newWeight, currentData } = location.state || {};
 
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWeight, setSelectedWeight] = useState(null);
     const [errors, setErrors] = useState({});
 
     const [form, setForm] = useState({
-        id: exampleData?.id,
-        metricSystem: exampleData?.metricSystem || false,
-        start: exampleData?.start || '',
-        goal: exampleData?.goal || '',
-        current: exampleData?.current || '',
-        day: exampleData?.day || Date.now(),
-        userId: exampleData?.userId || sessionUser.id
+        id: currentData?.id,
+        metricSystem: currentData?.metricSystem || false,
+        start: currentData?.start || '',
+        goal: currentData?.goal || '',
+        current: currentData?.current || '',
+        day: currentData?.day || Date.now(),
+        userId: currentData?.userId || sessionUser.id
     });
 
     const updateSetForm = (e) => {
@@ -60,11 +60,11 @@ function WeightPageForm() {
 
     //Delete Button & Modal -- start
     const handleDeleteBtn = () => {
-        if (!exampleData?.id) {
-            alert('Record cannot be deleted because it has not been saved yet.');
+        if (!currentData?.id) {
+            alert('Can not delete this new record because it has not been saved to database');
             return;
         }
-        setSelectedWeight(exampleData);
+        setSelectedWeight(currentData);
         setShowDeletetModal(true)
     }
 
@@ -108,12 +108,12 @@ function WeightPageForm() {
     }
     const handleResetBtn = () => {
         setForm({
-            metricSystem: exampleData?.metricSystem || false,
-            start: exampleData?.start || '',
-            goal: exampleData?.goal || '',
-            current: exampleData?.current || '',
-            day: formatDate(exampleData?.day),
-            userId: exampleData?.userId || sessionUser.id
+            metricSystem: currentData?.metricSystem || false,
+            start: currentData?.start || '',
+            goal: currentData?.goal || '',
+            current: currentData?.current || '',
+            day: formatDate(currentData?.day),
+            userId: currentData?.userId || sessionUser.id
         });
         // navigate(-1);  // This navigateigates back to the previous page
     };

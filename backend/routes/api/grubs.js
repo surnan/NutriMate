@@ -74,7 +74,7 @@ router.get('/:grubId', async (req, res, next) => {
 });
 
 
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
     try {
         const {name, description} = req.body
         const {servingSize, servingUnit, calories, protein, fats} = req.body
@@ -110,7 +110,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.delete('/:grubId', async (req, res, next) => {
+router.delete('/:grubId', requireAuth, async (req, res, next) => {
     try {
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await Grub.findByPk(grubId)
@@ -128,7 +128,7 @@ router.delete('/:grubId', async (req, res, next) => {
 })
 
 
-router.put('/:grubId', async (req, res, next) => {
+router.put('/:grubId', requireAuth, async (req, res, next) => {
     try {
         const grubId = parseInt(req.params.grubId)
         const currentGrub = await Grub.findByPk(grubId)
