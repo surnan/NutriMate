@@ -102,7 +102,6 @@ function GrubPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-        const allKeys = ["name", "servingUnit", "servingSize", "calories", "protein", "fats", "carbs", "sugar", "company", "description"];
 
         const mandatory = ["name", "servingUnit", "servingSize", "calories"];
         const minZero = ["protein", "fats", "carbs", "sugar"]
@@ -220,7 +219,6 @@ function GrubPageForm() {
                         name="servingUnit"
                         onChange={updateSetForm}
                         value={form.servingUnit || ""}
-                        selectedoption="each"
                     >
                         <option value="">Quantity Type</option>
                         <option value="each">each</option>
@@ -228,9 +226,8 @@ function GrubPageForm() {
                         <option value="Tea Spoon">teaspoon</option>
                         <option value="oz">ounces</option>
                         <option value="grams">grams</option>
-                        <option value="cups">grams</option>
-                        <option value="bowls">grams</option>
-                        <option value="grams">grams</option>
+                        <option value="cups">cups</option>
+                        <option value="bowls">bowls</option>
                     </select>
                     {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit}&nbsp;&nbsp;</span>}
                 </div>

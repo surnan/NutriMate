@@ -24,6 +24,9 @@
 
 
 .signup_hGrid label {text-align: right}
-.signup_hGrid button {width: 75%}
+.signup_hGrid button {
+    width: 75%;
+    margin: auto;
+}
 
 
