@@ -13,7 +13,8 @@
 
 .login_hGrid > * {
     display: grid;
-    align-items: center
+    align-items: center;
+    justify-content: center;
 }
 
 .login_hGrid > :nth-child(2), 
@@ -23,4 +24,7 @@
 
 .login_hGrid label {text-align: right}
 
-.login_hGrid button {width: 75%}
+.login_hGrid button {
+    width: 75%;
+    margin: auto;
+}
