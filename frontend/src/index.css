@@ -26,9 +26,13 @@ button {
     border-radius: 10px;
     height: 3rem;
     min-width: 6rem;
-    color: white;
     cursor: pointer;
+    color: white;
 }
+
+button:active {filter: brightness(1.33)}
+select, input, label {height: 2rem}
+input {padding-left: 1rem}
 
 .max_HFlex {
     display: flex;
@@ -39,16 +43,11 @@ button {
 }
 
 
-select, input, label {height: 2rem}
-input {padding-left: 1rem}
-
 .clickable {cursor: pointer}
 .errorMessage {color: red}
 .hidden {display: none}
-button:active {filter: brightness(1.33)}
 .center {text-align: center}
 .shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
-
 .blue {background-color: rgba(0, 115, 255, 0.665)}
 .green {background-color: green}
 .bluegreen {background-color: rgba(0, 247, 255, 0.665)}
@@ -56,8 +55,8 @@ button:active {filter: brightness(1.33)}
 .ltskyblue {background-color: lightskyblue}
 .orange {background-color: orange}
 .pink {background-color: pink}
-
-
+.ltYellow {background-color: lightyellow}
+.yellow {background-color: yellow}
 
 /* #root {
     max-width: 1200px;
