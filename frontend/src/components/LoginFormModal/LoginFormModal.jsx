@@ -79,7 +79,7 @@ function LoginFormModal() {
         <button
           className="ltcoral"
           type="button"
-          onClick={(e) => handleLogin(e, "user2@user.io", "password3")}
+          onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
         >
           Demo 2
         </button>
