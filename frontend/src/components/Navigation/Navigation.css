@@ -38,18 +38,16 @@
     width: 75%;
 }
 
-.h-grid{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.hFlex {
+.nav_flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 10px;
+    max-width: 1200px;
+    min-width: 600px;
+    height: 75px;
+    margin: auto;
+    padding: 35px;
 }
 
 .profile-dropdown {

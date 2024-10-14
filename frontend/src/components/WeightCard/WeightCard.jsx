@@ -12,7 +12,7 @@ function WeightCard({ weight }) {
   });
 
   return (
-    <div className="weight_card_grid">
+    <div className="weight_card_grid shadow">
       <p><strong>Date:</strong> {formattedDate}</p>
       <p><strong>Current Wt:</strong> {current}</p>
       <br/>
