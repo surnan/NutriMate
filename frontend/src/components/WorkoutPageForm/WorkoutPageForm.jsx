@@ -99,7 +99,7 @@ function WorkoutPageForm() {
     }
 
     return (
-        <>
+        <div className="mainBodyStyle">
             <h1>WorkoutPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
@@ -173,7 +173,7 @@ function WorkoutPageForm() {
                         workout={selectedWorkout}
                     />
                 )}
-        </>
+        </div>
     );
 }
 export default WorkoutPageForm;
