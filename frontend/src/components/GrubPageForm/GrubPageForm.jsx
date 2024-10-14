@@ -40,7 +40,7 @@ function GrubPageForm() {
             alert('Can not delete this new record because it has not been saved to database');
             return;
         }
-        setSelectedWeight(currentData);
+        setSelectedGrub(currentData);
         setShowDeletetModal(true)
     }
 
