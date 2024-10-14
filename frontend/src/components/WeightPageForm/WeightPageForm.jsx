@@ -120,8 +120,8 @@ function WeightPageForm() {
 
     return (
         <div className="mainBodyStyle">
-            <h1>WeightPageForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3>
+            {/* <h1>WeightPageForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3> */}
 
             <div className="max_HFlex">
                 <button
