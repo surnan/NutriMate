@@ -9,11 +9,11 @@
 }
 
 .profile_btn{
+    color: black;
     margin: 0;
     box-shadow: none;
     border-radius: 10px;
     height: 2rem;
-    padding: 0 2rem;
 }
 
 .profile_dropdown_grid{
@@ -50,14 +50,6 @@
     align-items: center;
     position: relative;
     padding: 10px;
-}
-
-.ltYellow {
-    background-color: lightyellow;
-}
-
-.yellow {
-    background-color: yellow;
 }
 
 .profile-dropdown {
