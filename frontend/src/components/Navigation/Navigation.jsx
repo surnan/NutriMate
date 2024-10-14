@@ -8,7 +8,7 @@ function Navigation() {
 
 
   return (
-    <div className="hFlex yellow">
+    <div className="nav_flex ltskyblue">
       {/* <NavLink to="/">Home</NavLink> */}
       <NavLink to="/">Home</NavLink>
 

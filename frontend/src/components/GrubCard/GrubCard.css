@@ -12,7 +12,6 @@
 }
 
 .grub_card_grid > :first-child {
-    background-color: aqua;
     display: grid;
     font-size: 1.5rem;
 }
@@ -24,7 +23,6 @@
 
 .grub_card_grid > :nth-child(3),
 .grub_card_grid > :nth-child(2){
-    background-color: aqua;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }

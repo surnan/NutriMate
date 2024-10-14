@@ -6,14 +6,8 @@
     box-sizing: border-box;
     font-family: sans-serif;
     /* border: 2px red solid; */
-    background-color: white;
 }
 
-body {
-    margin-bottom: 100px;
-    max-width: 1200px;
-    margin: auto;
-}
 
 .modal_css {
     text-align: center;
@@ -30,6 +24,17 @@ button {
     color: white;
 }
 
+input, textarea {
+    padding: 1rem;
+    border-radius: 8px;
+    width: 325px; 
+}
+
+textarea {
+    height: 125px;
+    resize: none; 
+}
+
 button:active {filter: brightness(1.33)}
 select, input, label {height: 2rem}
 input {padding-left: 1rem}
@@ -42,20 +47,37 @@ input {padding-left: 1rem}
     max-width: 1200px;
 }
 
+.mainBodyStyle {
+    background-color: rgb(206, 226, 236);
+    padding: 25px;
+    min-height: 100vw;
+    max-width: 1200px;
+    min-width: 600px;
+    margin: auto;
+}
 
 .clickable {cursor: pointer}
 .errorMessage {color: red}
 .hidden {display: none}
 .center {text-align: center}
 .shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
+.twenty_margin {margin: 20px}
+.twenty_padding {padding: 20px}
+
+
 .blue {background-color: rgba(0, 115, 255, 0.665)}
-.green {background-color: green}
 .bluegreen {background-color: rgba(0, 247, 255, 0.665)}
+.black {background-color: black}
+.black_font {color: black}
+.green {background-color: green}
 .ltcoral {background-color: lightcoral}
 .ltskyblue {background-color: lightskyblue}
+.ltltskyblue {background-color: rgba(135, 206, 250, 0.586)}
+.ltYellow {background-color: lightyellow}
 .orange {background-color: orange}
 .pink {background-color: pink}
-.ltYellow {background-color: lightyellow}
+.red {background-color: red}
+.red_font {color: red}
 .yellow {background-color: yellow}
 
 /* #root {
