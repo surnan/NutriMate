@@ -33,7 +33,7 @@ function WorkoutPageForm() {
             alert('Can not delete this new record because it has not been saved to database');
             return;
         }
-        setSelectedWeight(currentData);
+        setSelectedWorkout(currentData);
         setShowDeletetModal(true)
     }
 
@@ -156,13 +156,7 @@ function WorkoutPageForm() {
                     placeholder="Enter description"
                     value={form.description}
                 />
-                {showDeletetModal && (
-                    <DeleteWorkoutModal
-                        onClose={handleModalClose}
-                        onSubmit={handleDeleteBtn}
-                        workout={selectedWorkout}
-                    />
-                )}
+
             </div>
             
             <button
@@ -172,7 +166,13 @@ function WorkoutPageForm() {
             >
                 DELETE
             </button>
-
+            {showDeletetModal && (
+                    <DeleteWorkoutModal
+                        onClose={handleModalClose}
+                        onSubmit={handleDeleteBtn}
+                        workout={selectedWorkout}
+                    />
+                )}
         </>
     );
 }
