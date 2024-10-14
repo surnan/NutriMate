@@ -35,7 +35,7 @@ const WeightPage = () => {
 
   const somethingDifferent = (e, weight) => {
     e.preventDefault();
-    navigate('/weightform', { state: { newWeight: true, exampleData: weight } });
+    navigate('/weightform', { state: { newWeight: true, currentData: weight } });
   }
 
   const handleNewWeight = () => { navigate('/weightform') }

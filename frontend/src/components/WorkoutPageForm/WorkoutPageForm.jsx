@@ -29,7 +29,11 @@ function WorkoutPageForm() {
     const hasError = () => Object.keys(errors).length !== 0;
 
     const handleDeleteBtn = () => {
-        setSelectedWorkout(currentData);
+        if (!currentData?.id) {
+            alert('Can not delete this new record because it has not been saved to database');
+            return;
+        }
+        setSelectedWeight(currentData);
         setShowDeletetModal(true)
     }
 
