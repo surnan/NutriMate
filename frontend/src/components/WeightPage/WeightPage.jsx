@@ -42,7 +42,7 @@ const WeightPage = () => {
   const handleBackBtn = () => { navigate(-1) };
 
   return (
-    <>
+    <div className="mainBodyStyle">
       <h3>WeightPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">
@@ -61,9 +61,10 @@ const WeightPage = () => {
         </button>
 
       </div>
+
+      <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="weight_page_grid">
         {
-
           filteredAndSortedArray.map((weight, idx) => (
             <div
               className="weight_card_div"
@@ -75,7 +76,7 @@ const WeightPage = () => {
           ))
         }
       </div>
-    </>
+    </div>
   );
 }
 

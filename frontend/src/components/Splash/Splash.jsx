@@ -20,7 +20,7 @@ const Splash = () => {
   }, [sessionUser]);
 
   return (
-    <div>
+    <div className="mainBodyStyle">
       {sessionUser ? (
         <>
           <h3 className="splash_showEmail">Email = {sessionUser?.email}</h3>

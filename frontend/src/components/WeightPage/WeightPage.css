@@ -1,5 +1,10 @@
 /* weightPage.css */
 
+.weightpage_main_body {
+    background-color: rgb(206, 226, 236);
+    height: 100vw;
+}
+
 .weight_page_grid{
     display: grid;
     grid-template-columns: 1fr;
