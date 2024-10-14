@@ -3,7 +3,7 @@ import "./WeightCard.css";
 
 function WeightCard({ weight }) {
 
-  const { current, start, goal, day, User } = weight
+  const { current, day, User } = weight
 
   const formattedDate = new Date(day).toLocaleDateString('en-US', {
     year: 'numeric',
