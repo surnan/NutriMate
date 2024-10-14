@@ -38,8 +38,8 @@ const WorkoutPage = () => {
 
   return (
     <div className="mainBodyStyle">
-      <h3>WorkoutPage.jsx</h3>
-      <h3 >Email = {sessionUser?.email}</h3>
+      {/* <h3>WorkoutPage.jsx</h3>
+      <h3 >Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex workout_btn_div">
         <button

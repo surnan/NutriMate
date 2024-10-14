@@ -43,8 +43,8 @@ const WeightPage = () => {
 
   return (
     <div className="mainBodyStyle">
-      <h3>WeightPage.jsx</h3>
-      <h3 >Email = {sessionUser?.email}</h3>
+      {/* <h3>WeightPage.jsx</h3>
+      <h3 >Email = {sessionUser?.email}</h3> */}
       <div className="max_HFlex weight_btn_div">
         <button
           className="blue"
