@@ -24,8 +24,9 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: [1, 30],
                 isNameLengthValid(value) {
-                    if (value > 30) {
-                        throw new Error('Name too long.');
+                    const strValue = String(value)
+                    if (strValue.length > 30) {
+                        throw new Error(`Name too long. ==> ${strValue} has length ${strValue.length}`);
                     }
                 }
             }

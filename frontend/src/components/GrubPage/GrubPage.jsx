@@ -37,7 +37,7 @@ const GrubPage = () => {
   const handleBackBtn = () => { nav(-1) };
 
   return (
-    <div>
+    <div className="mainBodyStyle">
       <h1> GrubPage.jsx </h1>
       <h3 >Email = {sessionUser?.email}</h3>
 
@@ -55,7 +55,7 @@ const GrubPage = () => {
         >CREATE
         </button>
       </div>
-      <br />
+      <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="grub_page_grid">
         {
           filteredAndSortedArray.map((grub, idx) => (
