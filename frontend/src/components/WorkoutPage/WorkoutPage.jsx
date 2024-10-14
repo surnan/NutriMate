@@ -37,7 +37,7 @@ const WorkoutPage = () => {
   const handleBackBtn = () => { nav(-1) };
 
   return (
-    <>
+    <div className="mainBodyStyle">
       <h3>WorkoutPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
 
@@ -57,6 +57,7 @@ const WorkoutPage = () => {
         </button>
       </div>
 
+      <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="workout_page_grid">
         {
           filteredAndSortedArray.map((workout, idx) => (
@@ -69,7 +70,7 @@ const WorkoutPage = () => {
           ))
         }
       </div>
-    </>
+    </div>
   );
 }
 

@@ -159,7 +159,7 @@ function GrubPageForm() {
     }
 
     return (
-        <div>
+        <div className="mainBodyStyle">
             <h1>GrubForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
@@ -225,13 +225,13 @@ function GrubPageForm() {
                         value={form.servingUnit || ""}
                     >
                         <option value="">Quantity Type</option>
-                        <option value="each">each</option>
-                        <option value="Table Spoon">tablespoon</option>
-                        <option value="Tea Spoon">teaspoon</option>
-                        <option value="oz">ounces</option>
-                        <option value="grams">grams</option>
-                        <option value="cups">cups</option>
                         <option value="bowls">bowls</option>
+                        <option value="each">each</option>
+                        <option value="cups">cups</option>
+                        <option value="grams">grams</option>
+                        <option value="oz">ounces</option>
+                        <option value="tablespoon">tablespoon</option>
+                        <option value="teaspoon">teaspoon</option>
                     </select>
                     {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit}&nbsp;&nbsp;</span>}
                 </div>

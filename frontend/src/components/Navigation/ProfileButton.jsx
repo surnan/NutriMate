@@ -47,14 +47,14 @@ function ProfileButton() {
   return (
     <div className="profile_anchor">
       <button className="profile_btn" onClick={toggleMenu}>
-        <i className="fas fa-user-circle" />
+        <i className="fas fa-user-circle black_font" />
       </button>
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="profile_dropdown_grid">
               <p>{user.email}</p>
-              <button onClick={logout}>Log Out</button>
+              <button className="black_font" onClick={logout}>Log Out</button>
             </div>
           ) : (
             <div className="popupDiv">

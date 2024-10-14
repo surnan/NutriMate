@@ -119,7 +119,7 @@ function WeightPageForm() {
     };
 
     return (
-        <>
+        <div className="mainBodyStyle">
             <h1>WeightPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
@@ -229,7 +229,7 @@ function WeightPageForm() {
                     weight={selectedWeight}
                 />
             )}
-        </>
+        </div>
     );
 }
 
