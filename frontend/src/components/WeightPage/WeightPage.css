@@ -77,8 +77,13 @@
     width: 1rem;
 }
 
+
+/* 
 canvas {
     display: block;
+    background-color: green;
+    margin: auto;
     margin: 20px auto;
     border: 1px solid #ccc;
 }
+ */
