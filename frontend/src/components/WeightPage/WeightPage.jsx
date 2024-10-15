@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
 import WeightCard from "../WeightCard";
+import WeightChart from "../WeightChart/WeightChart"; 
 
 const WeightPage = () => {
   const dispatch = useDispatch()
@@ -43,8 +44,8 @@ const WeightPage = () => {
 
   return (
     <div className="mainBodyStyle">
-      {/* <h3>WeightPage.jsx</h3>
-      <h3 >Email = {sessionUser?.email}</h3> */}
+      <h3>WeightPage.jsx</h3>
+      <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">
         <button
           className="blue"
@@ -61,6 +62,8 @@ const WeightPage = () => {
         </button>
 
       </div>
+
+      <WeightChart weights={filteredAndSortedArray} />
 
       <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="weight_page_grid">
