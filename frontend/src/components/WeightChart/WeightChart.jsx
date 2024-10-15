@@ -8,12 +8,7 @@ const WeightChart = ({ weights }) => {
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext("2d");
-
-        canvas.width = 600;
-        canvas.height = 400;
-
         ctx.clearRect(0, 0, canvas.width, canvas.height)     // reset canvas
-
 
         const sortedWeights = [...weights].sort((a, b) => new Date(a.day) - new Date(b.day));
         const labels = sortedWeights.map(weight => new Date(weight.day).toLocaleDateString());
@@ -33,9 +28,6 @@ const WeightChart = ({ weights }) => {
         ctx.lineTo(canvas.width - 20, canvas.height - 20); // X axis
         ctx.stroke();
 
-
-
-
         // Label X axis (Dates)
         labels.forEach((label, index) => {
             const x = 40 + index * xInterval;
@@ -50,15 +42,11 @@ const WeightChart = ({ weights }) => {
             ctx.fillText(yValue.toFixed(0), 5, y + 5);
         }
 
-
-
-
         // Draw the line graph
         ctx.beginPath();
         sortedWeights.forEach((weight, index) => {
             const x = 40 + index * xInterval;
             const y = canvas.height - 20 - (weight.current - minWeight) * yScale;
-
             if (index === 0) {
                 ctx.moveTo(x, y);
             } else {
