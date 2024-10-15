@@ -33,25 +33,21 @@ const WeightChart = ({ weights }) => {
         ctx.lineTo(canvas.width - 20, canvas.height - 20); // X axis
         ctx.stroke();
 
-
-
-
         // Label X axis (Dates)
+        ctx.font = "12px Arial";
+        ctx.fillStyle = "#000";
         labels.forEach((label, index) => {
             const x = 40 + index * xInterval;
-            ctx.fillText(label, x - 20, canvas.height - 5); // X-axis labels
+            ctx.fillText(label, x - 20, canvas.height - 5); // moving dates below x-axis
         });
 
         // Label Y axis (Weights)
-        const yLabelCount = 5;
+        const yLabelCount = 5; // Number of Y axis labels
         for (let i = 0; i <= yLabelCount; i++) {
             const yValue = minWeight + (i * (maxWeight - minWeight)) / yLabelCount;
             const y = canvas.height - 40 - i * ((canvas.height - 60) / yLabelCount);
             ctx.fillText(yValue.toFixed(0), 5, y + 5);
         }
-
-
-
 
         // Draw the line graph
         ctx.beginPath();
