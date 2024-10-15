@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWeightsAllThunk } from "../../redux/weight";
+import { Line } from 'react-chartjs-2';
 import "./LineGraph.css"
-import {Line} from 'react-chartjs-2'
+
 import { 
     Chart as ChartJS,
     CategoryScale,
@@ -21,42 +25,51 @@ ChartJS.register(
     Legend 
 )
 
-const lineChartData = {
-    labels: [ //x-axis
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-        "Sunday",
-    ],
-    datasets: [//y-axis
-        {
-            label: "MINE", 
-            data: [3000, 5000, 6000, 8000, 7000, 9000, 400], 
-            borderColor: "green"
-        },
-        {
-            label: "WIFE", 
-            data: [5000, 3000, 8000, 1000, 4000, 5000, 4000], 
-            borderColor: "rgb(75,192, 192)"
-        }
-
-    ]
-}
-
-
 const LineGraph = () => {
-    const options = {
-        responsive: false,          
-        maintainAspectRatio: false 
+    const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
+    const weightsArr = useSelector(state => state.weights.allWeights || []); // Default to empty array if no data
+
+    // Prepare the data for the chart
+    let weightLabels = [];
+    let weightData = [];
+
+    // Ensure weightsArr is an array and iterate through it
+    if (Array.isArray(weightsArr)) {
+        weightsArr.forEach(e => {
+            // Format the 'day' as a readable date (assuming e.day is a valid date string)
+            const formattedDay = new Date(e.day).toLocaleDateString(); // Adjust the date format as needed
+            weightLabels.push(formattedDay);
+            weightData.push(e.current); // Y-axis value (current weight)
+        });
     }
 
+    // Data object for the chart
+    const lineChartData2 = {
+        labels: weightLabels, // X-axis labels (formatted dates)
+        datasets: [
+            {
+                label: "Current Weight", // Label for the dataset
+                data: weightData,       // Y-axis values (current weights)
+                borderColor: "blue",    // Line color
+                fill: false             // No fill below the line
+            }
+        ]
+    };
+
+    useEffect(() => {
+        dispatch(getWeightsAllThunk()); // Fetch weight data
+    }, [dispatch]);
+
+    const options = {
+        responsive: true, // Set true to make it responsive
+        maintainAspectRatio: false // Disable aspect ratio
+    };
+
     return (
-        <div>
-            {/* Set width and height explicitly */}
-            <Line options={options} data={lineChartData} width={1000} height={300} />
+        <div style={{ width: '1000px', height: '400px' }}>
+        {/* <div> */}
+            <Line options={options} data={lineChartData2} />
         </div>
     );
 }
