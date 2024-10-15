@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
 import WeightCard from "../WeightCard";
-import WeightChart from "../WeightChart/WeightChart"; 
+import WeightChart from "../WeightChart/WeightChart";
 import LineGraph from "../LineGraph";
 
 const WeightPage = () => {
@@ -27,7 +27,6 @@ const WeightPage = () => {
       if (dateB < new Date('1900-01-01').getTime()) return -1;
       if (dateA > new Date('2100-01-01').getTime()) return 1;
       if (dateB > new Date('2100-01-01').getTime()) return -1;
-
       return dateA - dateB;
     });
 
@@ -66,7 +65,9 @@ const WeightPage = () => {
 
       <WeightChart weights={filteredAndSortedArray} />
 
-      <LineGraph/>
+      <div>
+        <LineGraph />
+      </div>
 
       <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="weight_page_grid">
