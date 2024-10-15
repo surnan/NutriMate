@@ -1,11 +1,12 @@
 // frontend/src/components/GrubPage/GrubPage.jsx
 
 import "./GrubPage.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGrubsAllThunk } from "../../redux/grubs";
 import { useNavigate } from "react-router-dom"
 import GrubCard from "../GrubCard/GrubCard";
+import SearchBar from "../SearchBar";
 
 const GrubPage = () => {
   const dispatch = useDispatch()
@@ -13,9 +14,18 @@ const GrubPage = () => {
 
   const sessionUser = useSelector((state) => state.session.user);
   const grubArr = useSelector(state => state.grubs.allGrubs);
+  const [searchQuery, setSearchQuery] = useState("");
+  // Handle search input
+  const handleSearch = (query) => {
+    setSearchQuery(query.toLowerCase());
+  };
+
 
   const filteredAndSortedArray = grubArr
-    .filter(grub => grub.userId === sessionUser.id)
+    .filter(
+      grub => grub.userId === sessionUser.id &&
+      grub.name.toLowerCase().includes(searchQuery) 
+    )
     .sort((a, b) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
@@ -55,6 +65,7 @@ const GrubPage = () => {
         >CREATE
         </button>
       </div>
+      <SearchBar onSearch={handleSearch} placeholder="Search Grubs..." />
       <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="grub_page_grid">
         {

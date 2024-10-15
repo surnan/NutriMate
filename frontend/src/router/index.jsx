@@ -9,6 +9,7 @@ import WorkoutPage from '../components/WorkoutPage'
 import WorkoutPageForm from '../components/WorkoutPageForm'
 import GrubPage from '../components/GrubPage'
 import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
+import SearchBar from '../components/SearchBar';
 
 
 
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       {path: "workoutform", element: <WorkoutPageForm />},
       {path: "grubs", element: <GrubPage />},
       {path: "grubform", element: <GrubPageForm />},
+      {path: "searchbar", element: <SearchBar />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
