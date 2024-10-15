@@ -10,7 +10,7 @@ import WorkoutPageForm from '../components/WorkoutPageForm'
 import GrubPage from '../components/GrubPage'
 import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
 import SearchBar from '../components/SearchBar';
-
+import LineGraph from '../components/LineGraph';
 
 
 export const router = createBrowserRouter([
@@ -27,6 +27,7 @@ export const router = createBrowserRouter([
       {path: "grubs", element: <GrubPage />},
       {path: "grubform", element: <GrubPageForm />},
       {path: "searchbar", element: <SearchBar />},
+      {path: "line", element: <LineGraph />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
