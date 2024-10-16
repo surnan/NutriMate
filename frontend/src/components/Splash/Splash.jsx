@@ -12,6 +12,7 @@ const Splash = () => {
   const handleWeightsBtn = () => { nav("/weights") }
   const handleWorkoutsBtn = () => { nav("/workouts") }
   const handleGrubsBtn = () => { nav("/grubs") }
+  const handleDailyBtn = () => { nav("/daily") }
 
   useEffect(() => {
     if (sessionUser) {
@@ -28,6 +29,7 @@ const Splash = () => {
             <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
             <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
             <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
+            <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
           </div>
         </>
       ) : (
