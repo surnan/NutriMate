@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getWeightsAllThunk } from "../../redux/weight";
+
 import { Line } from 'react-chartjs-2';
 import "./LineGraph.css"
 
@@ -11,8 +9,7 @@ import {
     PointElement,
     LineElement,
     Title,
-    Tooltip,
-    Legend
+    Tooltip
 } from "chart.js";
 
 ChartJS.register(
@@ -21,36 +18,15 @@ ChartJS.register(
     PointElement,
     LineElement,
     Title,
-    Tooltip,
-    Legend
+    Tooltip
 )
 
-const LineGraph = () => {
-    const dispatch = useDispatch();
-    const sessionUser = useSelector((state) => state.session.user);
-    const weightsArr = useSelector(state => state.weights.allWeights || []); 
-
+const LineGraph = ({weights}) => {
     let weightLabels = [];
     let weightData = [];
 
-    const filteredAndSortedArray = weightsArr
-        .filter(weight => weight.userId === sessionUser.id)
-        .sort((a, b) => {
-            const dateA = new Date(a.day).getTime();
-            const dateB = new Date(b.day).getTime();
-
-            // Extreme dates break sort, so exceptions below:
-            if (dateA < new Date('1900-01-01').getTime()) return 1;
-            if (dateB < new Date('1900-01-01').getTime()) return -1;
-            if (dateA > new Date('2100-01-01').getTime()) return 1;
-            if (dateB > new Date('2100-01-01').getTime()) return -1;
-            return dateA - dateB;
-        }
-    );
-
-
-    if (Array.isArray(filteredAndSortedArray)) {
-        filteredAndSortedArray.forEach(e => {
+    if (Array.isArray(weights)) {
+        weights.forEach(e => {
             const formattedDay = new Date(e.day).toLocaleDateString(); 
             weightLabels.push(formattedDay);    // X-Axis
             weightData.push(e.current);         // Y-Axis
@@ -65,22 +41,51 @@ const LineGraph = () => {
                 label: "Current Weight", 
                 data: weightData,       // Y-axis [Weight.currentWeights]
                 borderColor: "blue",    
-                fill: false             
+                fill: false     
             }
         ]
     };
 
-    useEffect(() => {
-        dispatch(getWeightsAllThunk());
-    }, [dispatch]);
-
     const options = {
         responsive: true,          
-        maintainAspectRatio: false 
+        maintainAspectRatio: false,
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: 'Date',  // Title for X-axis,
+                    font: {
+                        size: 16,  // Set the font size
+                        weight: 'bold'  // Make the font bold
+                    }
+                }
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: 'Weight (lbs)',  // Title for Y-axis
+                    font: {
+                        size: 16,  // Set the font size
+                        weight: 'bold'  // Make the font bold
+                      }
+                }
+            }
+        },
+        plugins: {
+            title: {
+              display: true,
+              text: 'Weight Chart',
+              font: {
+                size: 26,  // Set the font size
+                weight: 'bold'  // Make the font bold
+              }
+            },
+          },
     };
 
+
     return (
-        <div className="chart-container">
+        <div className="chart_container">
             <Line options={options} data={lineChartData2} />
         </div>
     );
