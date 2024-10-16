@@ -32,7 +32,7 @@ const UpdateDailyModal = ({ stuff, onClose }) => {
                 </button>
                 <button onClick={handleDelete} className="deleteButton"
                 >
-                    <i class="fa-solid fa-utensils"></i>
+                    <i className="fa-solid fa-utensils"></i>
                     &nbsp;&nbsp;&nbsp; Yes (Delete Review)
                 </button>
                 <button onClick={onClose} className="cancelButton"
