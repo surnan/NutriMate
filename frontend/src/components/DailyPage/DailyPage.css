@@ -1,0 +1,51 @@
+
+
+.dailypage_div {
+    margin: 3rem auto;
+    width: 50rem;
+}
+
+.daily_date_header{
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    height: 4rem;
+    padding: 0 1rem;
+    background-color: lightgreen;
+}
+
+.dailyPage_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 3rem auto;
+    gap: 1rem;
+}
+
+.dailyPage_grid > * {
+    display: grid;
+    grid-template-columns: 4rem 1fr;
+    height: 3rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center
+}
+
+.dailyPage_grid > :nth-child(odd) {
+    background-color: aqua;
+}
+
+.dailyPage_grid > :nth-child(even) {
+background-color: bisque;
+}
+
+.daily_calendar{
+    display: grid;
+}
+
+.hour_label {
+    font-weight: 600;
+}
+
+.daily_page_hour{
+    font-size: larger;
+}
