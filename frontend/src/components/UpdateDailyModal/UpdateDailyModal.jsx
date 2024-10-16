@@ -22,7 +22,7 @@ const UpdateDailyModal = ({ stuff, onClose }) => {
 
 
     return (
-        <div className="confirmDeleteModal">
+        <div className="modal_btn">
             <div className="modalContent">
                 <h3>Click to Add:</h3>
                 <button onClick={handleDelete} className="deleteButton"
