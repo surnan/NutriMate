@@ -1,6 +1,6 @@
 //frontend/src/componenets/DailyPage/DailyPage.jsx
 import "./DailyPage.css";
-import DeleteWorkoutModal from "../DeleteWorkoutModal";
+import UpdateDailyModal from "../UpdateDailyModal";
 import { useState } from "react";
 
 // Array to hold the hours in both AM/PM format
@@ -18,12 +18,20 @@ const formattedDate = new Date().toLocaleDateString('en-US', {
 console.log("formattedAte = ", formattedDate)
 
 const DailyPage = () => {
-    const [showDeletetModal, setShowDeletetModal] = useState(false);
+    const [showCreateDailyModal, setShowCreateDailyModal] = useState(false);
+    const [showHour, setShowHour] = useState(12);
 
     const handleHourClick = (hour) => {
-        console.log(`Clicked on time: ${hour}`);
-        setShowDeletetModal(true)
+        setShowHour(hour)
+        setShowCreateDailyModal(true)
+        console.log(`Clicked on time: ${showHour}`);
     };
+
+    const handleModalClose = () => {
+        setShowCreateDailyModal(false)
+        setShowHour(null)
+    };
+
 
     return (
         <div className="dailypage_div">
@@ -49,6 +57,11 @@ const DailyPage = () => {
                     </div>
                 ))}
             </div>
+            {showCreateDailyModal && (
+                <UpdateDailyModal
+                onClose={handleModalClose}
+                onSubmit={handleHourClick}
+                />)}
         </div>
     );
 };
