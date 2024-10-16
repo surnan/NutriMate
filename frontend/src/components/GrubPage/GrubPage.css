@@ -12,16 +12,6 @@
 }
 
 
-.grubPage_createBtn{
-    display: block;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 5px;
-}
+
 
 .grub_btn_div{padding: 30px}

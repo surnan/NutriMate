@@ -18,7 +18,7 @@ const DeleteWorkoutModal = ({ workout, onClose }) => {
     };
 
     return (
-        <div className="confirmDeleteModal">
+        <div className="modal_btn">
             <div className="modalContent">
                 <h3>Confirm Delete</h3>
                 <p>Are you sure you want to remove this spot from the listings?</p>
