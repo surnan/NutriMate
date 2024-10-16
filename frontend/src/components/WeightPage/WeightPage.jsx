@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
 import WeightCard from "../WeightCard";
-import WeightChart from "../WeightChart/WeightChart";
+// import WeightChart from "../WeightChart/WeightChart";
 import LineGraph from "../LineGraph";
 
 const WeightPage = () => {
@@ -63,10 +63,10 @@ const WeightPage = () => {
 
       </div>
 
-      <WeightChart weights={filteredAndSortedArray} />
+      {/* <WeightChart weights={filteredAndSortedArray} /> */}
 
       <div>
-        <LineGraph />
+        <LineGraph weights={filteredAndSortedArray}/>
       </div>
 
       <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
