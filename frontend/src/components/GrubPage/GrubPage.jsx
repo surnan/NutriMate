@@ -48,8 +48,8 @@ const GrubPage = () => {
 
   return (
     <div className="mainBodyStyle">
-      {/* <h1> GrubPage.jsx </h1>
-      <h3 >Email = {sessionUser?.email}</h3> */}
+      <h1> GrubPage.jsx </h1>
+      <h3 >Email = {sessionUser?.email}</h3>
 
       <div className="max_HFlex grub_btn_div">
         <button
