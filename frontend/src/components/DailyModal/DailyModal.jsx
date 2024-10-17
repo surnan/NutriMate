@@ -10,6 +10,7 @@ const DailyModal = ({ stuff, onClose }) => {
 
     const handleDeleteBtn = async () => {
         console.log("BUTTON PRESSED")
+        onClose();
     };
 
     const handleWorkoutsBtn = () => { nav("/workouts") }
