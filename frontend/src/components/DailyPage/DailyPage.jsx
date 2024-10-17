@@ -1,7 +1,7 @@
 //frontend/src/componenets/DailyPage/DailyPage.jsx
 import "./DailyPage.css";
 import DailyModal from "../DailyModal";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 // Array to hold the hours in both AM/PM format
 const hours = [
@@ -15,22 +15,35 @@ const formattedDate = new Date().toLocaleDateString('en-US', {
     day: 'numeric',
 });
 
-console.log("formattedAte = ", formattedDate)
-
 const DailyPage = () => {
     const [showCreateDailyModal, setShowCreateDailyModal] = useState(false);
     const [showHour, setShowHour] = useState(12);
+    const modalRef = useRef(null);
 
     const handleHourClick = (hour) => {
         setShowHour(hour)
         setShowCreateDailyModal(true)
-        console.log(`Clicked on time: ${showHour}`);
     };
 
     const handleModalClose = () => {
         setShowCreateDailyModal(false)
         setShowHour(null)
     };
+
+    const handlePageClick = (e) => {
+        setShowCreateDailyModal(false);
+    };
+
+    useEffect(() => {
+        if (showCreateDailyModal) {
+            document.addEventListener("mousedown", handlePageClick);
+        } else {
+            document.removeEventListener("mousedown", handlePageClick);
+        }
+        return () => {
+            document.removeEventListener("mousedown", handlePageClick);
+        };
+    }, [showCreateDailyModal]);
 
 
     return (
@@ -62,10 +75,13 @@ const DailyPage = () => {
                 ))}
             </div>
             {showCreateDailyModal && (
-                <DailyModal
-                    onClose={handleModalClose}
-                    onSubmit={handleHourClick}
-                />)}
+                <div ref={modalRef}>
+                    <DailyModal
+                        onClose={handleModalClose}
+                        onSubmit={handleHourClick}
+                    />
+                </div>
+            )}
         </div>
     );
 };
