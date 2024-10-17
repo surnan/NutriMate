@@ -1,0 +1,27 @@
+
+
+.modal_under_layer .daily_extend_modal_window_all{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;;
+    background-color: beige;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.daily_btn_font_size_grid{
+    display: flex;
+    width: 500px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.daily_btn_font_size_grid button {
+    height: 76px;
+    width: 76px;
+}
+
+.daily_btn_font_size{
+    font-size: 30px;
+    background-color: lightgray;
+}

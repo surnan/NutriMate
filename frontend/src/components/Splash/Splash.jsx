@@ -24,7 +24,7 @@ const Splash = () => {
     <div className="mainBodyStyle">
       {sessionUser ? (
         <>
-          {/* <h3 className="splash_showEmail">Email = {sessionUser?.email}</h3> */}
+          <h3 className="splash_showEmail">Email = {sessionUser?.email}</h3>
           <div className="splash_grid twenty_padding">
             <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
             <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
