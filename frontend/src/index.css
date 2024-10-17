@@ -16,7 +16,7 @@
     padding: 2rem;
 }
 
-button {
+._button {
     border-radius: 10px;
     height: 3rem;
     min-width: 6rem;
@@ -25,19 +25,19 @@ button {
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604)
 }
 
-input, textarea {
+._input, std_textarea {
     padding: 1rem;
     border-radius: 8px;
     width: 325px; 
 }
 
-textarea {
+._textarea {
     height: 125px;
     resize: none; 
 }
 
-button:active {filter: brightness(1.33)}
-select, input, label {height: 2rem}
+._button:active {filter: brightness(1.33)}
+._select, ._input, ._label {height: 2rem}
 input {padding-left: 1rem}
 
 .max_HFlex {
@@ -92,7 +92,7 @@ input {padding-left: 1rem}
   } */
 
 
-  .modal_btn {
+  .modal_under_layer {
     position: fixed;
     top: 0;
     left: 0;
@@ -102,10 +102,9 @@ input {padding-left: 1rem}
     display: flex;
     align-items: center;
     justify-content: center;
-    
 }
 
-.modalContent {
+.modal_window_all {
     background: white;
     padding: 20px;
     border-radius: 5px;
@@ -116,10 +115,10 @@ input {padding-left: 1rem}
     flex-direction: column;
     gap: 1rem;
     width: 24rem;
+    background-color: orange;
 }
 
-
-.deleteButton {
+.delete_btn {
     display: block;
     background-color: red;
     color: white;
@@ -132,7 +131,7 @@ input {padding-left: 1rem}
     height: 3rem;
 }
 
-.cancelButton {
+.cancel_btn {
     display: block;
     background-color: gray;
     color: white;
@@ -155,3 +154,8 @@ input {padding-left: 1rem}
     height: 2rem;
     border-radius: 5px;
 }
+
+.round{
+    border-radius: 50%;
+}
+
