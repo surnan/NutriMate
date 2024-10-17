@@ -6,11 +6,11 @@ function OpenModalMenuItem({
   onItemClick, // optional: callback function that will be called once the button that opens the modal is clicked
   onModalClose // optional: callback function that will be called once the modal is closed
 }) {
-  const { setModalContent, setOnModalClose } = useModal();
+  const { setmodal_window_all, setOnModalClose } = useModal();
 
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
-    setModalContent(modalComponent);
+    setmodal_window_all(modalComponent);
     if (typeof onItemClick === "function") onItemClick();
   };
 

@@ -18,8 +18,8 @@ const DeleteWorkoutModal = ({ workout, onClose }) => {
     };
 
     return (
-        <div className="modal_btn">
-            <div className="modalContent">
+        <div className="modal_under_layer">
+            <div className="modal_window_all">
                 <h3>Confirm Delete</h3>
                 <p>Are you sure you want to remove this spot from the listings?</p>
                 <button onClick={handleDelete} className="deleteButton">Yes (Delete Workout)</button>

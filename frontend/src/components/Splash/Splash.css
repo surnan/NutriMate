@@ -15,7 +15,7 @@
 }
 
 
-.modal_btn {
+.modal_under_layer {
     position: fixed;
     top: 0;
     left: 0;
@@ -28,7 +28,7 @@
     
 }
 
-.modalContent {
+.modal_window_all {
     background: white;
     padding: 20px;
     border-radius: 5px;

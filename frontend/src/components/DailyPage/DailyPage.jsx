@@ -1,6 +1,6 @@
 //frontend/src/componenets/DailyPage/DailyPage.jsx
 import "./DailyPage.css";
-import UpdateDailyModal from "../UpdateDailyModal";
+import DailyModal from "../DailyModal";
 import { useState } from "react";
 
 // Array to hold the hours in both AM/PM format
@@ -11,8 +11,8 @@ const hours = [
 
 const formattedDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
+    month: 'short',
+    day: 'numeric',
 });
 
 console.log("formattedAte = ", formattedDate)
@@ -35,32 +35,36 @@ const DailyPage = () => {
 
     return (
         <div className="dailypage_div">
-            <div className="daily_date_header">
-                <button>
-                    <i className="fas fa-user-circle black_font" />
+            <div className="dp_header">
+                <button
+                    className="dph_btn black_font orange round"
+                >
+                    <i className="fa-solid fa-caret-left"></i>
                 </button>
-                <h3>{formattedDate}</h3>
-                <button>
-                    <i className="fas fa-user-circle black_font" />
+                <h2>{formattedDate}</h2>
+                <button
+                    className="black_font  orange dph_btn round"
+                >
+                    <i className="fa-solid fa-caret-right"></i>
                 </button>
             </div>
 
-            <div className="dailyPage_grid center">
+            <div className="dp_grid center">
                 {hours.map((hour, index) => (
                     <div
-                        className="daily_page_hour clickable"
+                        className="dpg_hour clickable"
                         key={index}
                         onClick={() => handleHourClick(hour)}
                     >
-                        <div className="hour_label">{hour}</div>
-                        <div className="hour_content"> click to enter food/excercise </div>
+                        <div className="dpgh_label">{hour}</div>
+                        <div className="dpgh_content"> click to enter food/excercise </div>
                     </div>
                 ))}
             </div>
             {showCreateDailyModal && (
-                <UpdateDailyModal
-                onClose={handleModalClose}
-                onSubmit={handleHourClick}
+                <DailyModal
+                    onClose={handleModalClose}
+                    onSubmit={handleHourClick}
                 />)}
         </div>
     );
