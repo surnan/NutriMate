@@ -29,13 +29,10 @@ module.exports = {
         allowNull: false
       },
       units: {  
-        // quantity 
         type: Sequelize.DECIMAL,
         allowNull: false
       },
       unitType: {
-        // is it? grams or minutes or reps 
-        //exists only so workout/grub can be deleted
         type: Sequelize.STRING,
         allowNull: false
       },
