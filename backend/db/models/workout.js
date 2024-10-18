@@ -12,7 +12,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // Workout.hasMany(models.DayLog, { foreignKey: 'workoutId' })
+      Workout.belongsToMany(models.DayLog, {
+        through: 'DayLogWorkout', 
+        foreignKey: 'workoutId',
+        otherKey: 'dayLogId'
+      });
+
       Workout.hasMany(models.WorkoutIcon, { foreignKey: 'workoutId' })
       Workout.hasMany(models.WorkoutImage, { foreignKey: 'workoutId' })
       Workout.belongsTo(models.User, { foreignKey: 'userId' })
