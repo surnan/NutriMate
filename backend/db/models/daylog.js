@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-        units: {
+        unit: {
             type: DataTypes.DECIMAL,
             allowNull: false,
             validate: {
