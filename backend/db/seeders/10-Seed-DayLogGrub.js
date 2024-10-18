@@ -13,20 +13,20 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('DayLogGrubs', [
       {
-        dayLogId: 1, // Assuming you have DayLog with ID 1
-        grubId: 1,   // Assuming you have Grub with ID 1
+        dayLogId: 1, 
+        grubId: 1,   
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        dayLogId: 2, // DayLog ID 2
-        grubId: 2,   // Grub ID 2
+        dayLogId: 2, 
+        grubId: 2,   
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        dayLogId: 3, // DayLog ID 3
-        grubId: 3,   // Grub ID 3
+        dayLogId: 3, 
+        grubId: 3,   
         createdAt: new Date(),
         updatedAt: new Date(),
       }

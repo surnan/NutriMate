@@ -13,14 +13,14 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('DayLogWorkouts', [
       {
-        dayLogId: 4, // Assuming you have DayLog with ID 4
-        workoutId: 1, // Assuming you have Workout with ID 1
+        dayLogId: 4, 
+        workoutId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        dayLogId: 5, // DayLog ID 5
-        workoutId: 2, // Workout ID 2
+        dayLogId: 5, 
+        workoutId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
