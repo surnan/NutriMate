@@ -12,6 +12,11 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            Grub.belongsToMany(models.DayLog, {
+                through: 'DayLogGrub',
+                foreignKey: 'grubId',
+                otherKey: 'dayLogId'
+            });
             Grub.hasMany(models.GrubIcon, { foreignKey: 'grubId' })
             Grub.hasMany(models.GrubImage, { foreignKey: 'grubId' })
             Grub.belongsTo(models.User, { foreignKey: 'userId' })
