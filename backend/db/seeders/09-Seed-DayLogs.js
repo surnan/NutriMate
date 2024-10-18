@@ -14,60 +14,203 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     return queryInterface.bulkInsert('DayLogs', [
       {
-        timestamp: new Date(), // Current timestamp
-        name: 'Breakfast', // Example log name
-        calories: 500, // Calories logged
-        units: 1.5, // Number of units consumed
-        unitType: 'serving', // Unit type of the consumed item
-        userId: 1, // Foreign key referencing the User table
-        grubId: 1, // Assuming this DayLog entry relates to a Grub (must provide either grubId or workoutId)
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'hamburger', 
+        calories: 600, 
+        units: 2, 
+        unitType: 'each', 
+        userId: 2, 
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        timestamp: new Date(), // Current timestamp
-        name: 'Lunch', // Example log name
-        calories: 800, // Calories logged
-        units: 2, // Number of units consumed
-        unitType: 'serving', // Unit type of the consumed item
-        userId: 2, // Foreign key referencing the User table
-        workoutId: 1, // Assuming this DayLog entry relates to a Workout (must provide either grubId or workoutId)
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'hotdog', 
+        calories: 250, 
+        units: 1, 
+        unitType: 'each', 
+        userId: 3, 
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        timestamp: new Date(), // Current timestamp
-        name: 'Afternoon Snack', // Example log name
-        calories: 200, // Calories logged
-        units: 1, // Number of units consumed
-        unitType: 'piece', // Unit type of the consumed item
-        userId: 3, // Foreign key referencing the User table
-        grubId: 2, // This DayLog entry relates to a Grub
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'ice cream', 
+        calories: 300, 
+        units: 0.5, 
+        unitType: '', 
+        userId: 3, 
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        timestamp: new Date(), // Current timestamp
-        name: 'Dinner', // Example log name
-        calories: 900, // Calories logged
-        units: 1, // Number of units consumed
-        unitType: 'plate', // Unit type of the consumed item
-        userId: 1, // Foreign key referencing the User table
-        workoutId: 2, // This DayLog entry relates to a Workout
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'grill chicken salad', 
+        calories: 350, 
+        units: 1, 
+        unitType: 'Table Spoons', 
+        userId: 2, 
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        timestamp: new Date(), // Current timestamp
-        name: 'Evening Snack', // Example log name
-        calories: 150, // Calories logged
-        units: 0.5, // Number of units consumed
-        unitType: 'cup', // Unit type of the consumed item
-        userId: 2, // Foreign key referencing the User table
-        grubId: 3, // This DayLog entry relates to a Grub
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'tuna sandwich', 
+        calories: 750, 
+        units: 1.5, 
+        unitType: 'each', 
+        userId: 3, 
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },     
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'pasta salad', 
+        calories: 325, 
+        units: 0.5, 
+        unitType: 'cup', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'mac and cheese', 
+        calories: 825, 
+        units: 1.5, 
+        unitType: 'bowl', 
+        userId: 3, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'nachos', 
+        calories: 425, 
+        units: 1, 
+        unitType: 'each', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'coffee', 
+        calories: 200, 
+        units: 0.5, 
+        unitType: 'oz', 
+        userId: 3, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'peanut butter', 
+        calories: 150, 
+        units: 0.5, 
+        unitType: 'cup', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },     {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Breakfast', 
+        calories: 500, 
+        units: 1.5, 
+        unitType: 'serving', 
+        userId: 1, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Lunch', 
+        calories: 800, 
+        units: 2, 
+        unitType: 'serving', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Afternoon Snack', 
+        calories: 200, 
+        units: 1, 
+        unitType: 'piece', 
+        userId: 3, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Dinner', 
+        calories: 900, 
+        units: 1, 
+        unitType: 'plate', 
+        userId: 1, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Evening Snack', 
+        calories: 150, 
+        units: 0.5, 
+        unitType: 'cup', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },     {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Breakfast', 
+        calories: 500, 
+        units: 1.5, 
+        unitType: 'serving', 
+        userId: 1, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Lunch', 
+        calories: 800, 
+        units: 2, 
+        unitType: 'serving', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Afternoon Snack', 
+        calories: 200, 
+        units: 1, 
+        unitType: 'piece', 
+        userId: 3, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Dinner', 
+        calories: 900, 
+        units: 1, 
+        unitType: 'plate', 
+        userId: 1, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        timestamp: new Date('2024-10-18T08:30:00'), 
+        name: 'Evening Snack', 
+        calories: 150, 
+        units: 0.5, 
+        unitType: 'cup', 
+        userId: 2, 
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ], {});
   },
 
