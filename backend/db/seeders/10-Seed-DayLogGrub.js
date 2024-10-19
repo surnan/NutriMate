@@ -1,6 +1,6 @@
 'use strict';
 
-const { DayLogGrubs, Sequelize } = require('../models');
+const { DayLogGrub, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 options.tableName = 'DayLogGrubs';
@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === 'production') {
 module.exports = {
   async up(queryInterface, Sequelize) {
     options.tableName = "DayLogGrubs";
-    return queryInterface.bulkInsert('DayLogGrubs', [
+    return queryInterface.bulkInsert(options, [
       {
         dayLogId: 1, 
         grubId: 1,   
