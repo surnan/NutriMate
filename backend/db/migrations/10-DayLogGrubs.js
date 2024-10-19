@@ -1,4 +1,4 @@
-// backend/db/10-DayLogsGrubs.js
+// backend/db/10-DayLogGrubs.js
 'use strict';
 
 let options = {};
