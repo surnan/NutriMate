@@ -19,30 +19,24 @@ module.exports = {
       dayLogId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'DayLogs',
-          key: 'id'
-        },
+        references: {model: 'DayLogs'},
         onDelete: 'CASCADE'
       },
       workoutId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Workouts',
-          key: 'id'
-        },
+        references: {model: 'Workouts'},
         onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('now')
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });
   },
