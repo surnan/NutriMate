@@ -1,6 +1,6 @@
-//frontend/src/componenets/DailyPage/DailyPage.jsx
-import "./DailyPage.css";
-import DailyModal from "../DailyModal";
+//frontend/src/componenets/DayLogPage/DayLogPage.jsx
+import "./DayLogPage.css";
+import DayLogModal from "../DayLogModal";
 import { useState, useRef, useEffect } from "react";
 
 const hours = [
@@ -15,26 +15,26 @@ const formattedDate = new Date().toLocaleDateString('en-US', {
 });
 
 const DailyPage = () => {
-    const [showCreateDailyModal, setShowCreateDailyModal] = useState(false);
+    const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
     const [showHour, setShowHour] = useState(12);
     const modalRef = useRef(null);
 
     const handleHourClick = (hour) => {
         setShowHour(hour)
-        setShowCreateDailyModal(true)
+        setShowCreateDayLogModal(true)
     };
 
     const handleModalClose = () => {
-        setShowCreateDailyModal(false)
+        setShowCreateDayLogModal(false)
         setShowHour(null)
     };
 
     const handlePageClick = (e) => {
-        setShowCreateDailyModal(false);
+        setShowCreateDayLogModal(false);
     };
 
     useEffect(() => {
-        if (showCreateDailyModal) {
+        if (showCreateDayLogModal) {
             document.addEventListener("mousedown", handlePageClick);
         } else {
             document.removeEventListener("mousedown", handlePageClick);
@@ -42,7 +42,7 @@ const DailyPage = () => {
         return () => {
             document.removeEventListener("mousedown", handlePageClick);
         };
-    }, [showCreateDailyModal]);
+    }, [showCreateDayLogModal]);
 
 
     return (
@@ -73,9 +73,9 @@ const DailyPage = () => {
                     </div>
                 ))}
             </div>
-            {showCreateDailyModal && (
+            {showCreateDayLogModal && (
                 <div ref={modalRef}>
-                    <DailyModal
+                    <DayLogModal
                         onClose={handleModalClose}
                         onSubmit={handleHourClick}
                     />
