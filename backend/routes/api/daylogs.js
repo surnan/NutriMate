@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require('sequelize')
-const { User, Workout, Grub, Daylog } = require('../../db/models');
+const { User, Workout, Grub, DayLog } = require('../../db/models');
 const { response } = require('../../app');
 
 
@@ -19,7 +19,7 @@ router.get('/hello/world', (req, res) => {
 //all 
 router.get('/', async (req, res, next) => {
     try {
-        const workouts = await Daylog.findAll({
+        const dayLogs = await DayLog.findAll({
             include: [
                 { 
                     model: User,
@@ -30,9 +30,9 @@ router.get('/', async (req, res, next) => {
             ]
         });
 
-        const answer = daylogs.map(e=>{
-            const daylogsJSON = e.toJSON();
-            return daylogsJSON
+        const answer = dayLogs.map(e=>{
+            const dayLogsJSON = e.toJSON();
+            return dayLogsJSON
         })     
         res.json({DayLog: answer})
     } catch (e) {
