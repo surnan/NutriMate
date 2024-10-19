@@ -1,6 +1,6 @@
 'use strict';
 
-const { DayLogWorkouts, Sequelize } = require('../models');
+const { DayLogWorkout, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 options.tableName = 'DayLogWorkouts';
@@ -11,7 +11,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('DayLogWorkouts', [
+    options.tableName = 'DayLogWorkouts';
+    return queryInterface.bulkInsert(options, [
       {
         dayLogId: 4, 
         workoutId: 1,
