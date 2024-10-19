@@ -2,6 +2,10 @@
 import "./DayLogPage.css";
 import DayLogModal from "../DayLogModal";
 import { useState, useRef, useEffect } from "react";
+import { getDailyLogsAllThunk } from "../../redux/daylogs"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom"
+
 
 const hours = [
     "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM",
@@ -14,7 +18,18 @@ const formattedDate = new Date().toLocaleDateString('en-US', {
     day: 'numeric',
 });
 
-const DailyPage = () => {
+const DayLogPage = () => {
+    const dispatch = useDispatch()
+    const nav = useNavigate();
+
+    const sessionUser = useSelector((state) => state?.session?.user);
+    const dayLogsArr = useSelector(state => state?.daylogs?.allDaylogs);
+
+    useEffect(() => {
+        console.log("Fetching daily logs...");
+        dispatch(getDailyLogsAllThunk())
+    }, [dispatch])
+
     const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
     const [showHour, setShowHour] = useState(12);
     const modalRef = useRef(null);
@@ -44,9 +59,22 @@ const DailyPage = () => {
         };
     }, [showCreateDayLogModal]);
 
+    const handleBackBtn = () => { nav(-1) };
 
     return (
-        <div className="dailypage_div">
+        <div className="DayLogPage_div">
+            <h3>DayLogPage.jsx</h3>
+            <h3 >Email = {sessionUser?.email}</h3>
+
+            <button
+                className="blue"
+                type="button"
+                onClick={handleBackBtn}
+            >
+                BACK
+            </button>
+
+
             <div className="dp_header">
                 <button
                     className="dph_btn black_font orange round"
@@ -84,4 +112,4 @@ const DailyPage = () => {
         </div>
     );
 };
-export default DailyPage;
+export default DayLogPage;
