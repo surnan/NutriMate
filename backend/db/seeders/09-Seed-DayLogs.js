@@ -1,7 +1,8 @@
 'use strict';
 
-const { Grub, Workout, Users, Sequelize } = require('../models');
+const {DayLog, Sequelize} = require('../models');
 const bcrypt = require('bcryptjs');
+
 let options = {};
 options.tableName = 'DayLogs';
 
@@ -12,7 +13,8 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('DayLogs', [
+    options.tableName = "DayLogs";
+    return queryInterface.bulkInsert(options, [
       {
         timestamp: new Date('2024-10-17T01:00:00'), 
         name: 'hamburger', 
@@ -77,6 +79,10 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('DayLogs', null, {});
+    options.tableName = "DayLog";
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(options, {
+      username: {[Op.in]: []}
+    })
   }
 };
