@@ -1,6 +1,6 @@
 'use strict';
 
-const { Grub, Workout, Users, Sequelize } = require('../models');
+const { DayLogWorkouts, Sequelize } = require('../models');
 const bcrypt = require('bcryptjs');
 let options = {};
 options.tableName = 'DayLogWorkouts';
@@ -28,6 +28,11 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    return queryInterface.bulkDelete('DayLogWorkouts', null, {});
+
+    options.tableName = "DayLogWorkouts";
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete(options, {
+      username: {[Op.in]: []}
+    })
   }
 };
