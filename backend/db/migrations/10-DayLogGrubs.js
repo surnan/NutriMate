@@ -41,6 +41,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('DayLogGrubs');
+    await queryInterface.dropTable(options);
   }
 };
