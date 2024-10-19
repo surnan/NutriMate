@@ -3,6 +3,7 @@ const {
     Model,
     Validator
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
     const DayLogWorkout = sequelize.define('DayLogWorkout', {
         dayLogId: {
