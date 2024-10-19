@@ -1,7 +1,7 @@
 // frontend/src/redux/workouts.js
 import { csrfFetch } from "./csrf";
 
-const LOAD_DAYLOGS_ALL = "daylogs/loadDayLogsAll"
+const LOAD_DAYLOGS_ALL = "daylogs/loadDaylogsall"
 
 
 //Actions
@@ -15,8 +15,8 @@ const loadDailyLogsAll = (data) => ({
 // Thunks
 export const getDailyLogsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/daylogs')
+    const data = await response.json();
     if (response.ok) {
-        const data = await response.json();
         await dispatch(loadDailyLogsAll(data))
         return data
     }
@@ -26,9 +26,9 @@ export const getDailyLogsAllThunk = () => async (dispatch) => {
 
 // State object
 const initialState = {
-    allDayLogs: [],
+    allDaylogs: [],
     byId: {},
-    currentDayLog: {}
+    currentDaylog: {}
 }
 
 
@@ -38,8 +38,9 @@ const daylogsReducer = (state = initialState, action) => {
         case LOAD_DAYLOGS_ALL: {
             let newState = {...state}
             // thunk returns JSON with key named: 'Workouts'
-            newState.allDayLogs = action.payload.allDayLogs;
-            for (let workouts of action.payload.DailyLogs) {
+            console.log("\n\n====> ACTION.payload ===> ", action.payload)
+            newState.allDaylogs = action.payload.DayLog;
+            for (let workouts of action.payload.DayLog) {
                 newState.byId[workouts.id] = workouts
             }
 
