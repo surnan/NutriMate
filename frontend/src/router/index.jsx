@@ -11,7 +11,7 @@ import GrubPage from '../components/GrubPage'
 import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
 import SearchBar from '../components/SearchBar';
 import LineGraph from '../components/LineGraph';
-import DailyPage from '../components/DailyPage';
+import DayLogPage from '../components/DayLogPage';
 
 
 export const router = createBrowserRouter([
@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
       {path: "grubform", element: <GrubPageForm />},
       {path: "searchbar", element: <SearchBar />},
       {path: "line", element: <LineGraph />},
-      {path: "daily", element: <DailyPage />},
+      {path: "daylog", element: <DayLogPage />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
