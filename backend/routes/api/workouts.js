@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require('sequelize')
-const { User, DayLog, Food, FoodIcon, FoodImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
+const { User, Workout, WorkoutImage } = require('../../db/models');
 const { response } = require('../../app');
 
 
@@ -26,9 +26,6 @@ router.get('/', async (req, res, next) => {
                     attributes: {
                         exclude: ['hashedPassword', 'updatedAt']
                     } 
-                },
-                { 
-                    model: WorkoutIcon,
                 },
                 { 
                     model: WorkoutImage,
@@ -59,9 +56,6 @@ router.get('/:workoutId', async (req, res, next) => {
                     attributes: {
                         exclude: ['hashedPassword', 'updatedAt']
                     } 
-                },
-                { 
-                    model: WorkoutIcon,
                 },
                 { 
                     model: WorkoutImage,

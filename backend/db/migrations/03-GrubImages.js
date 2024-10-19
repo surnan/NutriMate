@@ -1,8 +1,8 @@
-// backend/db/09-DayLogs.js
+// backend/db/03-GrubImages.js
 'use strict';
 
 let options = {};
-options.tableName = 'DayLogs';
+options.tableName = 'GrubImages';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -16,30 +16,18 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      timestamp: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
       name: {
         type: Sequelize.STRING(55),
-        allowNull: false
+        allowNull: true
       },
-      calories: {
+      url: {
+        type: Sequelize.STRING(255),
+        allowNull: true
+      },
+      grubId: {
         type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      units: {  
-        type: Sequelize.DECIMAL,
-        allowNull: false
-      },
-      unitType: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: { model: 'Users' },
         allowNull: false,
+        references: { model: 'Grubs' },
         onDelete: 'CASCADE'
       },
       createdAt: {

@@ -1,25 +1,12 @@
+// backend/db/daylogs.js
 'use strict';
-const {
-    Model,
-    Validator
-} = require('sequelize');
+const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class DayLog extends Model {
         static associate(models) {
-            // define association here
-            // DayLog.belongsToMany(models.Grub, {
-            //     through: 'DayLogGrub', // Junction table
-            //     foreignKey: 'dayLogId',
-            //     otherKey: 'grubId'
-            // });
-
-            // DayLog.belongsToMany(models.Workout, {
-            //     through: 'DayLogWorkout', // Junction table
-            //     foreignKey: 'dayLogId',
-            //     otherKey: 'workoutId'
-            // });
-
             DayLog.belongsTo(models.User, { foreignKey: 'userId' });
+            DayLog.belongsTo(models.Grub, { foreignKey: 'groupId' });
+            DayLog.belongsTo(models.Workout, { foreignKey: 'workoutId' });
         }
     }
     DayLog.init({
@@ -83,6 +70,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: { model: 'Users' }
+        },
+        grubId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: { model: 'Grubs' }
+        },
+        workoutId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: { model: 'Workouts' }
         }
     }, {
         sequelize,

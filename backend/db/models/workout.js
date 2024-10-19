@@ -1,26 +1,12 @@
+// backend/db/models/workout.js
 'use strict';
-const {
-  Model,
-  Validator
-} = require('sequelize');
+const {Model, Validator} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Workout extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
-      Workout.belongsToMany(models.DayLog, {
-        through: 'DayLogWorkout', 
-        foreignKey: 'workoutId',
-        otherKey: 'dayLogId'
-      });
-
-      Workout.hasMany(models.WorkoutIcon, { foreignKey: 'workoutId' })
-      Workout.hasMany(models.WorkoutImage, { foreignKey: 'workoutId' })
       Workout.belongsTo(models.User, { foreignKey: 'userId' })
+      Workout.hasMany(models.DayLog, { foreignKey: 'workoutId' })
+      Workout.hasMany(models.WorkoutImage, { foreignKey: 'workoutId' })
     }
   }
   Workout.init({
