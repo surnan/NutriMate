@@ -1,25 +1,12 @@
+// backend/db/models/grub.js
 'use strict';
-const {
-    Model,
-    Validator
-} = require('sequelize');
+const {Model, Validator} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Grub extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
         static associate(models) {
-            // define association here
-            Grub.belongsToMany(models.DayLog, {
-                through: 'DayLogGrub',
-                foreignKey: 'grubId',
-                otherKey: 'dayLogId'
-            });
-            Grub.hasMany(models.GrubIcon, { foreignKey: 'grubId' })
-            Grub.hasMany(models.GrubImage, { foreignKey: 'grubId' })
             Grub.belongsTo(models.User, { foreignKey: 'userId' })
+            Grub.hasMany(models.GrubImage, { foreignKey: 'grubId' })
+            Grub.hasMany(models.DayLog, { foreignKey: 'grubId' })
         }
     }
     Grub.init({
@@ -146,7 +133,8 @@ module.exports = (sequelize, DataTypes) => {
         userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            references: { model: 'Users' }
+            references: { model: 'Users' },
+            onDelete: "CASCADE"
         },
     }, {
         sequelize,
