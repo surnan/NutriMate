@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
 const { check, body } = require('express-validator');
 const { Op } = require('sequelize')
-const { User, DayLog, Grub, GrubIcon, GrubImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
+const { User, Grub, GrubImage } = require('../../db/models');
 
 
 const router = express.Router();
@@ -25,9 +25,6 @@ router.get('/', async (req, res, next) => {
                     attributes: {
                         exclude: ['hashedPassword', 'updatedAt']
                     } 
-                },
-                { 
-                    model: GrubIcon,
                 },
                 { 
                     model: GrubImage,
@@ -56,9 +53,6 @@ router.get('/:grubId', async (req, res, next) => {
                     attributes: {
                         exclude: ['hashedPassword', 'updatedAt']
                     } 
-                },
-                { 
-                    model: GrubIcon,
                 },
                 { 
                     model: GrubImage,
