@@ -9,12 +9,14 @@ import sessionReducer from "./session";
 import weightsReducer from "./weight";
 import workoutsReducer from "./workouts"
 import grubsReducer from "./grubs"
+import daylogsReducer from "./daylogs"
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     weights: weightsReducer,
     workouts: workoutsReducer,
-    grubs: grubsReducer
+    grubs: grubsReducer,
+    daylog: daylogsReducer
 });
 
 let enhancer;
