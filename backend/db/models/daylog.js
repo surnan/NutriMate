@@ -12,17 +12,17 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
-            DayLog.belongsToMany(models.Grub, {
-                through: 'DayLogGrub', // Junction table
-                foreignKey: 'dayLogId',
-                otherKey: 'grubId'
-            });
+            // DayLog.belongsToMany(models.Grub, {
+            //     through: 'DayLogGrub', // Junction table
+            //     foreignKey: 'dayLogId',
+            //     otherKey: 'grubId'
+            // });
 
-            DayLog.belongsToMany(models.Workout, {
-                through: 'DayLogWorkout', // Junction table
-                foreignKey: 'dayLogId',
-                otherKey: 'workoutId'
-            });
+            // DayLog.belongsToMany(models.Workout, {
+            //     through: 'DayLogWorkout', // Junction table
+            //     foreignKey: 'dayLogId',
+            //     otherKey: 'workoutId'
+            // });
 
             DayLog.belongsTo(models.User, { foreignKey: 'userId' });
         }
@@ -56,7 +56,7 @@ module.exports = (sequelize, DataTypes) => {
                 }
             }
         },
-        unit: {
+        units: {
             type: DataTypes.DECIMAL,
             allowNull: false,
             validate: {
