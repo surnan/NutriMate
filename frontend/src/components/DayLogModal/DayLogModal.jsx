@@ -1,10 +1,10 @@
 //frontend/src/components/DeleteReviewModal/DeleteReviewModal.jsx
 
-import './DailyModal.css'
+import './DayLogModal.css'
 import { useNavigate } from 'react-router-dom';
 
 
-const DailyModal = ({ stuff, onClose }) => {
+const DayLogModal = ({ stuff, onClose }) => {
     // const dispatch = useDispatch();
     const nav = useNavigate()
 
@@ -48,4 +48,4 @@ const DailyModal = ({ stuff, onClose }) => {
     );
 };
 
-export default DailyModal;
+export default DayLogModal;

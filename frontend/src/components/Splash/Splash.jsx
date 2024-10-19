@@ -12,7 +12,7 @@ const Splash = () => {
   const handleWeightsBtn = () => { nav("/weights") }
   const handleWorkoutsBtn = () => { nav("/workouts") }
   const handleGrubsBtn = () => { nav("/grubs") }
-  const handleDailyBtn = () => { nav("/daily") }
+  const handleDailyBtn = () => { nav("/daylog") }
 
   useEffect(() => {
     if (sessionUser) {
