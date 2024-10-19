@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     class DayLog extends Model {
         static associate(models) {
             DayLog.belongsTo(models.User, { foreignKey: 'userId' });
-            DayLog.belongsTo(models.Grub, { foreignKey: 'groupId' });
+            DayLog.belongsTo(models.Grub, { foreignKey: 'grubId' });
             DayLog.belongsTo(models.Workout, { foreignKey: 'workoutId' });
         }
     }
@@ -89,16 +89,18 @@ module.exports = (sequelize, DataTypes) => {
                 exclude: ["createdAt", "updatedAt"]
             }
         },
-        validate: {
-            grubOrWorkoutRequired() {
-                if (this.grubId === null && this.workoutId === null) {
-                    throw new Error('Either grubId or workoutId must be provided.');
-                }
-                if (this.grubId !== null && this.workoutId !== null) {
-                    throw new Error('Only one of grubId or workoutId can be provided, not both.');
-                }
-            }
-        }
     });
     return DayLog;
 };
+
+
+// validate: {
+//     grubOrWorkoutRequired() {
+//         if (this.grubId === null && this.workoutId === null) {
+//             throw new Error('Either grubId or workoutId must be provided.');
+//         }
+//         if (this.grubId !== null && this.workoutId !== null) {
+//             throw new Error('Only one of grubId or workoutId can be provided, not both.');
+//         }
+//     }
+// }
