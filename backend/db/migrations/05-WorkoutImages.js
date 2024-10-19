@@ -1,4 +1,4 @@
-// backend/db/07-WorkoutImages.js
+// backend/db/05-WorkoutImages.js
 'use strict';
 
 let options = {};

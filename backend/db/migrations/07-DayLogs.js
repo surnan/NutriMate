@@ -1,8 +1,8 @@
-// backend/db/02-WorkoutIcons.js
+// backend/db/07-DayLogs.js
 'use strict';
 
 let options = {};
-options.tableName = 'WorkoutIcons';
+options.tableName = 'DayLogs';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -16,18 +16,42 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      timestamp: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
       name: {
         type: Sequelize.STRING(55),
-        allowNull: true
-      },
-      url: {
-        type: Sequelize.STRING(255),
         allowNull: false
+      },
+      calories: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      units: {  
+        type: Sequelize.DECIMAL,
+        allowNull: false
+      },
+      unitType: {
+        //"SERVINGS" when !workoutId
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Users' },
+        allowNull: false,
+        onDelete: 'CASCADE'
+      },
+      grubId: {
+        type: Sequelize.INTEGER,
+        references: { model: 'Grubs' },
+        allowNull: true
       },
       workoutId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: { model: 'Workouts' }
+        references: { model: 'Workouts' },
+        allowNull: true
       },
       createdAt: {
         allowNull: false,

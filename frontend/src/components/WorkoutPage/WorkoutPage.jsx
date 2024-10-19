@@ -48,6 +48,11 @@ const WorkoutPage = () => {
   const handleNewWorkout = () => { nav('/workoutform') }
   const handleBackBtn = () => { nav(-1) };
 
+
+  console.log("\n\n")
+  console.log("filteredAndSortedArray", filteredAndSortedArray)
+  console.log("\n\n")
+  
   return (
     <div className="mainBodyStyle">
       <h3>WorkoutPage.jsx</h3>
