@@ -1,19 +1,12 @@
+// backend/db/models/user.js
 'use strict';
-const {
-  Model,
-  Validator
-} = require('sequelize');
+const {Model,Validator} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
       User.hasMany(models.Grub, {foreignKey: 'userId'})
       User.hasMany(models.Workout, {foreignKey: 'userId'})
+      User.hasMany(models.DayLog, {foreignKey: 'userId'})
     }
   }
   User.init({
@@ -54,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'User',
     defaultScope: {
       attributes: {
-        exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
+        exclude: ["hashedPassword", "createdAt", "updatedAt"]
       }
     }
   });

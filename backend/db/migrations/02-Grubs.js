@@ -4,7 +4,7 @@
 let options = {};
 options.tableName = 'Grubs';
 if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // schema defined in options object
+  options.schema = process.env.SCHEMA;  
 }
 
 module.exports = {

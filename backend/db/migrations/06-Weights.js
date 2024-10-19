@@ -1,8 +1,8 @@
-// backend/db/03-Workouts.js
+// backend/db/06-Weights.js
 'use strict';
 
 let options = {};
-options.tableName = 'Workouts';
+options.tableName = 'Weights';
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // schema defined in options object
 }
@@ -16,13 +16,25 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
-        type: Sequelize.STRING(30),
-        allowNull: false
-      },
-      description: {
-        type: Sequelize.STRING(500),
+      metricSystem: {
+        type: Sequelize.BOOLEAN,
         allowNull: true,
+      },
+      start: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      goal: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+      },
+      current: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      day: {
+        type: Sequelize.DATE,
+        allowNull: false,
       },
       userId: {
         type: Sequelize.INTEGER,
