@@ -29,6 +29,12 @@ module.exports = {
         grubId: 3,   
         createdAt: new Date(),
         updatedAt: new Date(),
+      },
+      {
+        dayLogId: 4, 
+        grubId: 4,   
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ], {});
   },
