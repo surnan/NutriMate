@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import DayLogCard from "../DayLogCard";
 import CustomCalendar from "../CustomCalendar";
 
 
@@ -16,23 +17,27 @@ const hours = [
 const DayLogPage = () => {
     const dispatch = useDispatch()
     const nav = useNavigate();
-
-    const sessionUser = useSelector((state) => state?.session?.user);
-    const dayLogsArr = useSelector(state => state?.daylogs?.allDaylogs);
-    console.log('======> dayLogsArr ==> ', dayLogsArr)
-
-    // Set initial selected date to today
+    const modalRef = useRef(null);
+    const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
+    const [showHour, setShowHour] = useState(12);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
+    const sessionUser = useSelector((state) => state.session.user);
+    const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
+
+
+    const filteredAndSortedArray = dayLogsArr
+        .filter(dayLog => dayLog.userId === sessionUser.id)
 
     useEffect(() => {
-        console.log("Fetching daily logs...");
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
-    const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
-    const [showHour, setShowHour] = useState(12);
-    const modalRef = useRef(null);
+    useEffect(() => {
+        console.log('+++++ => dayLogsArr updated ==> ', dayLogsArr);
+    }, [dayLogsArr]);
+
+
 
     const handleHourClick = (hour) => {
         setShowHour(hour)
@@ -73,16 +78,24 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
+    // Function to find the logs for a specific hour
+    const findLogForHour = (hourIndex) => {
+        return filteredAndSortedArray
+            .filter(log => {
+                const logHour = new Date(log.timestamp).getHours();
+                return logHour === hourIndex;
+            })
+            .map(log => log.name)
+            .join(", ");
+    };
+
     return (
-        <div className="DayLogPage_div">
+        <div className="dayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
 
-            <CustomCalendar
-                className="calenderCSS"
-                value={selectedDate}
-                onChange={handleDateChange} // Update selected date on calendar change
-            />
+            <br />
+            <br />
 
             <button
                 className="blue"
@@ -91,7 +104,13 @@ const DayLogPage = () => {
             >
                 BACK
             </button>
+            <br />
+            <br />
 
+            <CustomCalendar
+                value={selectedDate}
+                onChange={handleDateChange} // Update selected date on calendar change
+            />
 
             <div className="dp_header">
                 <button
@@ -115,7 +134,9 @@ const DayLogPage = () => {
                         onClick={() => handleHourClick(hour)}
                     >
                         <div className="dpgh_label">{hour}</div>
-                        <div className="dpgh_content"> click to enter food/excercise </div>
+                        <div className="dpgh_content">
+                            {findLogForHour(index) || "click to enter food/exercise"}
+                        </div>
                     </div>
                 ))}
             </div>
