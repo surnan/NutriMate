@@ -43,6 +43,8 @@ function LoginFormModal() {
         <label>
           Email&nbsp;&nbsp;
           <input
+
+          className="_input"
             type="text"
             value={email}
             name="email"
@@ -55,6 +57,7 @@ function LoginFormModal() {
         <label>
           Password&nbsp;&nbsp;
           <input
+          className="_input"
             type="password"
             value={password}
             name="password"
@@ -64,20 +67,20 @@ function LoginFormModal() {
         </label>
 
         {/* Log In button */}
-        <button className="orange" type="submit">
+        <button className="orange _button" type="submit">
           Log In
         </button>
 
         {/* Demo user buttons */}
         <button
-          className="ltskyblue"
+          className="ltskyblue _button"
           type="button"
           onClick={(e) => handleLogin(e, "user1@user.io", "password2")}
         >
           Demo 1
         </button>
         <button
-          className="ltcoral"
+          className="ltcoral _button"
           type="button"
           onClick={(e) => handleLogin(e, "user2@user.io", "password3")}
         >
