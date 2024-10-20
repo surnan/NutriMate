@@ -127,12 +127,23 @@ const DayLogPage = () => {
                     BACK
                 </button>
 
-                <button
-                    className="_button green"
-                onClick={handleNewDaily}
-                >
-                    CREATE
-                </button>
+
+                <div>
+
+                    <button
+                        className="_button orange"
+                        onClick={handleNewDaily}
+                    >
+                        + Workout
+                    </button>
+
+                    <button
+                        className="_button green"
+                        onClick={handleNewDaily}
+                    >
+                        + Grub
+                    </button>
+                </div>
             </div>
 
             <CustomCalendar
