@@ -24,16 +24,29 @@ const MyCalendar = ({ value, onChange }) => {
   }, [dayLogsArr]);
 
 
-  const highlightDates = dayLogsArr.reduce((acc, log) => {
-    const date = new Date(log.timestamp);
-    const dateString = date.toDateString();
-    // Add only unique dates to the accumulator
-    if (!acc.some(d => d.toDateString() === dateString)) {
-      acc.push(date);
-    }
+  // const highlightDates = dayLogsArr.reduce((acc, log) => {
+  //   const date = new Date(log.timestamp);
+  //   const dateString = date.toDateString();
+  //   // Add only unique dates to the accumulator
+  //   if (!acc.some(d => d.toDateString() === dateString)) {
+  //     acc.push(date);
+  //   }
+  //   return acc;
+  // }, []);
 
+  const highlightDates = dayLogsArr.reduce((acc, log) => {
+    if (log.userId === sessionUser?.id) { // Check if the log belongs to the current user
+      const date = new Date(log.timestamp);
+      const dateString = date.toDateString();
+      // Add only unique dates to the accumulator
+      if (!acc.some(d => d.toDateString() === dateString)) {
+        acc.push(date);
+      }
+    }
     return acc;
   }, []);
+
+  
 
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
