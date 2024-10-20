@@ -5,6 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom"
+import CustomCalendar from "../CustomCalendar";
 
 
 const hours = [
@@ -12,18 +13,17 @@ const hours = [
     "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM"
 ];
 
-const formattedDate = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-});
-
 const DayLogPage = () => {
     const dispatch = useDispatch()
     const nav = useNavigate();
 
     const sessionUser = useSelector((state) => state?.session?.user);
     const dayLogsArr = useSelector(state => state?.daylogs?.allDaylogs);
+    console.log('======> dayLogsArr ==> ', dayLogsArr)
+
+    // Set initial selected date to today
+    const [selectedDate, setSelectedDate] = useState(new Date());
+
 
     useEffect(() => {
         console.log("Fetching daily logs...");
@@ -44,7 +44,7 @@ const DayLogPage = () => {
         setShowHour(null)
     };
 
-    const handlePageClick = (e) => {
+    const handlePageClick = () => {
         setShowCreateDayLogModal(false);
     };
 
@@ -61,10 +61,28 @@ const DayLogPage = () => {
 
     const handleBackBtn = () => { nav(-1) };
 
+    // const formattedDate = new Date().toLocaleDateString('en-US', {
+    const formattedDate = selectedDate.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+
+    // Handle date change from the calendar
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
+
     return (
         <div className="DayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
+
+            <CustomCalendar
+                className="calenderCSS"
+                value={selectedDate}
+                onChange={handleDateChange} // Update selected date on calendar change
+            />
 
             <button
                 className="blue"

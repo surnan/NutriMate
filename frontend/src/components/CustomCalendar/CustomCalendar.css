@@ -1,0 +1,28 @@
+
+/* CustomCalendar.css */
+.react-calendar {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+  }
+  
+  .react-calendar__tile--now {
+    background-color: #ffeb3b; /* Highlight today's date */
+    color: black;
+  }
+  
+  .react-calendar__tile--active {
+    background-color: #03a9f4; /* Active date color */
+    color: white;
+  }
+  
+  .highlighted-date {
+    background-color: #8bc34a; /* Specific dates you want to highlight */
+    color: white;
+  }
+  
+  /* Example of customizing weekend colors */
+  .react-calendar__month-view__days__day--weekend {
+    color: red;
+  }
+  
