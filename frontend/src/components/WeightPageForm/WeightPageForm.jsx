@@ -125,7 +125,7 @@ function WeightPageForm() {
 
             <div className="max_HFlex">
                 <button
-                    className="blue"
+                    className="blue _button"
                     type="button"
                     onClick={handleBackBtn}
                 >
@@ -134,14 +134,14 @@ function WeightPageForm() {
 
                 <div className="weightPageForm_hFlex">
                     <button
-                        className="orange"
+                        className="orange _button"
                         type="button"
                         onClick={handleResetBtn}
                     >
                         RESET
                     </button>
                     <button
-                        className={`green`}
+                        className={`green _button`}
                         type="button"
                         onClick={handleSubmit}
                         disabled={hasError()}
@@ -157,6 +157,7 @@ function WeightPageForm() {
                     {errors.day && <span style={{ color: 'red' }}>{errors.day}&nbsp;&nbsp;</span>} Day
                 </label>
                 <input
+                    className="_input"
                     type="date"
                     name="day"
                     onChange={updateSetForm}
@@ -169,6 +170,7 @@ function WeightPageForm() {
                     {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} Starting Weight (number):
                 </label>
                 <input
+                    className="_input"
                     type="number"
                     name="start"
                     onChange={updateSetForm}
@@ -180,6 +182,7 @@ function WeightPageForm() {
                     {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} Goal Weight (number):
                 </label>
                 <input
+                    className="_input"
                     type="number"
                     name="goal"
                     onChange={updateSetForm}
@@ -194,6 +197,7 @@ function WeightPageForm() {
                 <input
                     type="number"
                     name="current"
+                    className="_input"
                     onChange={updateSetForm}
                     placeholder="Please enter current weight as integer"
                     value={form.current}
@@ -215,7 +219,7 @@ function WeightPageForm() {
             </div>
             <div className="weightPageForm_hFlex">
                 <button
-                    className="red"
+                    className="red _button"
                     type="button"
                     onClick={handleDeleteBtn}
                 >
