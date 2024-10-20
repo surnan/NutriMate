@@ -117,6 +117,7 @@ const DayLogPage = () => {
         <div className="dayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
+
             <div className="max_HFlex workout_btn_div">
                 <button
                     className="_button blue"
