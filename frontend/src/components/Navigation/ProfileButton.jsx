@@ -54,7 +54,7 @@ function ProfileButton() {
           {user ? (
             <div className="profile_dropdown_grid">
               <p>{user.email}</p>
-              <button className="black_font" onClick={logout}>Log Out</button>
+              <button className="black_font _button" onClick={logout}>Log Out</button>
             </div>
           ) : (
             <div className="popupDiv">
