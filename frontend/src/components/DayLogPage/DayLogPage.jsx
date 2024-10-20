@@ -78,12 +78,25 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
-    const findLogsForHour = (hourIndex) => {
+    const _findLogsForHour = (hourIndex) => {
         return filteredAndSortedArray.filter(log => {
             const logHour = new Date(log.timestamp).getHours();
             return logHour === hourIndex;
         });
     };
+
+    const findLogsForHour = (hourIndex) => {
+        return filteredAndSortedArray.filter(log => {
+            const logDate = new Date(log.timestamp);
+            const logHour = logDate.getHours();
+    
+            return logHour === hourIndex &&
+                   logDate.getFullYear() === selectedDate.getFullYear() &&
+                   logDate.getMonth() === selectedDate.getMonth() &&
+                   logDate.getDate() === selectedDate.getDate();
+        });
+    };
+    
 
     const handlePrevDayBtn = () => {
         console.log("PREV Button clicked")
