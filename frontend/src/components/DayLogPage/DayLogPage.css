@@ -45,3 +45,20 @@
 
 .dpg_hour {font-size: larger}
 .dpgh_label {font-weight: 600}
+
+.calendarStuff {
+    width: 50%;
+    height: 50%;
+    background-color: yellow;
+    color: purple;
+    margin: auto;
+    margin-top: 2rem;
+    padding: 1rem;
+}
+
+
+
+.calenderCSS{
+  margin: 0 auto;
+  display: block;
+}
