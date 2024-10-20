@@ -4,7 +4,7 @@ import './DayLogModal.css'
 import { useNavigate } from 'react-router-dom';
 
 
-const DayLogModal = ({ stuff, onClose }) => {
+const DayLogModal = ({ _stuff, onClose }) => {
     // const dispatch = useDispatch();
     const nav = useNavigate()
 
