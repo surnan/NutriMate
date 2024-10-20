@@ -49,8 +49,11 @@ const DayLogPage = () => {
         setShowHour(null)
     };
 
-    const handlePageClick = () => {
-        setShowCreateDayLogModal(false);
+
+    const handlePageClick = (e) => {
+        if (modalRef.current && !modalRef.current.querySelector('.daily_extend_modal_window_all').contains(e.target)) {
+            setShowCreateDayLogModal(false);
+        }
     };
 
     useEffect(() => {
@@ -78,25 +81,17 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
-    const _findLogsForHour = (hourIndex) => {
-        return filteredAndSortedArray.filter(log => {
-            const logHour = new Date(log.timestamp).getHours();
-            return logHour === hourIndex;
-        });
-    };
-
     const findLogsForHour = (hourIndex) => {
         return filteredAndSortedArray.filter(log => {
             const logDate = new Date(log.timestamp);
             const logHour = logDate.getHours();
-    
+
             return logHour === hourIndex &&
-                   logDate.getFullYear() === selectedDate.getFullYear() &&
-                   logDate.getMonth() === selectedDate.getMonth() &&
-                   logDate.getDate() === selectedDate.getDate();
+                logDate.getFullYear() === selectedDate.getFullYear() &&
+                logDate.getMonth() === selectedDate.getMonth() &&
+                logDate.getDate() === selectedDate.getDate();
         });
     };
-    
 
     const handlePrevDayBtn = () => {
         console.log("PREV Button clicked")
@@ -120,10 +115,6 @@ const DayLogPage = () => {
         <div className="dayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
-
-            <br />
-            <br />
-
             <button
                 className="blue"
                 type="button"
@@ -131,8 +122,6 @@ const DayLogPage = () => {
             >
                 BACK
             </button>
-            <br />
-            <br />
 
             <CustomCalendar
                 value={selectedDate}
@@ -176,7 +165,10 @@ const DayLogPage = () => {
                 ))}
             </div>
             {showCreateDayLogModal && (
-                <div ref={modalRef}>
+                <div
+                    className="WTF"
+                    ref={modalRef}
+                >
                     <DayLogModal
                         onClose={handleModalClose}
                         onSubmit={handleHourClick}
