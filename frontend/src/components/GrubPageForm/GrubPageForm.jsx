@@ -204,6 +204,7 @@ function GrubPageForm() {
                     {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
                 </label>
                 <input
+                    className="_input"
                     type="text"
                     name="name"
                     onChange={updateSetForm}
@@ -217,6 +218,7 @@ function GrubPageForm() {
                         Per Serving
                     </p>
                     <input
+                        className="_input"
                         type="Number"
                         name="servingSize"
                         onChange={updateSetForm}
@@ -245,6 +247,7 @@ function GrubPageForm() {
                     {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
                 </label>
                 <input
+                    className="_input"
                     type="Number"
                     name="calories"
                     onChange={updateSetForm}
@@ -259,6 +262,7 @@ function GrubPageForm() {
                             Protein (g)
                         </label>
                         <input
+                            className="_input"
                             type="Number"
                             name="protein"
                             onChange={updateSetForm}
@@ -274,6 +278,7 @@ function GrubPageForm() {
                             Fats (g)
                         </label>
                         <input
+                            className="_input"
                             type="Number"
                             name="fats"
                             onChange={updateSetForm}
@@ -289,6 +294,7 @@ function GrubPageForm() {
                             Carbs (g)
                         </label>
                         <input
+                            className="_input"
                             type="Number"
                             name="carbs"
                             onChange={updateSetForm}
@@ -304,6 +310,7 @@ function GrubPageForm() {
                             Sugar (g)
                         </label>
                         <input
+                            className="_input"
                             type="Number"
                             name="sugar"
                             onChange={updateSetForm}
@@ -319,6 +326,7 @@ function GrubPageForm() {
                     Company
                 </label>
                 <input
+                    className="_input"
                     type="text"
                     name="company"
                     onChange={updateSetForm}
@@ -330,6 +338,7 @@ function GrubPageForm() {
                     Description
                 </label>
                 <textarea
+                    className="_textarea"
                     name="description"
                     onChange={updateSetForm}
                     placeholder="enter description"
@@ -364,6 +373,7 @@ function GrubPageForm() {
 
                 <p>Date</p>
                 <input
+                    className="_input"
                     type="datetime-local"
                     name="day"
                     onChange={updateSetForm}
@@ -372,17 +382,19 @@ function GrubPageForm() {
                 />
                 <p>Serving Count</p>
                 <input
+                    className="_input"
                     type="number"
                     name="day"
                     onChange={updateSetForm}
                     placeholder="Please enter your goal weight"
                     value={formatDate(form.day)}
                 />
-               <label>
-                calculated calories
-               </label>
+                <label>
+                    calculated calories
+                </label>
                 <p> 99878 Calories</p>
                 <input
+                    className="_input"
                     type="number"
                     name="day"
                     onChange={updateSetForm}
@@ -390,6 +402,7 @@ function GrubPageForm() {
                     value={formatDate(form.day)}
                 />
                 <input
+                    className="_input"
                     type="number"
                     name="Quantity"
                     onChange={updateSetForm}
@@ -397,6 +410,7 @@ function GrubPageForm() {
                     value={formatDate(form.day)}
                 />
                 <select
+                    className="_input"
                     name="servingUnit"
                     onChange={updateSetForm}
                     value={form.servingUnit || ""}
