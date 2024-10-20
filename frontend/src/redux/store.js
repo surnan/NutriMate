@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     weights: weightsReducer,
     workouts: workoutsReducer,
     grubs: grubsReducer,
-    daylog: daylogsReducer
+    daylogs: daylogsReducer
 });
 
 let enhancer;
