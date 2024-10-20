@@ -46,7 +46,7 @@ function ProfileButton() {
 
   return (
     <div className="profile_anchor">
-      <button className="profile_btn" onClick={toggleMenu}>
+      <button className="profile_btn _button" onClick={toggleMenu}>
         <i className="fas fa-user-circle black_font" />
       </button>
       {showMenu && (

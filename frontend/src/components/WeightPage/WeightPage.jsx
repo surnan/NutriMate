@@ -48,14 +48,14 @@ const WeightPage = () => {
       <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">
         <button
-          className="blue"
+          className="blue _button"
           type="button"
           onClick={handleBackBtn}
         >
           BACK
         </button>
         <button
-          className="green"
+          className="green _button"
           onClick={handleNewWeight}
         >
           CREATE
