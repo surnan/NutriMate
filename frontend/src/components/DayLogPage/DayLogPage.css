@@ -1,6 +1,6 @@
 
 
-.dailypage_div {
+.dayLogPage_div {
     margin: 3rem auto;
     width: 50rem;
 }
@@ -54,11 +54,4 @@
     margin: auto;
     margin-top: 2rem;
     padding: 1rem;
-}
-
-
-
-.calenderCSS{
-  margin: 0 auto;
-  display: block;
 }
