@@ -111,17 +111,29 @@ const DayLogPage = () => {
         });
     }
 
+    const handleNewDaily = () => { nav('/daylogform') }
+
     return (
         <div className="dayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
-            <button
-                className="blue"
-                type="button"
-                onClick={handleBackBtn}
-            >
-                BACK
-            </button>
+
+            <div className="max_HFlex workout_btn_div">
+                <button
+                    className="_button blue"
+                    type="button"
+                    onClick={handleBackBtn}
+                >
+                    BACK
+                </button>
+
+                <button
+                    className="_button green"
+                onClick={handleNewDaily}
+                >
+                    CREATE
+                </button>
+            </div>
 
             <CustomCalendar
                 value={selectedDate}
