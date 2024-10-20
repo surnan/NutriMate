@@ -78,16 +78,30 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
-    // Function to find the logs for a specific hour
-    const findLogForHour = (hourIndex) => {
-        return filteredAndSortedArray
-            .filter(log => {
-                const logHour = new Date(log.timestamp).getHours();
-                return logHour === hourIndex;
-            })
-            .map(log => log.name)
-            .join(", ");
+    const findLogsForHour = (hourIndex) => {
+        return filteredAndSortedArray.filter(log => {
+            const logHour = new Date(log.timestamp).getHours();
+            return logHour === hourIndex;
+        });
     };
+
+    const handlePrevDayBtn = () => {
+        console.log("PREV Button clicked")
+        setSelectedDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() - 1);
+            return newDate;
+        });
+    }
+
+    const handleNextDayBtn = () => {
+        console.log("NEXT Button clicked")
+        setSelectedDate(prevDate => {
+            const newDate = new Date(prevDate);
+            newDate.setDate(newDate.getDate() + 1);
+            return newDate;
+        });
+    }
 
     return (
         <div className="dayLogPage_div">
@@ -115,12 +129,14 @@ const DayLogPage = () => {
             <div className="dp_header">
                 <button
                     className="dph_btn black_font orange round"
+                    onClick={handlePrevDayBtn}
                 >
                     <i className="fa-solid fa-caret-left"></i>
                 </button>
                 <h2>{formattedDate}</h2>
                 <button
                     className="black_font  orange dph_btn round"
+                    onClick={handleNextDayBtn}
                 >
                     <i className="fa-solid fa-caret-right"></i>
                 </button>
@@ -135,7 +151,13 @@ const DayLogPage = () => {
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
-                            {findLogForHour(index) || "click to enter food/exercise"}
+                            {findLogsForHour(index).length > 0 ? (
+                                findLogsForHour(index).map(log => (
+                                    <DayLogCard key={log.id} daylog={log} />
+                                ))
+                            ) : (
+                                "click to enter food/exercise"
+                            )}
                         </div>
                     </div>
                 ))}
