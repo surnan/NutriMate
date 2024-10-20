@@ -60,7 +60,7 @@ const WorkoutPage = () => {
 
       <div className="max_HFlex workout_btn_div">
         <button
-          className="blue"
+          className="blue _button"
           type="button"
           onClick={handleBackBtn}
         >
@@ -68,7 +68,7 @@ const WorkoutPage = () => {
         </button>
 
         <button
-          className="green"
+          className="green _button"
           onClick={handleNewWorkout}
         >CREATE
         </button>

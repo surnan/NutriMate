@@ -98,6 +98,12 @@ function WorkoutPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
+    const formatDate = (dateString) => {
+        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    };
+
     return (
         <div className="mainBodyStyle">
             {/* <h1>WorkoutPageForm.jsx</h1>
@@ -105,7 +111,7 @@ function WorkoutPageForm() {
 
             <div className="max_HFlex">
                 <button
-                    className="blue"
+                    className="blue _button"
                     type="button"
                     onClick={handleBackBtn}
                 >
@@ -114,14 +120,14 @@ function WorkoutPageForm() {
 
                 <div className="wokoutPageForm_hFlex">
                     <button
-                        className="orange"
+                        className="orange _button"
                         type="button"
                         onClick={handleresetBtn}
                     >
                         RESET
                     </button>
                     <button
-                        className="green"
+                        className="green _button"
                         type="button"
                         onClick={handleSubmit}
                         disabled={hasError()}
@@ -158,21 +164,74 @@ function WorkoutPageForm() {
                 />
 
             </div>
-            
+
             <button
-                className="red"
+                className="red _button"
                 type="button"
                 onClick={handleDeleteBtn}
             >
                 DELETE
             </button>
             {showDeletetModal && (
-                    <DeleteWorkoutModal
-                        onClose={handleModalClose}
-                        onSubmit={handleDeleteBtn}
-                        workout={selectedWorkout}
-                    />
-                )}
+                <DeleteWorkoutModal
+                    onClose={handleModalClose}
+                    onSubmit={handleDeleteBtn}
+                    workout={selectedWorkout}
+                />
+            )}
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+
+            <button
+                className="black _button"
+                type="button"
+            // onClick={handleDeleteBtn}
+            >
+                Add To Log
+            </button>
+
+            <div className="workout_page_form_grid">
+
+                <p>Date</p>
+                <input
+                    type="datetime-local"
+                    name="day"
+                    onChange={updateSetForm}
+                    placeholder="Please enter your goal weight"
+                    value={formatDate(form.day)}
+                />
+                <p>Calories</p>
+                <input
+                    type="number"
+                    name="day"
+                    onChange={updateSetForm}
+                    placeholder="Please enter your goal weight"
+                    value={formatDate(form.day)}
+                />
+                <input
+                    type="number"
+                    name="Quantity"
+                    onChange={updateSetForm}
+                    placeholder="Quantity"
+                    value={formatDate(form.day)}
+                />
+                                    <select
+                        name="servingUnit"
+                        onChange={updateSetForm}
+                        value={form.servingUnit || ""}
+                    >
+                        <option value="">Quantity Type</option>
+                        <option value="minutes">minutes</option>
+                        <option value="hours">hours</option>
+                        <option value="seconds">seconds</option>
+                        <option value="each">each</option>
+                        <option value="reps">reps</option>
+                    </select>
+
+            </div>
         </div>
     );
 }

@@ -53,14 +53,14 @@ const GrubPage = () => {
 
       <div className="max_HFlex grub_btn_div">
         <button
-          className="blue"
+          className="blue _button"
           type="button"
           onClick={handleBackBtn}
         >
           BACK
         </button>
         <button
-          className="green"
+          className="green _button"
           onClick={handleNewGrub}
         >CREATE
         </button>
