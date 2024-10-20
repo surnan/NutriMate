@@ -145,6 +145,7 @@ function WorkoutPageForm() {
                 </label>
 
                 <input
+                    className="_input"
                     type="text"
                     name="name"
                     onChange={updateSetForm}
@@ -156,6 +157,7 @@ function WorkoutPageForm() {
                     {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description:
                 </label>
                 <textarea
+                    className="_textarea"
                     maxLength="498"
                     name="description"
                     onChange={updateSetForm}
@@ -197,6 +199,7 @@ function WorkoutPageForm() {
 
                 <p>Date</p>
                 <input
+                    className="_input"
                     type="datetime-local"
                     name="day"
                     onChange={updateSetForm}
@@ -205,6 +208,7 @@ function WorkoutPageForm() {
                 />
                 <p>Calories</p>
                 <input
+                    className="_input"
                     type="number"
                     name="day"
                     onChange={updateSetForm}
@@ -212,24 +216,26 @@ function WorkoutPageForm() {
                     value={formatDate(form.day)}
                 />
                 <input
+                    className="_input"
                     type="number"
                     name="Quantity"
                     onChange={updateSetForm}
                     placeholder="Quantity"
                     value={formatDate(form.day)}
                 />
-                                    <select
-                        name="servingUnit"
-                        onChange={updateSetForm}
-                        value={form.servingUnit || ""}
-                    >
-                        <option value="">Quantity Type</option>
-                        <option value="minutes">minutes</option>
-                        <option value="hours">hours</option>
-                        <option value="seconds">seconds</option>
-                        <option value="each">each</option>
-                        <option value="reps">reps</option>
-                    </select>
+                <select
+                    className="_input"
+                    name="servingUnit"
+                    onChange={updateSetForm}
+                    value={form.servingUnit || ""}
+                >
+                    <option value="">Quantity Type</option>
+                    <option value="hours">hours</option>
+                    <option value="minutes">minutes</option>
+                    <option value="seconds">seconds</option>
+                    <option value="each">each</option>
+                    <option value="reps">reps</option>
+                </select>
 
             </div>
         </div>
