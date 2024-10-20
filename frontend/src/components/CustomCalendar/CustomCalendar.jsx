@@ -1,16 +1,39 @@
-import React, { useState } from 'react';
+// frontend/src/componenets/CustomCalendar.jsx
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CustomCalendar.css';
 
-// function MyCalendar() {  //ORIGINAL
-function MyCalendar({value, onChange}) {
-  const [date, setDate] = useState(new Date()); //today
+import { useState, useEffect } from "react";
+import { getDailyLogsAllThunk } from "../../redux/daylogs";
+import { useDispatch, useSelector } from "react-redux";
 
-  const highlightDates = [
-    new Date(2024, 9, 24), // October 24, 2024 - random
-    new Date(2024, 9, 31), // October 31, 2024 - random
-  ];
+
+// function MyCalendar() {  //ORIGINAL
+const MyCalendar = ({ value, onChange }) => {
+  const dispatch = useDispatch()
+
+  const sessionUser = useSelector((state) => state.session.user);
+  const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
+
+  useEffect(() => {
+    dispatch(getDailyLogsAllThunk())
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log('==> CustomCalendar +++++ => dayLogsArr updated ==> ', dayLogsArr);
+  }, [dayLogsArr]);
+
+
+  const highlightDates = dayLogsArr.reduce((acc, log) => {
+    const date = new Date(log.timestamp);
+    const dateString = date.toDateString();
+    // Add only unique dates to the accumulator
+    if (!acc.some(d => d.toDateString() === dateString)) {
+      acc.push(date);
+    }
+
+    return acc;
+  }, []);
 
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
