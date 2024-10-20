@@ -1,0 +1,33 @@
+/* DayLogPageForm.css */
+
+.workout_page_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1100px;
+    padding: 5px;
+    gap: 2rem;
+    column-gap: 1rem;
+}
+
+
+.WorkoutPage_createBtn{
+    display: block;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 5px;
+}
+
+.workout_btn_div{padding: 30px}
+
+.search_div {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 4rem;
+}
