@@ -9,16 +9,19 @@
   .react-calendar__tile--now {
     background-color: #ffeb3b; /* Highlight today's date */
     color: black;
+    border-radius: 50%;
   }
   
   .react-calendar__tile--active {
-    background-color: #03a9f4; /* Active date color */
+    background-color: limegreen; /* Active date color */
     color: white;
+    border-radius: 50%;
   }
   
   .highlighted-date {
-    background-color: #8bc34a; /* Specific dates you want to highlight */
+    background-color: rgba(0, 132, 255, 0.667); /* Specific dates you want to highlight */
     color: white;
+    border-radius: 50%;
   }
   
   /* Example of customizing weekend colors */

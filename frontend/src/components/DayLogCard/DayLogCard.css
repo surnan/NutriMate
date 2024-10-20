@@ -1,0 +1,20 @@
+/* DayLogCard.css */
+
+.dayLog_card_grid {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr 1fr;
+}
+
+.dayLog_card_grid > :first-child {
+    background-color: lightgrey;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.dayLog_card_grid > :nth-child(2) {
+    background-color: yellow;
+}
+
+.dayLog_card_grid > :nth-child(3) {
+    background-color: pink;
+}
