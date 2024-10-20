@@ -158,6 +158,12 @@ function GrubPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
+    const formatDate = (dateString) => {
+        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    };
+
     return (
         <div className="mainBodyStyle">
             {/* <h1>GrubForm.jsx</h1>
@@ -165,7 +171,7 @@ function GrubPageForm() {
 
             <div className="grubPageForm_hFlex">
                 <button
-                    className="orange"
+                    className="orange _button"
                     type="button"
                     onClick={handleBackBtn}
                 >
@@ -174,7 +180,7 @@ function GrubPageForm() {
 
                 <div className="grubPageForm_hFlex">
                     <button
-                        className="blue"
+                        className="blue _button"
                         type="button"
                         onClick={handleCancelBtn}
                     >
@@ -182,7 +188,7 @@ function GrubPageForm() {
                     </button>
 
                     <button
-                        className="green"
+                        className="green _button"
                         type="button"
                         onClick={handleSubmit}
                         disabled={hasError()}
@@ -333,7 +339,7 @@ function GrubPageForm() {
 
                 <div >
                     <button
-                        className="red"
+                        className="red _button"
                         type="button"
                         onClick={handleDeleteBtn}
                     >
@@ -349,6 +355,62 @@ function GrubPageForm() {
                     grub={selectedGrub}
                 />
             )}
+            <br />
+            <br />
+            <hr />
+            <br />
+            <br />
+            <div className="workout_page_form_grid">
+
+                <p>Date</p>
+                <input
+                    type="datetime-local"
+                    name="day"
+                    onChange={updateSetForm}
+                    placeholder="Please enter your goal weight"
+                    value={formatDate(form.day)}
+                />
+                <p>Serving Count</p>
+                <input
+                    type="number"
+                    name="day"
+                    onChange={updateSetForm}
+                    placeholder="Please enter your goal weight"
+                    value={formatDate(form.day)}
+                />
+               <label>
+                calculated calories
+               </label>
+                <p> 99878 Calories</p>
+                <input
+                    type="number"
+                    name="day"
+                    onChange={updateSetForm}
+                    placeholder="Please enter your goal weight"
+                    value={formatDate(form.day)}
+                />
+                <input
+                    type="number"
+                    name="Quantity"
+                    onChange={updateSetForm}
+                    placeholder="Quantity"
+                    value={formatDate(form.day)}
+                />
+                <select
+                    name="servingUnit"
+                    onChange={updateSetForm}
+                    value={form.servingUnit || ""}
+                >
+                    <option value="">Quantity Type</option>
+                    <option value="hours">hours</option>
+                    <option value="minutes">minutes</option>
+                    <option value="seconds">seconds</option>
+                    <option value="each">each</option>
+                    <option value="reps">reps</option>
+                </select>
+
+            </div>
+
         </div>
     );
 }
