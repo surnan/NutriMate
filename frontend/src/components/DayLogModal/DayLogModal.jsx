@@ -17,7 +17,7 @@ const DayLogModal = ({ _stuff, onClose }) => {
     const handleGrubsBtn = () => { nav("/grubs") }
 
     return (
-        <div className="modal_under_layer">
+        <div className="daylog_modal_under_layer">
             <div className="daily_extend_modal_window_all shadow">
                 <h2 className='center'>Click to Add:</h2>
                 <div className="daily_btn_font_size_grid">
