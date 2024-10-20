@@ -47,6 +47,7 @@ function SignupFormModal() {
         <label>
           Email
           <input
+            className="_input"
             type="text"
             value={email}
             name="email"
@@ -59,6 +60,7 @@ function SignupFormModal() {
         <label>
           Username
           <input
+            className="_input"
             type="text"
             value={username}
             name="username"
@@ -71,6 +73,7 @@ function SignupFormModal() {
         <label>
           Password
           <input
+            className="_input"
             type="password"
             value={password}
             name="password"
@@ -80,8 +83,9 @@ function SignupFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <label>
-          Confirm <br/>Password
+          Confirm <br />Password
           <input
+            className="_input"
             type="password"
             value={confirmPassword}
             name="confirmpassword"
@@ -91,7 +95,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button className="orange" type="submit">Sign Up</button>
+        <button className="orange _button" type="submit">Sign Up</button>
       </form>
     </>
   );
