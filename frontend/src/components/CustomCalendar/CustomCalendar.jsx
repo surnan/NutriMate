@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+// frontend/src/componenets/CustomCalendar.jsx
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CustomCalendar.css';
 
 // function MyCalendar() {  //ORIGINAL
 function MyCalendar({value, onChange}) {
-  const [date, setDate] = useState(new Date()); //today
 
   const highlightDates = [
     new Date(2024, 9, 24), // October 24, 2024 - random

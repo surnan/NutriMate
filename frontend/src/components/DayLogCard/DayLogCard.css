@@ -3,18 +3,18 @@
 .dayLog_card_grid {
     display: grid;
     grid-template-rows: 1.5fr 1fr 1fr;
+    border: 1px black solid;
 }
 
 .dayLog_card_grid > :first-child {
-    background-color: lightgrey;
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
 
-.dayLog_card_grid > :nth-child(2) {
+.dayLog_card_grid > :nth-child(odd) {
     background-color: yellow;
 }
 
-.dayLog_card_grid > :nth-child(3) {
+.dayLog_card_grid > :nth-child(even) {
     background-color: pink;
 }
