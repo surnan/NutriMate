@@ -78,13 +78,6 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
-    const _findLogsForHour = (hourIndex) => {
-        return filteredAndSortedArray.filter(log => {
-            const logHour = new Date(log.timestamp).getHours();
-            return logHour === hourIndex;
-        });
-    };
-
     const findLogsForHour = (hourIndex) => {
         return filteredAndSortedArray.filter(log => {
             const logDate = new Date(log.timestamp);

@@ -51,7 +51,7 @@ export const deleteDailyLogsThunkById = (id) => async (dispatch) => {
 }
 
 export const postDailyLogsOneThunk = ({ body }) => async (dispatch) => {
-    const res = await csrfFetch(`/api/daylogs/${id}`, {
+    const response = await csrfFetch(`/api/daylogs`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
@@ -100,19 +100,19 @@ const daylogsReducer = (state = initialState, action) => {
             }
             return newState
         }
-        case REMOVE_WORKOUTS_ONE: {
+        case REMOVE_DAYLOGS_ONE: {
             let newState = { ...state }
             newState.allDaylogs = newState.allDaylogs.filter(currentWorkout => currentWorkout.id !== action.payload);
             delete newState.byId[action.payload.id]
             return newState
         }
-        case POST_WORKOUTS_ONE: {
+        case POST_DAYLOGS_ONE: {
             let newState = {...state}
             newState.allDaylogs = [action.payload, ...newState.allDaylogs]
             newState.byId[action.payload.id] = action.payload;
             return newState
         }
-        case UPDATE_WORKOUTS_ONE: {
+        case UPDATE_DAYLOGS_ONE: {
             let newState = {...state}
             newState.allDaylogs = [action.payload, ...newState.allDaylogs]
             newState.byId[action.payload.id] = action.payload;
