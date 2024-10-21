@@ -18,13 +18,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1, 30],
-                isNameLengthValid(value) {
-                    const strValue = String(value)
-                    if (strValue.length > 30) {
-                        throw new Error(`Name too long. ==> ${strValue} has length ${strValue.length}`);
-                    }
-                }
+                len: [1, 30]
             }
         },
         calories: {
@@ -73,12 +67,12 @@ module.exports = (sequelize, DataTypes) => {
         },
         grubId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: { model: 'Grubs' }
         },
         workoutId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: { model: 'Workouts' }
         }
     }, {

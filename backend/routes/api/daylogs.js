@@ -81,7 +81,8 @@ router.get('/:dayLogId', async (req, res, next) => {
     }
 });
 
-router.delete('/:dayLogId', requireAuth, async (req, res, next) => {
+// router.delete('/:dayLogId', requireAuth, async (req, res, next) => {
+router.delete('/:dayLogId', async (req, res, next) => {
     try {
         const dayLogId = parseInt(req.params.dayLogId)
         const currentdayLog = await DayLog.findByPk(dayLogId)
@@ -98,9 +99,11 @@ router.delete('/:dayLogId', requireAuth, async (req, res, next) => {
     }
 })
 
-router.post('/', requireAuth, async (req, res, next) => {
+// router.post('/', requireAuth, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         const { name, calories, units, unitType, grubId, userId, workoutId, timestamp } = req.body
+
         const newdayLog = await DayLog.create(
             {
                 name, 
@@ -110,7 +113,7 @@ router.post('/', requireAuth, async (req, res, next) => {
                 grubId: parseInt(grubId) || null, 
                 workoutId: parseInt(workoutId) || null, 
                 userId: parseInt(userId), 
-                workoutId: parseInt(workoutId), 
+                grubtId: parseInt(grubId), 
                 timestamp 
             }
         )
@@ -125,7 +128,8 @@ router.post('/', requireAuth, async (req, res, next) => {
     }
 })
 
-router.put('/:dayLogId', requireAuth, async (req, res, next) => {
+// router.put('/:dayLogId', requireAuth, async (req, res, next) => {
+router.put('/:dayLogId', async (req, res, next) => {
     try {
         const dayLogId = parseInt(req.params.dayLogId)
         const currentdayLog = await DayLog.findByPk(dayLogId)
@@ -144,7 +148,7 @@ router.put('/:dayLogId', requireAuth, async (req, res, next) => {
                 grubId: parseInt(grubId) || null, 
                 workoutId: parseInt(workoutId) || null, 
                 userId: parseInt(userId), 
-                workoutId: parseInt(workoutId), 
+                grubtId: parseInt(grubId), 
                 timestamp 
             }
         )
