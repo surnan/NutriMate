@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './CustomCalendar.css';
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getDailyLogsAllThunk } from "../../redux/daylogs";
 import { useDispatch, useSelector } from "react-redux";
 
