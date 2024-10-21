@@ -19,7 +19,7 @@ const SearchBar = ({ onSearch, placeholder }) => {
                 value={searchQuery}
                 onChange={handleInputChange}
                 placeholder={placeholder || "Search..."}
-                className="search_input center "
+                className="_input center "
             />
         </div>
     );
