@@ -37,6 +37,17 @@ function WorkoutPageForm() {
         setShowDeletetModal(true)
     }
 
+    const handleDayLogBtn = () => {
+        if (!currentData?.id) {
+            alert('Workout needs to be saved before adding to DayLog');
+            return;
+        }
+        navigate('/DayLogFormWorkout')
+    }
+
+
+
+
     const handleModalClose = () => {
         setShowDeletetModal(false)
         setSelectedWorkout(null)
@@ -174,6 +185,16 @@ function WorkoutPageForm() {
             >
                 DELETE
             </button>
+
+            <button
+                className="black _button"
+                type="button"
+            onClick={handleDayLogBtn}
+            >
+                Add To Log
+            </button>
+
+
             {showDeletetModal && (
                 <DeleteWorkoutModal
                     onClose={handleModalClose}
@@ -187,13 +208,6 @@ function WorkoutPageForm() {
             <br />
             <br />
 
-            <button
-                className="black _button"
-                type="button"
-            // onClick={handleDeleteBtn}
-            >
-                Add To Log
-            </button>
 
             <div className="workout_page_form_grid">
 
