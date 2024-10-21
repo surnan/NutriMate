@@ -16,7 +16,7 @@ const hours = [
 
 const DayLogPage = () => {
     const dispatch = useDispatch()
-    const nav = useNavigate();
+    const navigate = useNavigate();
     const modalRef = useRef(null);
     const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
     const [showHour, setShowHour] = useState(12);
@@ -67,7 +67,7 @@ const DayLogPage = () => {
         };
     }, [showCreateDayLogModal]);
 
-    const handleBackBtn = () => { nav(-1) };
+    const handleBackBtn = () => { navigate(-1) };
 
     // const formattedDate = new Date().toLocaleDateString('en-US', {
     const formattedDate = selectedDate.toLocaleDateString('en-US', {
@@ -111,7 +111,9 @@ const DayLogPage = () => {
         });
     }
 
-    const handleNewDaily = () => { nav('/daylogform') }
+    // const handleNewDaily = () => { nav('/daylogform') }
+    const handleNewWorkout = () => {navigate("/workouts")}
+    const handleNewGrubs = () => {navigate("/grubs")}
 
     return (
         <div className="dayLogPage_div">
@@ -132,14 +134,14 @@ const DayLogPage = () => {
 
                     <button
                         className="_button orange"
-                        onClick={handleNewDaily}
+                        onClick={handleNewWorkout}
                     >
                         + Workout
                     </button>
 
                     <button
                         className="_button green"
-                        onClick={handleNewDaily}
+                        onClick={handleNewGrubs}
                     >
                         + Grub
                     </button>
