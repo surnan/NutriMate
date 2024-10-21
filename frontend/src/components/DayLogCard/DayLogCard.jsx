@@ -4,7 +4,7 @@ import "./DayLogCard.css";
 function DayLogCard({ daylog }) {
 
     //   const { timestamp, name, calories, unit, unitType, Grub, Workout } = daylog
-    const { timestamp, name, calories, User } = daylog
+    const { name, calories } = daylog
 
     // return (
     //     <div className="dayLog_card_grid">
