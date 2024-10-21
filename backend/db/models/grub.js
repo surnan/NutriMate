@@ -14,13 +14,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [1, 30],
-                isNameLengthValid(value) {
-                    const strValue = String(value)
-                    if (strValue.length > 30) {
-                        throw new Error(`Name too long. ==> ${strValue} has length ${strValue.length}`);
-                    }
-                }
+                len: [1, 30]
             }
         },
         servingSize: {
