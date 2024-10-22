@@ -50,13 +50,23 @@ const DayLogPage = () => {
         const isWorkout = e.target.closest('[data-daycardid]')?.getAttribute('data-workout');
         const isGrub = e.target.closest('[data-daycardid]')?.getAttribute('data-grub');
 
-        if (daycardId) {
-            console.log("DayCard ID:", daycardId);
-        } else {
-            console.log("No daycard ID found");
-        }
         console.log("isWorkout = ", isWorkout)
         console.log("isGrub = ", isGrub)
+        console.log("daycardId = ", daycardId)
+
+        if (isWorkout) {
+            navigate('/DayLogFormWorkout',
+                {
+                    state:
+                    {
+                        newWorkout: false,
+                        currentData: {
+                            daycardId,
+                            isWorkout,
+                            isGrub
+                        }
+                    }
+        })}
     };
 
     const handleModalClose = () => {
@@ -190,7 +200,7 @@ const DayLogPage = () => {
                     <div
                         className="dpg_hour clickable"
                         key={index}
-                        onClick={(e) => handleHourClick(e, hour)}   
+                        onClick={(e) => handleHourClick(e, hour)}
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
