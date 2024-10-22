@@ -16,10 +16,10 @@ function DayLogFormWorkout() {
     const [form, setForm] = useState({
         name: currentData?.name || "",
         description: currentData?.description || '',
-        day: currentData?.day || '',
-        calories: currentData || '',
-        units: currentData?.units || '',
-        unitType: currentData?.unitType || '',
+        day: '',
+        calories: '',
+        units: '',
+        unitType: '',
         userId: currentData?.userId || sessionUser?.id || 1
     });
 
@@ -140,15 +140,6 @@ function DayLogFormWorkout() {
                     value={form.calories}
                 />
 
-                <p>Serving Count</p>
-                <input
-                    className="_input"
-                    type="number"
-                    name="servings"
-                    placeholder="How many servings"
-                    onChange={updateSetForm}
-                    value={form.servings}
-                />
                 <label style={{ display: 'inline-flex' }}>
                     {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description:
                 </label>
@@ -181,11 +172,7 @@ function DayLogFormWorkout() {
                     <option value="each">each</option>
                     <option value="reps">reps</option>
                 </select>
-
             </div>
-
-
-
         </div>
     );
 }
