@@ -40,7 +40,7 @@ const WorkoutPage = () => {
       {
         state:
         {
-          newWorkout: true,
+          newWorkout: false,
           currentData: workout
         }
       })
