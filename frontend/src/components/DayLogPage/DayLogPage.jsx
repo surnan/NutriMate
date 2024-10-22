@@ -39,9 +39,20 @@ const DayLogPage = () => {
 
 
 
-    const handleHourClick = (hour) => {
-        setShowHour(hour)
-        setShowCreateDayLogModal(true)
+    const handleHourClick = (e, hour) => {
+        console.log("click happened")
+        console.log("hour = ", hour)
+        console.log("e.target = ", e.target)
+        // setShowHour(hour)
+        // setShowCreateDayLogModal(true)
+
+        const daycardId = e.target.closest('[data-daycardid]')?.getAttribute('data-daycardid');
+
+        if (daycardId) {
+            console.log("DayCard ID:", daycardId);
+        } else {
+            console.log("No daycard ID found");
+        }
     };
 
     const handleModalClose = () => {
@@ -112,14 +123,15 @@ const DayLogPage = () => {
     }
 
     // const handleNewDaily = () => { nav('/daylogform') }
-    const handleNewWorkout = () => {navigate("/workouts")}
-    const handleNewGrubs = () => {navigate("/grubs")}
+    const handleNewWorkout = () => { navigate("/workouts") }
+    const handleNewGrubs = () => { navigate("/grubs") }
 
     return (
         <div className="dayLogPage_div">
             <h3>DayLogPage.jsx</h3>
             <h3 >Email = {sessionUser?.email}</h3>
 
+            {/* top buttons */}
             <div className="max_HFlex workout_btn_div">
                 <button
                     className="_button blue"
@@ -128,10 +140,7 @@ const DayLogPage = () => {
                 >
                     BACK
                 </button>
-
-
                 <div>
-
                     <button
                         className="_button orange"
                         onClick={handleNewWorkout}
@@ -153,6 +162,8 @@ const DayLogPage = () => {
                 onChange={handleDateChange} // Update selected date on calendar change
             />
 
+
+            {/* header displaying Date & previous/next buttons */}
             <div className="dp_header">
                 <button
                     className="dph_btn black_font orange round"
@@ -169,12 +180,13 @@ const DayLogPage = () => {
                 </button>
             </div>
 
+            {/* Day Grid View */}
             <div className="dp_grid center">
                 {hours.map((hour, index) => (
                     <div
                         className="dpg_hour clickable"
                         key={index}
-                        onClick={() => handleHourClick(hour)}
+                        onClick={(e) => handleHourClick(e, hour)}   
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
