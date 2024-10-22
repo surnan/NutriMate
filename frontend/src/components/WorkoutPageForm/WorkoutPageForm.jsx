@@ -12,7 +12,7 @@ function WorkoutPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { newWorkout, currentData } = location.state || {};
-    const [updatedWorkout, setUpdatedWorkout] = useState(structuredClone(currentData) || {}) 
+    const [updatedWorkout, setUpdatedWorkout] = useState(structuredClone(currentData) || {})
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [errors, setErrors] = useState({});
@@ -47,20 +47,20 @@ function WorkoutPageForm() {
         }
 
         e.preventDefault();
-        const { name, description, userId } = form;
-        const body = {
-            id: parseInt(currentData?.id),
-            name,
-            description,
-            userId
-        }
 
         try {
+            const { name, description, userId } = form;
+            const body = {
+                id: parseInt(currentData.id),
+                name,
+                description,
+                userId
+            }
             const result = newWorkout
-            ? await dispatch(updateWorkoutsOneThunk({ body }))
-            : await dispatch(postWorkoutsOneThunk({ body }))
-            if (result) { 
-                setUpdatedWorkout(structuredClone(body)) 
+                ? await dispatch(updateWorkoutsOneThunk({ body }))
+                : await dispatch(postWorkoutsOneThunk({ body }))
+            if (result) {
+                setUpdatedWorkout(structuredClone(body))
             }
         } catch (error) {
             console.error('Error adding workout:', error);
@@ -83,12 +83,14 @@ function WorkoutPageForm() {
             return;
         }
         // console.log("updatedWorkout ==> ", JSON.stringify(updatedWorkout))
-        navigate('/DayLogFormWorkout', 
-            { state: 
-                { 
-                    newWorkout: true, 
-                    currentData:  currentData
-        } });
+        navigate('/DayLogFormWorkout',
+            {
+                state:
+                {
+                    newWorkout: true,
+                    currentData: updatedWorkout
+                }
+            });
     }
 
     const handleModalClose = () => {
