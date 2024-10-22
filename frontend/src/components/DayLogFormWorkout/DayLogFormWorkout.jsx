@@ -9,9 +9,43 @@ function DayLogFormWorkout() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const sessionUser = useSelector((state) => state.session.user);
     const [errors, setErrors] = useState({});
+
+
+    // const rootReducer = combineReducers({
+    //     session: sessionReducer,
+    //     weights: weightsReducer,
+    //     workouts: workoutsReducer,
+    //     grubs: grubsReducer,
+    //     daylogs: daylogsReducer
+    // });
+    
+    // const initialState = { user: null };
+    
+    // const initialState = {
+    //     allDaylogs: [],
+    //     byId: {},
+    //     currentDaylog: {}
+    // }
+    
+
     const { newWorkout, currentData } = location.state || {};
+    const sessionUser = useSelector((state) => state.session.user);
+    const currentWorkoutObject = useSelector((state) => state.daylogs.byId[currentData.daycardId])
+    const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
+
+    useEffect(()=> {
+        console.log("currentWorkoutObject is now : ", currentWorkoutObject)
+        console.log("dayLogsArr is now : ", dayLogsArr)
+        
+
+    }, [currentWorkoutObject, dayLogsArr])
+
+    if (newWorkout){
+        console.log("\n\n====> newWorkout = true")
+    } else {
+        console.log("\n\n====> newWorkout = false")
+    }
 
     const formatDatetimeLocal = (dateString) => {
         if (!dateString) {
@@ -27,12 +61,13 @@ function DayLogFormWorkout() {
     const hasError = () => Object.keys(errors).length !== 0;
 
     const [form, setForm] = useState({
-        name: currentData?.name || "",
-        description: currentData?.description || '',
-        day: currentData?.day || Date(),
-        calories: currentData?.calories || '',
-        units: currentData?.units || '',
-        unitType: currentData?.unitType || 'hours',
+        name: currentData?.name || currentWorkoutObject.name ||"",
+        description: currentData?.description || currentWorkoutObject?.Workout?.description ||'',
+        // description: currentData?.description ||'',
+        day: currentData?.day || currentWorkoutObject.timestamp || Date(),
+        calories: currentData?.calories || currentWorkoutObject.calories || '',
+        units: currentData?.units || currentWorkoutObject.units ||'',
+        unitType: currentData?.unitType || currentWorkoutObject.unitType || 'hours',
         userId: currentData?.userId || sessionUser?.id || 1
     });
 
