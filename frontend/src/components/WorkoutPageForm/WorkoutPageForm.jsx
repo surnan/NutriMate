@@ -12,15 +12,12 @@ function WorkoutPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { newWorkout, currentData } = location.state || {};
-
-
     const [updatedWorkout, setUpdatedWorkout] = useState(structuredClone(currentData) || {}) 
-    
-    
-    const sessionUser = useSelector((state) => state.session.user);
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
     const [errors, setErrors] = useState({});
+
+    const sessionUser = useSelector((state) => state.session.user);
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
@@ -57,11 +54,14 @@ function WorkoutPageForm() {
             description,
             userId
         }
+
         try {
             const result = newWorkout
-                ? await dispatch(updateWorkoutsOneThunk({ body }))
-                : await dispatch(postWorkoutsOneThunk({ body }))
-            if (result) { navigate(`/workouts`) }
+            ? await dispatch(updateWorkoutsOneThunk({ body }))
+            : await dispatch(postWorkoutsOneThunk({ body }))
+            if (result) { 
+                setUpdatedWorkout(structuredClone(body)) 
+            }
         } catch (error) {
             console.error('Error adding workout:', error);
         }
@@ -78,13 +78,17 @@ function WorkoutPageForm() {
     }
 
     const handleAddToLog = () => {
-        console.log("A")
         if (!currentData?.id) {
             alert('Workout needs to be saved before adding to DayLog');
             return;
         }
-        console.log("B")
-        navigate('/DayLogFormWorkout', { state: { newWorkout: true, currentData:  updatedWorkout} });
+        // console.log("updatedWorkout ==> ", JSON.stringify(updatedWorkout))
+        navigate('/DayLogFormWorkout', 
+            { state: 
+                { 
+                    newWorkout: true, 
+                    currentData:  currentData
+        } });
     }
 
     const handleModalClose = () => {
