@@ -3,6 +3,7 @@ import "./DayLogFormWorkout.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { postDailyLogsOneThunk, updateDailyLogsOneThunk } from "../../redux/daylogs";
 
 
 function DayLogFormWorkout() {
@@ -12,6 +13,7 @@ function DayLogFormWorkout() {
     const sessionUser = useSelector((state) => state.session.user);
     const [errors, setErrors] = useState({});
     const { newWorkout, currentData } = location.state || {};
+    const [updatedDayLog, setUpdatedDayLog] = useState(structuredClone(currentData) || {})
 
     const formatDatetimeLocal = (dateString) => {
         if (!dateString) {
@@ -33,7 +35,8 @@ function DayLogFormWorkout() {
         calories: currentData?.calories || '',
         units: currentData?.units || '',
         unitType: currentData?.unitType || 'hours',
-        userId: currentData?.userId || sessionUser?.id || 1
+        userId: currentData?.userId || sessionUser?.id || 1,
+        workoutId: currentData?.id || ''
     });
 
     const updateSetForm = (e) => {
@@ -57,15 +60,12 @@ function DayLogFormWorkout() {
             }
         })
 
-        const allKeys = ["name", "description", "date", "calories", "units", 'unittype'];
+        const allKeys = ["name", "description", "day", "calories", "units", 'unitType'];
         allKeys.forEach((key) => {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
             }
         });
-
-
-
         setErrors(newErrors);
     }, [form])
 
@@ -80,11 +80,44 @@ function DayLogFormWorkout() {
             units: currentData?.units || '',
             unitType: currentData?.unitType || "hours",
             userId: currentData?.userId || sessionUser?.id || 1,
+            workoutId: currentData?.id || ''
         });
     }
 
-    const handleSubmitSave = () => {
-        console.log("clicked")
+    const handleSubmitSave = async (e) => {
+        if (hasError()) {
+            console.log("has errors==")
+            console.log(JSON.stringify(errors))
+            console.log("====")
+            console.log("form==")
+            console.log(JSON.stringify(form))
+            return
+        }
+        console.log("no errors")
+
+        e.preventDefault();
+
+        try {
+            const { name, day, calories, units, unitType, workoutId, userId } = form;
+            const body = {
+                id: parseInt(currentData.id),
+                timestamp: day, 
+                name,
+                calories: parseInt(calories),
+                units: parseInt(units), 
+                unitType, 
+                userId: parseInt(userId),
+                workoutId: parseInt(workoutId)
+            }
+            const result = newWorkout
+                ? await dispatch(postDailyLogsOneThunk({ body }))
+                : await dispatch(postDailyLogsOneThunk({ body }))
+            if (result) {
+                setUpdatedDayLog(structuredClone(body))
+            }
+        } catch (error) {
+            console.error('Error adding workout:', error);
+        }
     }
 
 
