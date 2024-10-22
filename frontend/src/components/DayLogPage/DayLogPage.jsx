@@ -47,12 +47,16 @@ const DayLogPage = () => {
         // setShowCreateDayLogModal(true)
 
         const daycardId = e.target.closest('[data-daycardid]')?.getAttribute('data-daycardid');
+        const isWorkout = e.target.closest('[data-daycardid]')?.getAttribute('data-workout');
+        const isGrub = e.target.closest('[data-daycardid]')?.getAttribute('data-grub');
 
         if (daycardId) {
             console.log("DayCard ID:", daycardId);
         } else {
             console.log("No daycard ID found");
         }
+        console.log("isWorkout = ", isWorkout)
+        console.log("isGrub = ", isGrub)
     };
 
     const handleModalClose = () => {
