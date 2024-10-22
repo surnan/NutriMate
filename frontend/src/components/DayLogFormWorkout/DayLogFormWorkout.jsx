@@ -13,75 +13,91 @@ function DayLogFormWorkout() {
     const [errors, setErrors] = useState({});
     const { newWorkout, currentData } = location.state || {};
 
-    const [form, setForm] = useState({
-        name: currentData?.name || "",
-        description: currentData?.description || '',
-        day: currentData?.day || '',
-        calories: currentData || '',
-        units: currentData?.units || '',
-        unitType: currentData?.unitType || '',
-        userId: currentData?.userId || sessionUser?.id || 1
-    });
+    const formatDatetimeLocal = (dateString) => {
+        if (!dateString) {
+            const now = new Date();
+            const localISOTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+            return localISOTime; // local date & time in ISO format
+        }
+        const date = new Date(dateString);
+        return !isNaN(date.getTime()) ? new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
+    };
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
     const hasError = () => Object.keys(errors).length !== 0;
 
-    useEffect(() => {
-        const newErrors = {};
-        const allKeys = ["name", "description"];
-
-        allKeys.forEach((key) => {
-            if (!form[key]) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
-            }
-        });
-        setErrors(newErrors);
-    }, [form])
-
-
-    const handleresetBtn = () => {
-        setForm({
-            name: currentData?.name || "",
-            description: currentData?.description || '',
-            day: currentData?.day || '',
-            calories: currentData || '',
-            units: currentData?.units || '',
-            unitType: currentData?.unitType || 'hours',
-            userId: currentData?.userId || sessionUser?.id || 1,
-            servings: 1
-        });
-    }
-
-
-    const handleModalClose = () => {
-        setShowDeletetModal(false)
-        setSelectedWorkout(null)
-        navigate(-1)
-    };
-
-    const handleBackBtn = () => { navigate(-1) };
-
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().slice(0, 16); // Default to current date and time
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
-    };
-
+    const [form, setForm] = useState({
+        name: currentData?.name || "",
+        description: currentData?.description || '',
+        day: currentData?.day || Date(),
+        calories: currentData?.calories || '',
+        units: currentData?.units || '',
+        unitType: currentData?.unitType || 'hours',
+        userId: currentData?.userId || sessionUser?.id || 1
+    });
 
     const updateSetForm = (e) => {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
+
+
+    useEffect(() => {
+        const newErrors = {};
+
+        const minZero = ["calories", "units"]
+        minZero.forEach((key) => {
+            if (isNaN(form[key])) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
+                return
+            }
+            if (form[key] < 1) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} min is 1`;
+            }
+        })
+
+        const allKeys = ["name", "description", "date", "calories", "units", 'unittype'];
+        allKeys.forEach((key) => {
+            if (!form[key]) {
+                newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
+            }
+        });
+
+
+
+        setErrors(newErrors);
+    }, [form])
+
+    const handleBack = () => { navigate(-1) };
+
+    const handleReset = () => {
+        setForm({
+            name: currentData?.name || "",
+            description: currentData?.description || '',
+            day: currentData?.day || Date(),
+            calories: currentData?.calories || '',
+            units: currentData?.units || '',
+            unitType: currentData?.unitType || "hours",
+            userId: currentData?.userId || sessionUser?.id || 1,
+        });
+    }
+
+    const handleSubmitSave = () => {
+        console.log("clicked")
+    }
+
+
     return (
         <div className="mainBodyStyle">
             <h3>DayLogFormWorkout.jsx</h3>
 
             <div className="max_HFlex">
+                {/* TOP BUTTONS */}
                 <button
                     className="blue _button"
                     type="button"
-                    onClick={handleBackBtn}
+                    onClick={handleBack}
                 >
                     BACK
                 </button>
@@ -90,14 +106,14 @@ function DayLogFormWorkout() {
                     <button
                         className="orange _button"
                         type="button"
-                        onClick={handleresetBtn}
+                        onClick={handleReset}
                     >
                         RESET
                     </button>
                     <button
                         className="green _button"
                         type="button"
-                    // onClick={handleSubmit}
+                        onClick={handleSubmitSave}
                     // disabled={hasError()}
                     >
                         SAVE
@@ -106,6 +122,7 @@ function DayLogFormWorkout() {
 
             </div>
 
+            {/*  INPUT FIELDS */}
             <div className="workout_page_form_grid">
                 <label style={{ display: 'inline-flex' }}>
                     {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
@@ -118,6 +135,7 @@ function DayLogFormWorkout() {
                     placeholder="Enter name"
                     onChange={updateSetForm}
                     value={form.name}
+                    readOnly={true}
                 />
 
                 <p>Date</p>
@@ -127,10 +145,13 @@ function DayLogFormWorkout() {
                     name="day"
                     placeholder="Please enter your goal weight"
                     onChange={updateSetForm}
-                    value={formatDate(form.day)}
+                    value={formatDatetimeLocal(form.day)}
                 />
 
-                <p>Calories</p>
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories:
+                </label>
                 <input
                     className="_input"
                     type="number"
@@ -140,15 +161,6 @@ function DayLogFormWorkout() {
                     value={form.calories}
                 />
 
-                <p>Serving Count</p>
-                <input
-                    className="_input"
-                    type="number"
-                    name="servings"
-                    placeholder="How many servings"
-                    onChange={updateSetForm}
-                    value={form.servings}
-                />
                 <label style={{ display: 'inline-flex' }}>
                     {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description:
                 </label>
@@ -159,8 +171,12 @@ function DayLogFormWorkout() {
                     placeholder="Enter description"
                     onChange={updateSetForm}
                     value={form.description}
+                    readOnly={true}
                 />
 
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Units:
+                </label>
                 <input
                     className="_input"
                     type="number"
@@ -169,6 +185,10 @@ function DayLogFormWorkout() {
                     onChange={updateSetForm}
                     value={form.units}
                 />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Unit type:
+                </label>
                 <select
                     className="_input"
                     name="unitType"
@@ -181,11 +201,7 @@ function DayLogFormWorkout() {
                     <option value="each">each</option>
                     <option value="reps">reps</option>
                 </select>
-
             </div>
-
-
-
         </div>
     );
 }
