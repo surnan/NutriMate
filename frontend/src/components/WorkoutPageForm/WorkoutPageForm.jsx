@@ -12,6 +12,11 @@ function WorkoutPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { newWorkout, currentData } = location.state || {};
+
+
+    const [updatedWorkout, setUpdatedWorkout] = useState(structuredClone(currentData) || {}) 
+    
+    
     const sessionUser = useSelector((state) => state.session.user);
     const [showDeletetModal, setShowDeletetModal] = useState(false);
     const [selectedWorkout, setSelectedWorkout] = useState(null);
@@ -73,11 +78,13 @@ function WorkoutPageForm() {
     }
 
     const handleAddToLog = () => {
+        console.log("A")
         if (!currentData?.id) {
             alert('Workout needs to be saved before adding to DayLog');
             return;
         }
-        navigate('/DayLogFormWorkout', { state: { newWorkout: true, currentData: workout } });
+        console.log("B")
+        navigate('/DayLogFormWorkout', { state: { newWorkout: true, currentData:  updatedWorkout} });
     }
 
     const handleModalClose = () => {
