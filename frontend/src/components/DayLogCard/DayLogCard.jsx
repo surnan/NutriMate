@@ -3,31 +3,16 @@ import "./DayLogCard.css";
 
 function DayLogCard({ daylog }) {
 
-    //   const { timestamp, name, calories, unit, unitType, Grub, Workout } = daylog
-    const { name, calories } = daylog
+    const { id, name, calories } = daylog
 
-    // return (
-    //     <div className="dayLog_card_grid">
-    //         <div>
-    //             <p><strong>{name}</strong> </p>
-    //             <p> Calories: {calories}</p>
-    //         </div>
-    //         <p>Date: {timestamp}</p>
-    //         <p>{User?.email}</p>
-    //     </div>
-    // );
+    console.log("--< inside daycard --> card = ", daylog)
 
     return (
-        <div className="dayLog_card_grid">
-            <div>
-                <p><strong>{name}</strong> </p>
-                <p> Calories: {calories}</p>
-            </div>
+        <div className="dayLog_card_grid" data-daycardid={id}>
+            <p><strong>{name}</strong></p>
+            <p>Calories: {calories}</p>
         </div>
     );
-
-
-
 }
 
 export default DayLogCard;
