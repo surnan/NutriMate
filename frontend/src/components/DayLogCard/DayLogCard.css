@@ -2,12 +2,6 @@
 
 .dayLog_card_grid {
     display: grid;
-    grid-template-rows: 1.5fr 1fr 1fr;
-    border: 1px black solid;
-}
-
-.dayLog_card_grid > :first-child {
-    display: grid;
     grid-template-columns: 3fr 1fr;
 }
 
