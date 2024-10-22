@@ -10,17 +10,12 @@ import SearchBar from "../SearchBar";
 
 const WorkoutPage = () => {
   const dispatch = useDispatch()
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   const sessionUser = useSelector((state) => state.session.user);
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
-
-  const [searchQuery, setSearchQuery] = useState("");
-  // Handle search input
-  const handleSearch = (query) => {
-    setSearchQuery(query.toLowerCase());
-  };
-
 
   const filteredAndSortedArray = workoutsArr
     .filter(
@@ -40,19 +35,22 @@ const WorkoutPage = () => {
     dispatch(getWorkoutsAllThunk())
   }, [dispatch])
 
-  const somethingDifferent = (e, workout) => {
-    e.preventDefault();
-    nav('/workoutform', { state: { newWorkout: true, currentData: workout } });
+  const handleCard = (workout) => {
+    navigate('/workoutform',
+      {
+        state:
+        {
+          newWorkout: true,
+          currentData: workout
+        }
+      })
   }
 
-  const handleNewWorkout = () => { nav('/workoutform') }
-  const handleBackBtn = () => { nav(-1) };
+  const handleCreate = () => navigate('/workoutform');
+  const handleBack = () => navigate(-1);
+  const handleSearch = query => setSearchQuery(query.toLowerCase());
 
 
-  console.log("\n\n")
-  console.log("filteredAndSortedArray", filteredAndSortedArray)
-  console.log("\n\n")
-  
   return (
     <div className="mainBodyStyle">
       <h3>WorkoutPage.jsx</h3>
@@ -62,26 +60,24 @@ const WorkoutPage = () => {
         <button
           className="blue _button"
           type="button"
-          onClick={handleBackBtn}
+          onClick={handleBack}
         >
           BACK
         </button>
-
         <button
           className="green _button"
-          onClick={handleNewWorkout}
+          onClick={handleCreate}
         >CREATE
         </button>
       </div>
 
       <SearchBar onSearch={handleSearch} placeholder="Search Workouts..." />
-      <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="workout_page_grid">
         {
           filteredAndSortedArray.map((workout, idx) => (
             <div
               key={`${idx}-workout`}
-              onClick={e => somethingDifferent(e, workout)}
+              onClick={e => handleCard(workout)}
             >
               <WorkoutCard workout={workout} />
             </div>
