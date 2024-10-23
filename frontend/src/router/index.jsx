@@ -12,7 +12,7 @@ import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
 import SearchBar from '../components/SearchBar';
 import LineGraph from '../components/LineGraph';
 import DayLogPage from '../components/DayLogPage';
-import DayLogPageForm from '../components/DayLogPageForm';
+// import DayLogPageForm from '../components/DayLogPageForm';
 import DayLogFormGrub from '../components/DayLogFormGrub';
 import DayLogFormWorkout from '../components/DayLogFormWorkout';
 
@@ -28,7 +28,12 @@ export const router = createBrowserRouter([
       {path: "weights", element: <WeightPage />},
       {path: "weightform", element: <WeightPageForm />},
       {path: "workouts", element: <WorkoutPage />},
+
+
       {path: "workoutform", element: <WorkoutPageForm />},
+      {path: "workoutform/:id", element: <WorkoutPageForm />},
+      
+      
       {path: "grubs", element: <GrubPage />},
       {path: "grubform", element: <GrubPageForm />},
       {path: "searchbar", element: <SearchBar />},

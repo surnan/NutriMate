@@ -13,7 +13,6 @@ const WorkoutPage = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
 
-
   const sessionUser = useSelector((state) => state.session.user);
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
 
@@ -36,17 +35,25 @@ const WorkoutPage = () => {
   }, [dispatch])
 
   const handleCard = (workout) => {
-    navigate('/workoutform',
-      {
-        state:
-        {
-          newWorkout: false,
-          currentData: workout
-        }
-      })
+    // navigate('/workoutform',
+    //   {
+    //     state:
+    //     {
+    //       newWorkout: false,
+    //       currentData: workout
+    //     }
+    //   })
+    console.log("==> inside HANDLECARD")
+    navigate(`/workoutform/${workout.id}`)
   }
 
-  const handleCreate = () => navigate('/workoutform');
+  // const handleCreate = () => navigate('/workoutform');
+  const handleCreate = () => navigate('/workoutform', { 
+    state: { 
+      newWorkout: true 
+  } });
+
+
   const handleBack = () => navigate(-1);
   const handleSearch = query => setSearchQuery(query.toLowerCase());
 
