@@ -2,6 +2,7 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_DAYLOGS_ALL = "daylogs/loadDaylogsAll"
+const LOAD_DAYLOGS_ONE= "daylogs/loadDaylogsOne"
 const POST_DAYLOGS_ONE = "daylogs/postDaylogsOne"
 const UPDATE_DAYLOGS_ONE = "daylogs/updateDaylogsOne"
 const REMOVE_DAYLOGS_ONE = "daylogs/removeDaylogsOne"
@@ -12,6 +13,12 @@ const loadDailyLogsAll = (data) => ({
     type: LOAD_DAYLOGS_ALL,
     payload: data
 })
+
+const loadDailyLogsOne = (data) => ({
+    type: LOAD_DAYLOGS_ONE,
+    payload: data
+})
+
 const removeDailyLogsOne = (data) => ({
     type: REMOVE_DAYLOGS_ONE,
     payload: data
@@ -33,6 +40,16 @@ export const getDailyLogsAllThunk = () => async (dispatch) => {
     const data = await response.json();
     if (response.ok) {
         await dispatch(loadDailyLogsAll(data))
+        return data
+    }
+}
+
+export const getDailyLogsOneThunk = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/dailylogs/${id}`)
+    if (response.ok) {
+        const data = await response.json();
+        console.log("===> data ==> ", data)
+        await dispatch(loadDailyLogsOne(data))
         return data
     }
 }
@@ -83,7 +100,8 @@ export const updateDailyLogsOneThunk = ({ body }) => async (dispatch) => {
 const initialState = {
     allDaylogs: [],
     byId: {},
-    currentDaylog: {}
+    // currentDaylog: {}
+    single: {}
 }
 
 
@@ -98,6 +116,14 @@ const daylogsReducer = (state = initialState, action) => {
             for (let workouts of action.payload.DayLog) {
                 newState.byId[workouts.id] = workouts
             }
+            return newState
+        }
+        case LOAD_DAYLOGS_ONE: {
+            let newState = {...state}
+            newState.single = action.payload
+            console.log("____LOAD_DAILYLOGS_ONE")
+            console.log("____action.payload", action.payload)
+            console.log("____newState.single = ", newState)
             return newState
         }
         case REMOVE_DAYLOGS_ONE: {
