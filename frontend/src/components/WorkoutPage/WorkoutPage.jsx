@@ -34,29 +34,14 @@ const WorkoutPage = () => {
     dispatch(getWorkoutsAllThunk())
   }, [dispatch])
 
-  const handleCard = (workout) => {
-    // navigate('/workoutform',
-    //   {
-    //     state:
-    //     {
-    //       newWorkout: false,
-    //       currentData: workout
-    //     }
-    //   })
-    console.log("==> inside HANDLECARD")
-    navigate(`/workoutform/${workout.id}`)
-  }
+  const handleCard = workout => navigate(`/workoutform/${workout.id}`)
+  const handleSearch = query => setSearchQuery(query.toLowerCase())
+  const handleBack = () => navigate(-1)
 
-  // const handleCreate = () => navigate('/workoutform');
   const handleCreate = () => navigate('/workoutform', { 
     state: { 
       newWorkout: true 
-  } });
-
-
-  const handleBack = () => navigate(-1);
-  const handleSearch = query => setSearchQuery(query.toLowerCase());
-
+  }});
 
   return (
     <div className="mainBodyStyle">
