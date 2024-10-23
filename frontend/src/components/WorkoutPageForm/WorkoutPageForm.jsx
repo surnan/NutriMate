@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts"
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions'
 
 
 function WorkoutPageForm() {
@@ -100,6 +100,12 @@ function WorkoutPageForm() {
         setShowDeletetModal(true)
     }
 
+    const handleModalClose = () => {
+        setShowDeletetModal(false);
+        navigate(-1)
+    };
+
+
     const handleAddToLog = () => {
         if (!workoutId) {
             alert('Workout needs to be saved before adding to DayLog');
@@ -108,13 +114,9 @@ function WorkoutPageForm() {
         navigate('/DayLogFormWorkout')
     }
 
-    const handleModalClose = () => {
-        setShowDeletetModal(false);
-        navigate(-1)
-    };
 
 
-    const hasError = () => Object.keys(errors).length !== 0;
+    // const hasError = () => Object.keys(errors).length !== 0;
 
     return (
         <div className="mainBodyStyle">
@@ -140,10 +142,11 @@ function WorkoutPageForm() {
                         RESET
                     </button>
                     <button
-                        className={`green _button ${hasError() ? "disabled_btn" : ""}`}
+                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
                         onClick={handleSubmitSave}
-                        disabled={hasError()}
+                        // disabled={hasError()}
+                        disabled={isEmpty(errors)}
                     >
                         SAVE
                     </button>

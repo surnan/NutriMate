@@ -25,7 +25,6 @@ const removeWorkoutsOne = (data) => ({
         payload: data
 })
 
-
 const postWorkoutsOne = (data) => ({
         type: POST_WORKOUTS_ONE,
         payload: data
@@ -40,8 +39,6 @@ const updateWorkoutsOne = (data) => ({
 //         type: LOAD_WORKOUTS_USER,
 //         payload: data
 // })
-
-
 
 // Thunks
 export const getWorkoutsAllThunk = () => async (dispatch) => {
