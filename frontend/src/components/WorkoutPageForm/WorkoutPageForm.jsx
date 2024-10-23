@@ -1,103 +1,48 @@
-// frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
+// frontend/src/componenets/WorkoutPageForm/WorkoutPageForm.jsx
 import "./WorkoutPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { postWorkoutsOneThunk, updateWorkoutsOneThunk } from "../../redux/workouts"
-import DeleteWorkoutModal from "../DeleteWorkoutModal";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts"
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { capitalizeFirstLetter } from '../../utils/MyFunctions'
 
 
 function WorkoutPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const { newWorkout, currentData } = location.state || {};
-    const [updatedWorkout, setUpdatedWorkout] = useState(structuredClone(currentData) || {})
-    const [showDeletetModal, setShowDeletetModal] = useState(false);
-    const [selectedWorkout, setSelectedWorkout] = useState(null);
-    const [errors, setErrors] = useState({});
+
+    const { id } = useParams();
+    const workoutId = parseInt(id);
+    const { newWorkout } = location.state || {};  // newWorkout -> empty form
 
     const sessionUser = useSelector((state) => state.session.user);
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-    const hasError = () => Object.keys(errors).length !== 0;
+    const workoutObj = useSelector((state) => state.workouts.single)
 
+    const [showDeleteModal, setShowDeletetModal] = useState(false);
+    const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
-        name: currentData?.name || "",
-        description: currentData?.description || '',
-        userId: currentData?.userId || sessionUser?.id || 1
+        name: "",
+        description: '',
+        userId: sessionUser?.id || 1
     });
 
-    const updateSetForm = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }))
-    }
-
-    const handleBack = () => navigate(-1);
-
-    const handleReset = () => {
-        setForm({
-            name: currentData?.name || "",
-            description: currentData?.description || ""
-        });
-    }
-
-    const handleSubmitSave = async (e) => {
-        if (hasError()) {
-            return
-        }
-
-        e.preventDefault();
-
-        try {
-            const { name, description, userId } = form;
-            const body = {
-                id: parseInt(currentData.id),
-                name,
-                description,
-                userId
-            }
-            const result = newWorkout
-                ? await dispatch(updateWorkoutsOneThunk({ body }))
-                : await dispatch(postWorkoutsOneThunk({ body }))
-            if (result) {
-                setUpdatedWorkout(structuredClone(body))
-            }
-        } catch (error) {
-            console.error('Error adding workout:', error);
-        }
-    }
-
-
-    const handleDelete = () => {
-        if (!currentData?.id) {
-            alert('Can not delete this new record because it has not been saved to database');
-            return;
-        }
-        setSelectedWorkout(currentData);
-        setShowDeletetModal(true)
-    }
-
-    const handleAddToLog = () => {
-        if (!currentData?.id) {
-            alert('Workout needs to be saved before adding to DayLog');
-            return;
-        }
-        // console.log("updatedWorkout ==> ", JSON.stringify(updatedWorkout))
-        navigate('/DayLogFormWorkout',
-            {
-                state:
-                {
-                    newWorkout: true,
-                    currentData: updatedWorkout
-                }
+    useEffect(() => {
+        if (!newWorkout && workoutObj) {
+            setForm({
+                name: workoutObj.name || "",
+                description: workoutObj.description || "",
+                userId: workoutObj.userId || sessionUser?.id || 1
             });
-    }
+        }
+    }, [workoutObj, newWorkout, sessionUser])
 
-    const handleModalClose = () => {
-        setShowDeletetModal(false)
-        setSelectedWorkout(null)
-        navigate(-1)
-    };
+    useEffect(() => {
+        if (!newWorkout && workoutObj) {
+            dispatch(getWorkoutOneThunk(workoutId))
+        }
+    }, [dispatch, workoutId, newWorkout])
 
     useEffect(() => {
         const newErrors = {};
@@ -110,6 +55,66 @@ function WorkoutPageForm() {
         });
         setErrors(newErrors);
     }, [form])
+
+    const updateSetForm = (e) => {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }))
+    }
+
+    const handleBack = () => navigate(-1);
+
+    const handleReset = () => {
+        setForm({
+            name: workoutObj?.name || "",
+            description: workoutObj?.description || ""
+        });
+    }
+
+    const handleSubmitSave = async (e) => {
+        e.preventDefault();
+        try {
+            const { name, description, userId } = form;
+            const body = {
+                id: workoutId,
+                name,
+                description,
+                userId
+            }
+            const result = workoutId
+                ? await dispatch(updateWorkoutsOneThunk({ body }))
+                : await dispatch(postWorkoutsOneThunk({ body }))
+            if (result) {
+                navigate(-1)
+            }
+        } catch (error) {
+            console.error('Error adding workout:', error);
+        }
+    }
+
+
+    const handleDelete = () => {
+        if (!workoutId) {
+            alert('Workout not saved to database');
+            return;
+        }
+        setShowDeletetModal(true)
+    }
+
+    const handleAddToLog = () => {
+        if (!workoutId) {
+            alert('Workout needs to be saved before adding to DayLog');
+            return;
+        }
+        navigate('/DayLogFormWorkout')
+    }
+
+    const handleModalClose = () => {
+        setShowDeletetModal(false);
+        navigate(-1)
+    };
+
+
+    const hasError = () => Object.keys(errors).length !== 0;
 
     return (
         <div className="mainBodyStyle">
@@ -135,7 +140,7 @@ function WorkoutPageForm() {
                         RESET
                     </button>
                     <button
-                        className="green _button"
+                        className={`green _button ${hasError() ? "disabled_btn" : ""}`}
                         type="button"
                         onClick={handleSubmitSave}
                         disabled={hasError()}
@@ -199,11 +204,13 @@ function WorkoutPageForm() {
                 </button>
             </div>
 
-            {showDeletetModal && (
-                <DeleteWorkoutModal
+            {/* DELETE MODAL */}
+            {showDeleteModal && (
+                <DeleteModal
+                    item={workoutObj}
+                    itemType="workout"
+                    deleteThunk={deleteWorkoutThunkById}
                     onClose={handleModalClose}
-                    onSubmit={handleDelete}
-                    workout={selectedWorkout}
                 />
             )}
         </div >

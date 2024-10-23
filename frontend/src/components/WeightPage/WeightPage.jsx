@@ -9,6 +9,9 @@ import WeightCard from "../WeightCard";
 // import WeightChart from "../WeightChart/WeightChart";
 import LineGraph from "../LineGraph";
 
+
+
+
 const WeightPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
