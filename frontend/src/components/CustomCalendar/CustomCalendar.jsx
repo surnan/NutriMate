@@ -19,9 +19,9 @@ const MyCalendar = ({ value, onChange }) => {
     dispatch(getDailyLogsAllThunk())
   }, [dispatch])
 
-  useEffect(() => {
-    console.log('==> CustomCalendar +++++ => dayLogsArr updated ==> ', dayLogsArr);
-  }, [dayLogsArr]);
+  // useEffect(() => {
+  //   console.log('==> CustomCalendar +++++ => dayLogsArr updated ==> ', dayLogsArr);
+  // }, [dayLogsArr]);
 
 
   // const highlightDates = dayLogsArr.reduce((acc, log) => {
