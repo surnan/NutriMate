@@ -10,21 +10,17 @@ import SearchBar from "../SearchBar";
 
 const GrubPage = () => {
   const dispatch = useDispatch()
-  const nav = useNavigate();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const sessionUser = useSelector((state) => state.session.user);
   const grubArr = useSelector(state => state.grubs.allGrubs);
-  const [searchQuery, setSearchQuery] = useState("");
-  // Handle search input
-  const handleSearch = (query) => {
-    setSearchQuery(query.toLowerCase());
-  };
-
 
   const filteredAndSortedArray = grubArr
     .filter(
-      grub => grub.userId === sessionUser.id &&
-      grub.name.toLowerCase().includes(searchQuery) 
+      grub =>
+        grub.userId === sessionUser.id &&
+        grub.name.toLowerCase().includes(searchQuery)
     )
     .sort((a, b) => {
       const nameA = a.name.toLowerCase();
@@ -38,13 +34,14 @@ const GrubPage = () => {
     dispatch(getGrubsAllThunk())
   }, [dispatch])
 
-  const somethingDifferent = (e, grub) => {
-    e.preventDefault();
-    nav('/grubform', { state: { newGrub: true, currentData: grub } });
-  }
+  const handleCard = grub => navigate(`/grubform/${grub.id}`)
+  const handleSearch = query => setSearchQuery(query.toLowerCase())
+  const handleBack = () => navigate(-1)
 
-  const handleNewGrub = () => { nav('/grubform') }
-  const handleBackBtn = () => { nav(-1) };
+  const handleCreate = () => navigate('/grubform', {
+    state: {
+      newGrub: true
+  }})
 
   return (
     <div className="mainBodyStyle">
@@ -55,24 +52,23 @@ const GrubPage = () => {
         <button
           className="blue _button"
           type="button"
-          onClick={handleBackBtn}
+          onClick={handleBack}
         >
           BACK
         </button>
         <button
           className="green _button"
-          onClick={handleNewGrub}
+          onClick={handleCreate}
         >CREATE
         </button>
       </div>
       <SearchBar onSearch={handleSearch} placeholder="Search Grubs..." />
-      <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4>
       <div className="grub_page_grid">
         {
           filteredAndSortedArray.map((grub, idx) => (
             <div
               key={`${idx}-grub`}
-              onClick={e => somethingDifferent(e, grub)}
+              onClick={e => handleCard(grub)}
             >
               <GrubCard grub={grub} />
               <br />
