@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_GRUBS_ALL = "grubs/loadGrubsAll"
 // const LOAD_GRUB_USER = "grubs/loadGrubsUser"
-// const LOAD_GRUBS_ONE = "grubs/loadGrubsOne"
+const LOAD_GRUBS_ONE = "grubs/loadGrubsOne"
 const POST_GRUBS_ONE = "grubs/postGrubsOne"
 const UPDATE_GRUBS_ONE = "grubs/updateGrubsOne"
 const REMOVE_GRUBS_ONE = "grubs/removeGrubsOne"
@@ -15,6 +15,11 @@ const loadGrubsAll = (data) => ({
     payload: data
 });
 
+const loadGrubsOne = (data) => ({
+    type: LOAD_GRUBS_ONE,
+    payload: data
+})
+
 const removeGrubsOne = (data) => ({
     type: REMOVE_GRUBS_ONE,
     payload: data
@@ -24,7 +29,6 @@ const postGrubsOne = (data) => ({
     type: POST_GRUBS_ONE,
     payload: data
 })
-
 
 const updateGrubsOne = (data) => ({
     type: UPDATE_GRUBS_ONE,
@@ -36,17 +40,22 @@ const updateGrubsOne = (data) => ({
 //     payload: data
 // })
 
-// const loadGrubsOne = (data) => ({
-//     type: LOAD_GRUBS_ONE,
-//     payload: data
-// })
-
 // Thunks
 export const getGrubsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/grubs')
     if (response.ok) {
         const data = await response.json();
         await dispatch(loadGrubsAll(data))
+        return data
+    }
+}
+
+export const getGrubsOneThunk = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/grubs/${id}`)
+    if (response.ok) {
+        const data = await response.json();
+        console.log("===> data ==> ", data)
+        await dispatch(loadGrubsOne(data))
         return data
     }
 }
@@ -97,7 +106,8 @@ export const deleteGrubThunkById = (id) => async (dispatch) => {
 const initialState = {
     allGrubs: [],
     byId: {},
-    currentGrub: {}
+    // currentGrub: {}
+    single: {}
 }
 
 //Reducers
@@ -109,6 +119,14 @@ const grubsReducer = (state = initialState, action) => {
             for (let grub of action.payload.Grubs) {
                 newState.byId[grub.id] = grub
             }
+            return newState
+        }
+        case LOAD_GRUBS_ONE: {
+            let newState = {...state}
+            newState.single = action.payload
+            console.log("____LOAD_GRUBS_ONE")
+            console.log("____action.payload", action.payload)
+            console.log("____newState.single = ", newState)
             return newState
         }
         case POST_GRUBS_ONE: {
