@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_WORKOUTS_ALL = "weights/loadWorkoutsAll"
 // const LOAD_WORKOUTS_USER = "weights/loadWorkoutsUser"
-// const LOAD_WORKOUTS_ONE = "weights/loadWorkoutsOne"
+const LOAD_WORKOUTS_ONE = "weights/loadWorkoutsOne"
 const POST_WORKOUTS_ONE = "weights/postWorkoutsOne"
 const UPDATE_WORKOUTS_ONE = "weights/updateWorkoutsOne"
 const REMOVE_WORKOUTS_ONE = "weights/removeWorkoutsOne"
@@ -12,6 +12,11 @@ const REMOVE_WORKOUTS_ONE = "weights/removeWorkoutsOne"
 //Actions
 const loadWorkoutsAll = (data) => ({
         type: LOAD_WORKOUTS_ALL,
+        payload: data
+})
+
+const loadWorkoutsOne = (data) => ({
+        type: LOAD_WORKOUTS_ONE,
         payload: data
 })
 
@@ -31,11 +36,6 @@ const updateWorkoutsOne = (data) => ({
     payload: data
 })
 
-// const loadWorkoutsOne = (data) => ({
-//         type: LOAD_WORKOUTS_ONE,
-//         payload: data
-// })
-
 // const loadWorkoutsUser = (data) => ({
 //         type: LOAD_WORKOUTS_USER,
 //         payload: data
@@ -49,6 +49,16 @@ export const getWorkoutsAllThunk = () => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         await dispatch(loadWorkoutsAll(data))
+        return data
+    }
+}
+
+export const getWorkoutOneThunk = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/workouts/${id}`)
+    if (response.ok) {
+        const data = await response.json();
+        console.log("===> data ==> ", data)
+        await dispatch(loadWorkoutsOne(data))
         return data
     }
 }
@@ -98,7 +108,8 @@ export const deleteWorkoutThunkById = (id) => async (dispatch) => {
 const initialState = {
     allWorkouts: [],
     byId: {},
-    currentWorkout: {}
+    // currentWorkout: {}
+    single: {}
 }
 
 
@@ -112,6 +123,14 @@ const workoutsReducer = (state = initialState, action) => {
             for (let workouts of action.payload.Workouts) {
                 newState.byId[workouts.id] = workouts
             }
+            return newState
+        }
+        case LOAD_WORKOUTS_ONE: {
+            let newState = {...state}
+            newState.single = action.payload
+            console.log("____LOAD_WORKOUTS_ONE")
+            console.log("____action.payload", action.payload)
+            console.log("____newState.single = ", newState)
             return newState
         }
         case POST_WORKOUTS_ONE: {
