@@ -164,7 +164,7 @@ const DayLogPage = () => {
 
                     <button
                         className="_button green"
-                        onClick={handleNewGrubs}
+                        onClick={handleNewGrubs}handle
                     >
                         + Grub
                     </button>
