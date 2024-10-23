@@ -35,10 +35,6 @@ const updateGrubsOne = (data) => ({
     payload: data
 })
 
-// const loadGrubsUser = (data) => ({
-//     type: LOAD_GRUB_USER,
-//     payload: data
-// })
 
 // Thunks
 export const getGrubsAllThunk = () => async (dispatch) => {
