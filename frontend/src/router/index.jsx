@@ -28,14 +28,16 @@ export const router = createBrowserRouter([
       {path: "weights", element: <WeightPage />},
       {path: "weightform", element: <WeightPageForm />},
       {path: "workouts", element: <WorkoutPage />},
+      {path: "grubs", element: <GrubPage />},
 
 
       {path: "workoutform", element: <WorkoutPageForm />},
       {path: "workoutform/:id", element: <WorkoutPageForm />},
-      
-      
-      {path: "grubs", element: <GrubPage />},
+            
       {path: "grubform", element: <GrubPageForm />},
+      {path: "grubform/:id", element: <GrubPageForm />},
+
+
       {path: "searchbar", element: <SearchBar />},
       {path: "line", element: <LineGraph />},
       {path: "daylog", element: <DayLogPage />},
