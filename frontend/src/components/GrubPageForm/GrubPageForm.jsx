@@ -2,155 +2,104 @@
 import "./GrubPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { postGrubsOneThunk, updateGrubsOneThunk } from "../../redux/grubs"
-import DeleteGrubModal from '../DeleteGrubModal'
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
 
 
 function GrubPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
+
+    const { id } = useParams();
+    const grubId = parseInt(id);
+    const { newGrub } = location.state || {};  // newGrub -> empty form
+
     const sessionUser = useSelector((state) => state.session.user);
-    const { newGrub, currentData } = location.state || {};
+    const grubObj = useSelector((state) => state.grubs.single)
 
-    const [showDeletetModal, setShowDeletetModal] = useState(false);
-    const [selectedGrub, setSelectedGrub] = useState(null);
+    const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-
     const [form, setForm] = useState({
-        name: currentData?.name || "",
-        servingUnit: currentData?.servingUnit || '',
-        servingSize: currentData?.servingSize || '',
-        calories: currentData?.calories || '',
-        protein: currentData?.protein || '',
-        fats: currentData?.fats || '',
-        carbs: currentData?.carbs || '',
-        sugar: currentData?.sugar || '',
-        company: currentData?.company || '',
-        description: currentData?.description || '',
-        userId: currentData?.userId || sessionUser?.id || 1
+        name: "",
+        servingUnit: '',
+        servingSize: '',
+        calories: '',
+        protein: '',
+        fats: '',
+        carbs: '',
+        sugar: '',
+        company: '',
+        description: '',
+        userId: sessionUser?.id || 1
     });
 
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-    const hasError = () => Object.keys(errors).length !== 0;
 
-    const handleDeleteBtn = () => {
-        if (!currentData?.id) {
-            alert('Can not delete this new record because it has not been saved to database');
-            return;
+    useEffect(() => {
+        if (!newGrub && grubObj) {
+            setForm({
+                name: grubObj.name || "",
+                description: grubObj.description || "",
+                servingUnit: grubObj.servingUnit || '',
+                servingSize: grubObj.servingSize || '',
+                calories: grubObj.calories || '',
+                protein: grubObj.protein || '',
+                fats: grubObj.fats || '',
+                carbs: grubObj.carbs || '',
+                sugar: grubObj.sugar || '',
+                company: grubObj.company || '',
+                userId: grubObj.userId || sessionUser?.id || 1
+            });
         }
-        setSelectedGrub(currentData);
-        setShowDeletetModal(true)
-    }
+    }, [grubObj, newGrub, sessionUser])
 
-    const handleModalClose = () => {
-        setShowDeletetModal(false)
-        setSelectedGrub(null)
-        navigate(-1)
-    };
 
-    const handleBackBtn = () => { navigate(-1) };
-
-    const handleSubmit = async (e) => {
-        console.log("====> hasErrors ==> ", hasError())
-        if (hasError()) {
-            return
+    useEffect(() => {
+        if (!newGrub && grubObj) {
+            dispatch(getGrubsOneThunk(grubId))
         }
-        e.preventDefault();
+    }, [dispatch, grubId, newGrub])
 
-        const { name, servingUnit, servingSize, calories, protein, fats } = form
-        const { carbs, sugar, company, description, userId } = form
-
-        const body = {
-            id: parseInt(currentData?.id),
-            name,
-            servingUnit,
-            servingSize: parseInt(servingSize),
-            calories: parseInt(calories),
-            protein: parseInt(protein) || 0,
-            fats: parseInt(fats) || 0,
-            carbs: parseInt(carbs) || 0,
-            sugar: parseInt(sugar) || 0,
-            company: company || "",
-            description: description || "",
-            userId: parseInt(userId) || 1,
-        }
-
-        console.log("=====> body ==> ", body)
-        try {
-            const result = newGrub
-                ? await dispatch(updateGrubsOneThunk({ body }))
-                : await dispatch(postGrubsOneThunk({ body }))
-            if (result) { navigate(`/grubs`) }
-        } catch (error) {
-            console.error('Error adding grub:', error);
-        }
-    }
-
-    const handleCancelBtn = () => {
-        setForm({
-            name: currentData?.name || "",
-            description: currentData?.description,
-            servingUnit: currentData?.servingUnit,
-            servingSize: currentData?.servingSize,
-            calories: currentData?.calories,
-            protein: currentData?.protein,
-            fats: currentData?.fats,
-            carbs: currentData?.carbs,
-            sugar: currentData?.sugar,
-            company: currentData?.company,
-            userId: currentData?.userId || 1
-        });
-    };
 
     useEffect(() => {
         const newErrors = {};
 
-        const mandatory = ["name", "servingUnit", "servingSize", "calories"];
-        const minZero = ["protein", "fats", "carbs", "sugar"]
-        const minOne = ["servingSize", "calories"]
-        const optionalMinZero = ["protein", "fats", "carbs", "sugar"]
+        const validateFields = (fields, condition, errorMessage) => {
+            fields.forEach((key) => {
+                if (isNaN(form[key])) {
+                    newErrors[key] = `${capitalizeFirstLetter(key)} must be a number`;
+                } else if (condition(form[key])) {
+                    newErrors[key] = `${capitalizeFirstLetter(key)} ${errorMessage}`;
+                }
+            });
+        };
 
-        mandatory.forEach((key) => {
+        const mandatoryFields = ["name", "servingUnit", "servingSize", "calories"];
+        const minZeroFields = ["protein", "fats", "carbs", "sugar", "protein", "fats", "carbs", "sugar"]
+        const minOneFields = ["servingSize", "calories"]
+
+        mandatoryFields.forEach((key) => {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
             }
         });
 
-        minZero.forEach(key => {
-            if (isNaN(form[key])) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
-                return
-            }
-            if (form[key] < 0) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} min is 0`;
-            }
-        })
+        validateFields(
+            minOneFields,
+            (value) => value < 1,
+            "minimum is 1"
+        );
 
-        minOne.forEach(key => {
-            if (isNaN(form[key])) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
-                return
-            }
-            if (form[key] < 1) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} min is 1`;
-            }
-        })
-
-        optionalMinZero.forEach(key => {
-            if (isNaN(form[key])) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} must be number`;
-                return
-            }
-            if (form[key] < 0) {
-                newErrors[key] = `${capitalizeFirstLetter(key)} min is 0`;
-            }
-        })
+        validateFields(
+            minZeroFields,
+            (value) => value < 0,
+            "minimum is 0"
+        );
 
         setErrors(newErrors);
     }, [form])
-
 
 
     const updateSetForm = (e) => {
@@ -158,22 +107,86 @@ function GrubPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
+    const handleBack = () => navigate(-1);
+
+    const handleReset = () => {
+        setForm({
+            name: grubObj?.name || "",
+            description: grubObj?.description,
+            servingUnit: grubObj?.servingUnit,
+            servingSize: grubObj?.servingSize,
+            calories: grubObj?.calories,
+            protein: grubObj?.protein,
+            fats: grubObj?.fats,
+            carbs: grubObj?.carbs,
+            sugar: grubObj?.sugar,
+            company: grubObj?.company,
+            userId: grubObj?.userId || 1
+        });
     };
+
+    const handleSubmitSave = async (e) => {
+        e.preventDefault();
+
+        try {
+            const { name, servingUnit, servingSize, calories, protein, fats } = form
+            const { carbs, sugar, company, description, userId } = form
+
+            const body = {
+                id: parseInt(grubObj?.id),
+                name,
+                servingUnit,
+                servingSize: parseInt(servingSize),
+                calories: parseInt(calories),
+                protein: parseInt(protein) || 0,
+                fats: parseInt(fats) || 0,
+                carbs: parseInt(carbs) || 0,
+                sugar: parseInt(sugar) || 0,
+                company: company || "",
+                description: description || "",
+                userId: parseInt(userId) || 1,
+            }
+
+            const result = grubId
+                ? await dispatch(updateGrubsOneThunk({ body }))
+                : await dispatch(postGrubsOneThunk({ body }))
+            if (result) {
+                navigate(-1)
+            }
+        } catch (error) {
+            console.error('Error adding grub:', error);
+        }
+    }
+
+
+    
+    const handleDeleteBtn = () => {
+        if (!grubId) {
+            alert('Can not delete this new record because it has not been saved to database');
+            return;
+        }
+        setShowDeletetModal(true)
+    }
+    
+    const handleModalClose = () => {
+        setShowDeletetModal(false)
+        navigate(-1)
+    };
+    
+
+    
+    // const hasError = () => Object.keys(errors).length !== 0;
 
     return (
         <div className="mainBodyStyle">
-            {/* <h1>GrubForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3> */}
+            <h1>GrubForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="grubPageForm_hFlex">
                 <button
                     className="orange _button"
                     type="button"
-                    onClick={handleBackBtn}
+                    onClick={handleBack}
                 >
                     BACK
                 </button>
@@ -182,16 +195,17 @@ function GrubPageForm() {
                     <button
                         className="blue _button"
                         type="button"
-                        onClick={handleCancelBtn}
+                        onClick={handleReset}
                     >
                         RESET
                     </button>
 
                     <button
-                        className="green _button"
+                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
-                        onClick={handleSubmit}
-                        disabled={hasError()}
+                        onClick={handleSubmitSave}
+                        // disabled={hasError()}
+                        disabled={isEmpty(errors)}
                     >
                         SAVE
                     </button>
@@ -357,11 +371,13 @@ function GrubPageForm() {
                 </div>
             </div>
 
-            {showDeletetModal && (
-                <DeleteGrubModal
+            {/* DELETE MODAL */}
+            {showDeleteModal && (
+                <DeleteModal
+                    item={grubObj}
+                    itemType="grubs"
+                    deleteThunk={deleteGrubThunkById}
                     onClose={handleModalClose}
-                    onSubmit={handleDeleteBtn}
-                    grub={selectedGrub}
                 />
             )}
             <br />
