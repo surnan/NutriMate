@@ -29,20 +29,23 @@ export const router = createBrowserRouter([
       {path: "weightform", element: <WeightPageForm />},
       {path: "workouts", element: <WorkoutPage />},
       {path: "grubs", element: <GrubPage />},
+      {path: "daylog", element: <DayLogPage />},
 
-
+      
       {path: "workoutform", element: <WorkoutPageForm />},
       {path: "workoutform/:id", element: <WorkoutPageForm />},
-            
+      
       {path: "grubform", element: <GrubPageForm />},
       {path: "grubform/:id", element: <GrubPageForm />},
-
-
+      
+      
+      {path: "DayLogFormWorkout", element: <DayLogFormWorkout />},
+      {path: "DayLogFormWorkout/:id", element: <DayLogFormWorkout />},
+      
+      
       {path: "searchbar", element: <SearchBar />},
       {path: "line", element: <LineGraph />},
-      {path: "daylog", element: <DayLogPage />},
       {path: "DayLogFormGrub", element: <DayLogFormGrub />},
-      {path: "DayLogFormWorkout", element: <DayLogFormWorkout />},
       {path: "*" , element: <p> == Page NOT Found ==</p>},
     ],
   },
