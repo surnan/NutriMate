@@ -111,7 +111,7 @@ const initialState = { user: null };
 function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
-            console.log("SET-USER  ======> action.payload ====> ", action.payload)
+            // console.log("SET-USER  ======> action.payload ====> ", action.payload)
             if (action.payload?.user){
                 //thunkLogin
                 return { ...state, user: action.payload.user };
