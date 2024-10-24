@@ -30,17 +30,27 @@ function DayLogPageForm() {
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
-        name: "",
-        description: '',
+        timestamp: Date(),
+        calories: "",
+        units: "",
+        unitType: sessionUser.id,
+        userId: "",
+        grubId: "",
+        workoutId: "",
         userId: sessionUser?.id || 1
     });
 
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             setForm({
-                name: dayLogObj.name || "",
-                description: dayLogObj.description || "",
-                userId: dayLogObj.userId || sessionUser?.id || 1
+                timestamp: dayLogObj?.timestamp || Date(),
+                name: dayLogObj?.name || "",
+                calories: dayLogObj?.calories || "",
+                units: dayLogObj.units || "",
+                unitType: dayLogObj?.unitType || sessionUser.id,
+                grubId: dayLogObj?.grubId || "",
+                workoutId: dayLogObj?.workoutId || "",
+                userId: dayLogObj?.userId || sessionUser?.id || 1
             });
         }
     }, [dayLogObj, newDayLog, sessionUser])
@@ -53,11 +63,15 @@ function DayLogPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-        const allKeys = ["name", "description"];
+        const allKeys = ["calories", "units"];
 
         allKeys.forEach((key) => {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
+            } else {
+                if (parseInt(form[key]) <= 0){
+                    newErrors[key] = `${capitalizeFirstLetter(key)} must be > 0`;
+                }
             }
         });
         setErrors(newErrors);
@@ -72,20 +86,28 @@ function DayLogPageForm() {
 
     const handleReset = () => {
         setForm({
-            name: workoutObj?.name || "",
-            description: workoutObj?.description || ""
+            timestamp: dayLogObj?.timestamp || Date(),
+            calories: dayLogObj?.calories || "",
+            units: dayLogObj.units || "",
+            unitType: dayLogObj?.unitType || sessionUser.id,
         });
     }
 
     const handleSubmitSave = async (e) => {
         e.preventDefault();
         try {
-            const { name, description, userId } = form;
+            const { timestamp, name, calories, units, unitType, userId, grubId, workoutId } = form;
             const body = {
-                id: workoutId,
-                name,
-                description,
-                userId
+                id: dayLogId,
+                timestamp, 
+                name, 
+                calories, 
+                units, 
+                unitType, 
+                userId, 
+                grubId, 
+                workoutId
+                
             }
             const result = dayLogId
                 ? await dispatch(updateDailyLogsOneThunk({ body }))
@@ -144,15 +166,15 @@ function DayLogPageForm() {
                 </div>
             </div>
 
-            <WorkoutCard workout={dayLogObj?.Workout} />
+            {dayLogObj?.Workout &&
+                <WorkoutCard workout={dayLogObj?.Workout} />}
 
             <div className="workout_page_form_grid">
                 <p>Date</p>
                 <input
                     className="_input"
                     type="datetime-local"
-                    name="day"
-                    placeholder="Please enter your goal weight"
+                    name="timestamp"
                     onChange={updateSetForm}
                     value={formatDatetimeLocal(form.timestamp)}
                 />
