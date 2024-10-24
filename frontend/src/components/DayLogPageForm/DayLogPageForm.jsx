@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
+import { getWorkoutOneThunk } from "../../redux/workouts";
+import { getGrubsOneThunk } from "../../redux/grubs";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, isEmpty, formatDate } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
+import WorkoutCard from "../WorkoutCard";
 
 
 function DayLogPageForm() {
@@ -19,6 +22,10 @@ function DayLogPageForm() {
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
+
+    useEffect(() => {
+        console.log("____dayLogObj = ", dayLogObj)
+    }, [dayLogObj])
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
@@ -106,7 +113,8 @@ function DayLogPageForm() {
     };
 
     return (
-        <div className="max_HFlex">
+        <>
+            <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
                     className="blue _button"
@@ -134,8 +142,65 @@ function DayLogPageForm() {
                         SAVE
                     </button>
                 </div>
+            </div>
+
+            <WorkoutCard workout={dayLogObj.Workout} />
+
+            <div className="workout_page_form_grid">
+                <p>Date</p>
+                <input
+                    className="_input"
+                    type="datetime-local"
+                    name="day"
+                    placeholder="Please enter your goal weight"
+                    onChange={updateSetForm}
+                    value={formatDatetimeLocal(form.timestamp)}
+                />
+
+
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories:
+                </label>
+                <input
+                    className="_input"
+                    type="number"
+                    name="calories"
+                    placeholder="Please enter your goal weight"
+                    onChange={updateSetForm}
+                    value={form.calories}
+                />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Units:
+                </label>
+                <input
+                    className="_input"
+                    type="number"
+                    name="units"
+                    placeholder="units"
+                    onChange={updateSetForm}
+                    value={form.units}
+                />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Unit type:
+                </label>
+                <select
+                    className="_input"
+                    name="unitType"
+                    onChange={updateSetForm}
+                    value={form.unitType}
+                >
+                    <option value="hours">hours</option>
+                    <option value="minutes">minutes</option>
+                    <option value="seconds">seconds</option>
+                    <option value="each">each</option>
+                    <option value="reps">reps</option>
+                </select>
 
             </div>
+        </>
     );
 }
 
