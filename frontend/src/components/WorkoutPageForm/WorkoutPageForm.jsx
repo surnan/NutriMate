@@ -111,7 +111,13 @@ function WorkoutPageForm() {
             alert('Workout needs to be saved before adding to DayLog');
             return;
         }
-        navigate('/DayLogFormWorkout')
+        //Fix navigation bug
+        navigate(`/daylogform/${workoutId}`, {
+            state:
+            {
+                newWorkout: true
+            }
+        })
     }
 
 
@@ -202,6 +208,7 @@ function WorkoutPageForm() {
                     className="black _button"
                     type="button"
                     onClick={handleAddToLog}
+                    disabled={true}
                 >
                     Add To Log
                 </button>

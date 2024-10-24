@@ -45,7 +45,7 @@ export const getDailyLogsAllThunk = () => async (dispatch) => {
 }
 
 export const getDailyLogsOneThunk = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/dailylogs/${id}`)
+    const response = await csrfFetch(`/api/daylogs/${id}`)
     if (response.ok) {
         const data = await response.json();
         console.log("===> data ==> ", data)
