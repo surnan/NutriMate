@@ -111,7 +111,14 @@ function WorkoutPageForm() {
             alert('Workout needs to be saved before adding to DayLog');
             return;
         }
-        navigate('/DayLogFormWorkout')
+        //Fix navigation bug
+        navigate(`/DayLog/${daycardId}`,
+            {
+                state:
+                {
+                    newWorkout: false
+                }
+            })
     }
 
 
