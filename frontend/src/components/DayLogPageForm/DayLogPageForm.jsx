@@ -144,7 +144,7 @@ function DayLogPageForm() {
                 </div>
             </div>
 
-            <WorkoutCard workout={dayLogObj.Workout} />
+            <WorkoutCard workout={dayLogObj?.Workout} />
 
             <div className="workout_page_form_grid">
                 <p>Date</p>

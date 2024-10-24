@@ -1,15 +1,15 @@
 // frontend/src/componenets/WorkouttCard/DayLogCard.jsx
 import "./DayLogCard.css";
 
-function DayLogCard({ daylog }) {
+function DayLogCard({ daylog, handleClick }) {
 
     const { id, name, calories, grubId, workoutId } = daylog
 
     console.log("/n/n")
     console.log("--< inside daycard --> card = ")
-    console.log("grubId => ", grubId)
-    console.log("workoutId => ", workoutId)
-    console.log("dayLog = ", daylog)
+    console.log("__DayLogCard__grubId => ", grubId)
+    console.log("__DayLogCard__workoutId => ", workoutId)
+    console.log("__DayLogCard__dayLog = ", daylog)
 
 
 
@@ -19,6 +19,7 @@ function DayLogCard({ daylog }) {
             data-daycardid={id}
             data-workoutid={workoutId}
             data-grubid={grubId}
+            onClick={handleClick} 
         >
             <p><strong>{name}</strong></p>
             <p>Calories: {calories}</p>
