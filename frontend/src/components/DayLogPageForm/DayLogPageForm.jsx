@@ -2,44 +2,51 @@
 import "./DayLogPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { postWeightsOneThunk, updateWeightThunkById } from "../../redux/weight";
-import DeleteWeightModal from '../DeleteWeightModal'
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { capitalizeFirstLetter, isEmpty, formatDate } from '../../utils/MyFunctions'
 
 
 function DayLogPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
+
+    const { id } = useParams();
+    const dayLogId = parseInt(id);
+    const { newDayLog } = location.state || {};
+
     const sessionUser = useSelector((state) => state.session.user);
+    const dayLogObj = useSelector((state) => state.daylogs.single)
 
-    const { newWeight, currentData } = location.state || {};
-
-    const [showDeletetModal, setShowDeletetModal] = useState(false);
-    const [selectedWeight, setSelectedWeight] = useState(null);
+    const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-
     const [form, setForm] = useState({
-        id: currentData?.id,
-        metricSystem: currentData?.metricSystem || false,
-        start: currentData?.start || '',
-        goal: currentData?.goal || '',
-        current: currentData?.current || '',
-        day: currentData?.day || Date.now(),
-        userId: currentData?.userId || sessionUser.id
+        name: "",
+        description: '',
+        userId: sessionUser?.id || 1
     });
 
-    const updateSetForm = (e) => {
-        const { name, type, value, checked } = e.target;
-        setForm(prev => ({
-            ...prev,
-            [name]: type === 'checkbox' ? checked : value
-        }));
-    };
+    useEffect(() => {
+        if (!newDayLog && dayLogObj) {
+            setForm({
+                name: dayLogObj.name || "",
+                description: dayLogObj.description || "",
+                userId: dayLogObj.userId || sessionUser?.id || 1
+            });
+        }
+    }, [dayLogObj, newDayLog, sessionUser])
+
+    useEffect(() => {
+        if (!newDayLog && dayLogObj) {
+            dispatch(getDailyLogsOneThunk(dayLogId))
+        }
+    }, [dispatch, dayLogId, newDayLog])
 
     useEffect(() => {
         const newErrors = {};
-        const allKeys = ["start", "goal", "current", "day"];
+        const allKeys = ["name", "description"];
 
         allKeys.forEach((key) => {
             if (!form[key]) {
@@ -49,187 +56,86 @@ function DayLogPageForm() {
         setErrors(newErrors);
     }, [form])
 
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-    const hasError = () => Object.keys(errors).length !== 0;
+    const updateSetForm = (e) => {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }))
+    }
 
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().split('T')[0]; // Use current date if not provided
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
-    };
+    const handleBack = () => navigate(-1);
 
-    //Delete Button & Modal -- start
-    const handleDeleteBtn = () => {
-        if (!currentData?.id) {
-            alert('Can not delete this new record because it has not been saved to database');
+    const handleReset = () => {
+        setForm({
+            name: workoutObj?.name || "",
+            description: workoutObj?.description || ""
+        });
+    }
+
+    const handleSubmitSave = async (e) => {
+        e.preventDefault();
+        try {
+            const { name, description, userId } = form;
+            const body = {
+                id: workoutId,
+                name,
+                description,
+                userId
+            }
+            const result = dayLogId
+                ? await dispatch(updateDailyLogsOneThunk({ body }))
+                : await dispatch(postDailyLogsOneThunk({ body }))
+            if (result) {
+                navigate(-1)
+            }
+        } catch (error) {
+            console.error('Error adding dayLog:', error);
+        }
+    }
+
+
+    const handleDelete = () => {
+        if (!workoutId) {
+            alert('Workout not saved to database');
             return;
         }
-        setSelectedWeight(currentData);
         setShowDeletetModal(true)
     }
 
     const handleModalClose = () => {
-        setShowDeletetModal(false)
-        setSelectedWeight(null)
+        setShowDeletetModal(false);
         navigate(-1)
-    };
-    //Delete Button & Modal -- end
-
-
-    const handleBackBtn = () => { navigate(-1) };
-    const handleSubmit = async (e) => {
-        if (hasError()) {
-            console.log("===> ERRORS = ", errors)
-            return
-        }
-
-        e.preventDefault();
-
-        const { id, metricSystem, start, goal, current, day, userId } = form;
-
-        const body = {
-            "id": parseInt(id),
-            "metricSystem": metricSystem || false,
-            "start": parseInt(start),
-            "goal": parseInt(goal),
-            "current": parseInt(current),
-            "day": day || Date.now(),
-            "userId": parseInt(userId),
-        }
-
-        try {
-            const result = newWeight
-                ? await dispatch(updateWeightThunkById({ body }))
-                : await dispatch(postWeightsOneThunk({ body }))
-            if (result) { navigate(`/weights`) }
-        } catch (error) {
-            console.error('Error adding weight:', error);
-        }
-    }
-    const handleResetBtn = () => {
-        setForm({
-            metricSystem: currentData?.metricSystem || false,
-            start: currentData?.start || '',
-            goal: currentData?.goal || '',
-            current: currentData?.current || '',
-            day: formatDate(currentData?.day),
-            userId: currentData?.userId || sessionUser.id
-        });
-        // navigate(-1);  // This navigateigates back to the previous page
     };
 
     return (
-        <div className="mainBodyStyle">
-            <h3>DayLogPageForm.jsx</h3>
-            <h3 >Email = {sessionUser?.email}</h3>
-
-            <div className="max_HFlex">
+        <div className="max_HFlex">
+                {/* TOP BUTTONS */}
                 <button
-                    className="_button blue"
+                    className="blue _button"
                     type="button"
-                    onClick={handleBackBtn}
+                    onClick={handleBack}
                 >
                     BACK
                 </button>
 
-                <div className="DayLogPageForm_hFlex">
+                <div className="wokoutPageForm_hFlex">
                     <button
-                        className="_button orange"
+                        className="orange _button"
                         type="button"
-                        onClick={handleResetBtn}
+                        onClick={handleReset}
                     >
                         RESET
                     </button>
                     <button
-                        className={`_button green`}
+                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
-                        onClick={handleSubmit}
-                        disabled={hasError()}
+                        onClick={handleSubmitSave}
+                        // disabled={hasError()}
+                        disabled={isEmpty(errors)}
                     >
                         SAVE
                     </button>
-
                 </div>
-            </div>
-
-            <div className="weight_page_form_grid">
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.day && <span style={{ color: 'red' }}>{errors.day}&nbsp;&nbsp;</span>} Day
-                </label>
-                <input
-                    type="date"
-                    name="day"
-                    onChange={updateSetForm}
-                    placeholder="Please enter your goal weight"
-                    value={formatDate(form.day)}
-                />
-
-
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} Starting Weight (number):
-                </label>
-                <input
-                    type="number"
-                    name="start"
-                    onChange={updateSetForm}
-                    placeholder="Please enter starting weight as integer"
-                    value={form.start}
-                />
-
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} Goal Weight (number):
-                </label>
-                <input
-                    type="number"
-                    name="goal"
-                    onChange={updateSetForm}
-                    placeholder="Please enter goal weight as integer"
-                    value={form.goal}
-                />
-
-
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} Current Weight (number):
-                </label>
-                <input
-                    type="number"
-                    name="current"
-                    onChange={updateSetForm}
-                    placeholder="Please enter current weight as integer"
-                    value={form.current}
-                />
-
-                <label style={{ display: 'inline-flex' }}>
-                    metricSystem:
-                </label>
-
-                <input
-                    type="checkbox"
-                    name="metricSystem"
-                    onChange={updateSetForm}
-                    checked={form.metricSystem}
-                />
-
-
 
             </div>
-            <div className="DayLogPageForm_hFlex">
-                <button
-                    className="red _button"
-                    type="button"
-                    onClick={handleDeleteBtn}
-                >
-                    DELETE
-                </button>
-            </div>
-            {showDeletetModal && (
-                <DeleteWeightModal
-                    onClose={handleModalClose}
-                    onSubmit={handleDeleteBtn}
-                    weight={selectedWeight}
-                />
-            )}
-        </div>
     );
 }
 

@@ -15,9 +15,10 @@ function DayLogCard({ daylog }) {
 
     return (
         <div className="dayLog_card_grid"
-            data-daycardId={id}
-            data-workoutId={workoutId}
-            data-grubId={grubId}
+        //  "data-daycardid" must be all-lowercase
+            data-daycardid={id}
+            data-workoutid={workoutId}
+            data-grubid={grubId}
         >
             <p><strong>{name}</strong></p>
             <p>Calories: {calories}</p>
