@@ -1,25 +1,25 @@
 //frontend/src/componenets/DayLogPage/DayLogPage.jsx
+
 import "./DayLogPage.css";
-import DayLogModal from "../DayLogModal";
-import { useState, useRef, useEffect } from "react";
-import { getDailyLogsAllThunk } from "../../redux/daylogs"
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
 import DayLogCard from "../DayLogCard";
 import CustomCalendar from "../CustomCalendar";
 
 
-const hours = [
-    "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM",
-    "12 PM", "1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM"
-];
+
 
 const DayLogPage = () => {
+    const hours = [
+        "12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM",
+        "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "1 PM", "2 PM", "3 PM",
+        "4 PM", "5 PM", "6 PM", "7 PM", "8 PM", "9 PM", "10 PM", "11 PM"
+    ];
+
     const dispatch = useDispatch()
     const navigate = useNavigate();
-    const modalRef = useRef(null);
-    const [showCreateDayLogModal, setShowCreateDayLogModal] = useState(false);
-    const [showHour, setShowHour] = useState(12);
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const sessionUser = useSelector((state) => state.session.user);
@@ -29,72 +29,47 @@ const DayLogPage = () => {
     const filteredAndSortedArray = dayLogsArr
         .filter(dayLog => dayLog.userId === sessionUser.id)
 
+
+
     useEffect(() => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
-    // useEffect(() => {
-    //     console.log('+++++ => dayLogsArr updated ==> ', dayLogsArr);
-    // }, [dayLogsArr]);
+
+    const handleCard = workout => navigate(`/workoutform/${workout.id}`)
+    const handleBack = () => navigate(-1)
+    const handlePlusWorkout = () => { navigate("/workouts") }
+    const handlePlusGrub = () => { navigate("/grubs") }
 
 
 
-    const handleHourClick = (e, hour) => {
+    const handleHoursDiv = (e) => {
         console.log("click happened")
-        console.log("hour = ", hour)
-        console.log("e.target = ", e.target)
-        // setShowHour(hour)
-        // setShowCreateDayLogModal(true)
+        // console.log("e.target = ", e.target)
+        const daycardId = e.target.closest('[data-daycardId]')?.getAttribute('data-daycardId');
+        const workoutId = e.target.closest('[data-daycardId]')?.getAttribute('data-workoutId');
+        const grubId = e.target.closest('[data-daycardId]')?.getAttribute('data-grubId');
 
-        const daycardId = e.target.closest('[data-daycardid]')?.getAttribute('data-daycardid');
-        const isWorkout = e.target.closest('[data-daycardid]')?.getAttribute('data-workout');
-        const isGrub = e.target.closest('[data-daycardid]')?.getAttribute('data-grub');
-
-        console.log("isWorkout = ", isWorkout)
-        console.log("isGrub = ", isGrub)
         console.log("daycardId = ", daycardId)
+        console.log("workoutId = ", workoutId)
+        console.log("grubId = ", grubId)
 
-        if (isWorkout) {
-            navigate('/DayLogFormWorkout',
-                {
-                    state:
-                    {
-                        newWorkout: false,
-                        currentData: {
-                            daycardId,
-                            isWorkout,
-                            isGrub
-                        }
-                    }
-        })}
-    };
-
-    const handleModalClose = () => {
-        setShowCreateDayLogModal(false)
-        setShowHour(null)
+        // if (isWorkout) {
+        //     navigate('/DayLogFormWorkout',
+        //         {
+        //             state:
+        //             {
+        //                 newWorkout: false,
+        //                 currentData: {
+        //                     daycardId,
+        //                     isWorkout,
+        //                     isGrub
+        //                 }
+        //             }
+        // })}
     };
 
 
-    const handlePageClick = (e) => {
-        if (modalRef.current && !modalRef.current.querySelector('.daily_extend_modal_window_all').contains(e.target)) {
-            setShowCreateDayLogModal(false);
-        }
-    };
-
-    useEffect(() => {
-        if (showCreateDayLogModal) {
-            document.addEventListener("mousedown", handlePageClick);
-        } else {
-            document.removeEventListener("mousedown", handlePageClick);
-        }
-        return () => {
-            document.removeEventListener("mousedown", handlePageClick);
-        };
-    }, [showCreateDayLogModal]);
-
-    const handleBackBtn = () => { navigate(-1) };
-
-    // const formattedDate = new Date().toLocaleDateString('en-US', {
     const formattedDate = selectedDate.toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -119,7 +94,6 @@ const DayLogPage = () => {
     };
 
     const handlePrevDayBtn = () => {
-        console.log("PREV Button clicked")
         setSelectedDate(prevDate => {
             const newDate = new Date(prevDate);
             newDate.setDate(newDate.getDate() - 1);
@@ -128,7 +102,6 @@ const DayLogPage = () => {
     }
 
     const handleNextDayBtn = () => {
-        console.log("NEXT Button clicked")
         setSelectedDate(prevDate => {
             const newDate = new Date(prevDate);
             newDate.setDate(newDate.getDate() + 1);
@@ -136,9 +109,7 @@ const DayLogPage = () => {
         });
     }
 
-    // const handleNewDaily = () => { nav('/daylogform') }
-    const handleNewWorkout = () => { navigate("/workouts") }
-    const handleNewGrubs = () => { navigate("/grubs") }
+
 
     return (
         <div className="dayLogPage_div">
@@ -150,21 +121,21 @@ const DayLogPage = () => {
                 <button
                     className="_button blue"
                     type="button"
-                    onClick={handleBackBtn}
+                    onClick={handleBack}
                 >
                     BACK
                 </button>
                 <div>
                     <button
                         className="_button orange"
-                        onClick={handleNewWorkout}
+                        onClick={handlePlusWorkout}
                     >
                         + Workout
                     </button>
 
                     <button
                         className="_button green"
-                        onClick={handleNewGrubs}
+                        onClick={handlePlusGrub}
                     >
                         + Grub
                     </button>
@@ -177,7 +148,7 @@ const DayLogPage = () => {
             />
 
 
-            {/* header displaying Date & previous/next buttons */}
+            {/* header + previous + next buttons */}
             <div className="dp_header">
                 <button
                     className="dph_btn black_font orange round"
@@ -194,13 +165,13 @@ const DayLogPage = () => {
                 </button>
             </div>
 
-            {/* Day Grid View */}
+            {/* Insert DayLog Cards b2 hour divs*/}
             <div className="dp_grid center">
                 {hours.map((hour, index) => (
                     <div
                         className="dpg_hour clickable"
                         key={index}
-                        onClick={(e) => handleHourClick(e, hour)}
+                        onClick={(e) => handleHoursDiv(e, hour)}
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
@@ -215,17 +186,6 @@ const DayLogPage = () => {
                     </div>
                 ))}
             </div>
-            {showCreateDayLogModal && (
-                <div
-                    className="WTF"
-                    ref={modalRef}
-                >
-                    <DayLogModal
-                        onClose={handleModalClose}
-                        onSubmit={handleHourClick}
-                    />
-                </div>
-            )}
         </div>
     );
 };
