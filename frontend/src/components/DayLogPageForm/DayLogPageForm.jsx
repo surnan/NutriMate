@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
+import { getWorkoutOneThunk } from "../../redux/workouts";
+import { getGrubsOneThunk } from "../../redux/grubs";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, isEmpty, formatDate } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
+import WorkoutCard from "../WorkoutCard";
 
 
 function DayLogPageForm() {
@@ -15,25 +18,45 @@ function DayLogPageForm() {
 
     const { id } = useParams();
     const dayLogId = parseInt(id);
+    const _workoutId = parseInt(id);
+
     const { newDayLog } = location.state || {};
+
+    const [workObj, setWorkObj] = useState({});
+
+
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
 
+    useEffect(() => {
+        console.log("____dayLogObj = ", dayLogObj)
+    }, [dayLogObj])
+
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
-        name: "",
-        description: '',
+        timestamp: Date(),
+        calories: "",
+        units: "",
+        unitType: sessionUser.id,
+        userId: "",
+        grubId: "",
+        workoutId: "",
         userId: sessionUser?.id || 1
     });
 
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             setForm({
-                name: dayLogObj.name || "",
-                description: dayLogObj.description || "",
-                userId: dayLogObj.userId || sessionUser?.id || 1
+                timestamp: dayLogObj?.timestamp || Date(),
+                name: dayLogObj?.name || workObj?.name || "",
+                calories: dayLogObj?.calories ||"",
+                units: dayLogObj.units || "",
+                unitType: dayLogObj?.unitType || "each",
+                grubId: null,
+                workoutId: dayLogObj?.workoutId || workObj?.id ||"",
+                userId: dayLogObj?.userId || sessionUser?.id || 1
             });
         }
     }, [dayLogObj, newDayLog, sessionUser])
@@ -42,15 +65,23 @@ function DayLogPageForm() {
         if (!newDayLog && dayLogObj) {
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
+
+        if (!newDayLog) {
+            setWorkObj(getWorkoutOneThunk(parseInt(_workoutId)))
+        }
     }, [dispatch, dayLogId, newDayLog])
 
     useEffect(() => {
         const newErrors = {};
-        const allKeys = ["name", "description"];
+        const allKeys = ["calories", "units"];
 
         allKeys.forEach((key) => {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
+            } else {
+                if (parseInt(form[key]) <= 0) {
+                    newErrors[key] = `${capitalizeFirstLetter(key)} must be > 0`;
+                }
             }
         });
         setErrors(newErrors);
@@ -65,20 +96,28 @@ function DayLogPageForm() {
 
     const handleReset = () => {
         setForm({
-            name: workoutObj?.name || "",
-            description: workoutObj?.description || ""
+            timestamp: dayLogObj?.timestamp || Date(),
+            calories: dayLogObj?.calories || "",
+            units: dayLogObj.units || "",
+            unitType: dayLogObj?.unitType || sessionUser.id,
         });
     }
 
     const handleSubmitSave = async (e) => {
         e.preventDefault();
         try {
-            const { name, description, userId } = form;
+            const { timestamp, name, calories, units, unitType, userId, grubId, workoutId } = form;
             const body = {
-                id: workoutId,
+                id: dayLogId,
+                timestamp,
                 name,
-                description,
-                userId
+                calories,
+                units,
+                unitType,
+                userId,
+                grubId,
+                workoutId
+
             }
             const result = dayLogId
                 ? await dispatch(updateDailyLogsOneThunk({ body }))
@@ -106,7 +145,8 @@ function DayLogPageForm() {
     };
 
     return (
-        <div className="max_HFlex">
+        <>
+            <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
                     className="blue _button"
@@ -134,8 +174,65 @@ function DayLogPageForm() {
                         SAVE
                     </button>
                 </div>
+            </div>
+
+            {dayLogObj?.Workout &&
+                <WorkoutCard workout={dayLogObj?.Workout} />}
+
+            <div className="workout_page_form_grid">
+                <p>Date</p>
+                <input
+                    className="_input"
+                    type="datetime-local"
+                    name="timestamp"
+                    onChange={updateSetForm}
+                    value={formatDatetimeLocal(form.timestamp)}
+                />
+
+
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories:
+                </label>
+                <input
+                    className="_input"
+                    type="number"
+                    name="calories"
+                    placeholder="Please enter your goal weight"
+                    onChange={updateSetForm}
+                    value={form.calories}
+                />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Units:
+                </label>
+                <input
+                    className="_input"
+                    type="number"
+                    name="units"
+                    placeholder="units"
+                    onChange={updateSetForm}
+                    value={form.units}
+                />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Unit type:
+                </label>
+                <select
+                    className="_input"
+                    name="unitType"
+                    onChange={updateSetForm}
+                    value={form.unitType}
+                >
+                    <option value="hours">hours</option>
+                    <option value="minutes">minutes</option>
+                    <option value="seconds">seconds</option>
+                    <option value="each">each</option>
+                    <option value="reps">reps</option>
+                </select>
 
             </div>
+        </>
     );
 }
 
