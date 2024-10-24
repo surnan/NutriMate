@@ -7,6 +7,7 @@ import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
 import DayLogCard from "../DayLogCard";
 import CustomCalendar from "../CustomCalendar";
+import { format_Month_Date_Year } from "../../utils/MyFunctions"
 
 
 
@@ -46,35 +47,28 @@ const DayLogPage = () => {
     const handleHoursDiv = (e) => {
         console.log("click happened")
         // console.log("e.target = ", e.target)
-        const daycardId = e.target.closest('[data-daycardId]')?.getAttribute('data-daycardId');
-        const workoutId = e.target.closest('[data-daycardId]')?.getAttribute('data-workoutId');
-        const grubId = e.target.closest('[data-daycardId]')?.getAttribute('data-grubId');
+        const daycardId = e.target.closest('[data-daycardid]')?.getAttribute('data-daycardid');
+        const workoutId = e.target.closest('[data-daycardid]')?.getAttribute('data-workoutid');
+        const grubId = e.target.closest('[data-daycardid]')?.getAttribute('data-grubid');
 
         console.log("daycardId = ", daycardId)
         console.log("workoutId = ", workoutId)
         console.log("grubId = ", grubId)
 
-        // if (isWorkout) {
-        //     navigate('/DayLogFormWorkout',
-        //         {
-        //             state:
-        //             {
-        //                 newWorkout: false,
-        //                 currentData: {
-        //                     daycardId,
-        //                     isWorkout,
-        //                     isGrub
-        //                 }
-        //             }
-        // })}
+        if ((workoutId || grubId) && daycardId) {
+            navigate(`/DayLog/${daycardId}`,
+                {
+                    state:
+                    {
+                        newWorkout: false
+                    }
+                })
+        }
     };
 
 
-    const formattedDate = selectedDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-    });
+    const formattedDate = format_Month_Date_Year(selectedDate);
+
 
     // Handle date change from the calendar
     const handleDateChange = (date) => {
@@ -94,16 +88,16 @@ const DayLogPage = () => {
     };
 
     const handlePrevDayBtn = () => {
-        setSelectedDate(prevDate => {
-            const newDate = new Date(prevDate);
+        setSelectedDate(old_value => {  //old_value from React: "useState"
+            const newDate = new Date(old_value);
             newDate.setDate(newDate.getDate() - 1);
             return newDate;
         });
     }
 
     const handleNextDayBtn = () => {
-        setSelectedDate(prevDate => {
-            const newDate = new Date(prevDate);
+        setSelectedDate(old_value => {
+            const newDate = new Date(old_value);
             newDate.setDate(newDate.getDate() + 1);
             return newDate;
         });

@@ -7,3 +7,11 @@ export const formatDate = (dateString) => {
 };
 
 export const isEmpty = (obj) => Object.keys(obj).length !== 0;
+
+export const format_Month_Date_Year = (date) => {
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+};
