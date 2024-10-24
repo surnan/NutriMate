@@ -13,7 +13,7 @@ import SearchBar from '../components/SearchBar';
 import LineGraph from '../components/LineGraph';
 import DayLogPage from '../components/DayLogPage';
 import DayLogPageForm from '../components/DayLogPageForm';
-import DayLogFormGrub from '../components/DayLogFormGrub';
+import DayLogFormGrub from '../components/_DayLogFormGrub';
 import DayLogFormWorkout from '../components/DayLogFormWorkout';
 
 
@@ -38,6 +38,8 @@ export const router = createBrowserRouter([
 
       {path: "daylog", element: <DayLogPage />},
       {path: "daylog/:id", element: <DayLogPageForm />},
+      {path: "daylogform/:id", element: <DayLogPageForm />},
+      {path: "daylogform", element: <DayLogPageForm />},
 
 
       {path: "DayLogFormWorkout", element: <DayLogFormWorkout />},

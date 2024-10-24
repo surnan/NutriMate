@@ -51,18 +51,17 @@ const DayLogPage = () => {
         const workoutId = e.target.closest('[data-daycardid]')?.getAttribute('data-workoutid');
         const grubId = e.target.closest('[data-daycardid]')?.getAttribute('data-grubid');
 
-        console.log("daycardId = ", daycardId)
-        console.log("workoutId = ", workoutId)
-        console.log("grubId = ", grubId)
+        console.log("__handleHoursDiv__daycardId = ", daycardId)
+        console.log("__handleHoursDiv__workoutId = ", workoutId)
+        console.log("__handleHoursDiv__grubId = ", grubId)
 
-        if ((workoutId || grubId) && daycardId) {
-            navigate(`/DayLog/${daycardId}`,
+        if (workoutId && daycardId) {
+            navigate(`/daylogform/${daycardId}`, {
+                state:
                 {
-                    state:
-                    {
-                        newWorkout: false
-                    }
-                })
+                    newWorkout: false
+                }
+            })
         }
     };
 
@@ -165,13 +164,17 @@ const DayLogPage = () => {
                     <div
                         className="dpg_hour clickable"
                         key={index}
-                        onClick={(e) => handleHoursDiv(e, hour)}
+                    // onClick={(e) => handleHoursDiv(e, hour)}
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
                             {findLogsForHour(index).length > 0 ? (
                                 findLogsForHour(index).map(log => (
-                                    <DayLogCard key={log.id} daylog={log} />
+                                    <DayLogCard
+                                        key={log.id}
+                                        daylog={log}
+                                        handleClick={(e) => handleHoursDiv(e, hour)} // Pass the onClick handler as a prop
+                                    />
                                 ))
                             ) : (
                                 "click to enter food/exercise"

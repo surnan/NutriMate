@@ -1,30 +1,54 @@
-// frontend/src/componenets/DayLogFormGrub/DayLogFormGrub.jsx
+// frontend/src/componenets/DayLogPageForm/DayLogPageForm.jsx
 import "./DayLogFormGrub.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
+import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
+import { getGrubsOneThunk } from "../../redux/grubs";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
+import GrubCard from "../GrubCard";
 
 
 function DayLogFormGrub() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const sessionUser = useSelector((state) => state.session.user);
-    const [errors, setErrors] = useState({});
-    const { newWorkout, currentData } = location.state || {};
 
+    const { id } = useParams();
+    const dayLogId = parseInt(id);
+    const { newDayLog } = location.state || {};
+
+    const sessionUser = useSelector((state) => state.session.user);
+    const dayLogObj = useSelector((state) => state.daylogs.single)
+
+    useEffect(() => {
+        console.log("____dayLogObj = ", dayLogObj)
+    }, [dayLogObj])
+
+    const [showDeleteModal, setShowDeletetModal] = useState(false);
+    const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
-        name: currentData?.name || "",
-        description: currentData?.description || '',
-        day: currentData?.day || '',
-        calories: currentData || '',
-        units: currentData?.units || '',
-        unitType: currentData?.unitType || '',
-        userId: currentData?.userId || sessionUser?.id || 1
+        name: "",
+        description: '',
+        userId: sessionUser?.id || 1
     });
 
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
-    const hasError = () => Object.keys(errors).length !== 0;
+    useEffect(() => {
+        if (!newDayLog && dayLogObj) {
+            setForm({
+                name: dayLogObj.name || "",
+                description: dayLogObj.description || "",
+                userId: dayLogObj.userId || sessionUser?.id || 1
+            });
+        }
+    }, [dayLogObj, newDayLog, sessionUser])
+
+    useEffect(() => {
+        if (!newDayLog && dayLogObj) {
+            dispatch(getDailyLogsOneThunk(dayLogId))
+        }
+    }, [dispatch, dayLogId, newDayLog])
 
     useEffect(() => {
         const newErrors = {};
@@ -38,50 +62,63 @@ function DayLogFormGrub() {
         setErrors(newErrors);
     }, [form])
 
-
-    const handleresetBtn = () => {
-        setForm({
-            name: currentData?.name || "",
-            description: currentData?.description || '',
-            day: currentData?.day || '',
-            calories: currentData || '',
-            units: currentData?.units || '',
-            unitType: currentData?.unitType || 'hours',
-            userId: currentData?.userId || sessionUser?.id || 1,
-            servings: 1
-        });
-    }
-
-
-    const handleModalClose = () => {
-        setShowDeletetModal(false)
-        setSelectedWorkout(null)
-        navigate(-1)
-    };
-
-    const handleBackBtn = () => { navigate(-1) };
-
-    const formatDate = (dateString) => {
-        if (!dateString) return new Date().toISOString().slice(0, 16); // Default to current date and time
-        const date = new Date(dateString);
-        return !isNaN(date.getTime()) ? date.toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
-    };
-
-
     const updateSetForm = (e) => {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
-    return (
-        <div className="mainBodyStyle">
-            <h3>DayLogFormWorkout.jsx</h3>
+    const handleBack = () => navigate(-1);
 
+    const handleReset = () => {
+        setForm({
+            name: grubObj?.name || "",
+            description: grubObj?.description || ""
+        });
+    }
+
+    const handleSubmitSave = async (e) => {
+        e.preventDefault();
+        try {
+            const { name, description, userId } = form;
+            const body = {
+                id: Id,
+                name,
+                description,
+                userId
+            }
+            const result = dayLogId
+                ? await dispatch(updateDailyLogsOneThunk({ body }))
+                : await dispatch(postDailyLogsOneThunk({ body }))
+            if (result) {
+                navigate(-1)
+            }
+        } catch (error) {
+            console.error('Error adding dayLog:', error);
+        }
+    }
+
+
+    const handleDelete = () => {
+        if (!Id) {
+            alert(' not saved to database');
+            return;
+        }
+        setShowDeletetModal(true)
+    }
+
+    const handleModalClose = () => {
+        setShowDeletetModal(false);
+        navigate(-1)
+    };
+
+    return (
+        <>
             <div className="max_HFlex">
+                {/* TOP BUTTONS */}
                 <button
                     className="blue _button"
                     type="button"
-                    onClick={handleBackBtn}
+                    onClick={handleBack}
                 >
                     BACK
                 </button>
@@ -90,36 +127,25 @@ function DayLogFormGrub() {
                     <button
                         className="orange _button"
                         type="button"
-                        onClick={handleresetBtn}
+                        onClick={handleReset}
                     >
                         RESET
                     </button>
                     <button
-                        className="green _button"
+                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
-                    // onClick={handleSubmit}
-                    // disabled={hasError()}
+                        onClick={handleSubmitSave}
+                        // disabled={hasError()}
+                        disabled={isEmpty(errors)}
                     >
                         SAVE
                     </button>
                 </div>
-
             </div>
 
-            <div className="workout_page_form_grid">
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
-                </label>
+            {/* <Card ={dayLogObj?.} /> */}
 
-                <input
-                    className="_input"
-                    type="text"
-                    name="name"
-                    placeholder="Enter name"
-                    onChange={updateSetForm}
-                    value={form.name}
-                />
-
+            <div className="_page_form_grid">
                 <p>Date</p>
                 <input
                     className="_input"
@@ -127,10 +153,14 @@ function DayLogFormGrub() {
                     name="day"
                     placeholder="Please enter your goal weight"
                     onChange={updateSetForm}
-                    value={formatDate(form.day)}
+                    value={formatDatetimeLocal(form.timestamp)}
                 />
 
-                <p>Calories</p>
+
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories:
+                </label>
                 <input
                     className="_input"
                     type="number"
@@ -140,27 +170,9 @@ function DayLogFormGrub() {
                     value={form.calories}
                 />
 
-                <p>Serving Count</p>
-                <input
-                    className="_input"
-                    type="number"
-                    name="servings"
-                    placeholder="How many servings"
-                    onChange={updateSetForm}
-                    value={form.servings}
-                />
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.description && <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>} Description:
+                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Units:
                 </label>
-                <textarea
-                    className="_textarea"
-                    maxLength="498"
-                    name="description"
-                    placeholder="Enter description"
-                    onChange={updateSetForm}
-                    value={form.description}
-                />
-
                 <input
                     className="_input"
                     type="number"
@@ -169,6 +181,10 @@ function DayLogFormGrub() {
                     onChange={updateSetForm}
                     value={form.units}
                 />
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Unit type:
+                </label>
                 <select
                     className="_input"
                     name="unitType"
@@ -181,8 +197,9 @@ function DayLogFormGrub() {
                     <option value="each">each</option>
                     <option value="reps">reps</option>
                 </select>
+
             </div>
-        </div>
+        </>
     );
 }
 
