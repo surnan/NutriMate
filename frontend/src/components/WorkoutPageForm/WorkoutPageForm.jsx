@@ -112,13 +112,12 @@ function WorkoutPageForm() {
             return;
         }
         //Fix navigation bug
-        navigate(`/DayLog/${daycardId}`,
+        navigate(`/daylogform/${workoutId}`, {
+            state:
             {
-                state:
-                {
-                    newWorkout: false
-                }
-            })
+                newWorkout: true
+            }
+        })
     }
 
 
@@ -209,6 +208,7 @@ function WorkoutPageForm() {
                     className="black _button"
                     type="button"
                     onClick={handleAddToLog}
+                    disabled={true}
                 >
                     Add To Log
                 </button>
