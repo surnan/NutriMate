@@ -15,3 +15,13 @@ export const format_Month_Date_Year = (date) => {
         day: 'numeric',
     });
 };
+
+export const formatDatetimeLocal = (dateString) => {
+    if (!dateString) {
+        const now = new Date();
+        const localISOTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+        return localISOTime; // local date & time in ISO format
+    }
+    const date = new Date(dateString);
+    return !isNaN(date.getTime()) ? new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
+};
