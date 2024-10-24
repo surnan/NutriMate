@@ -18,7 +18,13 @@ function DayLogPageForm() {
 
     const { id } = useParams();
     const dayLogId = parseInt(id);
+    const _workoutId = parseInt(id);
+
     const { newDayLog } = location.state || {};
+
+    const [workObj, setWorkObj] = useState({});
+
+
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
@@ -44,12 +50,12 @@ function DayLogPageForm() {
         if (!newDayLog && dayLogObj) {
             setForm({
                 timestamp: dayLogObj?.timestamp || Date(),
-                name: dayLogObj?.name || "",
-                calories: dayLogObj?.calories || "",
+                name: dayLogObj?.name || workObj?.name || "",
+                calories: dayLogObj?.calories ||"",
                 units: dayLogObj.units || "",
-                unitType: dayLogObj?.unitType || sessionUser.id,
-                grubId: dayLogObj?.grubId || "",
-                workoutId: dayLogObj?.workoutId || "",
+                unitType: dayLogObj?.unitType || "each",
+                grubId: null,
+                workoutId: dayLogObj?.workoutId || workObj?.id ||"",
                 userId: dayLogObj?.userId || sessionUser?.id || 1
             });
         }
@@ -58,6 +64,10 @@ function DayLogPageForm() {
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             dispatch(getDailyLogsOneThunk(dayLogId))
+        }
+
+        if (!newDayLog) {
+            setWorkObj(getWorkoutOneThunk(parseInt(_workoutId)))
         }
     }, [dispatch, dayLogId, newDayLog])
 
@@ -69,7 +79,7 @@ function DayLogPageForm() {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
             } else {
-                if (parseInt(form[key]) <= 0){
+                if (parseInt(form[key]) <= 0) {
                     newErrors[key] = `${capitalizeFirstLetter(key)} must be > 0`;
                 }
             }
@@ -99,15 +109,15 @@ function DayLogPageForm() {
             const { timestamp, name, calories, units, unitType, userId, grubId, workoutId } = form;
             const body = {
                 id: dayLogId,
-                timestamp, 
-                name, 
-                calories, 
-                units, 
-                unitType, 
-                userId, 
-                grubId, 
+                timestamp,
+                name,
+                calories,
+                units,
+                unitType,
+                userId,
+                grubId,
                 workoutId
-                
+
             }
             const result = dayLogId
                 ? await dispatch(updateDailyLogsOneThunk({ body }))

@@ -56,13 +56,12 @@ const DayLogPage = () => {
         console.log("__handleHoursDiv__grubId = ", grubId)
 
         if (workoutId && daycardId) {
-            navigate(`/DayLog/${daycardId}`,
+            navigate(`/daylogform/${daycardId}`, {
+                state:
                 {
-                    state:
-                    {
-                        newWorkout: false
-                    }
-                })
+                    newWorkout: false
+                }
+            })
         }
     };
 
@@ -165,17 +164,17 @@ const DayLogPage = () => {
                     <div
                         className="dpg_hour clickable"
                         key={index}
-                        // onClick={(e) => handleHoursDiv(e, hour)}
+                    // onClick={(e) => handleHoursDiv(e, hour)}
                     >
                         <div className="dpgh_label">{hour}</div>
                         <div className="dpgh_content">
                             {findLogsForHour(index).length > 0 ? (
                                 findLogsForHour(index).map(log => (
-                                    <DayLogCard 
-                                    key={log.id} 
-                                    daylog={log} 
-                                    handleClick={(e) => handleHoursDiv(e, hour)} // Pass the onClick handler as a prop
-                                />
+                                    <DayLogCard
+                                        key={log.id}
+                                        daylog={log}
+                                        handleClick={(e) => handleHoursDiv(e, hour)} // Pass the onClick handler as a prop
+                                    />
                                 ))
                             ) : (
                                 "click to enter food/exercise"
