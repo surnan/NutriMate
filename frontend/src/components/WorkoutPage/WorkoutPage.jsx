@@ -34,11 +34,15 @@ const WorkoutPage = () => {
     dispatch(getWorkoutsAllThunk())
   }, [dispatch])
 
-  const handleCard = workout => navigate(`/workoutform/${workout.id}`)
+  // PUT
+  const handleCard = workout => navigate(`/workoutform/${workout.id}`) // PUT
+
+
   const handleSearch = query => setSearchQuery(query.toLowerCase())
   const handleBack = () => navigate(-1)
 
-  const handleCreate = () => navigate('/workoutform', { 
+  //POST
+  const handleCreate = () => navigate('/workoutform', { //POST
     state: { 
       newWorkout: true 
   }});
