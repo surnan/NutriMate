@@ -15,7 +15,7 @@ function WorkoutPageForm() {
 
     const { id } = useParams();
     const workoutId = parseInt(id);
-    const { newWorkout } = location.state || {};  // newWorkout -> empty form
+    const { newWorkout } = location.state || {};  // newWorkout=bool --> empty form
 
     const sessionUser = useSelector((state) => state.session.user);
     const workoutObj = useSelector((state) => state.workouts.single)
@@ -117,7 +117,6 @@ function WorkoutPageForm() {
             state:
             {
                 newDayLog: true,
-                newWorkId: workoutObj.id,
                 newWorkoutObj: workoutObj
             }
         })
@@ -125,7 +124,6 @@ function WorkoutPageForm() {
 
 
 
-    // const hasError = () => Object.keys(errors).length !== 0;
 
     return (
         <div className="mainBodyStyle">

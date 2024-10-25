@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
-import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
+import { getWorkoutOneThunk } from "../../redux/workouts";
+import { getGrubsOneThunk } from "../../redux/grubs";
 import DeleteModal from "../DeleteModal/DeleteModal";
+import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
 import WorkoutCard from "../WorkoutCard";
 
 
@@ -16,14 +18,13 @@ function DayLogPageForm() {
 
     const { id } = useParams();
     const dayLogId = parseInt(id);
-    const { newDayLog, newWorkoutObj } = location.state || {};
+    const { newDayLog, newWorkId, newWorkoutObj } = location.state || {};
 
     useEffect(()=>{
         console.log("___newDayLog = ", newDayLog)
-        if (!newDayLog){
-            console.log("___newWorkoutObj = ", newWorkoutObj)
-        }
-    }, [newDayLog, newWorkoutObj])
+        console.log("___newWorkId = ", newWorkId)
+
+    }, [newDayLog, newWorkId])
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
@@ -46,10 +47,10 @@ function DayLogPageForm() {
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             setForm({
-                name: dayLogObj.name || newWorkoutObj?.name || "",
+                name: dayLogObj.name || newWorkoutObj.name || "",
                 description: dayLogObj.description || "",
                 grubId: dayLogObj.grubId,
-                workoutId: dayLogObj.workoutId || newWorkoutObj?.id || "",
+                workoutId: dayLogObj.workoutId || newWorkId || "",
                 userId: dayLogObj.userId || sessionUser?.id || 1
             });
         }
@@ -98,17 +99,17 @@ function DayLogPageForm() {
         console.log("hello")
         e.preventDefault();
         try {
-            const { timestamp, calories, units, unitType, userId, grubId, workoutId } = form;
+            const { timestamp, name, calories, units, unitType, userId, grubId, workoutId } = form;
             const body = {
                 id: dayLogId,
                 timestamp: timestamp,
-                name: newWorkoutObj?.name || "no name given",
+                name: newWorkoutObj.name,
                 calories: parseInt(calories),
                 units: parseInt(units),
-                unitType: unitType,
+                unitType: "each",
                 userId: parseInt(userId),
                 grubId: null,
-                workoutId: parseInt(newWorkoutObj?.id || 999)
+                workoutId: 1
 
             }
             console.log("___body = ", body)
