@@ -56,12 +56,8 @@ const DayLogPage = () => {
         console.log("__handleHoursDiv__grubId = ", grubId)
 
         if (workoutId && daycardId) {
-            navigate(`/daylogform/${daycardId}`, {
-                state:
-                {
-                    newWorkout: false
-                }
-            })
+            //  PUT 
+            navigate(`/daylogform/${daycardId}`) //PUT
         }
     };
 

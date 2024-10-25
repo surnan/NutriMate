@@ -21,11 +21,13 @@ function WorkoutPageForm() {
     const workoutObj = useSelector((state) => state.workouts.single)
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
+    const [newWorkId, setNewWorkId] = useState(null)
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
         name: "",
         description: '',
-        userId: sessionUser?.id || 1
+        userId: sessionUser?.id || 1,
+        workoutId: ""
     });
 
     useEffect(() => {
@@ -33,7 +35,8 @@ function WorkoutPageForm() {
             setForm({
                 name: workoutObj.name || "",
                 description: workoutObj.description || "",
-                userId: workoutObj.userId || sessionUser?.id || 1
+                userId: workoutObj.userId || sessionUser?.id || 1,
+                workoutId: workoutObj.id
             });
         }
     }, [workoutObj, newWorkout, sessionUser])
@@ -84,6 +87,7 @@ function WorkoutPageForm() {
                 ? await dispatch(updateWorkoutsOneThunk({ body }))
                 : await dispatch(postWorkoutsOneThunk({ body }))
             if (result) {
+                setNewWorkId(parseInt(result.id))
                 navigate(-1)
             }
         } catch (error) {
@@ -112,14 +116,16 @@ function WorkoutPageForm() {
             return;
         }
 
+        console.log("_____newWorkId = ", newWorkId);
+        console.log("_____workoutObj.id = ", workoutObj.id);
         //Fix navigation bug
-        navigate(`/daylogform/${workoutId}`, {
-            state:
-            {
-                newDayLog: true,
-                newWorkId: workoutObj.id
-            }
-        })
+        // navigate(`/daylogform/${workoutId}`, {
+        //     state:
+        //     {
+        //         newDayLog: true,
+        //         newWorkId: parseInt(newWorkId)
+        //     }
+        // })
     }
 
 
@@ -210,7 +216,7 @@ function WorkoutPageForm() {
                     className="black _button"
                     type="button"
                     onClick={handleAddToLog}
-                    disabled={isEmpty(errors)}
+                    disabled={true}
                 >
                     Add To Log
                 </button>

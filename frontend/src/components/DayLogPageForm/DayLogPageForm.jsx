@@ -18,28 +18,25 @@ function DayLogPageForm() {
 
     const { id } = useParams();
     const dayLogId = parseInt(id);
-    const _workoutId = parseInt(id);
+    const { newDayLog, newWorkId } = location.state || {};
 
-    const { newDayLog } = location.state || {};
+    useEffect(()=>{
+        console.log("___newDayLog = ", newDayLog)
+        console.log("___newWorkId = ", newWorkId)
 
-    const [workObj, setWorkObj] = useState({});
-
-
+    }, [newDayLog, newWorkId])
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
-
-    useEffect(() => {
-        console.log("____dayLogObj = ", dayLogObj)
-    }, [dayLogObj])
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
     const [form, setForm] = useState({
         timestamp: Date(),
+        name: "",
         calories: "",
         units: "",
-        unitType: sessionUser.id,
+        unitType: "",
         userId: "",
         grubId: "",
         workoutId: "",
@@ -49,14 +46,11 @@ function DayLogPageForm() {
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             setForm({
-                timestamp: dayLogObj?.timestamp || Date(),
-                name: dayLogObj?.name || workObj?.name || "",
-                calories: dayLogObj?.calories ||"",
-                units: dayLogObj.units || "",
-                unitType: dayLogObj?.unitType || "each",
-                grubId: null,
-                workoutId: dayLogObj?.workoutId || workObj?.id ||"",
-                userId: dayLogObj?.userId || sessionUser?.id || 1
+                name: dayLogObj.name || "",
+                description: dayLogObj.description || "",
+                grubId: dayLogObj.grubId,
+                workoutId: dayLogObj.workoutId || newWorkId || "",
+                userId: dayLogObj.userId || sessionUser?.id || 1
             });
         }
     }, [dayLogObj, newDayLog, sessionUser])
@@ -65,11 +59,8 @@ function DayLogPageForm() {
         if (!newDayLog && dayLogObj) {
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
-
-        if (!newDayLog) {
-            setWorkObj(getWorkoutOneThunk(parseInt(_workoutId)))
-        }
     }, [dispatch, dayLogId, newDayLog])
+
 
     useEffect(() => {
         const newErrors = {};
@@ -99,29 +90,31 @@ function DayLogPageForm() {
             timestamp: dayLogObj?.timestamp || Date(),
             calories: dayLogObj?.calories || "",
             units: dayLogObj.units || "",
-            unitType: dayLogObj?.unitType || sessionUser.id,
+            unitType: dayLogObj?.unitType || ""
         });
     }
 
     const handleSubmitSave = async (e) => {
+        console.log("hello")
         e.preventDefault();
         try {
             const { timestamp, name, calories, units, unitType, userId, grubId, workoutId } = form;
             const body = {
                 id: dayLogId,
-                timestamp,
-                name,
-                calories,
-                units,
-                unitType,
-                userId,
-                grubId,
-                workoutId
+                timestamp: Date(),
+                name: "asdf1234",
+                calories: parseInt(calories),
+                units: parseInt(units),
+                unitType: "each",
+                userId: parseInt(userId),
+                grubId: null,
+                workoutId: 1
 
             }
-            const result = dayLogId
-                ? await dispatch(updateDailyLogsOneThunk({ body }))
-                : await dispatch(postDailyLogsOneThunk({ body }))
+            console.log("___body = ", body)
+            const result = newDayLog
+                ? await dispatch(postDailyLogsOneThunk({ body }))
+                : await dispatch(updateDailyLogsOneThunk({ body }))
             if (result) {
                 navigate(-1)
             }
@@ -145,7 +138,7 @@ function DayLogPageForm() {
     };
 
     return (
-        <>
+        <div className="mainBodyStyle">
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
@@ -176,8 +169,10 @@ function DayLogPageForm() {
                 </div>
             </div>
 
-            {dayLogObj?.Workout &&
-                <WorkoutCard workout={dayLogObj?.Workout} />}
+            {/* {
+                dayLogObj?.Workout &&
+                <WorkoutCard workout={dayLogObj?.Workout} />
+            } */}
 
             <div className="workout_page_form_grid">
                 <p>Date</p>
@@ -232,7 +227,8 @@ function DayLogPageForm() {
                 </select>
 
             </div>
-        </>
+
+        </div >
     );
 }
 
