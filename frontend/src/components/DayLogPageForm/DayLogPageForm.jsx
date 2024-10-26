@@ -169,6 +169,7 @@ function DayLogPageForm() {
                 <input
                     className="_input"
                     value={form.name}
+                    readOnly={true}
                 />
 
 
