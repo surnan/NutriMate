@@ -159,7 +159,7 @@ function GrubPageForm() {
     }
 
 
-    
+
     const handleDeleteBtn = () => {
         if (!grubId) {
             alert('Can not delete this new record because it has not been saved to database');
@@ -167,14 +167,27 @@ function GrubPageForm() {
         }
         setShowDeletetModal(true)
     }
-    
+
     const handleModalClose = () => {
         setShowDeletetModal(false)
         navigate(-1)
     };
-    
 
-    
+    const handleAddToLog = () => {
+        if (!grubId) {
+            alert('Grub needs to be saved before adding to DayLog');
+        } else {
+            //  !!!Fix navigation bug
+            navigate(`/daylogform/${grubId}`, {
+                state: {
+                    newDayLog: true,
+                    newGrubObj: grubObj
+                },
+            });
+        }
+    };
+
+
     // const hasError = () => Object.keys(errors).length !== 0;
 
     return (
@@ -243,6 +256,7 @@ function GrubPageForm() {
                 <div>
                     <select
                         name="servingUnit"
+                        className="_input"
                         onChange={updateSetForm}
                         value={form.servingUnit || ""}
                     >
@@ -360,6 +374,8 @@ function GrubPageForm() {
                 />
 
 
+            </div>
+            <div className="max_HFlex">
                 <div >
                     <button
                         className="red _button"
@@ -369,78 +385,25 @@ function GrubPageForm() {
                         DELETE
                     </button>
                 </div>
-            </div>
+                <button
+                    className="black _button"
+                    type="button"
+                    onClick={handleAddToLog}
+                //disabled={!isEmpty(errors)}
+                >
+                    Add To Log
+                </button>
 
+            </div>
             {/* DELETE MODAL */}
             {showDeleteModal && (
                 <DeleteModal
                     item={grubObj}
-                    itemType="grubs"
+                    itemType="grub"
                     deleteThunk={deleteGrubThunkById}
                     onClose={handleModalClose}
                 />
             )}
-            <br />
-            <br />
-            <hr />
-            <br />
-            <br />
-            <div className="workout_page_form_grid">
-
-                <p>Date</p>
-                <input
-                    className="_input"
-                    type="datetime-local"
-                    name="day"
-                    onChange={updateSetForm}
-                    placeholder="Please enter your goal weight"
-                    value={formatDate(form.day)}
-                />
-                <p>Serving Count</p>
-                <input
-                    className="_input"
-                    type="number"
-                    name="day"
-                    onChange={updateSetForm}
-                    placeholder="Please enter your goal weight"
-                    value={formatDate(form.day)}
-                />
-                <label>
-                    calculated calories
-                </label>
-                <p> 99878 Calories</p>
-                <input
-                    className="_input"
-                    type="number"
-                    name="day"
-                    onChange={updateSetForm}
-                    placeholder="Please enter your goal weight"
-                    value={formatDate(form.day)}
-                />
-                <input
-                    className="_input"
-                    type="number"
-                    name="Quantity"
-                    onChange={updateSetForm}
-                    placeholder="Quantity"
-                    value={formatDate(form.day)}
-                />
-                <select
-                    className="_input"
-                    name="servingUnit"
-                    onChange={updateSetForm}
-                    value={form.servingUnit || ""}
-                >
-                    <option value="">Quantity Type</option>
-                    <option value="hours">hours</option>
-                    <option value="minutes">minutes</option>
-                    <option value="seconds">seconds</option>
-                    <option value="each">each</option>
-                    <option value="reps">reps</option>
-                </select>
-
-            </div>
-
         </div>
     );
 }

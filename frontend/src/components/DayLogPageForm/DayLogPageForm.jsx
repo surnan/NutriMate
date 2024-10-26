@@ -7,6 +7,7 @@ import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkByI
 import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
 import DeleteModal from "../DeleteModal/DeleteModal";
 import WorkoutCard from "../WorkoutCard";
+import GrubCard from "../GrubCard/GrubCard";
 
 
 function DayLogPageForm() {
@@ -114,12 +115,7 @@ function DayLogPageForm() {
 
 
     const handleDelete = () => {
-        alert('Workout not saved to database');
-        // if (!workoutId) {
-        //     alert('Workout not saved to database');
-        //     return;
-        // }
-        // setShowDeletetModal(true)
+        setShowDeletetModal(true)
     }
 
     const handleModalClose = () => {
@@ -159,13 +155,24 @@ function DayLogPageForm() {
                 </div>
             </div>
 
-            {/* {
-                dayLogObj?.Workout &&
-                <WorkoutCard workout={dayLogObj?.Workout} />
-            } */}
+
+{/* 
+            <div className="card">
+                {
+                    dayLogObj?.Workout &&
+                    <WorkoutCard workout={dayLogObj?.Workout} />
+                }
+
+                {
+                    dayLogObj?.Grub &&
+                    <GrubCard grub={dayLogObj?.Grub} />
+                }
+            </div>
+ */}
+
 
             <div className="workout_page_form_grid">
-            <p>Name</p>
+                <p>Name</p>
                 <input
                     className="_input"
                     value={form.name}
@@ -226,7 +233,21 @@ function DayLogPageForm() {
 
             </div>
 
-        </div >
+            <div className="max_HFlex">
+                <button className="red _button" type="button" onClick={handleDelete}>
+                    DELETE
+                </button>
+            </div>
+
+            {showDeleteModal && (
+                <DeleteModal
+                    item={dayLogObj}
+                    itemType="dayLogObj"
+                    deleteThunk={deleteDailyLogsThunkById}
+                    onClose={handleModalClose}
+                />
+            )}
+        </div>
     );
 }
 
