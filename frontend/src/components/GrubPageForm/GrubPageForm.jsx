@@ -12,7 +12,6 @@ function GrubPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-
     const { id } = useParams();
     const grubId = parseInt(id);
     const { newGrub } = location.state || {};  // newGrub -> empty form
@@ -22,24 +21,29 @@ function GrubPageForm() {
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-    const [form, setForm] = useState({
-        name: "",
-        servingUnit: '',
-        servingSize: '',
-        calories: '',
-        protein: '',
-        fats: '',
-        carbs: '',
-        sugar: '',
-        company: '',
-        description: '',
-        userId: sessionUser?.id || 1
-    });
+    const [form, setForm] = useState(initializeForm());
+
+    function initializeForm() {
+        return {
+            name: "",
+            servingUnit: '',
+            servingSize: '',
+            calories: '',
+            protein: '',
+            fats: '',
+            carbs: '',
+            sugar: '',
+            company: '',
+            description: '',
+            userId: sessionUser?.id || 1
+        }
+    };
 
 
     useEffect(() => {
         if (!newGrub && grubObj) {
-            setForm({
+            setForm((prevForm) => ({
+                ...prevForm,
                 name: grubObj.name || "",
                 description: grubObj.description || "",
                 servingUnit: grubObj.servingUnit || '',
@@ -51,7 +55,7 @@ function GrubPageForm() {
                 sugar: grubObj.sugar || '',
                 company: grubObj.company || '',
                 userId: grubObj.userId || sessionUser?.id || 1
-            });
+            }));
         }
     }, [grubObj, newGrub, sessionUser])
 
@@ -65,7 +69,6 @@ function GrubPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-
         const validateFields = (fields, condition, errorMessage) => {
             fields.forEach((key) => {
                 if (isNaN(form[key])) {
@@ -86,17 +89,8 @@ function GrubPageForm() {
             }
         });
 
-        validateFields(
-            minOneFields,
-            (value) => value < 1,
-            "minimum is 1"
-        );
-
-        validateFields(
-            minZeroFields,
-            (value) => value < 0,
-            "minimum is 0"
-        );
+        validateFields(minOneFields, (value) => value < 1, "minimum is 1");
+        validateFields(minZeroFields, (value) => value < 0, "minimum is 0");
 
         setErrors(newErrors);
     }, [form])
@@ -110,19 +104,7 @@ function GrubPageForm() {
     const handleBack = () => navigate(-1);
 
     const handleReset = () => {
-        setForm({
-            name: grubObj?.name || "",
-            description: grubObj?.description,
-            servingUnit: grubObj?.servingUnit,
-            servingSize: grubObj?.servingSize,
-            calories: grubObj?.calories,
-            protein: grubObj?.protein,
-            fats: grubObj?.fats,
-            carbs: grubObj?.carbs,
-            sugar: grubObj?.sugar,
-            company: grubObj?.company,
-            userId: grubObj?.userId || 1
-        });
+        setForm(initializeForm());
     };
 
     const handleSubmitSave = async (e) => {
@@ -157,8 +139,6 @@ function GrubPageForm() {
             console.error('Error adding grub:', error);
         }
     }
-
-
 
     const handleDeleteBtn = () => {
         if (!grubId) {
