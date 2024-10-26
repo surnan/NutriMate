@@ -156,7 +156,7 @@ function DayLogPageForm() {
             </div>
 
 
-{/* 
+
             <div className="card">
                 {
                     dayLogObj?.Workout &&
@@ -168,7 +168,7 @@ function DayLogPageForm() {
                     <GrubCard grub={dayLogObj?.Grub} />
                 }
             </div>
- */}
+
 
 
             <div className="workout_page_form_grid">
@@ -201,6 +201,7 @@ function DayLogPageForm() {
                     placeholder="Please enter your goal weight"
                     onChange={updateSetForm}
                     value={form.calories}
+                    readOnly={form.grubId || newGrubObj}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
@@ -230,6 +231,18 @@ function DayLogPageForm() {
                     <option value="each">each</option>
                     <option value="reps">reps</option>
                 </select>
+
+                <label style={{ display: 'inline-flex' }}>
+                    {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Serving Units:
+                </label>
+                <input
+                    className="_input"
+                    type="number"
+                    name="servingunits"
+                    placeholder="enter servings"
+                    onChange={updateSetForm}
+                    // value={form.units}
+                />
 
             </div>
 

@@ -7,6 +7,8 @@
     max-width: 1100px;
     grid-template-columns: 1fr;
     gap: 0.5rem;
+    border: 2px black solid;
+    box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604);
 }
 
 .workout_card_grid > :first-child {
