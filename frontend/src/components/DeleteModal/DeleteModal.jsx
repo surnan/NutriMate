@@ -22,8 +22,8 @@ const DeleteModal = ({ item, itemType, deleteThunk, onClose }) => {
             <div className="modal_window_all">
                 <h3>Confirm Delete</h3>
                 <p>Are you sure you want to delete this {itemType}?</p>
-                <button onClick={handleDelete} className="deleteButton">Yes (Delete {itemTypeText})</button>
-                <button onClick={onClose} className="cancelButton">No (Keep {itemTypeText})</button>
+                <button onClick={handleDelete} className="red _button">Yes (Delete {itemTypeText})</button>
+                <button onClick={onClose} className="green _button">No (Keep {itemTypeText})</button>
             </div>
         </div>
     );
