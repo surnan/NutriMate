@@ -1,6 +1,6 @@
 // frontend/src/componenets/DayLogPageForm/DayLogPageForm.jsx
 import "./DayLogPageForm.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
@@ -16,12 +16,14 @@ function DayLogPageForm() {
     const location = useLocation();
     const { id } = useParams();
     const dayLogId = parseInt(id);
-
     const { newDayLog, newWorkoutObj, newGrubObj, currentDayLog } = location.state || {};
+
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
 
-    const initialForm = {
+    const [showDeleteModal, setShowDeletetModal] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [form, setForm] = useState({
         timestamp: Date(),
         name: "",
         calories: "",
@@ -29,36 +31,38 @@ function DayLogPageForm() {
         unitType: "",
         userId: "",
         grubId: "",
-        workoutId: ""
-    };
+        workoutId: "",
+        userId: dayLogObj.userId || sessionUser?.id || 1
+    });
 
-    const [showDeleteModal, setShowDeletetModal] = useState(false);
-    const [errors, setErrors] = useState({});
-    const [form, setForm] = useState(initialForm);
 
-    useEffect(() => {
-        if (!newDayLog && dayLogObj) {
-            setForm({
-                name: dayLogObj.name || newWorkoutObj?.name || newGrubObj?.name || "",
-                timestamp: dayLogObj.timestamp || Date.now(),
-                calories: dayLogObj.calories || "",
-                units: dayLogObj.units || "",
-                unitType: dayLogObj.unitType || "",
-                grubId: dayLogObj.grubId || newGrubObj?.id || null,
-                workoutId: dayLogObj.workoutId || newWorkoutObj?.id || null,
-                userId: dayLogObj.userId || sessionUser?.id || 1
-            });
-        } else {
-            dispatch(getDailyLogsOneThunk(dayLogId));
+    const initializeForm = useCallback(() => {
+        return {
+            name: dayLogObj.name || newWorkoutObj?.name || newGrubObj?.name || "",
+            timestamp: dayLogObj.timestamp || Date.now(),
+            calories: dayLogObj.calories || "",
+            units: dayLogObj.units || "",
+            unitType: dayLogObj.unitType || "",
+            grubId: dayLogObj.grubId || newGrubObj?.id || null,
+            workoutId: dayLogObj.workoutId || newWorkoutObj?.id || null,
+            userId: dayLogObj.userId || sessionUser?.id || 1
         }
     }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
 
+
+    useEffect(() => {
+        setForm(initializeForm());
+    }, [initializeForm]);
 
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
     }, [dispatch, dayLogId, newDayLog])
+
+    const handleReset = () => setForm(initializeForm)
+    const handleBack = () => navigate(-1);
+
 
 
     useEffect(() => {
@@ -82,10 +86,6 @@ function DayLogPageForm() {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
-
-
-    const handleBack = () => navigate(-1);
-    const handleReset = () => setForm(initialForm)
 
     const handleSubmitSave = async (e) => {
         console.log("hello")
