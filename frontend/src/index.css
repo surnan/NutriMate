@@ -54,6 +54,10 @@ button:disabled {
 ._select, ._input, ._label {height: 2rem}
 input {padding-left: 1rem}
 
+select._input {
+    padding: 0.5rem; /* Or adjust as needed */
+}
+
 .max_HFlex {
     display: flex;
     justify-content: space-between;

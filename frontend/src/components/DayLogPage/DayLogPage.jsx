@@ -25,6 +25,7 @@ const DayLogPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
+    const dayLogsById = useSelector(state => state.daylogs.byId);
 
 
     const filteredAndSortedArray = dayLogsArr
@@ -55,14 +56,27 @@ const DayLogPage = () => {
         console.log("__handleHoursDiv__workoutId = ", workoutId)
         console.log("__handleHoursDiv__grubId = ", grubId)
 
-        if (workoutId && daycardId) {
+
+
+        console.log ("dayLogsArr = ", dayLogsArr)
+        console.log("\n\n")
+        console.log ("dayLogsById = ", dayLogsById)
+        console.log("\n\n")
+        console.log("dayLogsById[grubId]  = ", dayLogsById[grubId])
+        console.log("\n\n")
+        console.log("dayLogsById[workoutId]  = ", dayLogsById[workoutId])
+
+        const currentdayLog = dayLogsById[grubId] ? dayLogsById[grubId] : dayLogsById[workoutId]
+
+        //PUT
+            // navigate(`/daylogform/${daycardId}`) //PUT
             navigate(`/daylogform/${daycardId}`, {
-                state:
-                {
-                    newWorkout: false
+                state: {
+                    newDayLog: false,
+                    currentDayLog: currentdayLog
                 }
-            })
-        }
+            }) //PUT
+
     };
 
 
