@@ -1,6 +1,6 @@
 // frontend/src/componenets/GrubPageForm/GrubPageForm.jsx
 import "./GrubPageForm.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
@@ -21,23 +21,42 @@ function GrubPageForm() {
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-    const [form, setForm] = useState(initializeForm());
+    const [form, setForm] = useState({
+        name: "",
+        servingUnit: '',
+        servingSize: '',
+        calories: '',
+        protein: '',
+        fats: '',
+        carbs: '',
+        sugar: '',
+        company: '',
+        description: '',
+        userId: sessionUser?.id || 1
+    })
 
-    function initializeForm() {
+    const initializeForm = useCallback(() => {
         return {
-            name: "",
-            servingUnit: '',
-            servingSize: '',
-            calories: '',
-            protein: '',
-            fats: '',
-            carbs: '',
-            sugar: '',
-            company: '',
-            description: '',
-            userId: sessionUser?.id || 1
-        }
-    };
+            name: grubObj?.name || "",
+            description: grubObj?.description || "",
+            servingUnit: grubObj?.servingUnit || '',
+            servingSize: grubObj?.servingSize || '',
+            calories: grubObj?.calories || '',
+            protein: grubObj?.protein || '',
+            fats: grubObj?.fats || '',
+            carbs: grubObj?.carbs || '',
+            sugar: grubObj?.sugar || '',
+            company: grubObj?.company || '',
+            userId: grubObj?.userId || sessionUser?.id || 1
+        };
+    }, [newGrub, grubObj, sessionUser]);
+
+    useEffect(() => {
+        setForm(initializeForm());
+    }, [initializeForm]);
+
+    const handleReset = () => setForm(initializeForm());
+    const handleBack = () => navigate(-1);
 
 
     useEffect(() => {
@@ -101,11 +120,7 @@ function GrubPageForm() {
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
-    const handleBack = () => navigate(-1);
 
-    const handleReset = () => {
-        setForm(initializeForm());
-    };
 
     const handleSubmitSave = async (e) => {
         e.preventDefault();
@@ -216,7 +231,7 @@ function GrubPageForm() {
                     name="name"
                     onChange={updateSetForm}
                     placeholder="enter name"
-                    value={form.name || ""}
+                    value={form?.name}
                 />
 
                 <div>
@@ -230,7 +245,7 @@ function GrubPageForm() {
                         name="servingSize"
                         onChange={updateSetForm}
                         placeholder="Quantity"
-                        value={form.servingSize || ""}
+                        value={form?.servingSize}
                     />
                 </div>
                 <div>
@@ -238,7 +253,7 @@ function GrubPageForm() {
                         name="servingUnit"
                         className="_input"
                         onChange={updateSetForm}
-                        value={form.servingUnit || ""}
+                        value={form?.servingUnit}
                     >
                         <option value="">Quantity Type</option>
                         <option value="bowls">bowls</option>
@@ -260,7 +275,7 @@ function GrubPageForm() {
                     name="calories"
                     onChange={updateSetForm}
                     placeholder="enter calories"
-                    value={form.calories || ""}
+                    value={form?.calories || ""}
                 />
 
                 <div>
@@ -275,7 +290,7 @@ function GrubPageForm() {
                             name="protein"
                             onChange={updateSetForm}
                             placeholder="enter protein"
-                            value={form.protein || ""}
+                            value={form?.protein || ""}
                         />
                         {errors.protein && <p style={{ color: 'red' }}>{errors.protein}&nbsp;&nbsp;</p>}
                     </div>
@@ -291,7 +306,7 @@ function GrubPageForm() {
                             name="fats"
                             onChange={updateSetForm}
                             placeholder="enter fats"
-                            value={form.fats || ""}
+                            value={form?.fats || ""}
                         />
                         {errors.fats && <p style={{ color: 'red' }}>{errors.fats}&nbsp;&nbsp;</p>}
                     </div>
@@ -307,7 +322,7 @@ function GrubPageForm() {
                             name="carbs"
                             onChange={updateSetForm}
                             placeholder="enter carbs"
-                            value={form.carbs || ""}
+                            value={form?.carbs || ""}
                         />
                         {errors.carbs && <p style={{ color: 'red' }}>{errors.carbs}&nbsp;&nbsp;</p>}
                     </div>
@@ -323,7 +338,7 @@ function GrubPageForm() {
                             name="sugar"
                             onChange={updateSetForm}
                             placeholder="enter sugar"
-                            value={form.sugar || ""}
+                            value={form?.sugar || ""}
                         />
                         {errors.sugar && <p style={{ color: 'red' }}>{errors.sugar}&nbsp;&nbsp;</p>}
                     </div>
@@ -339,7 +354,7 @@ function GrubPageForm() {
                     name="company"
                     onChange={updateSetForm}
                     placeholder="enter company name"
-                    value={form.company || ""}
+                    value={form?.company || ""}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
@@ -350,7 +365,7 @@ function GrubPageForm() {
                     name="description"
                     onChange={updateSetForm}
                     placeholder="enter description"
-                    value={form.description || ""}
+                    value={form?.description || ""}
                 />
 
 
