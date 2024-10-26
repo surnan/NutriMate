@@ -205,7 +205,7 @@ function DayLogPageForm() {
                 />
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Units:
+                    {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>} Quantity:
                 </label>
                 <input
                     className="_input"
@@ -216,9 +216,13 @@ function DayLogPageForm() {
                     value={form.units}
                 />
 
+
                 <label style={{ display: 'inline-flex' }}>
                     {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Unit type:
                 </label>
+
+
+
                 <select
                     className="_input"
                     name="unitType"
@@ -232,17 +236,22 @@ function DayLogPageForm() {
                     <option value="reps">reps</option>
                 </select>
 
+
+
                 <label style={{ display: 'inline-flex' }}>
                     {errors.unitType && <span style={{ color: 'red' }}>{errors.unitType}&nbsp;&nbsp;</span>} Serving Units:
                 </label>
+
+
                 <input
                     className="_input"
                     type="number"
                     name="servingunits"
                     placeholder="enter servings"
                     onChange={updateSetForm}
-                    // value={form.units}
+                // value={form.units}
                 />
+
 
             </div>
 
