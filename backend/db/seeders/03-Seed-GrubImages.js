@@ -16,62 +16,62 @@ module.exports = {
         options.tableName = "GrubImages";
         return queryInterface.bulkInsert(options, [
             {
-                url: 'https://www.home-mega.com/wp-content/uploads/2021/08/4416-Monticello-Ave-28-1-scaled.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/1730057529100.png',
                 grubId: 1,
                 name: "one-img.jpg"
             },
             {
-                url: 'https://photos.zillowstatic.com/fp/828db8b15f2e8c98075e9448e6912b38-p_e.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/1730057529227.png',
                 grubId: 2,
                 name: "two-img.jpg"
             },
             {
-                url: 'https://www.trulia.com/pictures/thumbs_5/zillowstatic/fp/87b3605e6bd9499e38ec39ad6236f455-full.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/output.jpg',
                 grubId: 3,
                 name: "three-img.jpg"
             },
             {
-                url: 'https://d1ja9tyo8nbkbc.cloudfront.net/45929683_S0440/S0440/S0440-R0100/ONEH6297093/ONEH6297093-2.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9327.jpg',
                 grubId: 4,
                 name: "four-img.jpg"
             },
             {
-                url: 'https://d1ja9tyo8nbkbc.cloudfront.net/45929683_S0440/S0440/S0440-R0100/ONE3561922/ONE3561922-2.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9326.jpg',
                 grubId: 5,
                 name: "five-img.jpg"
             },
             {
-                url: 'https://www.compass.com/m/3aca145551c3be57f5147df19ebca2ed7074a8ca_img_0_12fd3/origin.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9325.jpg',
                 grubId: 6,
                 name: "six-img.jpg"
             },
             {
-                url: 'https://www.home-mega.com/wp-content/uploads/2021/08/4416-Monticello-Ave-28-1-scaled.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9324.jpg',
                 grubId: 7,
                 name: "sevem-img.jpg"
             },
             {
-                url: 'https://photos.zillowstatic.com/fp/828db8b15f2e8c98075e9448e6912b38-p_e.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9323.jpg',
                 grubId: 8,
                 name: "eight-img.jpg"
             },
             {
-                url: 'https://www.trulia.com/pictures/thumbs_5/zillowstatic/fp/87b3605e6bd9499e38ec39ad6236f455-full.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9322.jpg',
                 grubId: 9,
                 name: "nine-img.jpg"
             },
             {
-                url: 'https://d1ja9tyo8nbkbc.cloudfront.net/45929683_S0440/S0440/S0440-R0100/ONEH6297093/ONEH6297093-2.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9321.jpg',
                 grubId: 10,
                 name: "ten-img.jpg"
             },
             {
-                url: 'https://d1ja9tyo8nbkbc.cloudfront.net/45929683_S0440/S0440/S0440-R0100/ONE3561922/ONE3561922-2.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9320.jpg',
                 grubId: 11,
                 name: "eleven-img.jpg"
             },
             {
-                url: 'https://www.compass.com/m/3aca145551c3be57f5147df19ebca2ed7074a8ca_img_0_12fd3/origin.jpg',
+                url: 'https://nutrimatebucket.s3.amazonaws.com/IMG_9319.jpg',
                 grubId: 12,
                 name: "twelve-img.jpg"
             },
