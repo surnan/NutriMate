@@ -11,22 +11,21 @@ const multer = require("multer");
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 // --------------------------- Public UPLOAD ------------------------
-
+//These are middlewares for express
 const singlePublicFileUpload = async (file) => {
     const { originalname, mimetype, buffer } = await file;
     const path = require("path");
-    // name of the file in your S3 bucket will be the date in ms plus the extension name
+    // filename will be key, so applending name to timestamps to ensure unique.  Inside S3 bucket
     const Key = new Date().getTime().toString() + path.extname(originalname);
     const uploadParams = {
         Bucket: NAME_OF_BUCKET,
         Key,
         Body: buffer,
-        ACL: "public-read",
+        ACL: "public-read", //not in private upload
     };
     const result = await s3.upload(uploadParams).promise();
-
-    // save the name of the file in your bucket as the key in your database to retrieve for later
-    return result.Location;
+    // name of the file in bucket = DB key
+    return result.Location; //not in private upload
 };
 
 const multiplePublicFileUpload = async (files) => {
@@ -38,7 +37,7 @@ const multiplePublicFileUpload = async (files) => {
 };
 
 // --------------------------- Prviate UPLOAD ------------------------
-
+//Also middlewares for express/
 const singlePrivateFileUpload = async (file) => {
     const { originalname, mimetype, buffer } = await file;
     const path = require("path");
@@ -50,7 +49,6 @@ const singlePrivateFileUpload = async (file) => {
         Body: buffer,
     };
     const result = await s3.upload(uploadParams).promise();
-
     // save the name of the file in your bucket as the key in your database to retrieve for later
     return result.Key;
 };
