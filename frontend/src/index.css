@@ -1,4 +1,6 @@
-/* TODO: Add sitewide styles */
+/* frontend/src/index.css */
+/* sitewide styles */
+
 
 * {
     margin: 0;
@@ -21,7 +23,7 @@
     height: 3rem;
     min-width: 6rem;
     cursor: pointer;
-    color: white;
+    /* color: white; */
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604)
 }
 
