@@ -8,6 +8,8 @@ const database = db.database;
 const host = db.host;
 const schema = db.schema;
 
+console.log('Password type:', typeof password);
+
 module.exports = {
     development: {
         username,
