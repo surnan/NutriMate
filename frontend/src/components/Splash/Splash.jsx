@@ -1,5 +1,4 @@
 // frontend/src/components/Splash/Splash.jsx
-
 import "./Splash.css"
 import React, { useState, useEffect } from 'react';
 import { updateUserThunk } from '../../redux/session';
@@ -38,8 +37,8 @@ const Splash = () => {
     const form = { img_url };
     const updateUser = await dispatch(updateUserThunk(sessionUser.id, form))
   }
-
-  return (
+  
+return (
 <div className="mainBodyStyle">
       <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
 
@@ -50,6 +49,7 @@ const Splash = () => {
               <label htmlFor='file-upload'> Select From Computer
                 <input
                   type='file'
+
                   className="_button orange"
                   id='file-upload'
                   name="img_url"
@@ -81,6 +81,6 @@ const Splash = () => {
       )}
     </div>
   );
-};
+}
 
 export default Splash;
