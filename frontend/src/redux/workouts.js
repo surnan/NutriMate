@@ -149,7 +149,7 @@ const workoutsReducer = (state = initialState, action) => {
             return newState
         }
         default: {
-            return initialState
+            return state
         }
     }
 }
