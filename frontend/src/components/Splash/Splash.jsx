@@ -19,7 +19,6 @@ const Splash = () => {
   const [showUpload, setShowUpload] = useState(true); //  //show image?
   const [previewUrl, setPreviewUrl] = useState("");  //img url in react
 
-
   const handleWeightsBtn = () => { nav("/weights") }
   const handleWorkoutsBtn = () => { nav("/workouts") }
   const handleGrubsBtn = () => { nav("/grubs") }
@@ -38,7 +37,7 @@ const Splash = () => {
     e.preventDefault();
     const img_url = imgUrl;
     const form = { img_url };
-    const updateUser = await dispatch(updateUserThunk(sessionUser.id, form))
+    await dispatch(updateUserThunk(sessionUser.id, form))
   }
   
 return (
