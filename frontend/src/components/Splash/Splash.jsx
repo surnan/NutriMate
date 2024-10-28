@@ -24,8 +24,6 @@ const Splash = () => {
   const handleWorkoutsBtn = () => { nav("/workouts") }
   const handleGrubsBtn = () => { nav("/grubs") }
   const handleDailyBtn = () => { nav("/daylog") }
-  const handleDayWorkoutBtn = () => { nav("/DayLogFormWorkout") }
-  const handleDayGrubBtn = () => { nav("/DayLogFormGrub") }
 
   const updatedImgFromPC = async (e) => {
     const file = e.target.files[0];
@@ -79,8 +77,6 @@ return (
             <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
             <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
             <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
-            <button className="splashButton black shadow" onClick={handleDayWorkoutBtn}>day workout</button>
-            <button className="splashButton green shadow" onClick={handleDayGrubBtn}>day grub</button>
           </div>
         </form>
       )}
