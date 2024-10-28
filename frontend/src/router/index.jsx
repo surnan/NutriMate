@@ -3,17 +3,23 @@ import { createBrowserRouter } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
+
 import Splash from '../components/Splash';
 import WeightPage from '../components/WeightPage'
 import WeightPageForm from '../components/WeightPageForm/WeightPageForm';
+
 import WorkoutPage from '../components/WorkoutPage'
 import WorkoutPageForm from '../components/WorkoutPageForm'
+
 import GrubPage from '../components/GrubPage'
 import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
+
 import SearchBar from '../components/SearchBar';
 import LineGraph from '../components/LineGraph';
+
 import DayLogPage from '../components/DayLogPage';
 import DayLogPageForm from '../components/DayLogPageForm';
+
 // import DayLogFormGrub from '../components/_DayLogFormGrub';
 // import DayLogFormWorkout from '../components/DayLogFormWorkout';
 

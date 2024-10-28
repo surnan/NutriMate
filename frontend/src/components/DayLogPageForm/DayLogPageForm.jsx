@@ -104,7 +104,7 @@ function DayLogPageForm() {
             const result = newDayLog
                 ? await dispatch(postDailyLogsOneThunk({ body }))
                 : await dispatch(updateDailyLogsOneThunk({ body }))
-            if (result) navigate(-1)
+            if (result) navigate("/daylog")
         } catch (error) {
             console.error('Error adding dayLog:', error);
         }
