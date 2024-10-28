@@ -381,7 +381,7 @@ function GrubPageForm() {
                     </button>
                 </div>
                 <button
-                    className="black _button"
+                    className="black _button white_font"
                     type="button"
                     onClick={handleAddToLog}
                 //disabled={!isEmpty(errors)}

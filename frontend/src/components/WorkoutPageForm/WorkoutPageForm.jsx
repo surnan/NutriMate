@@ -3,7 +3,7 @@ import "./WorkoutPageForm.css";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk} from "../../redux/workouts";
+import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
@@ -43,7 +43,7 @@ function WorkoutPageForm() {
   const handleBack = () => navigate(-1);
   const handleReset = initializeForm;
 
-  
+
   useEffect(() => {
     if (!newWorkout && workoutId) {
       dispatch(getWorkoutOneThunk(workoutId));
@@ -101,11 +101,11 @@ function WorkoutPageForm() {
     if (!workoutId) {
       alert('Workout needs to be saved before adding to DayLog');
     } else {
-    //  !!!Fix navigation bug
+      //  !!!Fix navigation bug
       navigate(`/daylogform/${workoutId}`, {
-        state: { 
-            newDayLog: true, 
-            newWorkoutObj: workoutObj 
+        state: {
+          newDayLog: true,
+          newWorkoutObj: workoutObj
         },
       });
     }
@@ -128,7 +128,7 @@ function WorkoutPageForm() {
             className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
             type="button"
             onClick={handleSubmitSave}
-            //disabled={!isEmpty(errors)}
+          //disabled={!isEmpty(errors)}
           >
             SAVE
           </button>
@@ -170,10 +170,10 @@ function WorkoutPageForm() {
           DELETE
         </button>
         <button
-          className="black _button"
+          className="black _button white_font"
           type="button"
           onClick={handleAddToLog}
-          //disabled={!isEmpty(errors)}
+        //disabled={!isEmpty(errors)}
         >
           Add To Log
         </button>

@@ -5,14 +5,14 @@ const { requireAuth } = require('../../utils/auth');
 const { properUserValidation, handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
 const { Op } = require('sequelize')
-const { User, DayLog, Grub, GrubIcon, GrubImage, Workout, WorkoutIcon, WorkoutImage } = require('../../db/models');
+const { User, Workout, WorkoutImage } = require('../../db/models');
 
 
 const router = express.Router();
 
 
 router.get('/hello/world', (req, res) => {
-    res.send('api/routes/food ---> Hello World!');
+    res.send('api/routes/workoutImages ---> Hello World!');
 });
 
 //all
