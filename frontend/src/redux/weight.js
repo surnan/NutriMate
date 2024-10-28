@@ -166,8 +166,7 @@ const weightsReducer = (state = initialState, action) => {
             return newState
         }
         default: {
-            avoidingErrors()
-            return initialState
+            return state
         }
     }
 }
