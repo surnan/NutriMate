@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
-const {singleMulterUpload, singlePublicFileUpload} = require('../../awsS3')
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3')
 
 const router = express.Router();
 
@@ -30,6 +30,14 @@ const validateSignup = [
     handleValidationErrors
 ];
 
+// export const thunkAuthenticate = () => async (dispatch) => {
+// GET
+// const response = await csrfFetch("/api/restore-user");
+
+// export const thunkLogin = (credentials) => async dispatch => {
+// POST
+// const response = await csrfFetch("/api/session", {
+
 // Sign up
 router.post('/', validateSignup, async (req, res) => {
 
@@ -42,6 +50,7 @@ router.post('/', validateSignup, async (req, res) => {
         id: user.id,
         email: user.email,
         username: user.username,
+        profileImg: user.profileImg
     };
 
     await setTokenCookie(res, safeUser);
@@ -68,19 +77,19 @@ router.get('/', (req, res) => {
 
 //AWS route
 router.put('/:id/update', singleMulterUpload('image'), async (req, res, next) => {
-    try{
-        const {userId} = req.body;
+    try {
+        const { userId } = req.body;
         let user;
 
-        if(userId){
+        if (userId) {
             user = await User.findByPk(userId);
-        } else{
+        } else {
             throw new Error("No user founder with that id")
         }
 
         let imgUrl;
 
-        if(req.file){
+        if (req.file) {
             imgUrl = await singlePublicFileUpload(req.file); //converts data from form
         }
         user.profileImg = imgUrl;
@@ -88,7 +97,7 @@ router.put('/:id/update', singleMulterUpload('image'), async (req, res, next) =>
         return res.json(user)
         // frontend -> backend -> AWS -> backend -> database -> backend -> frontend
         //this route is the "AWS" step
-    }catch(e){
+    } catch (e) {
         next(e)
     }
 
