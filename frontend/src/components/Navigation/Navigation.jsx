@@ -13,8 +13,13 @@ function Navigation() {
 
   useEffect(() => {
     dispatch(thunkAuthenticate());
+<<<<<<< Updated upstream
     //dispatch([user]) causes infinite renders
   }, [dispatch, user?.email]);
+=======
+  }, [dispatch]);
+  // }, [dispatch, user]);
+>>>>>>> Stashed changes
 
 
   useEffect(()=>{
