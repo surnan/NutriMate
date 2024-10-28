@@ -24,6 +24,7 @@ export const thunkAuthenticate = () => async (dispatch) => {
         // const response = await csrfFetch("/api/csrf/restore");
         if (response.ok) {
             const data = await response.json();
+            console.log("...thunkAuthentication...")
             dispatch(setUser(data));
         }
     } catch (e) {
@@ -40,6 +41,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
+        console.log("...thunkLogin...")
         await dispatch(setUser(data));
     } else if (response.status < 500) {
         const errorMessages = await response.json();
@@ -115,7 +117,7 @@ const initialState = { user: null };
 function sessionReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER:
-            // console.log("SET-USER  ======> action.payload ====> ", action.payload)
+            console.log("....sessionReducer ==> SET-USER  ======> action.payload ====> ", action.payload)
             if (action.payload?.user){
                 //thunkLogin
                 return { ...state, user: action.payload.user };

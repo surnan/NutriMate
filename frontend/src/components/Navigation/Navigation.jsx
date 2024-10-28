@@ -13,15 +13,20 @@ function Navigation() {
 
   useEffect(() => {
     dispatch(thunkAuthenticate());
-  }, [dispatch]);
+    //dispatch([user]) causes infinite renders
+  }, [dispatch, user?.email]);
 
+
+
+  useEffect(()=>{
+    console.log("...Navigation->user = ", user)
+  }, [user])
 
 
 
 
   return (
     <div className="nav_flex ltskyblue">
-      {/* <NavLink to="/">Home</NavLink> */}
       <NavLink to="/">
         <img
           src={logo}
