@@ -1,30 +1,46 @@
+//frontend/src/components/Navigation/Navigation.jsx
 import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-// import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+// import logo from "../../fe_images/nutimate_logo.png";
+import logo from "../../fe_images/nutimate_logo.png";
+import { useEffect } from "react";
+import { thunkAuthenticate } from "../../redux/session";
 
 function Navigation() {
-  // const user = useSelector((state) => state.session.user);
+  const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(thunkAuthenticate());
+  }, [dispatch]);
+
+
 
 
   return (
     <div className="nav_flex ltskyblue">
       {/* <NavLink to="/">Home</NavLink> */}
-      <NavLink to="/">Home</NavLink>
-
-
-      <ProfileButton />
-      {
-        /* {user && (
-          <>
-            {user.profileImg?
-            <img
-              src={user.profileImg}
-              style={{height: "70px", width: '70px', borderRadius: "50%"}}
-            />: null}
-          </>
-        )} */
-      }
+      <NavLink to="/">
+        <img
+          src={logo}
+          alt="Home"
+          className="logo"
+        />
+      </NavLink>
+      <div className="navigation_right">
+        <ProfileButton />
+        {user && (
+          <p>
+            {user.profileImg ?
+              <img
+                src={user.profileImg}
+                style={{ height: "70px", width: '70px', borderRadius: "50%" }}
+              /> : null}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

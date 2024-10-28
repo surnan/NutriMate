@@ -1,5 +1,3 @@
-// frontend/src/redux/session.js
-
 import { csrfFetch } from './csrf';
 
 //Constants
@@ -40,7 +38,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 
     if (response.ok) {
         const data = await response.json();
-        await dispatch(setUser(data));
+        dispatch(setUser(data));
     } else if (response.status < 500) {
         const errorMessages = await response.json();
         return errorMessages
@@ -78,21 +76,19 @@ export const thunkLogout = () => async (dispatch) => {
 export const updateUserThunk = (userId, form) => async (dispatch) => {
     const { img_url } = form
     try {
-        const formData = new FormData(); //AWS requires FormData class
-        formData.append('userId', userId) //append, NOT push
+        const formData = new FormData();
+        formData.append('userId', userId)
         formData.append("image", img_url);
 
         const option = {
             method: "PUT",
-            headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
             body: formData
         }
 
         const response = await csrfFetch(`/api/users/${userId}/update`, option);
         if (response.ok) {
             const user = await response.json();
-            // dispatch(setUser(user));
-            dispatch(editUser(user))
+            dispatch(setUser(user));
 
         } else if (response.status < 500) {
             const data = await response.json();

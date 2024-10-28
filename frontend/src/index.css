@@ -84,10 +84,14 @@ select._input {
 .twenty_padding {padding: 20px}
 
 
+.black_font {color: black}
+.red_font {color: red}
+.white_font {color: white}
+
+
 .blue {background-color: rgba(0, 115, 255, 0.665)}
 .bluegreen {background-color: rgba(0, 247, 255, 0.665)}
 .black {background-color: black}
-.black_font {color: black}
 .green {background-color: green}
 .ltcoral {background-color: lightcoral}
 .ltskyblue {background-color: lightskyblue}
@@ -96,7 +100,6 @@ select._input {
 .orange {background-color: orange}
 .pink {background-color: pink}
 .red {background-color: red}
-.red_font {color: red}
 .yellow {background-color: yellow}
 
 /* #root {
