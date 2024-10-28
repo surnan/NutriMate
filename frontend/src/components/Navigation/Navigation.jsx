@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
-// import logo from "../../fe_images/nutimate_logo.png";
 import logo from "../../fe_images/nutimate_logo.png";
 import { useEffect } from "react";
 import { thunkAuthenticate } from "../../redux/session";
@@ -15,6 +14,7 @@ function Navigation() {
   useEffect(() => {
     dispatch(thunkAuthenticate());
   }, [dispatch]);
+
 
 
 

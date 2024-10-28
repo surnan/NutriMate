@@ -1,5 +1,5 @@
-// "useRef" & "ref={ulRef}" <=== create alias to DOM element
 // "e.target" <=== DOM element that was clicked.  You will always be a DOM element
+import { useNavigate } from "react-router-dom"
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { thunkLogout } from "../../redux/session";
@@ -7,7 +7,8 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
-import { useNavigate } from "react-router-dom"
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -46,11 +47,11 @@ function ProfileButton() {
 
   return (
     <div className="profile_anchor">
-      <button className="profile_btn _button" onClick={toggleMenu}>
+      <button className="profile_btn " onClick={toggleMenu}>
         <i className="fas fa-user-circle black_font" />
       </button>
       {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
+        <div className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="profile_dropdown_grid">
               <p>{user.email}</p>
@@ -70,7 +71,7 @@ function ProfileButton() {
               />
             </div>
           )}
-        </ul>
+        </div>
       )}
     </div>
   );
