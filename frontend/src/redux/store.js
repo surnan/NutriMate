@@ -1,3 +1,4 @@
+// frontend/src/redux/store.js
 import {
     legacy_createStore as createStore,
     applyMiddleware,
@@ -10,13 +11,15 @@ import weightsReducer from "./weight";
 import workoutsReducer from "./workouts"
 import grubsReducer from "./grubs"
 import daylogsReducer from "./daylogs"
+import workoutImagesReducer from "./workoutImages";
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     weights: weightsReducer,
     workouts: workoutsReducer,
     grubs: grubsReducer,
-    daylogs: daylogsReducer
+    daylogs: daylogsReducer,
+    workoutimages: workoutImagesReducer
 });
 
 let enhancer;
