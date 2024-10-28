@@ -1,6 +1,6 @@
 import "./LoginFormModal.css";
 import { useState } from "react";
-import { thunkLogin } from "../../redux/session";
+import { thunkLogin, thunkAuthenticate } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
@@ -21,6 +21,10 @@ function LoginFormModal() {
     };
 
     const serverResponse = await dispatch(thunkLogin(credentials));
+    
+    // if (serverResponse.ok) {
+    //   await dispatch(thunkAuthenticate)
+    // }
 
     if (serverResponse?.errors) {
       // If server responds with errors, set them to display in the UI
