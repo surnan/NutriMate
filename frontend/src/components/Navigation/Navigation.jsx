@@ -13,7 +13,8 @@ function Navigation() {
 
   useEffect(() => {
     dispatch(thunkAuthenticate());
-  }, [dispatch, user]);
+  }, [dispatch]);
+
 
 
 
