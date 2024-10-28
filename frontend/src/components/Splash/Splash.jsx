@@ -5,8 +5,6 @@ import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
@@ -39,11 +37,9 @@ const Splash = () => {
     const form = { img_url };
     const updateUser = await dispatch(updateUserThunk(sessionUser.id, form))
   }
-
-
-
-  return (
-    <div className="mainBodyStyle">
+  
+return (
+<div className="mainBodyStyle">
       <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
 
       {sessionUser && (
@@ -53,6 +49,8 @@ const Splash = () => {
               <label htmlFor='file-upload'> Select From Computer
                 <input
                   type='file'
+
+                  className="_button orange"
                   id='file-upload'
                   name="img_url"
                   onChange={updatedImgFromPC}
