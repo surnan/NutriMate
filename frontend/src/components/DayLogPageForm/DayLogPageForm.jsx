@@ -84,11 +84,6 @@ function DayLogPageForm() {
     }, [form])
 
 
-    const updateSetForm = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }))
-    }
-
     const handleSubmitSave = async (e) => {
         console.log("hello")
         e.preventDefault();
@@ -135,17 +130,31 @@ function DayLogPageForm() {
         }
     }, [dispatch, dayLogId, newDayLog]);
 
+
+
+    const updateSetForm = (e) => {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }))
+    }
+
     useEffect(() => {
         const calculateGrubCalories = () => {
             if (newGrubObj && form.units) {
-                const calories = newGrubObj.calories * form.units;
-                setGrubCalories(calories);
-                console.log("....grubCalories (updated) = ", calories); 
+                const newCalories = newGrubObj.calories * form.units;
+                setGrubCalories(newCalories);
+                console.log("....grubCalories (updated) = ", newCalories);
+                const e = {
+                    target: {
+                        name: "calories",
+                        value: newCalories
+                    }
+                }
+                updateSetForm(e)
             }
         };
         calculateGrubCalories();
     }, [newGrubObj, form.units]);
-    
+
 
     return (
         <div className="mainBodyStyle">
@@ -237,9 +246,14 @@ function DayLogPageForm() {
 
                 {(newGrubObj || form.grubId) &&
                     <div>
-                        <label style={{ display: 'inline-flex' }}>
-                            Servings  &nbsp;&nbsp; {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>}
-                        </label>
+                        <select
+                            className="_input"
+                            name="unitType"
+                            onChange={updateSetForm}
+                            value={form.unitType}
+                        >
+                            <option value="servings">servings</option>
+                        </select>
                     </div>
                 }
 
