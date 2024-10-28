@@ -67,7 +67,9 @@ function DayLogPageForm() {
 
     useEffect(() => {
         const newErrors = {};
-        const allKeys = ["calories", "units"];
+        const allKeys = ["units"];
+
+        if (newWorkoutObj || form.workoutId) allKeys.push("calories")
 
         allKeys.forEach((key) => {
             if (!form[key]) {
@@ -81,11 +83,6 @@ function DayLogPageForm() {
         setErrors(newErrors);
     }, [form])
 
-
-    const updateSetForm = (e) => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }))
-    }
 
     const handleSubmitSave = async (e) => {
         console.log("hello")
@@ -122,6 +119,42 @@ function DayLogPageForm() {
         setShowDeletetModal(false);
         navigate(-1)
     };
+
+
+
+    const [grubCalories, setGrubCalories] = useState(0);
+
+    useEffect(() => {
+        if (!newDayLog && dayLogObj) {
+            dispatch(getDailyLogsOneThunk(dayLogId));
+        }
+    }, [dispatch, dayLogId, newDayLog]);
+
+
+
+    const updateSetForm = (e) => {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }))
+    }
+
+    useEffect(() => {
+        const calculateGrubCalories = () => {
+            if (newGrubObj && form.units) {
+                const newCalories = newGrubObj.calories * form.units;
+                setGrubCalories(newCalories);
+                console.log("....grubCalories (updated) = ", newCalories);
+                const e = {
+                    target: {
+                        name: "calories",
+                        value: newCalories
+                    }
+                }
+                updateSetForm(e)
+            }
+        };
+        calculateGrubCalories();
+    }, [newGrubObj, form.units]);
+
 
     return (
         <div className="mainBodyStyle">
@@ -197,50 +230,86 @@ function DayLogPageForm() {
                     readOnly={form.grubId || newGrubObj}
                 />
 
-                <div>
-                    <label style={{ display: 'inline-flex' }}>
-                        Units: {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>}
-                    </label>
-                    <input
-                        className="_input"
-                        type="number"
-                        name="units"
-                        placeholder="enter servings"
-                        onChange={updateSetForm}
-                        value={form.units}
-                    />
-
-                </div>
-
-                <div>
-                    <label style={{ display: 'inline-flex' }}>
-                        Unit type:
-                    </label>
-                    <br />
-
-                    <select
-                        className="_input"
-                        name="unitType"
-                        onChange={updateSetForm}
-                        value={form.unitType}
-                    >
-                        <option value="hours">hours</option>
-                        <option value="minutes">minutes</option>
-                        <option value="seconds">seconds</option>
-                        <option value="each">each</option>
-                        <option value="reps">reps</option>
-                    </select>
-                </div>
+                {(newGrubObj || form.grubId) &&
+                    <div>
+                        <input
+                            className="_input"
+                            type="number"
+                            name="units"
+                            placeholder="enter number servings"
+                            onChange={updateSetForm}
+                            value={form.units}
+                        />
+                    </div>
+                }
 
 
+                {(newGrubObj || form.grubId) &&
+                    <div>
+                        <select
+                            className="_input"
+                            name="unitType"
+                            onChange={updateSetForm}
+                            value={form.unitType}
+                        >
+                            <option value="servings">servings</option>
+                        </select>
+                    </div>
+                }
 
+                <hr />
+                <hr />
+                {(newWorkoutObj || form.workoutId) &&
+                    <div>
+                        <label style={{ display: 'inline-flex' }}>
+                            Units: {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>}
+                        </label>
+                        <input
+                            className="_input"
+                            type="number"
+                            name="units"
+                            placeholder="enter quantity"
+                            onChange={updateSetForm}
+                            value={form.units}
+                        />
+                    </div>
+                }
+
+                {(newWorkoutObj || form.workoutId) &&
+                    <div>
+                        <label style={{ display: 'inline-flex' }}>
+                            Unit type:
+                        </label>
+                        <br />
+
+                        <select
+                            className="_input"
+                            name="unitType"
+                            onChange={updateSetForm}
+                            value={form.unitType}
+                        >
+                            <option value="hours">hours</option>
+                            <option value="minutes">minutes</option>
+                            <option value="seconds">seconds</option>
+                            <option value="each">each</option>
+                            <option value="reps">reps</option>
+                        </select>
+                    </div>
+                }
             </div>
 
+
+            <br /><br />
+            <p></p>
+            <br /><br />
             <div className="max_HFlex">
                 <button className="red _button" type="button" onClick={handleDelete}>
                     DELETE
                 </button>
             </div>
+
+
+
 
             {showDeleteModal && (
                 <DeleteModal
