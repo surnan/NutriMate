@@ -1,5 +1,5 @@
 .profile_anchor{
-    position: re;
+    position: relative;
 }
 
 .profile-dropdown {
@@ -8,12 +8,26 @@
     top: 250px;
 }
 
+.logo {
+    max-height: 60px;
+    width: auto;
+}
+
+.fas {
+    height: auto;
+    width: auto;
+    font-size: 1.5rem;
+}
+
 .profile_btn{
     color: black;
     margin: 0;
-    box-shadow: none;
     border-radius: 10px;
-    height: 2rem;
+    height: 3rem;
+    min-width: 6rem;
+    cursor: pointer;
+    align-items: center;
+    text-align: center;
 }
 
 .profile_dropdown_grid{
@@ -45,18 +59,25 @@
     position: relative;
     max-width: 1200px;
     min-width: 600px;
-    height: 75px;
+    height: 95px;
     margin: auto;
-    padding: 35px;
+    padding: 25px;
 }
 
 .profile-dropdown {
     position: absolute;
-    right: 4rem;
     top: 4rem;
+    right: 0;
 }
 
 .popupDiv {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+
+.navigation_right{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    gap: 1rem;
 }
