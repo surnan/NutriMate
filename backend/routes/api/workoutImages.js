@@ -46,6 +46,29 @@ router.get('/:grubId', async (req, res, next) => {
 });
 
 
+//one
+router.get('/workout/:workoutId', async (req, res, next) => {
+    try {
+        const workoutId = parseInt(req.params.workoutId);
+        const allImages = await WorkoutImage.findAll({
+            where: {
+                workoutId: workoutId 
+            },
+            include: [
+                { model: Workout }
+            ]
+        });
+
+        // .toJSON is not required for Sequelize's findAll response
+        return res.status(200).json(allImages);
+    } catch (e) {
+        console.log('Route Error: ', e);
+        next(e);
+    }
+});
+
+
+
 router.post('/', async (req, res, next) => {
     try {
         const {url, workoutId, name} = req.body

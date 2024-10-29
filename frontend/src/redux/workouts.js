@@ -50,15 +50,27 @@ export const getWorkoutsAllThunk = () => async (dispatch) => {
     }
 }
 
+// export const getWorkoutOneThunk = (id) => async (dispatch) => {
+//     const response = await csrfFetch(`/api/workouts/${id}`)
+//     if (response.ok) {
+//         const data = await response.json();
+//         console.log("===> data ==> ", data)
+//         await dispatch(loadWorkoutsOne(data))
+//         return data
+//     }
+// }
+
 export const getWorkoutOneThunk = (id) => async (dispatch) => {
-    const response = await csrfFetch(`/api/workouts/${id}`)
+    const response = await csrfFetch(`/api/workouts/${id}`);
     if (response.ok) {
         const data = await response.json();
-        console.log("===> data ==> ", data)
-        await dispatch(loadWorkoutsOne(data))
-        return data
+        console.log("===> data ==> ", data);
+        await dispatch(loadWorkoutsOne(data));
+        return data;  // Returns the data as a promise, allowing chaining
     }
-}
+    return null; // Return null or an error object if the fetch fails
+};
+
 
 export const postWorkoutsOneThunk = ({ body }) => async (dispatch) => {
     const response = await csrfFetch('/api/workouts', {

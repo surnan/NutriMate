@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
+import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
@@ -43,12 +44,18 @@ function WorkoutPageForm() {
   const handleBack = () => navigate(-1);
   const handleReset = initializeForm;
 
-
   useEffect(() => {
     if (!newWorkout && workoutId) {
-      dispatch(getWorkoutOneThunk(workoutId));
+      dispatch(getWorkoutOneThunk(workoutId)).then((data) => {
+        // Only get images if workout exists
+        if (data) {
+          console.log("...data.id ==> ", data.id)
+          dispatch(getWorkoutImagesForWorkoutThunk(data.id));
+        }
+      });
     }
   }, [dispatch, workoutId, newWorkout]);
+  
 
   useEffect(() => {
     const newErrors = {}
@@ -179,6 +186,19 @@ function WorkoutPageForm() {
         </button>
       </div>
 
+      <hr />
+
+      {/* 1 */}
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Water_molecule_3D.svg"
+        style={{ height: "400px", width: '400px', borderRadius: "50%" }}
+      />
+
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Water_molecule_3D.svg"
+        style={{ height: "400px", width: '400px', borderRadius: "50%" }}
+      />
+      
       {showDeleteModal && (
         <DeleteModal
           item={workoutObj}
