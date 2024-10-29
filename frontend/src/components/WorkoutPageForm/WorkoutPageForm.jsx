@@ -4,6 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
+import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
@@ -17,6 +18,7 @@ function WorkoutPageForm() {
 
   const sessionUser = useSelector((state) => state.session.user);
   const workoutObj = useSelector((state) => state.workouts.single);
+  const workoutImgArr = useSelector((state) => state.workoutimages.currentworkout)
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState({});
@@ -43,12 +45,18 @@ function WorkoutPageForm() {
   const handleBack = () => navigate(-1);
   const handleReset = initializeForm;
 
-
   useEffect(() => {
     if (!newWorkout && workoutId) {
-      dispatch(getWorkoutOneThunk(workoutId));
+      dispatch(getWorkoutOneThunk(workoutId)).then((data) => {
+        // Only get images if workout exists
+        if (data) {
+          console.log("...data.id ==> ", data.id)
+          dispatch(getWorkoutImagesForWorkoutThunk(data.id));
+        }
+      });
     }
   }, [dispatch, workoutId, newWorkout]);
+
 
   useEffect(() => {
     const newErrors = {}
@@ -110,6 +118,10 @@ function WorkoutPageForm() {
       });
     }
   };
+
+  const handleImgClick = (e) => {
+    console.log("..img clicked...")
+  }
 
   return (
     <div className="mainBodyStyle">
@@ -178,6 +190,23 @@ function WorkoutPageForm() {
           Add To Log
         </button>
       </div>
+
+      <hr />
+
+      <div>
+        {workoutImgArr.map((currentImg) => (
+          <div key={currentImg.id}>
+            <img
+              src={currentImg.url}
+              style={{ height: "300px", width: '300px' }}
+              alt="Workout Image"
+              onClick={handleImgClick}
+              className="clickable"
+            />
+          </div>
+        ))}
+      </div>
+
 
       {showDeleteModal && (
         <DeleteModal

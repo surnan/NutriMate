@@ -4,6 +4,7 @@ import { csrfFetch } from "./csrf";
 // const LOAD_WORKOUTS_USER = "weights/loadWorkoutsUser"
 const LOAD_WORKOUTIMAGES_ALL = "workoutimages/loadWorkoutImagesAll"
 const LOAD_WORKOUTIMAGES_ONE = "workoutimages/loadWorkoutImagesOne"
+const LOAD_WORKOUTIMAGES_WORKOUT = "workoutimages/loadWorkoutImagesWorkoutAll"
 const REMOVE_WORKOUTIMAGES_ONE = "workoutimages/removeWorkoutImagesOne"
 const POST_WORKOUTIMAGES_ONE = "workoutimages/postWorkoutImagesOne"
 
@@ -28,6 +29,11 @@ const postWorkoutImagesOne = (data) => ({
         payload: data
 })
 
+const loadWorkoutImagesForWorkout = (data) => ({
+    type: LOAD_WORKOUTIMAGES_WORKOUT,
+    payload: data
+})
+
 
 // Thunks
 export const getWorkoutImagesAllThunk = () => async (dispatch) => {
@@ -45,6 +51,16 @@ export const getWorkoutImagesOneThunk = (id) => async (dispatch) => {
         const data = await response.json();
         console.log("===> data ==> ", data)
         await dispatch(loadWorkoutImagesOne(data))
+        return data
+    }
+}
+
+export const getWorkoutImagesForWorkoutThunk = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/workoutimages/workout/${id}`)
+    if (response.ok) {
+        const data = await response.json();
+        console.log("===> data ==> ", data)
+        await dispatch(loadWorkoutImagesForWorkout(data))
         return data
     }
 }
@@ -80,6 +96,7 @@ export const deleteWorkoutThunkByWorkout = (id) => async (dispatch) => {
 // State object
 const initialState = {
     allWorkoutImages: [],
+    currentworkout: [],
     byId: {},
     single: {}
 };
@@ -112,6 +129,11 @@ const workoutImagesReducer = (state = initialState, action) => {
             );
             delete newState.byId[action.payload];
             return newState;
+        }
+        case LOAD_WORKOUTIMAGES_WORKOUT: {
+            let newState = { ...state };
+            newState.currentworkout = action.payload
+            return newState
         }
         default: {
             return state;  
