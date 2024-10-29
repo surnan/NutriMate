@@ -6,7 +6,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, isEmpty, handleBack } from '../../utils/MyFunctions';
+import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -15,7 +15,6 @@ function WorkoutPageForm() {
   const { id } = useParams();
   const workoutId = parseInt(id);
   const { newWorkout } = location.state || {};
-
 
   const sessionUser = useSelector((state) => state.session.user);
   const workoutObj = useSelector((state) => state.workouts.single);
@@ -146,6 +145,8 @@ function WorkoutPageForm() {
     }
   };
 
+  const handleBack = () => navigate(-1);
+  
   const handleModalClose = () => {
     setShowDeleteModal(false);
     navigate(-1);
