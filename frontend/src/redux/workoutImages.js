@@ -7,26 +7,32 @@ const LOAD_WORKOUTIMAGES_ONE = "workoutimages/loadWorkoutImagesOne"
 const LOAD_WORKOUTIMAGES_WORKOUT = "workoutimages/loadWorkoutImagesWorkoutAll"
 const REMOVE_WORKOUTIMAGES_ONE = "workoutimages/removeWorkoutImagesOne"
 const POST_WORKOUTIMAGES_ONE = "workoutimages/postWorkoutImagesOne"
+const UPDATE_WORKOUTIMAGES_ONE = "workoutimages/updateWorkoutImagesOne"
 
 //Actions
 const loadWorkoutImagesAll = (data) => ({
-        type: LOAD_WORKOUTIMAGES_ALL,
-        payload: data
+    type: LOAD_WORKOUTIMAGES_ALL,
+    payload: data
 })
 
 const loadWorkoutImagesOne = (data) => ({
-        type: LOAD_WORKOUTIMAGES_ONE,
-        payload: data
+    type: LOAD_WORKOUTIMAGES_ONE,
+    payload: data
+})
+
+const updateWorkoutImagesOne = (data) => ({
+    type: UPDATE_WORKOUTIMAGES_ONE,
+    payload: data
 })
 
 const removeWorkoutImagesOne = (data) => ({
-        type: REMOVE_WORKOUTIMAGES_ONE,
-        payload: data
+    type: REMOVE_WORKOUTIMAGES_ONE,
+    payload: data
 })
 
 const postWorkoutImagesOne = (data) => ({
-        type: POST_WORKOUTIMAGES_ONE,
-        payload: data
+    type: POST_WORKOUTIMAGES_ONE,
+    payload: data
 })
 
 const loadWorkoutImagesForWorkout = (data) => ({
@@ -93,6 +99,33 @@ export const deleteWorkoutThunkByWorkout = (id) => async (dispatch) => {
     }
 }
 
+export const updateWorkoutImagesOneThunk = ( body ) => async (dispatch) => {
+    console.log("...body...updateWorkoutImagesOneThunk...  = ", body)
+    const { workoutId, url, name } = body
+
+    try {
+        const formData = new FormData(); //AWS requires FormData class
+        formData.append('workoutId', workoutId) //append, NOT push
+        formData.append("image", url);
+        formData.append("name", name)
+
+        const option = {
+            method: "PUT",
+            headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
+            body: formData
+        }
+        const response = await csrfFetch(`/api/workoutimages/${workoutId}/update`,option)
+
+        if (response.ok) {
+            const currentWorkout = await response.json()
+            dispatch(updateWorkoutImagesOne(currentWorkout))
+        }
+        return response
+    } catch (e) {
+        return e
+    }
+}
+
 // State object
 const initialState = {
     allWorkoutImages: [],
@@ -135,8 +168,18 @@ const workoutImagesReducer = (state = initialState, action) => {
             newState.currentworkout = action.payload
             return newState
         }
+        case UPDATE_WORKOUTIMAGES_ONE: {
+            let newState = {...state}
+            console.log("...case UPDATE_WORKOUTIMAGES_ONE...")
+            console.log("...action.payload")
+
+            //below is for the workpageform.map
+            //not sure if it creates multi-d array if action.payload is an array
+            newState.currentworkout = Array(action.payload)
+            return newState
+        }
         default: {
-            return state;  
+            return state;
         }
     }
 };
