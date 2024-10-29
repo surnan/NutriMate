@@ -12,6 +12,7 @@ import workoutsReducer from "./workouts"
 import grubsReducer from "./grubs"
 import daylogsReducer from "./daylogs"
 import workoutImagesReducer from "./workoutImages";
+import grubImagesReducer from "./grubImages";
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     workouts: workoutsReducer,
     grubs: grubsReducer,
     daylogs: daylogsReducer,
-    workoutimages: workoutImagesReducer
+    workoutimages: workoutImagesReducer,
+    grubimages: grubImagesReducer
 });
 
 let enhancer;
