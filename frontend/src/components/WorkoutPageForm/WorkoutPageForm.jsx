@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
-import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk } from "../../redux/workoutImages";
+import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
@@ -28,6 +28,11 @@ function WorkoutPageForm() {
     userId: sessionUser?.id || 1,
   });
 
+  const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+  const [showUpload, setShowUpload] = useState(true); //  //show image?
+  const [previewUrl, setPreviewUrl] = useState("");  //img url in react
+  const [clickedWorkoutImgId, setClickedWorkoutImgId] = useState(0);  //object.id of clicked image
+
   const initializeForm = useCallback(() => {
     if (!newWorkout && workoutObj) {
       setForm({
@@ -41,6 +46,32 @@ function WorkoutPageForm() {
   useEffect(() => {
     initializeForm();
   }, [initializeForm]);
+
+  const updatedImgFromPC = async (e) => {
+    console.log("updatedImgFromPC")
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = e => setPreviewUrl(reader.result)
+    setImgUrl(file);
+    setShowUpload(false);
+  };
+
+  const handleImgSubmit = async () => {
+    console.log('handleImgSubmit')
+    let temp = {
+      workoutId: clickedWorkoutImgId,
+      name: "abc",
+      url: imgUrl
+    }
+    await dispatch(updateWorkoutImagesOneThunk(temp))
+    setClickedWorkoutImgId(0)
+  }
+
+
+
+
+
 
   const handleBack = () => navigate(-1);
   const handleReset = initializeForm;
@@ -119,9 +150,9 @@ function WorkoutPageForm() {
     }
   };
 
-  const handleImgClick = (e) => {
-    console.log("..img clicked...")
-  }
+
+
+
 
   return (
     <div className="mainBodyStyle">
@@ -194,17 +225,47 @@ function WorkoutPageForm() {
       <hr />
 
       <div>
-        {workoutImgArr.map((currentImg) => (
+        {workoutImgArr?.map((currentImg) => (
           <div key={currentImg.id}>
             <img
               src={currentImg.url}
               style={{ height: "300px", width: '300px' }}
               alt="Workout Image"
-              onClick={handleImgClick}
+              onClick={() => handleImgClick(currentImg.id)}
               className="clickable"
             />
           </div>
         ))}
+      </div>
+
+
+      <div>
+        {(clickedWorkoutImgId > 0) && showUpload && (
+          <label htmlFor='file-upload'> Select From Computer
+            <input
+              type='file'
+
+              className="_button orange"
+              id='file-upload'
+              name="img_url"
+              onChange={updatedImgFromPC}
+              accept='.jpg, .jpeg, .png, .gif'
+            />
+          </label>
+        )}
+        <br /><br /><br /><br />
+        {(clickedWorkoutImgId > 0) && !showUpload && (
+          <div>
+            <img
+              src={previewUrl}
+              alt="preview"
+            />
+            <button
+              onClick={handleImgSubmit}
+            >Change Profile
+            </button>
+          </div>
+        )}
       </div>
 
 
