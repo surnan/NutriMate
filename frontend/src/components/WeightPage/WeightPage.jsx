@@ -1,5 +1,6 @@
 // frontend/src/components/WeightPage/WeightPage.jsx
 
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import "./WeightPage.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
