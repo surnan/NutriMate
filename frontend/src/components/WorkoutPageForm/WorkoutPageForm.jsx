@@ -119,6 +119,10 @@ function WorkoutPageForm() {
     }
   };
 
+  const handleImgClick = (e) => {
+    console.log("..img clicked...")
+  }
+
   return (
     <div className="mainBodyStyle">
       <h1>WorkoutPageForm.jsx</h1>
@@ -195,6 +199,9 @@ function WorkoutPageForm() {
             <img
               src={currentImg.url}
               style={{ height: "300px", width: '300px' }}
+              alt="Workout Image"
+              onClick={handleImgClick}
+              className="clickable"
             />
           </div>
         ))}
