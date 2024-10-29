@@ -49,8 +49,17 @@ router.get('/:grubId', async (req, res, next) => {
 
 //one
 router.get('/grub/:grubId', async (req, res, next) => {
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("entered router.get")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
     try {
-        const workoutId = parseInt(req.params.grubId);
+        const grubId = parseInt(req.params.grubId);
         const allImages = await GrubImage.findAll({
             where: {
                 grubId: grubId
@@ -133,7 +142,7 @@ router.put('/:id/update',
         console.log("...")
         try {
             const grubImageId = parseInt(req.params.id)
-            const currentGrubImage = await WorkoutImage.findByPk(grubImageId)
+            const currentGrubImage = await GrubImage.findByPk(grubImageId)
             if (!currentGrubImage) {
                 res.status(404).json({
                     message: "WorkoutImage couldn't be found"
@@ -147,7 +156,7 @@ router.put('/:id/update',
                 console.log("entered -->  if (req.file) {")
             }
 
-            const { url, grubId, name } = currentWorkoutImage
+            const { url, grubId, name } = currentGrubImage
             await currentGrubImage.update(
                 {
                     name,
@@ -155,7 +164,7 @@ router.put('/:id/update',
                     grubId: parseInt(grubId)
                 }
             )
-            let currentGrubImageJSON = currentWorkoutImage.toJSON();
+            let currentGrubImageJSON = currentGrubImage.toJSON();
             return res.status(201).json(currentGrubImageJSON)
         } catch (e) {
             console.log('Route Error: ', e)
