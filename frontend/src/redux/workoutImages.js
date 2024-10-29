@@ -8,6 +8,8 @@ const LOAD_WORKOUTIMAGES_WORKOUT = "workoutimages/loadWorkoutImagesWorkoutAll"
 const REMOVE_WORKOUTIMAGES_ONE = "workoutimages/removeWorkoutImagesOne"
 const POST_WORKOUTIMAGES_ONE = "workoutimages/postWorkoutImagesOne"
 const UPDATE_WORKOUTIMAGES_ONE = "workoutimages/updateWorkoutImagesOne"
+const RESET_WORKOUT_IMAGES = "workoutimages/resetWorkoutImages";
+
 
 //Actions
 const loadWorkoutImagesAll = (data) => ({
@@ -99,7 +101,7 @@ export const deleteWorkoutThunkByWorkout = (id) => async (dispatch) => {
     }
 }
 
-export const updateWorkoutImagesOneThunk = ( body ) => async (dispatch) => {
+export const updateWorkoutImagesOneThunk = (body) => async (dispatch) => {
     console.log("...body...updateWorkoutImagesOneThunk...  = ", body)
     const { workoutId, url, name } = body
 
@@ -114,7 +116,7 @@ export const updateWorkoutImagesOneThunk = ( body ) => async (dispatch) => {
             headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
             body: formData
         }
-        const response = await csrfFetch(`/api/workoutimages/${workoutId}/update`,option)
+        const response = await csrfFetch(`/api/workoutimages/${workoutId}/update`, option)
 
         if (response.ok) {
             const currentWorkout = await response.json()
@@ -126,6 +128,12 @@ export const updateWorkoutImagesOneThunk = ( body ) => async (dispatch) => {
     }
 }
 
+
+export const resetWorkoutImages = () => (dispatch) => {
+    dispatch({ type: "RESET_WORKOUT_IMAGES" });
+};
+
+
 // State object
 const initialState = {
     allWorkoutImages: [],
@@ -136,6 +144,22 @@ const initialState = {
 
 const workoutImagesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESET_WORKOUT_IMAGES: {
+            console.log(".... case RESET_WORKOUT_IMAGES.....")
+            console.log(".... case RESET_WORKOUT_IMAGES.....")
+            console.log(".... case RESET_WORKOUT_IMAGES.....")
+
+            console.log("action ==> ", action)
+            console.log("state ==> ", state)
+
+
+            return {
+                ...state,
+                // currentworkout: [],
+                currentworkout: null,
+            };
+            
+        }
         case LOAD_WORKOUTIMAGES_ALL: {
             let newState = { ...state };
             newState.allWorkoutImages = action.payload.WorkoutImages;
@@ -169,7 +193,7 @@ const workoutImagesReducer = (state = initialState, action) => {
             return newState
         }
         case UPDATE_WORKOUTIMAGES_ONE: {
-            let newState = {...state}
+            let newState = { ...state }
             console.log("...case UPDATE_WORKOUTIMAGES_ONE...")
             console.log("...action.payload")
 
