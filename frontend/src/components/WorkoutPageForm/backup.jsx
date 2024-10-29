@@ -82,7 +82,7 @@ function WorkoutPageForm() {
   }
 
   const updatedImgFromPC = async (e) => {
-    console.log("updatedImgFromPC")
+    // console.log("updatedImgFromPC")
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -92,7 +92,7 @@ function WorkoutPageForm() {
   };
 
   const handleImgSubmit = async () => {
-    console.log('handleImgSubmit')
+    // console.log('handleImgSubmit')
     let temp = {
       workoutId: clickedWorkoutImgId,
       name: "abc",
