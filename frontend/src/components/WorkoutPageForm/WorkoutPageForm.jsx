@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
+import { resetWorkoutImages } from "../../redux/workoutImages";
+
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
+import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -101,7 +104,7 @@ function WorkoutPageForm() {
     setClickedWorkoutImgId(0)
   }
 
-  
+
   const handleReset = initializeForm;
 
   const updateSetForm = (e) => {
@@ -145,10 +148,17 @@ function WorkoutPageForm() {
     }
   };
 
-  const handleBack = () => navigate(-1);
-  
+  // const handleBack = () => navigate(-1);
+  const handleBack = async () => {
+    dispatch(resetWorkoutImages()); // Clear workout images
+    navigate(-1);
+  };
+
+
+
   const handleModalClose = () => {
     setShowDeleteModal(false);
+    resetWorkoutImages()
     navigate(-1);
   };
 
@@ -222,7 +232,16 @@ function WorkoutPageForm() {
 
       <hr />
 
-      <div>
+      {/* <div>
+        <br />
+        <img
+          src={placeholderIMG}
+          style={{ height: "300px", width: '300px' }}
+          alt="Workout Image"
+          onClick={() => handleImgClick(currentImg.id)}
+          className="clickable"
+        />
+        <br />
         {workoutImgArr?.map((currentImg) => (
           <div key={currentImg.id}>
             <img
@@ -234,8 +253,65 @@ function WorkoutPageForm() {
             />
           </div>
         ))}
-      </div>
+      </div> */}
 
+      <div>
+        {/* {workoutImgArr && workoutImgArr.length && !newWorkout > 0 ? ( */}
+        {/* {workoutImgArr && workoutImgArr.length > 0 && !newWorkout ? (
+          workoutImgArr.map((currentImg) => (
+            <div key={currentImg.id}>
+              <img
+                src={currentImg.url}
+                style={{ height: "300px", width: '300px' }}
+                alt="Workout Image"
+                onClick={() => handleImgClick(currentImg.id)}
+                className="clickable"
+              />
+            </div>
+          ))
+        ) : (
+          <div>
+            <br />
+            <img
+              src={placeholderIMG}
+              style={{ height: "300px", width: '300px' }}
+              alt="Workout Placeholder"
+              className="clickable"
+            />
+            <br />
+          </div>
+        )} */}
+
+
+        <div>
+          {workoutImgArr && workoutImgArr.length > 0 && !newWorkout ? (
+            workoutImgArr.map((currentImg) => (
+              <div key={currentImg.id}>
+                <img
+                  src={currentImg.url}
+                  style={{ height: "300px", width: '300px' }}
+                  alt="Workout Image"
+                  onClick={() => handleImgClick(currentImg.id)}
+                  className="clickable"
+                />
+              </div>
+            ))
+          ) : (
+            <div>
+              <br />
+              <img
+                src={placeholderIMG}
+                style={{ height: "300px", width: '300px' }}
+                alt="Workout Placeholder"
+                className="clickable"
+              />
+              <br />
+            </div>
+          )}
+        </div>
+
+
+      </div>
 
       <div>
         {(clickedWorkoutImgId > 0) && showUpload && (
