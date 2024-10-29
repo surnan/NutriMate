@@ -6,7 +6,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import { postWorkoutImagesOneThunk, getWorkoutImagesForWorkoutThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, isEmpty, handleBack } from '../../utils/MyFunctions';
+import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -16,15 +16,9 @@ function WorkoutPageForm() {
   const workoutId = parseInt(id);
   const { newWorkout } = location.state || {};
 
-
   const sessionUser = useSelector((state) => state.session.user);
   const workoutObj = useSelector((state) => state.workouts.single);
   const workoutImgArr = useSelector((state) => state.workoutimages.currentworkout)
-
-  const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
-  const [showUpload, setShowUpload] = useState(true); //  //show image?
-  const [previewUrl, setPreviewUrl] = useState("");  //img url in react
-  const [clickedWorkoutImgId, setClickedWorkoutImgId] = useState(0);  //object.id of clicked image
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState({});
@@ -33,6 +27,11 @@ function WorkoutPageForm() {
     description: '',
     userId: sessionUser?.id || 1,
   });
+
+  const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+  const [showUpload, setShowUpload] = useState(true); //  //show image?
+  const [previewUrl, setPreviewUrl] = useState("");  //img url in react
+  const [clickedWorkoutImgId, setClickedWorkoutImgId] = useState(0);  //object.id of clicked image
 
   const initializeForm = useCallback(() => {
     if (!newWorkout && workoutObj) {
@@ -47,39 +46,6 @@ function WorkoutPageForm() {
   useEffect(() => {
     initializeForm();
   }, [initializeForm]);
-
-
-  useEffect(() => {
-    if (!newWorkout && workoutId) {
-      dispatch(getWorkoutOneThunk(workoutId)).then((data) => {
-        // Only get images if workout exists
-        if (data) {
-          console.log("...data.id ==> ", data.id)
-          dispatch(getWorkoutImagesForWorkoutThunk(data.id));
-        }
-      });
-    }
-  }, [dispatch, workoutId, newWorkout]);
-
-  useEffect(() => {
-    const newErrors = {}
-    const requiredVar = ["name", "description"]
-
-    requiredVar.reduce((sum, key) => {
-      if (!form[key]) {
-        sum[key] = `${capitalizeFirstLetter(key)} is required`;
-      }
-      return sum;
-    }, {});
-    setErrors(newErrors);
-  }, [form]);
-
-
-  // AWS
-  const handleImgClick = (id) => {
-    // console.log("A - ...handleImgClick..id = ", id)
-    setClickedWorkoutImgId(id)
-  }
 
   const updatedImgFromPC = async (e) => {
     console.log("updatedImgFromPC")
@@ -102,13 +68,46 @@ function WorkoutPageForm() {
     setClickedWorkoutImgId(0)
   }
 
-  
+
+
+
+
+
+  const handleBack = () => navigate(-1);
   const handleReset = initializeForm;
+
+  useEffect(() => {
+    if (!newWorkout && workoutId) {
+      dispatch(getWorkoutOneThunk(workoutId)).then((data) => {
+        // Only get images if workout exists
+        if (data) {
+          console.log("...data.id ==> ", data.id)
+          dispatch(getWorkoutImagesForWorkoutThunk(data.id));
+        }
+      });
+    }
+  }, [dispatch, workoutId, newWorkout]);
+
+
+  useEffect(() => {
+    const newErrors = {}
+    const requiredVar = ["name", "description"]
+
+    requiredVar.reduce((sum, key) => {
+      if (!form[key]) {
+        sum[key] = `${capitalizeFirstLetter(key)} is required`;
+      }
+      return sum;
+    }, {});
+    setErrors(newErrors);
+  }, [form]);
 
   const updateSetForm = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
+
+
 
   const handleSubmitSave = async (e) => {
     e.preventDefault();
@@ -132,6 +131,11 @@ function WorkoutPageForm() {
     }
   };
 
+  const handleModalClose = () => {
+    setShowDeleteModal(false);
+    navigate(-1);
+  };
+
   const handleAddToLog = () => {
     if (!workoutId) {
       alert('Workout needs to be saved before adding to DayLog');
@@ -146,10 +150,9 @@ function WorkoutPageForm() {
     }
   };
 
-  const handleModalClose = () => {
-    setShowDeleteModal(false);
-    navigate(-1);
-  };
+
+
+
 
   return (
     <div className="mainBodyStyle">
