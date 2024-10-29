@@ -18,6 +18,7 @@ function WorkoutPageForm() {
 
   const sessionUser = useSelector((state) => state.session.user);
   const workoutObj = useSelector((state) => state.workouts.single);
+  const workoutImgArr = useSelector((state) => state.workoutimages.currentworkout)
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState({});
@@ -55,7 +56,7 @@ function WorkoutPageForm() {
       });
     }
   }, [dispatch, workoutId, newWorkout]);
-  
+
 
   useEffect(() => {
     const newErrors = {}
@@ -188,17 +189,18 @@ function WorkoutPageForm() {
 
       <hr />
 
-      {/* 1 */}
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Water_molecule_3D.svg"
-        style={{ height: "400px", width: '400px', borderRadius: "50%" }}
-      />
+      <div>
+        {workoutImgArr.map((currentImg) => (
+          <div key={currentImg.id}>
+            <img
+              src={currentImg.url}
+              style={{ height: "300px", width: '300px' }}
+            />
+          </div>
+        ))}
+      </div>
 
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Water_molecule_3D.svg"
-        style={{ height: "400px", width: '400px', borderRadius: "50%" }}
-      />
-      
+
       {showDeleteModal && (
         <DeleteModal
           item={workoutObj}
