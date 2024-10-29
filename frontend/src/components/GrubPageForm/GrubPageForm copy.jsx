@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
-import { postGrubImagesOneThunk, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
 
@@ -19,13 +18,6 @@ function GrubPageForm() {
 
     const sessionUser = useSelector((state) => state.session.user);
     const grubObj = useSelector((state) => state.grubs.single)
-    const grubImgArr = useSelector((state) => state.grubimages.currentgrub)
-
-    const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
-    const [showUpload, setShowUpload] = useState(true); //  //show image?
-    const [previewUrl, setPreviewUrl] = useState("");  //img url in react
-    const [clickedGrubImgId, setClickedGrubImgId] = useState(0);  //object.id of clicked image
-
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
@@ -44,39 +36,55 @@ function GrubPageForm() {
     })
 
     const initializeForm = useCallback(() => {
-        if (!newGrub && grubObj) {
-            setForm({
-                name: grubObj?.name || "",
-                description: grubObj?.description || "",
-                servingUnit: grubObj?.servingUnit || '',
-                servingSize: grubObj?.servingSize || '',
-                calories: grubObj?.calories || '',
-                protein: grubObj?.protein || '',
-                fats: grubObj?.fats || '',
-                carbs: grubObj?.carbs || '',
-                sugar: grubObj?.sugar || '',
-                company: grubObj?.company || '',
-                userId: grubObj?.userId || sessionUser?.id || 1
-            })
-        }
+        return {
+            name: grubObj?.name || "",
+            description: grubObj?.description || "",
+            servingUnit: grubObj?.servingUnit || '',
+            servingSize: grubObj?.servingSize || '',
+            calories: grubObj?.calories || '',
+            protein: grubObj?.protein || '',
+            fats: grubObj?.fats || '',
+            carbs: grubObj?.carbs || '',
+            sugar: grubObj?.sugar || '',
+            company: grubObj?.company || '',
+            userId: grubObj?.userId || sessionUser?.id || 1
+        };
     }, [newGrub, grubObj, sessionUser]);
 
     useEffect(() => {
-        initializeForm();
+        setForm(initializeForm());
     }, [initializeForm]);
+
+    const handleReset = () => setForm(initializeForm());
+    const handleBack = () => navigate(-1);
 
 
     useEffect(() => {
-        if (!newGrub && grubId) {
-            dispatch(getGrubsOneThunk(grubId)).then((data) => {
-                // Only get images if workout exists
-                if (data) {
-                    console.log("...data.id ==> ", data.id)
-                    dispatch(getGrubImagesForGrubThunk(data.id));
-                }
-            });
+        if (!newGrub && grubObj) {
+            setForm((prevForm) => ({
+                ...prevForm,
+                name: grubObj.name || "",
+                description: grubObj.description || "",
+                servingUnit: grubObj.servingUnit || '',
+                servingSize: grubObj.servingSize || '',
+                calories: grubObj.calories || '',
+                protein: grubObj.protein || '',
+                fats: grubObj.fats || '',
+                carbs: grubObj.carbs || '',
+                sugar: grubObj.sugar || '',
+                company: grubObj.company || '',
+                userId: grubObj.userId || sessionUser?.id || 1
+            }));
+        }
+    }, [grubObj, newGrub, sessionUser])
+
+
+    useEffect(() => {
+        if (!newGrub && grubObj) {
+            dispatch(getGrubsOneThunk(grubId))
         }
     }, [dispatch, grubId, newGrub])
+
 
     useEffect(() => {
         const newErrors = {};
@@ -106,42 +114,17 @@ function GrubPageForm() {
         setErrors(newErrors);
     }, [form])
 
-    //AWS
-    const handleImgClick = (id) => {
-        // console.log("A - ...handleImgClick..id = ", id)
-        setClickedGrubImgId(id)
-    }
-
-    const updatedImgFromPC = async (e) => {
-        console.log("updatedImgFromPC")
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = e => setPreviewUrl(reader.result)
-        setImgUrl(file);
-        setShowUpload(false);
-    };
-
-    const handleImgSubmit = async () => {
-        console.log('handleImgSubmit')
-        let temp = {
-            grubId: clickedGrubImgId,
-            name: "abc",
-            url: imgUrl
-        }
-        await dispatch(updateGrubImagesOneThunk(temp))
-        setClickedGrubImgId(0)
-    }
-
-    const handleReset = () => setForm(initializeForm());
 
     const updateSetForm = (e) => {
         const { name, value } = e.target;
         setForm(prev => ({ ...prev, [name]: value }))
     }
 
+
+
     const handleSubmitSave = async (e) => {
         e.preventDefault();
+
         try {
             const { name, servingUnit, servingSize, calories, protein, fats } = form
             const { carbs, sugar, company, description, userId } = form
@@ -180,6 +163,11 @@ function GrubPageForm() {
         setShowDeletetModal(true)
     }
 
+    const handleModalClose = () => {
+        setShowDeletetModal(false)
+        navigate(-1)
+    };
+
     const handleAddToLog = () => {
         if (!grubId) {
             alert('Grub needs to be saved before adding to DayLog');
@@ -194,11 +182,6 @@ function GrubPageForm() {
         }
     };
 
-    const handleModalClose = () => {
-        setShowDeletetModal(false)
-        navigate(-1)
-    };
-    const handleBack = () => navigate(-1);
 
     // const hasError = () => Object.keys(errors).length !== 0;
 
@@ -405,68 +388,8 @@ function GrubPageForm() {
                 >
                     Add To Log
                 </button>
+
             </div>
-
-            <hr />
-            <div>
-                {grubImgArr?.map((currentImg) => (
-                    <div key={currentImg.id}>
-                        <img
-                            src={currentImg.url}
-                            style={{ height: "300px", width: '300px' }}
-                            alt="Workout Image"
-                            onClick={() => handleImgClick(currentImg.id)}
-                            className="clickable"
-                        />
-                    </div>
-                ))}
-            </div>
-
-
-            <div>
-                {(clickedGrubImgId > 0) && showUpload && (
-                    <label htmlFor='file-upload'> Select From Computer
-                        <input
-                            type='file'
-
-                            className="_button orange"
-                            id='file-upload'
-                            name="img_url"
-                            onChange={updatedImgFromPC}
-                            accept='.jpg, .jpeg, .png, .gif'
-                        />
-                    </label>
-                )}
-                <br /><br /><br /><br />
-                {(clickedGrubImgId > 0) && !showUpload && (
-                    <div>
-                        <img
-                            src={previewUrl}
-                            alt="preview"
-                        />
-                        <button
-                            onClick={handleImgSubmit}
-                        >Change Profile
-                        </button>
-                    </div>
-                )}
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             {/* DELETE MODAL */}
             {showDeleteModal && (
                 <DeleteModal
