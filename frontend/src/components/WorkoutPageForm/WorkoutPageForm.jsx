@@ -108,7 +108,10 @@ function WorkoutPageForm() {
   }
 
 
-  const handleReset = initializeForm;
+  const handleReset = () => {
+    initializeForm;
+    setPreviewUrl(""); // Clear preview URL on reset
+  }
 
   const updateSetForm = (e) => {
     const { name, value } = e.target;
@@ -230,9 +233,7 @@ function WorkoutPageForm() {
           Add To Log
         </button>
       </div>
-
       <hr />
-
       <div>
         <h1>Your Workout Page Form</h1>
         <WorkoutImageDisplay
