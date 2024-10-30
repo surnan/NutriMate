@@ -10,6 +10,8 @@ import { resetWorkoutImages } from "../../redux/workoutImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
+import downloadGIF from '../../fe_images/download.gif'
+import WorkoutImageDisplay from "./WorkoutImageDisplay";
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ function WorkoutPageForm() {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     description: '',
@@ -148,13 +151,10 @@ function WorkoutPageForm() {
     }
   };
 
-  // const handleBack = () => navigate(-1);
   const handleBack = async () => {
     dispatch(resetWorkoutImages()); // Clear workout images
     navigate(-1);
   };
-
-
 
   const handleModalClose = () => {
     setShowDeleteModal(false);
@@ -162,6 +162,7 @@ function WorkoutPageForm() {
     navigate(-1);
   };
 
+  //downloadGIF
   return (
     <div className="mainBodyStyle">
       <h1>WorkoutPageForm.jsx</h1>
@@ -233,85 +234,50 @@ function WorkoutPageForm() {
       <hr />
 
       {/* <div>
-        <br />
-        <img
-          src={placeholderIMG}
-          style={{ height: "300px", width: '300px' }}
-          alt="Workout Image"
-          onClick={() => handleImgClick(currentImg.id)}
-          className="clickable"
-        />
-        <br />
-        {workoutImgArr?.map((currentImg) => (
-          <div key={currentImg.id}>
-            <img
-              src={currentImg.url}
-              style={{ height: "300px", width: '300px' }}
-              alt="Workout Image"
-              onClick={() => handleImgClick(currentImg.id)}
-              className="clickable"
-            />
+        {loading || (workoutImgArr && workoutImgArr.length === 0) ? (
+          <div className="loadingGifDiv">
+            <img src={downloadGIF} alt="Loading..." className="downloadGIF" />
           </div>
-        ))}
+        ) : (
+          <div>
+            {workoutImgArr && workoutImgArr.length > 0 ? (
+              workoutImgArr.map((currentImg) => (
+                <div key={currentImg.id}>
+                  <img
+                    src={currentImg.url}
+                    style={{ height: "300px", width: "300px" }}
+                    alt="Workout Image"
+                    onClick={() => handleImgClick(currentImg.id)}
+                    className="clickable"
+                  />
+                </div>
+              ))
+            ) : (
+              <div>
+                <br />
+                <img
+                  src={placeholderIMG}
+                  style={{ height: "300px", width: "300px" }}
+                  alt="Workout Placeholder"
+                  className="clickable"
+                />
+                <br />
+              </div>
+            )}
+          </div>
+        )}
       </div> */}
 
       <div>
-        {/* {workoutImgArr && workoutImgArr.length && !newWorkout > 0 ? ( */}
-        {/* {workoutImgArr && workoutImgArr.length > 0 && !newWorkout ? (
-          workoutImgArr.map((currentImg) => (
-            <div key={currentImg.id}>
-              <img
-                src={currentImg.url}
-                style={{ height: "300px", width: '300px' }}
-                alt="Workout Image"
-                onClick={() => handleImgClick(currentImg.id)}
-                className="clickable"
-              />
-            </div>
-          ))
-        ) : (
-          <div>
-            <br />
-            <img
-              src={placeholderIMG}
-              style={{ height: "300px", width: '300px' }}
-              alt="Workout Placeholder"
-              className="clickable"
-            />
-            <br />
-          </div>
-        )} */}
-
-
-        <div>
-          {workoutImgArr && workoutImgArr.length > 0 && !newWorkout ? (
-            workoutImgArr.map((currentImg) => (
-              <div key={currentImg.id}>
-                <img
-                  src={currentImg.url}
-                  style={{ height: "300px", width: '300px' }}
-                  alt="Workout Image"
-                  onClick={() => handleImgClick(currentImg.id)}
-                  className="clickable"
-                />
-              </div>
-            ))
-          ) : (
-            <div>
-              <br />
-              <img
-                src={placeholderIMG}
-                style={{ height: "300px", width: '300px' }}
-                alt="Workout Placeholder"
-                className="clickable"
-              />
-              <br />
-            </div>
-          )}
-        </div>
-
-
+        <h1>Your Workout Page Form</h1>
+        <WorkoutImageDisplay
+          workoutImgArr={workoutImgArr}
+          downloadGIF={downloadGIF}
+          placeholderIMG={placeholderIMG}
+          handleImgClick={handleImgClick}
+        />
       </div>
+
 
       <div>
         {(clickedWorkoutImgId > 0) && showUpload && (

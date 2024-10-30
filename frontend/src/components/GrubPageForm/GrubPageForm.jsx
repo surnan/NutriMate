@@ -7,6 +7,8 @@ import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOn
 import { postGrubImagesOneThunk, resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
+import downloadGIF from '../../fe_images/download.gif'
+import GrubImageDisplay from "./GrubImageDisplay";
 
 
 function GrubPageForm() {
@@ -29,6 +31,7 @@ function GrubPageForm() {
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
+     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         servingUnit: '',
