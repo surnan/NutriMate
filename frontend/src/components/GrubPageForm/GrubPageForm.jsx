@@ -7,6 +7,7 @@ import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOn
 import { postGrubImagesOneThunk, resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
+import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import GrubImageDisplay from "./GrubImageDisplay";
 
@@ -31,7 +32,7 @@ function GrubPageForm() {
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-     const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         servingUnit: '',
@@ -207,7 +208,7 @@ function GrubPageForm() {
     const handleBack = async () => {
         dispatch(resetGrubImages()); // Clear workout images
         navigate(-1);
-      };
+    };
 
     return (
         <div className="mainBodyStyle">
@@ -415,7 +416,7 @@ function GrubPageForm() {
             </div>
 
             <hr />
-            <div>
+            {/* <div>
                 {grubImgArr?.map((currentImg) => (
                     <div key={currentImg.id}>
                         <img
@@ -427,6 +428,16 @@ function GrubPageForm() {
                         />
                     </div>
                 ))}
+            </div> */}
+
+            <div>
+                <h1>Your Workout Page Form</h1>
+                <GrubImageDisplay
+                    grubImgArr={grubImgArr}
+                    downloadGIF={downloadGIF}
+                    placeholderIMG={placeholderIMG}
+                    handleImgClick={handleImgClick}
+                />
             </div>
 
 

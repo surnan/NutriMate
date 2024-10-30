@@ -1,4 +1,4 @@
-// WorkoutImageDisplay.jsx
+// frontend/src/components/WorkoutPageForm/WorkoutImageDisplay.jsx
 import React, { useEffect, useState } from "react";
 
 function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handleImgClick }) {

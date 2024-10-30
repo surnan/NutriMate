@@ -233,41 +233,6 @@ function WorkoutPageForm() {
 
       <hr />
 
-      {/* <div>
-        {loading || (workoutImgArr && workoutImgArr.length === 0) ? (
-          <div className="loadingGifDiv">
-            <img src={downloadGIF} alt="Loading..." className="downloadGIF" />
-          </div>
-        ) : (
-          <div>
-            {workoutImgArr && workoutImgArr.length > 0 ? (
-              workoutImgArr.map((currentImg) => (
-                <div key={currentImg.id}>
-                  <img
-                    src={currentImg.url}
-                    style={{ height: "300px", width: "300px" }}
-                    alt="Workout Image"
-                    onClick={() => handleImgClick(currentImg.id)}
-                    className="clickable"
-                  />
-                </div>
-              ))
-            ) : (
-              <div>
-                <br />
-                <img
-                  src={placeholderIMG}
-                  style={{ height: "300px", width: "300px" }}
-                  alt="Workout Placeholder"
-                  className="clickable"
-                />
-                <br />
-              </div>
-            )}
-          </div>
-        )}
-      </div> */}
-
       <div>
         <h1>Your Workout Page Form</h1>
         <WorkoutImageDisplay
