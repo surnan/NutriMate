@@ -431,7 +431,7 @@ function GrubPageForm() {
             </div> */}
 
             <div>
-                <h1>Your Workout Page Form</h1>
+                <h1>Your GRUB Page Form</h1>
                 <GrubImageDisplay
                     grubImgArr={grubImgArr}
                     downloadGIF={downloadGIF}
