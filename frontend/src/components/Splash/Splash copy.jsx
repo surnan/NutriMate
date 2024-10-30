@@ -5,13 +5,12 @@ import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
+  useEffect(()=>{
     console.log("...Splash->user = ", sessionUser)
   }, [sessionUser])
 
@@ -40,10 +39,11 @@ const Splash = () => {
     const form = { img_url };
     await dispatch(updateUserThunk(sessionUser.id, form))
   }
-
-  return (
-    <div className="mainBodyStyle">
+  
+return (
+<div className="mainBodyStyle">
       <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
+
       {sessionUser && (
         <form onSubmit={handleSubmit}>
           <div>
@@ -60,7 +60,7 @@ const Splash = () => {
                 />
               </label>
             )}
-            <br /><br /><br /><br />
+            <br/><br/><br/><br/>
             {!showUpload && (
               <div>
                 <img

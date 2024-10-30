@@ -186,220 +186,221 @@ function GrubPageForm() {
     // const hasError = () => Object.keys(errors).length !== 0;
 
     return (
-        <div className="mainBodyStyle">
-            <h1>GrubForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3>
+        // <div className="mainBodyStyle">
+        //     <h1>GrubForm.jsx</h1>
+        //     <h3 >Email = {sessionUser?.email}</h3>
 
-            <div className="grubPageForm_hFlex">
-                <button
-                    className="orange _button"
-                    type="button"
-                    onClick={handleBack}
-                >
-                    BACK
-                </button>
+        //     <div className="grubPageForm_hFlex">
+        //         <button
+        //             className="orange _button"
+        //             type="button"
+        //             onClick={handleBack}
+        //         >
+        //             BACK
+        //         </button>
 
-                <div className="grubPageForm_hFlex">
-                    <button
-                        className="blue _button"
-                        type="button"
-                        onClick={handleReset}
-                    >
-                        RESET
-                    </button>
+        //         <div className="grubPageForm_hFlex">
+        //             <button
+        //                 className="blue _button"
+        //                 type="button"
+        //                 onClick={handleReset}
+        //             >
+        //                 RESET
+        //             </button>
 
-                    <button
-                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
-                        type="button"
-                        onClick={handleSubmitSave}
-                        // disabled={hasError()}
-                        disabled={isEmpty(errors)}
-                    >
-                        SAVE
-                    </button>
-                </div>
-            </div>
-
-
-            <div className="grub_page_form_grid">
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
-                </label>
-                <input
-                    className="_input"
-                    type="text"
-                    name="name"
-                    onChange={updateSetForm}
-                    placeholder="enter name"
-                    value={form?.name}
-                />
-
-                <div>
-                    {errors.servingSize && <span style={{ color: 'red' }}>{errors.servingSize}&nbsp;&nbsp;</span>}
-                    <p>
-                        Per Serving
-                    </p>
-                    <input
-                        className="_input"
-                        type="Number"
-                        name="servingSize"
-                        onChange={updateSetForm}
-                        placeholder="Quantity"
-                        value={form?.servingSize}
-                    />
-                </div>
-                <div>
-                    <select
-                        name="servingUnit"
-                        className="_input"
-                        onChange={updateSetForm}
-                        value={form?.servingUnit}
-                    >
-                        <option value="">Quantity Type</option>
-                        <option value="bowls">bowls</option>
-                        <option value="each">each</option>
-                        <option value="cups">cups</option>
-                        <option value="grams">grams</option>
-                        <option value="oz">ounces</option>
-                        <option value="tablespoon">tablespoon</option>
-                        <option value="teaspoon">teaspoon</option>
-                    </select>
-                    {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit}&nbsp;&nbsp;</span>}
-                </div>
-                <label style={{ display: 'inline-flex' }}>
-                    {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
-                </label>
-                <input
-                    className="_input"
-                    type="Number"
-                    name="calories"
-                    onChange={updateSetForm}
-                    placeholder="enter calories"
-                    value={form?.calories || ""}
-                />
-
-                <div>
-                    {/* protein */}
-                    <div className="grubVflex">
-                        <label style={{ display: 'inline-flex' }}>
-                            Protein (g)
-                        </label>
-                        <input
-                            className="_input"
-                            type="Number"
-                            name="protein"
-                            onChange={updateSetForm}
-                            placeholder="enter protein"
-                            value={form?.protein || ""}
-                        />
-                        {errors.protein && <p style={{ color: 'red' }}>{errors.protein}&nbsp;&nbsp;</p>}
-                    </div>
-
-                    {/* fats */}
-                    <div className="grubVflex">
-                        <label style={{ display: 'inline-flex' }}>
-                            Fats (g)
-                        </label>
-                        <input
-                            className="_input"
-                            type="Number"
-                            name="fats"
-                            onChange={updateSetForm}
-                            placeholder="enter fats"
-                            value={form?.fats || ""}
-                        />
-                        {errors.fats && <p style={{ color: 'red' }}>{errors.fats}&nbsp;&nbsp;</p>}
-                    </div>
-
-                    {/* carbs */}
-                    <div className="grubVflex">
-                        <label style={{ display: 'inline-flex' }}>
-                            Carbs (g)
-                        </label>
-                        <input
-                            className="_input"
-                            type="Number"
-                            name="carbs"
-                            onChange={updateSetForm}
-                            placeholder="enter carbs"
-                            value={form?.carbs || ""}
-                        />
-                        {errors.carbs && <p style={{ color: 'red' }}>{errors.carbs}&nbsp;&nbsp;</p>}
-                    </div>
-
-                    {/* sugar */}
-                    <div className="grubVflex">
-                        <label style={{ display: 'inline-flex' }}>
-                            Sugar (g)
-                        </label>
-                        <input
-                            className="_input"
-                            type="Number"
-                            name="sugar"
-                            onChange={updateSetForm}
-                            placeholder="enter sugar"
-                            value={form?.sugar || ""}
-                        />
-                        {errors.sugar && <p style={{ color: 'red' }}>{errors.sugar}&nbsp;&nbsp;</p>}
-                    </div>
-                </div>
+        //             <button
+        //                 className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
+        //                 type="button"
+        //                 onClick={handleSubmitSave}
+        //                 // disabled={hasError()}
+        //                 disabled={isEmpty(errors)}
+        //             >
+        //                 SAVE
+        //             </button>
+        //         </div>
+        //     </div>
 
 
-                <label style={{ display: 'inline-flex' }}>
-                    Company
-                </label>
-                <input
-                    className="_input"
-                    type="text"
-                    name="company"
-                    onChange={updateSetForm}
-                    placeholder="enter company name"
-                    value={form?.company || ""}
-                />
+        //     <div className="grub_page_form_grid">
+        //         <label style={{ display: 'inline-flex' }}>
+        //             {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>} Name:
+        //         </label>
+        //         <input
+        //             className="_input"
+        //             type="text"
+        //             name="name"
+        //             onChange={updateSetForm}
+        //             placeholder="enter name"
+        //             value={form?.name}
+        //         />
 
-                <label style={{ display: 'inline-flex' }}>
-                    Description
-                </label>
-                <textarea
-                    className="_textarea"
-                    name="description"
-                    onChange={updateSetForm}
-                    placeholder="enter description"
-                    value={form?.description || ""}
-                />
+        //         <div>
+        //             {errors.servingSize && <span style={{ color: 'red' }}>{errors.servingSize}&nbsp;&nbsp;</span>}
+        //             <p>
+        //                 Per Serving
+        //             </p>
+        //             <input
+        //                 className="_input"
+        //                 type="Number"
+        //                 name="servingSize"
+        //                 onChange={updateSetForm}
+        //                 placeholder="Quantity"
+        //                 value={form?.servingSize}
+        //             />
+        //         </div>
+        //         <div>
+        //             <select
+        //                 name="servingUnit"
+        //                 className="_input"
+        //                 onChange={updateSetForm}
+        //                 value={form?.servingUnit}
+        //             >
+        //                 <option value="">Quantity Type</option>
+        //                 <option value="bowls">bowls</option>
+        //                 <option value="each">each</option>
+        //                 <option value="cups">cups</option>
+        //                 <option value="grams">grams</option>
+        //                 <option value="oz">ounces</option>
+        //                 <option value="tablespoon">tablespoon</option>
+        //                 <option value="teaspoon">teaspoon</option>
+        //             </select>
+        //             {errors.servingUnit && <span style={{ color: 'red' }}>{errors.servingUnit}&nbsp;&nbsp;</span>}
+        //         </div>
+        //         <label style={{ display: 'inline-flex' }}>
+        //             {errors.calories && <span style={{ color: 'red' }}>{errors.calories}&nbsp;&nbsp;</span>} Calories
+        //         </label>
+        //         <input
+        //             className="_input"
+        //             type="Number"
+        //             name="calories"
+        //             onChange={updateSetForm}
+        //             placeholder="enter calories"
+        //             value={form?.calories || ""}
+        //         />
+
+        //         <div>
+        //             {/* protein */}
+        //             <div className="grubVflex">
+        //                 <label style={{ display: 'inline-flex' }}>
+        //                     Protein (g)
+        //                 </label>
+        //                 <input
+        //                     className="_input"
+        //                     type="Number"
+        //                     name="protein"
+        //                     onChange={updateSetForm}
+        //                     placeholder="enter protein"
+        //                     value={form?.protein || ""}
+        //                 />
+        //                 {errors.protein && <p style={{ color: 'red' }}>{errors.protein}&nbsp;&nbsp;</p>}
+        //             </div>
+
+        //             {/* fats */}
+        //             <div className="grubVflex">
+        //                 <label style={{ display: 'inline-flex' }}>
+        //                     Fats (g)
+        //                 </label>
+        //                 <input
+        //                     className="_input"
+        //                     type="Number"
+        //                     name="fats"
+        //                     onChange={updateSetForm}
+        //                     placeholder="enter fats"
+        //                     value={form?.fats || ""}
+        //                 />
+        //                 {errors.fats && <p style={{ color: 'red' }}>{errors.fats}&nbsp;&nbsp;</p>}
+        //             </div>
+
+        //             {/* carbs */}
+        //             <div className="grubVflex">
+        //                 <label style={{ display: 'inline-flex' }}>
+        //                     Carbs (g)
+        //                 </label>
+        //                 <input
+        //                     className="_input"
+        //                     type="Number"
+        //                     name="carbs"
+        //                     onChange={updateSetForm}
+        //                     placeholder="enter carbs"
+        //                     value={form?.carbs || ""}
+        //                 />
+        //                 {errors.carbs && <p style={{ color: 'red' }}>{errors.carbs}&nbsp;&nbsp;</p>}
+        //             </div>
+
+        //             {/* sugar */}
+        //             <div className="grubVflex">
+        //                 <label style={{ display: 'inline-flex' }}>
+        //                     Sugar (g)
+        //                 </label>
+        //                 <input
+        //                     className="_input"
+        //                     type="Number"
+        //                     name="sugar"
+        //                     onChange={updateSetForm}
+        //                     placeholder="enter sugar"
+        //                     value={form?.sugar || ""}
+        //                 />
+        //                 {errors.sugar && <p style={{ color: 'red' }}>{errors.sugar}&nbsp;&nbsp;</p>}
+        //             </div>
+        //         </div>
 
 
-            </div>
-            <div className="max_HFlex">
-                <div >
-                    <button
-                        className="red _button"
-                        type="button"
-                        onClick={handleDeleteBtn}
-                    >
-                        DELETE
-                    </button>
-                </div>
-                <button
-                    className="black _button white_font"
-                    type="button"
-                    onClick={handleAddToLog}
-                //disabled={!isEmpty(errors)}
-                >
-                    Add To Log
-                </button>
+        //         <label style={{ display: 'inline-flex' }}>
+        //             Company
+        //         </label>
+        //         <input
+        //             className="_input"
+        //             type="text"
+        //             name="company"
+        //             onChange={updateSetForm}
+        //             placeholder="enter company name"
+        //             value={form?.company || ""}
+        //         />
 
-            </div>
-            {/* DELETE MODAL */}
-            {showDeleteModal && (
-                <DeleteModal
-                    item={grubObj}
-                    itemType="grub"
-                    deleteThunk={deleteGrubThunkById}
-                    onClose={handleModalClose}
-                />
-            )}
-        </div>
+        //         <label style={{ display: 'inline-flex' }}>
+        //             Description
+        //         </label>
+        //         <textarea
+        //             className="_textarea"
+        //             name="description"
+        //             onChange={updateSetForm}
+        //             placeholder="enter description"
+        //             value={form?.description || ""}
+        //         />
+
+
+        //     </div>
+        //     <div className="max_HFlex">
+        //         <div >
+        //             <button
+        //                 className="red _button"
+        //                 type="button"
+        //                 onClick={handleDeleteBtn}
+        //             >
+        //                 DELETE
+        //             </button>
+        //         </div>
+        //         <button
+        //             className="black _button white_font"
+        //             type="button"
+        //             onClick={handleAddToLog}
+        //         //disabled={!isEmpty(errors)}
+        //         >
+        //             Add To Log
+        //         </button>
+
+        //     </div>
+        //     {/* DELETE MODAL */}
+        //     {showDeleteModal && (
+        //         <DeleteModal
+        //             item={grubObj}
+        //             itemType="grub"
+        //             deleteThunk={deleteGrubThunkById}
+        //             onClose={handleModalClose}
+        //         />
+        //     )}
+        // </div>
+        <h1> hello world</h1>
     );
 }
 
