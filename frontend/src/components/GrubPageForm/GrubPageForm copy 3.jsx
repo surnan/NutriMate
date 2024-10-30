@@ -137,7 +137,10 @@ function GrubPageForm() {
         setClickedGrubImgId(0)
     }
 
-    const handleReset = () => setForm(initializeForm());
+    const handleReset = () => {
+        setForm(initializeForm());
+        setPreviewUrl("");
+    }
 
     const updateSetForm = (e) => {
         const { name, value } = e.target;
@@ -414,7 +417,21 @@ function GrubPageForm() {
                     Add To Log
                 </button>
             </div>
+
             <hr />
+            {/* <div>
+                {grubImgArr?.map((currentImg) => (
+                    <div key={currentImg.id}>
+                        <img
+                            src={currentImg.url}
+                            style={{ height: "300px", width: '300px' }}
+                            alt="Workout Image"
+                            onClick={() => handleImgClick(currentImg.id)}
+                            className="clickable"
+                        />
+                    </div>
+                ))}
+            </div> */}
 
             <div>
                 <h1>Your GRUB Page Form</h1>
@@ -455,6 +472,21 @@ function GrubPageForm() {
                     </div>
                 )}
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             {/* DELETE MODAL */}
             {showDeleteModal && (
