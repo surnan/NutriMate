@@ -8,19 +8,18 @@ function GrubImageDisplay({ grubImgArr, downloadGIF, placeholderIMG, handleImgCl
     if (grubImgArr && grubImgArr.length > 0) {
       let loadedImages = 0;
       
-      // Preload each image and check when all are fully loaded
       grubImgArr.forEach((image) => {
         const img = new Image();
         img.src = image.url;
         img.onload = () => {
           loadedImages += 1;
           if (loadedImages === grubImgArr.length) {
-            setLoading(false); // Set loading to false only when all images are fully loaded
+            setLoading(false); 
           }
         };
       });
     } else {
-      setLoading(false); // Stop loading if there are no images
+      setLoading(false); 
     }
   }, [grubImgArr]);
 
