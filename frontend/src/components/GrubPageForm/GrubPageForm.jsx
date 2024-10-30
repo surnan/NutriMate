@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
-import { postGrubImagesOneThunk, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
+import { postGrubImagesOneThunk, resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
 import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
 
@@ -198,9 +198,13 @@ function GrubPageForm() {
         setShowDeletetModal(false)
         navigate(-1)
     };
-    const handleBack = () => navigate(-1);
-
+    // const handleBack = () => navigate(-1);
     // const hasError = () => Object.keys(errors).length !== 0;
+
+    const handleBack = async () => {
+        dispatch(resetGrubImages()); // Clear workout images
+        navigate(-1);
+      };
 
     return (
         <div className="mainBodyStyle">
