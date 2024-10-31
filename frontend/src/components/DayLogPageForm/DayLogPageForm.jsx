@@ -16,7 +16,7 @@ function DayLogPageForm() {
     const location = useLocation();
     const { id } = useParams();
     const dayLogId = parseInt(id);
-    const { newDayLog, newWorkoutObj, newGrubObj, currentDayLog } = location.state || {};
+    const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
@@ -29,7 +29,6 @@ function DayLogPageForm() {
         calories: "",
         units: "",
         unitType: "",
-        userId: "",
         grubId: "",
         workoutId: "",
         userId: dayLogObj.userId || sessionUser?.id || 1
@@ -47,7 +46,7 @@ function DayLogPageForm() {
             workoutId: dayLogObj.workoutId || newWorkoutObj?.id || null,
             userId: dayLogObj.userId || sessionUser?.id || 1
         }
-    }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
+    }, [dayLogObj, sessionUser, newWorkoutObj, newGrubObj])
 
 
     useEffect(() => {
@@ -56,9 +55,11 @@ function DayLogPageForm() {
 
     useEffect(() => {
         if (!newDayLog && dayLogObj) {
+            console.log("....dispatch A .....")
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
-    }, [dispatch, dayLogId, newDayLog])
+    // }, [dispatch, dayLogId, newDayLog, dayLogObj])
+    }, [dayLogId, newDayLog])
 
     const handleReset = () => setForm(initializeForm)
     const handleBack = () => navigate(-1);
@@ -81,7 +82,7 @@ function DayLogPageForm() {
             }
         });
         setErrors(newErrors);
-    }, [form])
+    }, [form, newWorkoutObj])
 
 
     const handleSubmitSave = async (e) => {
@@ -101,6 +102,7 @@ function DayLogPageForm() {
                 workoutId: parseInt(workoutId)
             }
             console.log("___body = ", body)
+            console.log("....dispatch B .....")
             const result = newDayLog
                 ? await dispatch(postDailyLogsOneThunk({ body }))
                 : await dispatch(updateDailyLogsOneThunk({ body }))
@@ -120,15 +122,11 @@ function DayLogPageForm() {
         navigate(-1)
     };
 
-
-
-    const [grubCalories, setGrubCalories] = useState(0);
-
-    useEffect(() => {
-        if (!newDayLog && dayLogObj) {
-            dispatch(getDailyLogsOneThunk(dayLogId));
-        }
-    }, [dispatch, dayLogId, newDayLog]);
+    // useEffect(() => {
+    //     if (!newDayLog && dayLogObj) {
+    //         dispatch(getDailyLogsOneThunk(dayLogId));
+    //     }
+    // }, [dispatch, dayLogId, newDayLog, dayLogObj]);
 
 
 
@@ -141,7 +139,7 @@ function DayLogPageForm() {
         const calculateGrubCalories = () => {
             if (newGrubObj && form.units) {
                 const newCalories = newGrubObj.calories * form.units;
-                setGrubCalories(newCalories);
+                // setGrubCalories(newCalories);
                 console.log("....grubCalories (updated) = ", newCalories);
                 const e = {
                     target: {

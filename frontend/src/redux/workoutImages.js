@@ -13,7 +13,7 @@ const RESET_WORKOUT_IMAGES = "workoutimages/resetWorkoutImages";
 
 //Actions
 const loadWorkoutImagesAll = (data) => ({
-    type: LOAD_WORKOUTIMAGES_ALL,
+    type: LOAD_WORKOUTIMAGES_ALL, 
     payload: data
 })
 
@@ -40,6 +40,10 @@ const postWorkoutImagesOne = (data) => ({
 const loadWorkoutImagesForWorkout = (data) => ({
     type: LOAD_WORKOUTIMAGES_WORKOUT,
     payload: data
+})
+
+const resetWorkoutImagesForWorkout = () => ({
+    type: RESET_WORKOUT_IMAGES,
 })
 
 
@@ -129,8 +133,12 @@ export const updateWorkoutImagesOneThunk = (body) => async (dispatch) => {
 }
 
 
+// export const resetWorkoutImages = () => (dispatch) => {
+//     dispatch({ type: "RESET_WORKOUT_IMAGES" });
+// };
+
 export const resetWorkoutImages = () => (dispatch) => {
-    dispatch({ type: "RESET_WORKOUT_IMAGES" });
+    dispatch(resetWorkoutImagesForWorkout());
 };
 
 
@@ -146,19 +154,14 @@ const workoutImagesReducer = (state = initialState, action) => {
     switch (action.type) {
         case RESET_WORKOUT_IMAGES: {
             console.log(".... case RESET_WORKOUT_IMAGES.....")
+            console.log("...initialState = ", initialState)
             console.log(".... case RESET_WORKOUT_IMAGES.....")
-            console.log(".... case RESET_WORKOUT_IMAGES.....")
 
-            console.log("action ==> ", action)
-            console.log("state ==> ", state)
-
-
-            return {
-                ...state,
-                // currentworkout: [],
-                currentworkout: null,
-            };
-            
+            // return {
+            //     ...state,
+            //     currentworkout: [],
+            // };
+            return initialState
         }
         case LOAD_WORKOUTIMAGES_ALL: {
             let newState = { ...state };

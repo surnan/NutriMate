@@ -7,6 +7,7 @@ const LOAD_GRUBIMAGES_GRUB = "grubimages/loadGrubImagesGrubAll"
 const REMOVE_GRUB_ONE = "grubimages/removeGrubImagesOne"
 const POST_GRUB_ONE = "grubimages/postGrubImagesOne"
 const UPDATE_GRUB_ONE = "grubimages/updateGrubImagesOne"
+const RESET_GRUB_IMAGES = "grubimages/resetGrubImages";
 
 //Actions
 const loadGrubImagesAll = (data) => ({
@@ -39,6 +40,9 @@ const loadGrubImagesForGrub = (data) => ({
     payload: data
 })
 
+const resetGrubImagesForGrub = () => ({
+    type: RESET_GRUB_IMAGES,
+})
 
 // Thunks
 export const getGrubImagesAllThunk = () => async (dispatch) => {
@@ -79,7 +83,7 @@ export const postGrubImagesOneThunk = ({ body }) => async (dispatch) => {
 
     if (response.ok) {
         const grubData = await response.json()
-        await dispatch(postGrubImagesOne(grubtData))
+        await dispatch(postGrubImagesOne(grubData))
         return grubData
     }
 }
@@ -98,7 +102,7 @@ export const deleteGrubThunkByGrub = (id) => async (dispatch) => {
     }
 }
 
-export const updateGrubImagesOneThunk = ( body ) => async (dispatch) => {
+export const updateGrubImagesOneThunk = (body) => async (dispatch) => {
     console.log("...body...updateGrubImagesOneThunk...  = ", body)
     const { grubId, url, name } = body
 
@@ -113,7 +117,7 @@ export const updateGrubImagesOneThunk = ( body ) => async (dispatch) => {
             headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
             body: formData
         }
-        const response = await csrfFetch(`/api/grubimages/${grubId}/update`,option)
+        const response = await csrfFetch(`/api/grubimages/${grubId}/update`, option)
 
         if (response.ok) {
             const currentGrub = await response.json()
@@ -125,6 +129,14 @@ export const updateGrubImagesOneThunk = ( body ) => async (dispatch) => {
     }
 }
 
+export const resetGrubImages = () => (dispatch) => {
+    dispatch(resetGrubImagesForGrub());
+};
+
+
+
+
+
 // State object
 const initialState = {
     allGrubImages: [],
@@ -135,6 +147,9 @@ const initialState = {
 
 const grubImagesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case RESET_GRUB_IMAGES: {
+            return initialState
+        }
         case LOAD_GRUBIMAGES_ALL: {
             let newState = { ...state };
             newState.allGrubImages = action.payload.GrubImages;
@@ -165,11 +180,11 @@ const grubImagesReducer = (state = initialState, action) => {
         case LOAD_GRUBIMAGES_GRUB: {
             let newState = { ...state };
             newState.currentgrub
-             = action.payload
+                = action.payload
             return newState
         }
         case UPDATE_GRUB_ONE: {
-            let newState = {...state}
+            let newState = { ...state }
             console.log("...case UPDATE_GRUBIMAGES_ONE...")
             console.log("...action.payload")
 
