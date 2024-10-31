@@ -5,6 +5,7 @@ import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import SplashGifDiv from "./SplashGifDiv"; 
 
 const Splash = () => {
   const dispatch = useDispatch();
@@ -41,46 +42,97 @@ const Splash = () => {
     await dispatch(updateUserThunk(sessionUser.id, form))
   }
 
-  return (
-    <div className="mainBodyStyle">
-      <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
-      {sessionUser && (
-        <form onSubmit={handleSubmit}>
-          <div>
-            {showUpload && (
-              <label htmlFor='file-upload'> Select From Computer
-                <input
-                  type='file'
+  
+// return (
+// <div className="mainBodyStyle">
+//       <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
 
-                  className="_button orange"
-                  id='file-upload'
-                  name="img_url"
-                  onChange={updatedImgFromPC}
-                  accept='.jpg, .jpeg, .png, .gif'
-                />
-              </label>
-            )}
-            <br /><br /><br /><br />
-            {!showUpload && (
-              <div>
-                <img
-                  src={previewUrl}
-                  alt="preview"
-                />
-                <button>Change Profile</button>
-              </div>
-            )}
-          </div>
-          <div className="splash_grid twenty_padding">
-            <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
-            <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
-            <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
-            <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
-          </div>
-        </form>
-      )}
-    </div>
-  );
+//       {sessionUser && (
+//         <form onSubmit={handleSubmit}>
+//           <div>
+//             {showUpload && (
+//               <label htmlFor='file-upload'> Select From Computer
+//                 <input
+//                   type='file'
+
+//                   className="_button orange"
+//                   id='file-upload'
+//                   name="img_url"
+//                   onChange={updatedImgFromPC}
+//                   accept='.jpg, .jpeg, .png, .gif'
+//                 />
+//               </label>
+//             )}
+//             <br/><br/><br/><br/>
+//             {!showUpload && (
+//               <div>
+//                 <img
+//                   src={previewUrl}
+//                   alt="preview"
+//                 />
+//                 <button>Change Profile</button>
+//               </div>
+//             )}
+//           </div>
+//           <div className="splash_grid twenty_padding">
+//             <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
+//             <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
+//             <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
+//             <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
+//           </div>
+//         </form>
+//       )}
+//       <SplashGifDiv/>
+//     </div>
+//   );
+
+
+return (
+  <div className="mainBodyStyle relative">
+    <div className="dark_Splash_Screen absolute"></div>
+    
+
+    <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
+    {sessionUser && (
+      <form onSubmit={handleSubmit}>
+        <div>
+          {showUpload && (
+            <label htmlFor='file-upload'> Select From Computer
+              <input
+                type='file'
+
+                className="_button orange"
+                id='file-upload'
+                name="img_url"
+                onChange={updatedImgFromPC}
+                accept='.jpg, .jpeg, .png, .gif'
+              />
+            </label>
+          )}
+          <br /><br /><br /><br />
+          {!showUpload && (
+            <div>
+              <img
+                src={previewUrl}
+                alt="preview"
+              />
+              <button>Change Profile</button>
+            </div>
+          )}
+        </div>
+        <div className="splash_grid twenty_padding">
+          <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
+          <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
+          <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
+          <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
+        </div>
+      </form>
+    )}
+    {/* {!sessionUser && <SplashGifDiv/>} */}
+    <SplashGifDiv/>
+
+  </div>
+);
 }
 
 export default Splash;
