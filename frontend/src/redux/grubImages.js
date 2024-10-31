@@ -83,7 +83,7 @@ export const postGrubImagesOneThunk = ({ body }) => async (dispatch) => {
 
     if (response.ok) {
         const grubData = await response.json()
-        await dispatch(postGrubImagesOne(grubtData))
+        await dispatch(postGrubImagesOne(grubData))
         return grubData
     }
 }
