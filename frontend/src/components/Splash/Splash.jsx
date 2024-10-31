@@ -127,7 +127,8 @@ return (
         </div>
       </form>
     )}
-    {!sessionUser && <SplashGifDiv/>}
+    {/* {!sessionUser && <SplashGifDiv/>} */}
+    <SplashGifDiv/>
 
   </div>
 );
