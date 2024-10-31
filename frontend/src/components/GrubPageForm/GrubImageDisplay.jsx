@@ -1,5 +1,5 @@
 // frontend/src/components/GrubPageFormGrubImageDisplay.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function GrubImageDisplay({ grubImgArr, downloadGIF, placeholderIMG, handleImgClick }) {
   const [loading, setLoading] = useState(true);
