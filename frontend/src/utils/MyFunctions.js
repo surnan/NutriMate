@@ -26,5 +26,3 @@ export const formatDatetimeLocal = (dateString) => {
     const date = new Date(dateString);
     return !isNaN(date.getTime()) ? new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
 };
-
-export const handleBack = () => navigate(-1);
