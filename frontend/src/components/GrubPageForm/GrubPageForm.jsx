@@ -4,9 +4,12 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
-import { postGrubImagesOneThunk, resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
+import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions'
+import placeholderIMG from '../../fe_images/placeholder_image.jpg'
+import downloadGIF from '../../fe_images/download.gif'
+import GrubImageDisplay from "./GrubImageDisplay";
 
 
 function GrubPageForm() {
@@ -204,7 +207,7 @@ function GrubPageForm() {
     const handleBack = async () => {
         dispatch(resetGrubImages()); // Clear workout images
         navigate(-1);
-      };
+    };
 
     return (
         <div className="mainBodyStyle">
@@ -410,20 +413,16 @@ function GrubPageForm() {
                     Add To Log
                 </button>
             </div>
-
             <hr />
+
             <div>
-                {grubImgArr?.map((currentImg) => (
-                    <div key={currentImg.id}>
-                        <img
-                            src={currentImg.url}
-                            style={{ height: "300px", width: '300px' }}
-                            alt="Workout Image"
-                            onClick={() => handleImgClick(currentImg.id)}
-                            className="clickable"
-                        />
-                    </div>
-                ))}
+                <h1>Your GRUB Page Form</h1>
+                <GrubImageDisplay
+                    grubImgArr={grubImgArr}
+                    downloadGIF={downloadGIF}
+                    placeholderIMG={placeholderIMG}
+                    handleImgClick={handleImgClick}
+                />
             </div>
 
 
@@ -455,21 +454,6 @@ function GrubPageForm() {
                     </div>
                 )}
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             {/* DELETE MODAL */}
             {showDeleteModal && (
