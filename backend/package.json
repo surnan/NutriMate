@@ -22,6 +22,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@playwright/test": "^1.48.2",
     "aws-sdk": "^2.1691.0",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -36,8 +37,10 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1",
     "per-env": "^1.0.2",
     "pg": "^8.11.3",
+    "playwright": "^1.48.2",
     "react-calendar": "^5.0.0",
     "sequelize": "^6.35.1",
     "sequelize-cli": "^6.6.2"

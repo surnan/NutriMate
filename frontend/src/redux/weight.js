@@ -38,33 +38,6 @@ const removeWeightsOne = (data) => {
     }
 }
 
-const loadWeightsUser = (data) => {
-    return {
-        type: LOAD_WEIGHTS_USER,
-        payload: data
-    }
-}
-const loadWeightsOne = (data) => {
-    return {
-        type: LOAD_WEIGHTS_ONE,
-        payload: data
-    }
-}
-
-const removeWeightsUser = (data) => {
-    return {
-        type: REMOVE_WEIGHTS_USER,
-        payload: data
-    }
-}
-
-
-function avoidingErrors() {
-    loadWeightsUser(null);
-    removeWeightsUser(null);
-    loadWeightsOne(null);
-}
-
 // Thunks
 export const getWeightsAllThunk = () => async (dispatch) => {
     const response = await csrfFetch('/api/weights')

@@ -4,9 +4,9 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
-import { postGrubImagesOneThunk, resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
+import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../DeleteModal/DeleteModal";
-import { capitalizeFirstLetter, formatDate, isEmpty } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty } from '../../utils/MyFunctions'
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import GrubImageDisplay from "./GrubImageDisplay";
@@ -32,7 +32,6 @@ function GrubPageForm() {
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
-    const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
         servingUnit: '',

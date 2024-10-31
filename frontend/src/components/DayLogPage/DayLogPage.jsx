@@ -37,13 +37,9 @@ const DayLogPage = () => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
-
-    const handleCard = workout => navigate(`/workoutform/${workout.id}`)
     const handleBack = () => navigate(-1)
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
-
-
 
     const handleHoursDiv = (e) => {
         console.log("click happened")

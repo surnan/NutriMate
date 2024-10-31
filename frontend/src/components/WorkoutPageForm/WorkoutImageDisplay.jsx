@@ -1,5 +1,5 @@
 // frontend/src/components/WorkoutPageForm/WorkoutImageDisplay.jsx
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handleImgClick }) {
   const [loading, setLoading] = useState(true);

@@ -1,6 +1,6 @@
 // frontend/src/components/Splash/Splash.jsx
 import "./Splash.css"
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
