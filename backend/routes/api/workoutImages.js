@@ -68,29 +68,6 @@ router.get('/workout/:workoutId', async (req, res, next) => {
     }
 });
 
-
-
-// router.post('/', async (req, res, next) => {
-//     try {
-//         const { url, workoutId, name } = req.body
-//         const newGrub = await WorkoutImage.create(
-//             {
-//                 url,
-//                 name,
-//                 workoutId: parseInt(workoutId)
-//             }
-//         )
-//         let newWorkoutJSON = newGrub.toJSON();
-//         let responseBody = { ...newWorkoutJSON }
-//         responseBody.createdAt = newWorkoutJSON.createdAt
-//         responseBody.updatedAt = newWorkoutJSON.updatedAt
-//         return res.status(201).json(responseBody)
-//     } catch (e) {
-//         console.log('Route Error: ', e)
-//         next(e)
-//     }
-// })
-
 router.delete('/:grubId', async (req, res, next) => {
     try {
         const grubId = parseInt(req.params.grubId)
@@ -108,29 +85,12 @@ router.delete('/:grubId', async (req, res, next) => {
     }
 })
 
-// const workoutId = parseInt(req.params.workoutId);
-// const allImages = await WorkoutImage.findAll({
-//     where: {
-//         workoutId: workoutId
-//     },
-//     include: [
-//         { model: Workout }
-//     ]
-// });
+
 
 // AWS
 router.put('/:id/update',
     singleMulterUpload('image'),
     async (req, res, next) => {
-        console.log("...")
-        console.log("...")
-        console.log("...")
-        console.log("...")
-        console.log("entered router.put")
-        console.log("...")
-        console.log("...")
-        console.log("...")
-        console.log("...")
         try {
             const workoutImageId = parseInt(req.params.id)
             const currentWorkoutImage = await WorkoutImage.findByPk(workoutImageId)
@@ -164,16 +124,25 @@ router.put('/:id/update',
     })
 
     // AWS
-router.post('/:workoutId',
+router.post('/',
     singleMulterUpload('image'),
     async (req, res, next) => {
         try {
             let imgUrl;
+            console.log("")
+            console.log("")
+            console.log("")
+            console.log("req.body ==> ", req.body)
+            console.log("")
+            console.log("req ==> ", req)
+            console.log("")
+            console.log("")
+            console.log("")
 
             if (req.file) {
                 imgUrl = await singlePublicFileUpload(req.file); //converts data from form
             }
-            const workoutId = parseInt(req.params.workoutId)
+            const workoutId = parseInt(req.body.workoutId)
             const currentWorkoutImage = await WorkoutImage.create({
                 url: imgUrl,
                 workoutId
@@ -198,7 +167,15 @@ module.exports = router;
 
 
 
-
+// const workoutId = parseInt(req.params.workoutId);
+// const allImages = await WorkoutImage.findAll({
+//     where: {
+//         workoutId: workoutId
+//     },
+//     include: [
+//         { model: Workout }
+//     ]
+// });
 
 
 // router.put('/:WorkoutImageId', async (req, res, next) => {
@@ -221,6 +198,27 @@ module.exports = router;
 //         let currentWorkoutImageJSON = currentWorkoutImage.toJSON();
 //         return res.status(201).json(currentWorkoutImageJSON)
 //     } catch (e){
+//         console.log('Route Error: ', e)
+//         next(e)
+//     }
+// })
+
+// router.post('/', async (req, res, next) => {
+//     try {
+//         const { url, workoutId, name } = req.body
+//         const newGrub = await WorkoutImage.create(
+//             {
+//                 url,
+//                 name,
+//                 workoutId: parseInt(workoutId)
+//             }
+//         )
+//         let newWorkoutJSON = newGrub.toJSON();
+//         let responseBody = { ...newWorkoutJSON }
+//         responseBody.createdAt = newWorkoutJSON.createdAt
+//         responseBody.updatedAt = newWorkoutJSON.updatedAt
+//         return res.status(201).json(responseBody)
+//     } catch (e) {
 //         console.log('Route Error: ', e)
 //         next(e)
 //     }
