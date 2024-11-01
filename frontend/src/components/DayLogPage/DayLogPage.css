@@ -1,15 +1,11 @@
 
 
-.dayLogPage_div {
-    margin: 3rem auto;
-    width: 50rem;
-}
 
-.dp_header{
+
+.dp_header {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    height: 100px;
     padding: 0 2rem;
     background-color: lightgreen;
 }
@@ -18,18 +14,18 @@
     height: 50px;
     width:  50px;
     font-size: 25px;
-    border: none;
     background-color: transparent;
+    border: 2px solid black;
+
 }
 
 .dph_btn:active {filter: brightness(1.33)}
 
-
 .dp_grid {
     display: grid;
     grid-template-columns: 1fr;
-    margin: 3rem auto;
-    gap: 5px;
+    /* margin: 3rem auto; */
+    gap: 2px;
 }
 
 .dp_grid > * {
@@ -40,10 +36,13 @@
     justify-content: center
 }
 
-.dp_grid > :nth-child(odd) {background-color: aqua}
-.dp_grid > :nth-child(even) {background-color: bisque}
+.dp_grid > :nth-child(odd) {background-color: white}
+.dp_grid > :nth-child(even) {background-color: rgba(32, 41, 76, 0.138) }
 
-.dpg_hour {font-size: larger}
+.dpg_hour {
+    font-size: larger;
+    height: 4rem;
+}
 .dpgh_label {font-weight: 600}
 
 .calendarStuff {

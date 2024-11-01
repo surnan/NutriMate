@@ -26,7 +26,7 @@ function Navigation() {
 
 
   return (
-    <div className="nav_flex navBlue">
+    <div className="nav_flex container-width navBlue">
       <NavLink to="/">
         <img
           src={logo}

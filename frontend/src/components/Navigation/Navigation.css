@@ -58,12 +58,12 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    max-width: 1200px;
-    min-width: 600px;
     height: 95px;
     margin: auto;
     padding: 25px;
 }
+
+
 
 .profile-dropdown {
     position: absolute;
@@ -95,4 +95,10 @@
 .openModalBtn:hover{
     background-color: darkblue;
     color: white;
+}
+
+.container-width {
+    max-width: 1200px;
+    min-width: 600px;
+    margin: auto;
 }
