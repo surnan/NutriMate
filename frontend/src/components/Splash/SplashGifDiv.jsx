@@ -1,10 +1,10 @@
-import React from 'react';
+// frontend/src/components/Splash/SplashGifDiv.jsx
 import "./Splash.css"
 
 
 const SplashGifDiv = () => {
     return (
-        <div className="splash-giv-div">
+        <div className="splash-giv-div center">
             <img
                 src="https://media.giphy.com/media/4bjIKBOWUnVPICCzJc/giphy.gif"
                 alt="Loading Animation"

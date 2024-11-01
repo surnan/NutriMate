@@ -55,6 +55,17 @@
     width: 20rem;
 }
 
+.splash_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash_gif {
+    width: 100%;
+    height: auto;
+}
+
 .loadingOverlay {
     position: fixed;
     top: 0;
@@ -72,4 +83,3 @@
     width: 80px;
     height: 80px;
   }
-  
