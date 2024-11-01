@@ -68,7 +68,7 @@ const GrubPage = () => {
           filteredAndSortedArray.map((grub, idx) => (
             <div
               key={`${idx}-grub`}
-              onClick={handleCard(grub)}
+              onClick={()=>handleCard(grub)}
             >
               <GrubCard grub={grub} />
               <br />
