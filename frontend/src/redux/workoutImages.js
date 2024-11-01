@@ -77,18 +77,52 @@ export const getWorkoutImagesForWorkoutThunk = (id) => async (dispatch) => {
     }
 }
 
-export const postWorkoutImagesOneThunk = ({ body }) => async (dispatch) => {
-    const response = await csrfFetch('/api/workoutimages', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-    })
+export const postWorkoutImagesOneThunk = (body ) => async (dispatch) => {
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("body ... ", body)
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    const { workoutId, url, name } = body
 
-    if (response.ok) {
-        const workoutData = await response.json()
-        await dispatch(postWorkoutImagesOne(workoutData))
-        return workoutData
+    try {
+        const formData = new FormData(); //AWS requires FormData class
+        formData.append('workoutId', workoutId) //append, NOT push
+        formData.append("image", url);
+        formData.append("name", name)
+
+        const option = {
+            method: "POST",
+            headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
+            body: formData
+        }
+        const response = await csrfFetch(`/api/workoutimages/`, option)
+
+        if (response.ok) {
+            const currentWorkout = await response.json()
+            dispatch(updateWorkoutImagesOne(currentWorkout))
+        }
+        return response
+    } catch (e) {
+        return e
     }
+
+
+    // const response = await csrfFetch('/api/workoutimages', {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify(body)
+    // })
+
+    // if (response.ok) {
+    //     const workoutData = await response.json()
+    //     await dispatch(postWorkoutImagesOne(workoutData))
+    //     return workoutData
+    // }
 }
 
 

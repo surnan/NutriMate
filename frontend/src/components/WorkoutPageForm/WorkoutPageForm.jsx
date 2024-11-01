@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
-import { getWorkoutImagesForWorkoutThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
+import { getWorkoutImagesForWorkoutThunk, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import { resetWorkoutImages } from "../../redux/workoutImages";
 
 import DeleteModal from "../DeleteModal/DeleteModal";
@@ -114,7 +114,28 @@ function WorkoutPageForm() {
       name: "abc",
       url: imgUrl
     }
-    await dispatch(updateWorkoutImagesOneThunk(temp))
+
+    console.log(">>>")
+    console.log(">>>")
+    console.log("..temp == ", temp)
+    console.log("..workoutObj == ", workoutObj)
+    console.log(">>>")
+    console.log(">>>")
+    console.log(">>>")
+
+    console.log("...temp = B4 if STATEMENT B4 .....", temp)
+    console.log("...workoutObj = B4 if STATEMENT B4 .....", workoutObj)
+    if (workoutObj?.WorkoutImages.length === 0 ){
+      console.log("POST")
+      const updatedTemp = { ...temp, workoutId: workoutObj?.id };
+      console.log("...updatedTemp B4 ... POST ....", updatedTemp)
+      await dispatch(postWorkoutImagesOneThunk(updatedTemp))
+    } else {
+      console.log("PUT")
+      console.log("...temp B4 ... PUT ....", temp)
+      await dispatch(updateWorkoutImagesOneThunk(temp))
+    }
+
     setClickedWorkoutImgId(0)
   }
 
