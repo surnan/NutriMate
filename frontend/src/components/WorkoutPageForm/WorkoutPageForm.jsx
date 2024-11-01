@@ -82,7 +82,18 @@ function WorkoutPageForm() {
 
   // AWS
   const handleImgClick = (id) => {
-    // console.log("A - ...handleImgClick..id = ", id)
+    if (newWorkout) {
+      alert("Please save Workout to database before adding image")
+      return
+    }
+
+    console.log("A - ...handleImgClick..id = ", id)
+    console.log("...newworkout = ", newWorkout)
+
+    if (!id) {
+      id= 666666
+    }
+
     setClickedWorkoutImgId(id)
   }
 
