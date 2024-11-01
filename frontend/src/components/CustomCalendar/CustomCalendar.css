@@ -29,3 +29,10 @@
     color: red;
   }
   
+  .calenar_div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding: 5rem 0;
+  }
+  

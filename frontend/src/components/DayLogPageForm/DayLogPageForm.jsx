@@ -18,6 +18,10 @@ function DayLogPageForm() {
     const dayLogId = parseInt(id);
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
 
+    useEffect(() => {
+        console.log("...location.state = ", location.state)
+    }, [location.state])
+
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
 
@@ -34,6 +38,10 @@ function DayLogPageForm() {
         userId: dayLogObj.userId || sessionUser?.id || 1
     });
 
+    useEffect(() => {
+        console.log("...errors = ", errors)
+    }, [errors, form])
+
 
     const initializeForm = useCallback(() => {
         return {
@@ -41,13 +49,13 @@ function DayLogPageForm() {
             timestamp: dayLogObj.timestamp || Date.now(),
             calories: dayLogObj.calories || "",
             units: dayLogObj.units || "",
-            unitType: dayLogObj.unitType || "",
+            unitType: dayLogObj.unitType || (newGrubObj ? "servings" : "hours"),
             grubId: dayLogObj.grubId || newGrubObj?.id || null,
             workoutId: dayLogObj.workoutId || newWorkoutObj?.id || null,
             userId: dayLogObj.userId || sessionUser?.id || 1
         }
-    }, [dayLogObj, sessionUser, newWorkoutObj, newGrubObj])
-    // }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
+
+    }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
 
     useEffect(() => {
         setForm(initializeForm());
@@ -58,8 +66,8 @@ function DayLogPageForm() {
             console.log("....dispatch A .....")
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
-    // }, [dispatch, dayLogId, newDayLog, dayLogObj])
-    }, [dayLogId, newDayLog])
+    }, [dispatch, dayLogId, newDayLog, dayLogObj])
+    // }, [dayLogId, newDayLog])
 
     const handleReset = () => setForm(initializeForm)
     const handleBack = () => navigate(-1);
@@ -67,6 +75,8 @@ function DayLogPageForm() {
 
 
     useEffect(() => {
+        console.log("...form = ", form)
+        console.log("useEffect - Set Error")
         const newErrors = {};
         const allKeys = ["units"];
 
@@ -82,7 +92,7 @@ function DayLogPageForm() {
             }
         });
         setErrors(newErrors);
-    }, [form, newWorkoutObj])
+    }, [form, newWorkoutObj, newGrubObj])
 
 
     const handleSubmitSave = async (e) => {
@@ -121,12 +131,6 @@ function DayLogPageForm() {
         setShowDeletetModal(false);
         navigate(-1)
     };
-
-    // useEffect(() => {
-    //     if (!newDayLog && dayLogObj) {
-    //         dispatch(getDailyLogsOneThunk(dayLogId));
-    //     }
-    // }, [dispatch, dayLogId, newDayLog, dayLogObj]);
 
 
 
@@ -222,7 +226,7 @@ function DayLogPageForm() {
                     className="_input"
                     type="number"
                     name="calories"
-                    placeholder="Please enter your goal weight"
+                    placeholder="calories"
                     onChange={updateSetForm}
                     value={form.calories}
                     readOnly={form.grubId || newGrubObj}
@@ -230,6 +234,9 @@ function DayLogPageForm() {
 
                 {(newGrubObj || form.grubId) &&
                     <div>
+                        <label style={{ display: 'inline-flex' }}>
+                            Units: {errors.units && <span style={{ color: 'red' }}>{errors.units}&nbsp;&nbsp;</span>}
+                        </label>
                         <input
                             className="_input"
                             type="number"
@@ -241,9 +248,11 @@ function DayLogPageForm() {
                     </div>
                 }
 
-
                 {(newGrubObj || form.grubId) &&
                     <div>
+                        <label style={{ display: 'inline-flex' }}>
+                            Unit Type:
+                        </label>
                         <select
                             className="_input"
                             name="unitType"
@@ -255,8 +264,6 @@ function DayLogPageForm() {
                     </div>
                 }
 
-                <hr />
-                <hr />
                 {(newWorkoutObj || form.workoutId) &&
                     <div>
                         <label style={{ display: 'inline-flex' }}>
