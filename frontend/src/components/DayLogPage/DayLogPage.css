@@ -29,7 +29,7 @@
     display: grid;
     grid-template-columns: 1fr;
     margin: 3rem auto;
-    gap: 2rem;
+    gap: 5px;
 }
 
 .dp_grid > * {

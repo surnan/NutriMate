@@ -33,16 +33,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             validate: {
                 len: [1, 30],
-                isNotEmptyAndNoLeadingWhitespace(value) {
-                    if (value.length > 1 && /^\s/.test(value)) {
-                        throw new Error('The first character cannot be a space or any whitespace.');
-                    }
-                },
-                isNameLengthValid(value) {
-                    if (value > 30) {
-                        throw new Error('Name too long.');
-                    }
-                }
             }
         },
         calories: {

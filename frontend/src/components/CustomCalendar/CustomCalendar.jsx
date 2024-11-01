@@ -59,9 +59,7 @@ const MyCalendar = ({ value, onChange }) => {
 
   return (
     <Calendar
-      // onChange={setDate}
       onChange={onChange}
-      // value={date}
       value={value}
       tileClassName={tileClassName}
       locale="en-US"

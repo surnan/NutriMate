@@ -148,11 +148,14 @@ const DayLogPage = () => {
                 </div>
             </div>
 
-            <CustomCalendar
-                value={selectedDate}
-                onChange={handleDateChange} // Update selected date on calendar change
-            />
+            <div className="calenar_div">
 
+                <CustomCalendar
+                    value={selectedDate}
+                    onChange={handleDateChange} // Update selected date on calendar change
+                />
+
+            </div>
 
             {/* header + previous + next buttons */}
             <div className="dp_header">
@@ -190,7 +193,7 @@ const DayLogPage = () => {
                                     />
                                 ))
                             ) : (
-                                "click to enter food/exercise"
+                                "-"
                             )}
                         </div>
                     </div>
