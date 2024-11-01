@@ -63,6 +63,7 @@ const Splash = () => {
               <div>
                 <img
                   src={previewUrl}
+                  style={{ height: "300px", width: "300px" }}
                   alt="preview"
                 />
                 <button>Change Profile</button>

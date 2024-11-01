@@ -53,24 +53,63 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
           ) : null} 
           
           {workoutImgArr && workoutImgArr.length === 0 && ( 
-            <div>
-              <br />
+              <div key="666666">
               <img
                 src={placeholderIMG}
                 style={{ height: "300px", width: "300px" }}
-                alt="Workout Placeholder"
+                alt="Workout Image"
+                onClick={() => handleImgClick()}
                 className="clickable"
               />
-              <br />
             </div>
           )}
         </div>
       )}
     </div>
   );
-  
-
-
 }
 
 export default WorkoutImageDisplay;
+
+
+
+
+
+// return (
+//   <div>
+//     {loading ? (
+//       <div className="loadingGifDiv">
+//         <img src={downloadGIF} alt="Loading..." className="downloadGIF" />
+//       </div>
+//     ) : (
+//       <div>
+//         {workoutImgArr && workoutImgArr.length > 0 ? (
+//           workoutImgArr.map((currentImg) => (
+//             <div key={currentImg.id}>
+//               <img
+//                 src={currentImg.url}
+//                 style={{ height: "300px", width: "300px" }}
+//                 alt="Workout Image"
+//                 onClick={() => handleImgClick(currentImg.id)}
+//                 className="clickable"
+//               />
+//             </div>
+//           ))
+//         ) : null} 
+        
+//         {workoutImgArr && workoutImgArr.length === 0 && ( 
+//           <div>
+//             <br />
+//             <img
+//               src={placeholderIMG}
+//               style={{ height: "300px", width: "300px" }}
+//               alt="Workout Placeholder"
+//               className="clickable"
+//             />
+//             <br />
+//           </div>
+//         )}
+//       </div>
+//     )}
+//   </div>
+// );
