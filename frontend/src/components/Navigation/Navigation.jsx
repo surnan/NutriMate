@@ -26,7 +26,7 @@ function Navigation() {
 
 
   return (
-    <div className="nav_flex ltskyblue">
+    <div className="nav_flex navBlue">
       <NavLink to="/">
         <img
           src={logo}
@@ -37,7 +37,7 @@ function Navigation() {
       <div className="navigation_right">
         <ProfileButton />
         {user && (
-          <p>
+          <p className="p_profileImg">
             {user.profileImg ?
               <img
                 src={user.profileImg}
