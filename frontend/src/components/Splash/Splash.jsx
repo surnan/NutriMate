@@ -42,6 +42,7 @@ const Splash = () => {
     await dispatch(updateUserThunk(sessionUser.id, form))
   }
 
+
   return (
     <div className="mainBodyStyle relative">
       {!sessionUser &&
@@ -86,6 +87,7 @@ const Splash = () => {
       {!sessionUser && <SplashGifDiv />}
     </div>
   );
+
 }
 
 export default Splash;

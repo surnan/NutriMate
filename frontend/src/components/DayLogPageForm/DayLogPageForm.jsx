@@ -47,9 +47,7 @@ function DayLogPageForm() {
             userId: dayLogObj.userId || sessionUser?.id || 1
         }
     }, [dayLogObj, sessionUser, newWorkoutObj, newGrubObj])
-
     // }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
-
 
     useEffect(() => {
         setForm(initializeForm());

@@ -12,11 +12,6 @@ const Splash = () => {
   const nav = useNavigate()
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    console.log("...Splash->user = ", sessionUser)
-  }, [sessionUser])
-
-
   const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
   const [showUpload, setShowUpload] = useState(true); //  //show image?
   const [previewUrl, setPreviewUrl] = useState("");  //img url in react
@@ -61,7 +56,9 @@ const Splash = () => {
                 />
               </label>
             )}
+            
             <br /><br /><br /><br />
+
             {!showUpload && (
               <div>
                 <img
@@ -83,8 +80,6 @@ const Splash = () => {
       {!sessionUser && <SplashGifDiv />}
     </div>
   );
-
-
 }
 
 export default Splash;

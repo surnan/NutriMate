@@ -71,6 +71,11 @@
     right: 0;
 }
 
+.popupDiv {
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
 .navigation_right{
     display: flex;
     justify-content: right;

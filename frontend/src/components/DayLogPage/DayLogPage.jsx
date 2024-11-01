@@ -52,9 +52,7 @@ const DayLogPage = () => {
         console.log("__handleHoursDiv__daycardId = ", daycardId)
         console.log("__handleHoursDiv__workoutId = ", workoutId)
         console.log("__handleHoursDiv__grubId = ", grubId)
-
-
-
+      
         console.log("dayLogsArr = ", dayLogsArr)
         console.log("\n\n")
         console.log("dayLogsById = ", dayLogsById)
@@ -73,7 +71,6 @@ const DayLogPage = () => {
                 currentDayLog: currentdayLog
             }
         }) //PUT
-
     };
 
 
@@ -203,14 +200,3 @@ const DayLogPage = () => {
     );
 };
 export default DayLogPage;
-
-
-
-
-{/* <button
-    className="_button blue"
-    type="button"
-    onClick={handleBack}
->
-    <i class="fa-solid fa-arrow-rotate-left"></i>
-</button> */}
