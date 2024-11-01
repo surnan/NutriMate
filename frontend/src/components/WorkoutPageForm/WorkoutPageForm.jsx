@@ -91,7 +91,7 @@ function WorkoutPageForm() {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = e => setPreviewUrl(reader.result)
+    reader.onload = () => setPreviewUrl(reader.result)
     setImgUrl(file);
     setShowUpload(false);
   };

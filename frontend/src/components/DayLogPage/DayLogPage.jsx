@@ -40,6 +40,7 @@ const DayLogPage = () => {
     const handleBack = () => navigate(-1)
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
+    const handleWeights = () => { navigate("/weights") }
 
     const handleHoursDiv = (e) => {
         console.log("click happened")
@@ -54,9 +55,9 @@ const DayLogPage = () => {
 
 
 
-        console.log ("dayLogsArr = ", dayLogsArr)
+        console.log("dayLogsArr = ", dayLogsArr)
         console.log("\n\n")
-        console.log ("dayLogsById = ", dayLogsById)
+        console.log("dayLogsById = ", dayLogsById)
         console.log("\n\n")
         console.log("dayLogsById[grubId]  = ", dayLogsById[grubId])
         console.log("\n\n")
@@ -65,13 +66,13 @@ const DayLogPage = () => {
         const currentdayLog = dayLogsById[grubId] ? dayLogsById[grubId] : dayLogsById[workoutId]
 
         //PUT
-            // navigate(`/daylogform/${daycardId}`) //PUT
-            navigate(`/daylogform/${daycardId}`, {
-                state: {
-                    newDayLog: false,
-                    currentDayLog: currentdayLog
-                }
-            }) //PUT
+        // navigate(`/daylogform/${daycardId}`) //PUT
+        navigate(`/daylogform/${daycardId}`, {
+            state: {
+                newDayLog: false,
+                currentDayLog: currentdayLog
+            }
+        }) //PUT
 
     };
 
@@ -122,11 +123,10 @@ const DayLogPage = () => {
             {/* top buttons */}
             <div className="max_HFlex workout_btn_div">
                 <button
-                    className="_button blue"
-                    type="button"
+                    className="back_btn navBlue"
                     onClick={handleBack}
                 >
-                    BACK
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
                 </button>
                 <div>
                     <button
@@ -141,6 +141,12 @@ const DayLogPage = () => {
                         onClick={handlePlusGrub}
                     >
                         + Grub
+                    </button>
+                    <button
+                        className="_button dkPink"
+                        onClick={handleWeights}
+                    >
+                        + Weight
                     </button>
                 </div>
             </div>
@@ -197,3 +203,14 @@ const DayLogPage = () => {
     );
 };
 export default DayLogPage;
+
+
+
+
+{/* <button
+    className="_button blue"
+    type="button"
+    onClick={handleBack}
+>
+    <i class="fa-solid fa-arrow-rotate-left"></i>
+</button> */}

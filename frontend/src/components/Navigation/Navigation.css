@@ -9,7 +9,7 @@
 }
 
 .logo {
-    max-height: 60px;
+    max-height: 100px;
     width: auto;
 }
 
@@ -21,6 +21,7 @@
 
 .profile_btn{
     color: black;
+    background-color: whitesmoke;
     margin: 0;
     border-radius: 10px;
     height: 3rem;
@@ -66,13 +67,8 @@
 
 .profile-dropdown {
     position: absolute;
-    top: 4rem;
+    top: 5rem;
     right: 0;
-}
-
-.popupDiv {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
 }
 
 .navigation_right{
@@ -80,5 +76,18 @@
     justify-content: right;
     align-items: center;
     gap: 1rem;
+    background-color: transparent;
 }
 
+.p_profileImg {
+    background-color: transparent;
+}
+
+.openModalBtn{
+    padding: 4px 20px;
+}
+
+.openModalBtn:hover{
+    background-color: darkblue;
+    color: white;
+}

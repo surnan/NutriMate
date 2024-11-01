@@ -1,13 +1,28 @@
 /* frontend/src/index.css */
 /* sitewide styles */
 
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    /* font-size: 18px; */
     /* border: 2px red solid; */
+}
+
+
+._button {
+    border-radius: 10px;
+    height: 3rem;
+    min-width: 7rem;
+    cursor: pointer;
+    color: white;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604);
+    font-family: "Noto+Sans", Arial, Helvetica, sans-serif;
+    font-weight: 900;
 }
 
 
@@ -18,14 +33,6 @@
     padding: 2rem;
 }
 
-._button {
-    border-radius: 10px;
-    height: 3rem;
-    min-width: 6rem;
-    cursor: pointer;
-    /* color: white; */
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604)
-}
 
 button:disabled {
     cursor: not-allowed; 
@@ -49,7 +56,7 @@ button:disabled {
     resize: none; 
 }
 
-._button:active {filter: brightness(1.33)}
+._button:active .back_btn:active{filter: brightness(1.33)}
 ._button:active {filter: none}
 
 
@@ -69,12 +76,12 @@ select._input {
 }
 
 .mainBodyStyle {
-    background-color: rgb(206, 226, 236);
+    background-color: rgba(252, 253, 250);
     padding: 25px;
-    min-height: 100vw;
+    height: 100vw;
     max-width: 1200px;
-    min-width: 600px;
     margin: auto;
+    font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
 
 .clickable {cursor: pointer}
@@ -86,9 +93,9 @@ select._input {
 .twenty_padding {padding: 20px}
 
 
-.black_font {color: black}
-.red_font {color: red}
-.white_font {color: white}
+.black_font {color: black !important}
+.red_font {color: red !important}
+.white_font {color: white !important}
 
 
 .blue {background-color: rgba(0, 115, 255, 0.665)}
@@ -100,7 +107,9 @@ select._input {
 .ltltskyblue {background-color: rgba(135, 206, 250, 0.586)}
 .ltYellow {background-color: lightyellow}
 .orange {background-color: orange}
+.navBlue {background-color: rgb(33, 45, 87)}
 .pink {background-color: pink}
+.dkPink {background-color: rgb(210, 144, 155)}
 .red {background-color: red}
 .yellow {background-color: yellow}
 
@@ -182,3 +191,25 @@ select._input {
     border-radius: 50%;
 }
 
+
+._button {
+    border-radius: 10px;
+    height: 3rem;
+    min-width: 7rem;
+    cursor: pointer;
+    color: white;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604);
+    font-family: "Noto+Sans", Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+
+.back_btn{
+    border-radius: 10px;
+    height: 3rem;
+    min-width: 3rem;
+    cursor: pointer;
+    color: white;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604);
+    font-family: "Noto+Sans", Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}

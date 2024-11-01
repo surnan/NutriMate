@@ -1,6 +1,6 @@
 // frontend/src/components/Splash/Splash.jsx
 import "./Splash.css"
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ const Splash = () => {
   const nav = useNavigate()
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(()=>{
+  useEffect(() => {
     console.log("...Splash->user = ", sessionUser)
   }, [sessionUser])
 
@@ -30,7 +30,7 @@ const Splash = () => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = e => setPreviewUrl(reader.result)
+    reader.onload = () => setPreviewUrl(reader.result)
     setImgUrl(file);
     setShowUpload(false);
   };
@@ -41,11 +41,10 @@ const Splash = () => {
     const form = { img_url };
     await dispatch(updateUserThunk(sessionUser.id, form))
   }
-  
-return (
-<div className="mainBodyStyle">
-      <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
 
+  return (
+    <div className="mainBodyStyle relative">
+      <h2 className="twenty_margin ">Email = {sessionUser?.email || "< not logged in >"}</h2>
       {sessionUser && (
         <form onSubmit={handleSubmit}>
           <div>
@@ -62,7 +61,7 @@ return (
                 />
               </label>
             )}
-            <br/><br/><br/><br/>
+            <br /><br /><br /><br />
             {!showUpload && (
               <div>
                 <img
@@ -81,9 +80,11 @@ return (
           </div>
         </form>
       )}
-      <SplashGifDiv/>
+      {!sessionUser && <SplashGifDiv />}
     </div>
   );
+
+
 }
 
 export default Splash;

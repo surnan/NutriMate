@@ -48,6 +48,8 @@ function DayLogPageForm() {
         }
     }, [dayLogObj, sessionUser, newWorkoutObj, newGrubObj])
 
+    // }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
+
 
     useEffect(() => {
         setForm(initializeForm());
