@@ -234,7 +234,7 @@ function WorkoutPageForm() {
         </button>
       </div>
       <hr />
-      <div>
+      <div className="abc123">
         <h1>Your Workout Page Form</h1>
         <WorkoutImageDisplay
           workoutImgArr={workoutImgArr}
@@ -264,6 +264,7 @@ function WorkoutPageForm() {
           <div>
             <img
               src={previewUrl}
+              style={{ height: "300px", width: "300px" }}
               alt="preview"
             />
             <button
