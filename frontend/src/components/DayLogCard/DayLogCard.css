@@ -2,13 +2,21 @@
 
 .dayLog_card_grid {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 0 5px;
+    border: 2px solid black;
+    border-radius: 8px;
 }
 
-.dayLog_card_grid > :nth-child(odd) {
-    background-color: yellow;
+
+.dayLog_card_grid > :first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 0 1rem;
 }
 
-.dayLog_card_grid > :nth-child(even) {
-    background-color: pink;
+.dayLog_card_grid > :nth-child(2) {
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 0 2rem;
 }

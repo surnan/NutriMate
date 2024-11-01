@@ -27,6 +27,8 @@ const DayLogPage = () => {
     const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
     const dayLogsById = useSelector(state => state.daylogs.byId);
 
+    
+
 
     const filteredAndSortedArray = dayLogsArr
         .filter(dayLog => dayLog.userId === sessionUser.id)
@@ -44,28 +46,13 @@ const DayLogPage = () => {
 
     const handleHoursDiv = (e) => {
         console.log("click happened")
-        // console.log("e.target = ", e.target)
         const daycardId = e.target.closest('[data-daycardid]')?.getAttribute('data-daycardid');
         const workoutId = e.target.closest('[data-daycardid]')?.getAttribute('data-workoutid');
         const grubId = e.target.closest('[data-daycardid]')?.getAttribute('data-grubid');
-
-        console.log("__handleHoursDiv__daycardId = ", daycardId)
-        console.log("__handleHoursDiv__workoutId = ", workoutId)
-        console.log("__handleHoursDiv__grubId = ", grubId)
-      
-        console.log("dayLogsArr = ", dayLogsArr)
-        console.log("\n\n")
-        console.log("dayLogsById = ", dayLogsById)
-        console.log("\n\n")
-        console.log("dayLogsById[grubId]  = ", dayLogsById[grubId])
-        console.log("\n\n")
-        console.log("dayLogsById[workoutId]  = ", dayLogsById[workoutId])
-
         const currentdayLog = dayLogsById[grubId] ? dayLogsById[grubId] : dayLogsById[workoutId]
 
         //PUT
-        // navigate(`/daylogform/${daycardId}`) //PUT
-        navigate(`/daylogform/${daycardId}`, {
+        navigate(`/daylogform/${daycardId}`, { //PUT
             state: {
                 newDayLog: false,
                 currentDayLog: currentdayLog
@@ -113,12 +100,9 @@ const DayLogPage = () => {
 
 
     return (
-        <div className="dayLogPage_div">
-            <h3>DayLogPage.jsx</h3>
-            <h3 >Email = {sessionUser?.email}</h3>
-
+        <div className="vertical_center_flex container-width">
             {/* top buttons */}
-            <div className="max_HFlex workout_btn_div">
+            <div className="max_HFlex workout_btn_div container-width">
                 <button
                     className="back_btn navBlue"
                     onClick={handleBack}
@@ -148,26 +132,24 @@ const DayLogPage = () => {
                 </div>
             </div>
 
-            <div className="calenar_div">
-
+            <div className="calender_div">
                 <CustomCalendar
                     value={selectedDate}
                     onChange={handleDateChange} // Update selected date on calendar change
                 />
-
             </div>
 
             {/* header + previous + next buttons */}
             <div className="dp_header">
                 <button
-                    className="dph_btn black_font orange round"
+                    className="dph_btn black_font white round"
                     onClick={handlePrevDayBtn}
                 >
                     <i className="fa-solid fa-caret-left"></i>
                 </button>
                 <h2>{formattedDate}</h2>
                 <button
-                    className="black_font  orange dph_btn round"
+                    className="black_font white dph_btn round"
                     onClick={handleNextDayBtn}
                 >
                     <i className="fa-solid fa-caret-right"></i>
@@ -193,7 +175,7 @@ const DayLogPage = () => {
                                     />
                                 ))
                             ) : (
-                                "-"
+                                ""
                             )}
                         </div>
                     </div>
