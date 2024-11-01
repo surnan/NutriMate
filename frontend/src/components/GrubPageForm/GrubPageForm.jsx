@@ -413,7 +413,12 @@ function GrubPageForm() {
                     Add To Log
                 </button>
             </div>
+
+            <br />
+            <br />
             <hr />
+            <br />
+            <br />
 
             <div>
                 <h1>Your GRUB Page Form</h1>

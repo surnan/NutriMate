@@ -200,8 +200,8 @@ function WorkoutPageForm() {
   //downloadGIF
   return (
     <div className="mainBodyStyle">
-      <h1>WorkoutPageForm.jsx</h1>
-      <h3>Email = {sessionUser?.email}</h3>
+      {/* <h1>WorkoutPageForm.jsx</h1>
+      <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex">
         <button className="blue _button" type="button" onClick={handleBack}>
@@ -265,9 +265,13 @@ function WorkoutPageForm() {
           Add To Log
         </button>
       </div>
+      <br/>
+      <br/>
       <hr />
+      <br/>
+      <br/>
       <div className="abc123">
-        <h1>Your Workout Page Form</h1>
+        {/* <h1>Your Workout Page Form</h1> */}
         <WorkoutImageDisplay
           workoutImgArr={workoutImgArr}
           downloadGIF={downloadGIF}
