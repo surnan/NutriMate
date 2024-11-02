@@ -1,5 +1,5 @@
 //frontend/src/components/Navigation/Navigation.jsx
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,7 @@ import { thunkAuthenticate } from "../../redux/session";
 
 function Navigation() {
   const user = useSelector((state) => state.session.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -42,6 +43,8 @@ function Navigation() {
               <img
                 src={user.profileImg}
                 style={{ height: "70px", width: '70px', borderRadius: "50%" }}
+                className="clickable"
+                onClick={()=>navigate("/")}
               /> : null}
           </p>
         )}

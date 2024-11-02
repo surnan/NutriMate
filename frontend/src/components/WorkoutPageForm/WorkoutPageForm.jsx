@@ -270,7 +270,7 @@ function WorkoutPageForm() {
       <hr />
       <br/>
       <br/>
-      <div className="abc123">
+      <div className="abc123 vertical_center_flex">
         {/* <h1>Your Workout Page Form</h1> */}
         <WorkoutImageDisplay
           workoutImgArr={workoutImgArr}
@@ -281,13 +281,11 @@ function WorkoutPageForm() {
       </div>
 
 
-      <div>
+      <div className="vertical_center_flex">
         {(clickedWorkoutImgId > 0) && showUpload && (
           <label htmlFor='file-upload'> Select From Computer
             <input
               type='file'
-
-              className="_button orange"
               id='file-upload'
               name="img_url"
               onChange={updatedImgFromPC}
@@ -297,14 +295,16 @@ function WorkoutPageForm() {
         )}
         <br /><br /><br /><br />
         {(clickedWorkoutImgId > 0) && !showUpload && (
-          <div>
+          <div className="vertical_center_flex">
             <img
               src={previewUrl}
               style={{ height: "300px", width: "300px" }}
               alt="preview"
+              className="round"
             />
             <button
               onClick={handleImgSubmit}
+              className="_button black block twenty_margin"
             >Change Profile
             </button>
           </div>
