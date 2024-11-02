@@ -204,7 +204,7 @@ function DayLogPageForm() {
                 }
             </div>
 
-            <div className="workout_page_form_grid">
+            <div className="daylog_page_form_grid">
                 <p>Name</p>
                 <input
                     className="_input"
@@ -256,7 +256,7 @@ function DayLogPageForm() {
                             Unit Type:
                         </label>
                         <select
-                            className="_input"
+                            className="_input block"
                             name="unitType"
                             onChange={updateSetForm}
                             value={form.unitType}
