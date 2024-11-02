@@ -211,8 +211,8 @@ function GrubPageForm() {
 
     return (
         <div className="mainBodyStyle">
-            <h1>GrubForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3>
+            {/* <h1>GrubForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3> */}
 
             <div className="grubPageForm_hFlex">
                 <button
