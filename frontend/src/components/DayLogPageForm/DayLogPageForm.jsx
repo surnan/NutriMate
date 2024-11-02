@@ -19,7 +19,11 @@ function DayLogPageForm() {
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
 
     useEffect(() => {
+        console.log("")
+        console.log("")
         console.log("...location.state = ", location.state)
+        console.log("")
+        console.log("")
     }, [location.state])
 
     const sessionUser = useSelector((state) => state.session.user);
@@ -38,11 +42,6 @@ function DayLogPageForm() {
         userId: dayLogObj.userId || sessionUser?.id || 1
     });
 
-    useEffect(() => {
-        console.log("...errors = ", errors)
-    }, [errors, form])
-
-
     const initializeForm = useCallback(() => {
         return {
             name: dayLogObj.name || newWorkoutObj?.name || newGrubObj?.name || "",
@@ -58,14 +57,14 @@ function DayLogPageForm() {
     }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
 
     useEffect(() => {
-        console.log("...Z")
+        // console.log("...Z")
         setForm(initializeForm());
     }, [initializeForm]);
 
     useEffect(() => {
         console.log("...B")
         if (!newDayLog && dayLogObj) {
-            console.log("....dispatch A .....")
+            // console.log("....dispatch A .....")
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
     }, [dispatch, dayLogId, newDayLog])
@@ -77,7 +76,7 @@ function DayLogPageForm() {
 
 
     useEffect(() => {
-        console.log("...C")
+        // console.log("...C")
         const newErrors = {};
         const allKeys = ["units"];
 
@@ -113,7 +112,7 @@ function DayLogPageForm() {
                 workoutId: parseInt(workoutId)
             }
             console.log("___body = ", body)
-            console.log("....dispatch B .....")
+            // console.log("....dispatch B .....")
             const result = newDayLog
                 ? await dispatch(postDailyLogsOneThunk({ body }))
                 : await dispatch(updateDailyLogsOneThunk({ body }))
@@ -141,7 +140,7 @@ function DayLogPageForm() {
     }
 
     useEffect(() => {
-        console.log("...D")
+        // console.log("...D")
         const calculateGrubCalories = () => {
             if (newGrubObj && form.units) {
                 const newCalories = newGrubObj.calories * form.units;
@@ -159,6 +158,9 @@ function DayLogPageForm() {
         calculateGrubCalories();
     }, [newGrubObj, form.units]);
 
+    useEffect(()=>{
+        console.log("...dayLogObj = ", dayLogObj)
+    }, [dayLogObj.id])
 
     return (
         <div className="mainBodyStyle">

@@ -2,7 +2,7 @@
 import { csrfFetch } from "./csrf";
 
 const LOAD_DAYLOGS_ALL = "daylogs/loadDaylogsAll"
-const LOAD_DAYLOGS_ONE= "daylogs/loadDaylogsOne"
+const LOAD_DAYLOGS_ONE = "daylogs/loadDaylogsOne"
 const POST_DAYLOGS_ONE = "daylogs/postDaylogsOne"
 const UPDATE_DAYLOGS_ONE = "daylogs/updateDaylogsOne"
 const REMOVE_DAYLOGS_ONE = "daylogs/removeDaylogsOne"
@@ -109,40 +109,49 @@ const initialState = {
 const daylogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_DAYLOGS_ALL: {
-            let newState = { ...state }
-            // thunk returns JSON with key named: 'Workouts'
-            // console.log("\n\n====> daylogsReducer.ACTION.payload ===> ", action.payload)
+            const newState = { ...state, byId: {} };
             newState.allDaylogs = action.payload.DayLog;
-            for (let workouts of action.payload.DayLog) {
-                newState.byId[workouts.id] = workouts
-            }
-            return newState
+            action.payload.DayLog.forEach(daylog => {
+                newState.byId[daylog.id] = daylog;
+            });
+            return newState;
         }
         case LOAD_DAYLOGS_ONE: {
-            let newState = {...state}
-            newState.single = action.payload
-            console.log("____LOAD_DAILYLOGS_ONE")
-            console.log("____action.payload", action.payload)
-            console.log("____newState.single = ", newState)
-            return newState
+            return {
+                ...state,
+                single: action.payload
+            };
         }
         case REMOVE_DAYLOGS_ONE: {
-            let newState = { ...state }
-            newState.allDaylogs = newState.allDaylogs.filter(currentWorkout => currentWorkout.id !== action.payload);
-            delete newState.byId[action.payload.id]
-            return newState
+            const newState = { 
+                ...state,
+                allDaylogs: state.allDaylogs.filter(daylog => daylog.id !== action.payload),
+            };
+            delete newState.byId[action.payload];
+            return newState;
         }
         case POST_DAYLOGS_ONE: {
-            let newState = {...state}
-            newState.allDaylogs = [action.payload, ...newState.allDaylogs]
-            newState.byId[action.payload.id] = action.payload;
-            return newState
+            return {
+                ...state,
+                allDaylogs: [action.payload, ...state.allDaylogs],
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: action.payload
+                }
+            };
         }
         case UPDATE_DAYLOGS_ONE: {
-            let newState = {...state}
-            newState.allDaylogs = [action.payload, ...newState.allDaylogs]
-            newState.byId[action.payload.id] = action.payload;
-            return newState
+            const updatedAllDaylogs = state.allDaylogs.map(daylog =>
+                daylog.id === action.payload.id ? action.payload : daylog
+            );
+            return {
+                ...state,
+                allDaylogs: updatedAllDaylogs,
+                byId: {
+                    ...state.byId,
+                    [action.payload.id]: action.payload
+                }
+            };
         }
         default: {
             return state
@@ -151,3 +160,47 @@ const daylogsReducer = (state = initialState, action) => {
 }
 
 export default daylogsReducer;
+
+
+
+
+
+
+// const daylogsReducer = (state = initialState, action) => {
+//     switch (action.type) {
+//         case LOAD_DAYLOGS_ALL: {
+//             let newState = { ...state }
+//             newState.allDaylogs = action.payload.DayLog;
+//             for (let workouts of action.payload.DayLog) {
+//                 newState.byId[workouts.id] = workouts
+//             }
+//             return newState
+//         }
+//         case LOAD_DAYLOGS_ONE: {
+//             let newState = {...state}
+//             newState.single = action.payload
+//             return newState
+//         }
+//         case REMOVE_DAYLOGS_ONE: {
+//             let newState = { ...state }
+//             newState.allDaylogs = newState.allDaylogs.filter(currentWorkout => currentWorkout.id !== action.payload);
+//             delete newState.byId[action.payload.id]
+//             return newState
+//         }
+//         case POST_DAYLOGS_ONE: {
+//             let newState = {...state}
+//             newState.allDaylogs = [action.payload, ...newState.allDaylogs]
+//             newState.byId[action.payload.id] = action.payload;
+//             return newState
+//         }
+//         case UPDATE_DAYLOGS_ONE: {
+//             let newState = {...state}
+//             newState.allDaylogs = [action.payload, ...newState.allDaylogs]
+//             newState.byId[action.payload.id] = action.payload;
+//             return newState
+//         }
+//         default: {
+//             return state
+//         }
+//     }
+// }
