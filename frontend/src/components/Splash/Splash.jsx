@@ -5,7 +5,7 @@ import { updateUserThunk } from '../../redux/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import SplashGifDiv from "./SplashGifDiv"; 
+import SplashGifDiv from "./SplashGifDiv";
 
 const Splash = () => {
   const dispatch = useDispatch();
@@ -49,15 +49,17 @@ const Splash = () => {
         <h1 className="twenty_margin ">Login to track your health!!</h1>
       }
 
+
       {sessionUser && (
         <form onSubmit={handleSubmit}>
           <div className="center">
+            <h3>Change Your Profile Picture</h3>
+            <br />
+            <br />
             {showUpload && (
               <label htmlFor='file-upload'> Select From Computer
                 <input
                   type='file'
-
-                  // className="_button center orange"
                   id='file-upload'
                   name="img_url"
                   onChange={updatedImgFromPC}
@@ -67,13 +69,18 @@ const Splash = () => {
             )}
             <br /><br /><br /><br />
             {!showUpload && (
-              <div>
+              <div className="vertical_center_flex">
                 <img
                   src={previewUrl}
                   alt="preview"
                   style={{ height: "300px", width: "300px" }}
+                  className="round"
                 />
-                <button>Change Profile</button>
+                <button
+                  className="_button black block twenty_margin"
+                >
+                  Change Profile
+                </button>
               </div>
             )}
           </div>

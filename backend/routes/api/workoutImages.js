@@ -129,16 +129,7 @@ router.post('/',
     async (req, res, next) => {
         try {
             let imgUrl;
-            console.log("")
-            console.log("")
-            console.log("")
-            console.log("req.body ==> ", req.body)
-            console.log("")
-            console.log("req ==> ", req)
-            console.log("")
-            console.log("")
-            console.log("")
-
+            
             if (req.file) {
                 imgUrl = await singlePublicFileUpload(req.file); //converts data from form
             }
@@ -157,69 +148,3 @@ router.post('/',
     })
 
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-// const workoutId = parseInt(req.params.workoutId);
-// const allImages = await WorkoutImage.findAll({
-//     where: {
-//         workoutId: workoutId
-//     },
-//     include: [
-//         { model: Workout }
-//     ]
-// });
-
-
-// router.put('/:WorkoutImageId', async (req, res, next) => {
-//     try {
-//         const WorkoutImageId = parseInt(req.params.WorkoutImageId)
-//         const currentWorkoutImage = await WorkoutImage.findByPk(WorkoutImageId)
-//         if (!currentWorkoutImage){
-//             res.status(404).json({
-//                 message: "WorkoutImage couldn't be found"
-//             })
-//         }
-//         const {url, grubId, name} = req.body
-//         await currentWorkoutImage.update(
-//             {
-//                 name,
-//                 url,
-//                 grubId: parseInt(grubId)
-//             }
-//         )
-//         let currentWorkoutImageJSON = currentWorkoutImage.toJSON();
-//         return res.status(201).json(currentWorkoutImageJSON)
-//     } catch (e){
-//         console.log('Route Error: ', e)
-//         next(e)
-//     }
-// })
-
-// router.post('/', async (req, res, next) => {
-//     try {
-//         const { url, workoutId, name } = req.body
-//         const newGrub = await WorkoutImage.create(
-//             {
-//                 url,
-//                 name,
-//                 workoutId: parseInt(workoutId)
-//             }
-//         )
-//         let newWorkoutJSON = newGrub.toJSON();
-//         let responseBody = { ...newWorkoutJSON }
-//         responseBody.createdAt = newWorkoutJSON.createdAt
-//         responseBody.updatedAt = newWorkoutJSON.updatedAt
-//         return res.status(201).json(responseBody)
-//     } catch (e) {
-//         console.log('Route Error: ', e)
-//         next(e)
-//     }
-// })

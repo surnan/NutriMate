@@ -59,7 +59,7 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
                 style={{ height: "300px", width: "300px" }}
                 alt="Workout Image"
                 onClick={() => handleImgClick()}
-                className="clickable"
+                className="clickable round"
               />
             </div>
           )}

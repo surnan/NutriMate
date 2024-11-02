@@ -39,7 +39,7 @@ function GrubImageDisplay({ grubImgArr, downloadGIF, placeholderIMG, handleImgCl
                   style={{ height: "300px", width: "300px" }}
                   alt="Grub Image"
                   onClick={() => handleImgClick(currentImg.id)}
-                  className="clickable"
+                  className="clickable round"
                 />
               </div>
             ))
