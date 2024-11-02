@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 import SplashGifDiv from "./SplashGifDiv";
 
+import { handleNavigation } from '../../utils/MyFunctions';
+
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
@@ -16,15 +18,14 @@ const Splash = () => {
     console.log("...Splash->user = ", sessionUser)
   }, [sessionUser])
 
-
   const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
   const [showUpload, setShowUpload] = useState(true); //  //show image?
   const [previewUrl, setPreviewUrl] = useState("");  //img url in react
 
-  const handleWeightsBtn = () => { nav("/weights") }
-  const handleWorkoutsBtn = () => { nav("/workouts") }
-  const handleGrubsBtn = () => { nav("/grubs") }
-  const handleDailyBtn = () => { nav("/daylog") }
+  const handleWeightsBtn = (e) => handleNavigation(e, "/weights");
+  const handleWorkoutsBtn = (e) => handleNavigation(e, "/workouts");
+  const handleGrubsBtn = (e) => handleNavigation(e, "/grubs");
+  const handleDailyBtn = (e) => handleNavigation(e, "/daylog");
 
   const updatedImgFromPC = async (e) => {
     const file = e.target.files[0];
@@ -41,7 +42,6 @@ const Splash = () => {
     const form = { img_url };
     await dispatch(updateUserThunk(sessionUser.id, form))
   }
-
 
   return (
     <div className="mainBodyStyle relative">
@@ -85,10 +85,10 @@ const Splash = () => {
             )}
           </div>
           <div className="splash_grid twenty_padding">
-            <button className="splashButton green shadow" onClick={handleWeightsBtn}>weights</button>
-            <button className="splashButton orange shadow" onClick={handleWorkoutsBtn}>workouts</button>
-            <button className="splashButton blue shadow" onClick={handleGrubsBtn}>grubs</button>
-            <button className="splashButton pink shadow" onClick={handleDailyBtn}>daily</button>
+            <button className="splashButton green shadow" onMouseDown={(e) => handleWeightsBtn(e, nav)}>weights</button>
+            <button className="splashButton orange shadow" onMouseDown={(e) => handleWorkoutsBtn(e, nav)}>workouts</button>
+            <button className="splashButton blue shadow" onMouseDown={(e) => handleGrubsBtn(e, nav)}>grubs</button>
+            <button className="splashButton pink shadow" onMouseDown={(e) => handleDailyBtn(e, nav)}>daily</button>
           </div>
         </form>
       )}
