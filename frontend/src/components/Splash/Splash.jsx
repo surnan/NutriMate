@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import SplashGifDiv from "./SplashGifDiv";
+import { handleNavigation } from '../../utils/MyFunctions';
 
 import { handleNavigation } from '../../utils/MyFunctions';
 
@@ -14,18 +15,15 @@ const Splash = () => {
   const nav = useNavigate()
   const sessionUser = useSelector((state) => state.session.user);
 
-  useEffect(() => {
-    console.log("...Splash->user = ", sessionUser)
-  }, [sessionUser])
-
   const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
   const [showUpload, setShowUpload] = useState(true); //  //show image?
   const [previewUrl, setPreviewUrl] = useState("");  //img url in react
 
-  const handleWeightsBtn = (e) => handleNavigation(e, "/weights");
-  const handleWorkoutsBtn = (e) => handleNavigation(e, "/workouts");
-  const handleGrubsBtn = (e) => handleNavigation(e, "/grubs");
-  const handleDailyBtn = (e) => handleNavigation(e, "/daylog");
+
+  const handleWeightsBtn = (e) => handleNavigation(e, "/weights", nav);
+  const handleWorkoutsBtn = (e) => handleNavigation(e, "/workouts", nav);
+  const handleGrubsBtn = (e) => handleNavigation(e, "/grubs", nav);
+  const handleDailyBtn = (e) => handleNavigation(e, "/daylog", nav);
 
   const updatedImgFromPC = async (e) => {
     const file = e.target.files[0];
@@ -41,6 +39,9 @@ const Splash = () => {
     const img_url = imgUrl;
     const form = { img_url };
     await dispatch(updateUserThunk(sessionUser.id, form))
+    setImgUrl("");
+    setShowUpload(true); 
+    setPreviewUrl("");  
   }
 
   return (
@@ -48,7 +49,6 @@ const Splash = () => {
       {!sessionUser &&
         <h1 className="twenty_margin ">Login to track your health!!</h1>
       }
-
 
       {sessionUser && (
         <form onSubmit={handleSubmit}>

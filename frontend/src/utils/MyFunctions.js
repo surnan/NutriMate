@@ -28,7 +28,7 @@ export const formatDatetimeLocal = (dateString) => {
 };
 
 // Custom navigation function for middle mouse button handling
-export const handleNavigation = (e, path) => {
+export const handleNavigation = (e, path, nav) => {
     if (e.button === 1) { // Middle mouse button
         window.open(path, '_blank');
     } else {
