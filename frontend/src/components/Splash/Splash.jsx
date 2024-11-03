@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import SplashGifDiv from "./SplashGifDiv";
 import { handleNavigation } from '../../utils/MyFunctions';
 
+import { handleNavigation } from '../../utils/MyFunctions';
+
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
@@ -16,6 +18,7 @@ const Splash = () => {
   const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
   const [showUpload, setShowUpload] = useState(true); //  //show image?
   const [previewUrl, setPreviewUrl] = useState("");  //img url in react
+
 
   const handleWeightsBtn = (e) => handleNavigation(e, "/weights", nav);
   const handleWorkoutsBtn = (e) => handleNavigation(e, "/workouts", nav);
@@ -40,7 +43,6 @@ const Splash = () => {
     setShowUpload(true); 
     setPreviewUrl("");  
   }
-
 
   return (
     <div className="mainBodyStyle relative">
