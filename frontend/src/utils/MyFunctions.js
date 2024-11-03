@@ -26,3 +26,17 @@ export const formatDatetimeLocal = (dateString) => {
     const date = new Date(dateString);
     return !isNaN(date.getTime()) ? new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toISOString().slice(0, 16) : new Date().toISOString().slice(0, 16);
 };
+
+// Custom navigation function for middle mouse button handling
+export const handleNavigation = (e, path, nav) => {
+    if (e.button === 1) { // Middle mouse button
+        window.open(path, '_blank');
+    } else {
+        nav(path);
+    }
+};
+
+export const handleWeightsBtn = (e, nav) => handleNavigation(e, "/weights", nav);
+export const handleWorkoutsBtn = (e, nav) => handleNavigation(e, "/workouts", nav);
+export const handleGrubsBtn = (e, nav) => handleNavigation(e, "/grubs", nav);
+export const handleDailyBtn = (e, nav) => handleNavigation(e, "/daylog", nav);
