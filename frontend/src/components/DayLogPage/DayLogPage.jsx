@@ -107,7 +107,7 @@ const DayLogPage = () => {
                     className="back_btn navBlue"
                     onClick={handleBack}
                 >
-                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                    <i className="fa-solid fa-arrow-rotate-left"></i>
                 </button>
                 <div>
                     <button
