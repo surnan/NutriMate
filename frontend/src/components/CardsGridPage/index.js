@@ -1,3 +1,3 @@
-import CardsGridPage from "./CardsGridPage";
+import CardsPage from "./CardsGridPage";
 
-export default CardsGridPage
+export default CardsPage
