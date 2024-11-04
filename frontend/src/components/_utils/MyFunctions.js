@@ -28,6 +28,7 @@ export const formatDatetimeLocal = (dateString) => {
 };
 
 // Custom navigation function for middle mouse button handling
+// Opens tab but also makes it acive.
 export const handleNavigation = (e, path, nav) => {
     if (e.button === 1) { // Middle mouse button
         window.open(path, '_blank');
@@ -35,6 +36,7 @@ export const handleNavigation = (e, path, nav) => {
         nav(path);
     }
 };
+
 
 export const handleWeightsBtn = (e, nav) => handleNavigation(e, "/weights", nav);
 export const handleWorkoutsBtn = (e, nav) => handleNavigation(e, "/workouts", nav);

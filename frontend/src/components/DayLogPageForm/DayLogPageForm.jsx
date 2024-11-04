@@ -4,10 +4,10 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
-import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../../utils/MyFunctions'
+import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/MyFunctions'
 import DeleteModal from "../DeleteModal/DeleteModal";
-import WorkoutCard from "../WorkoutCard";
-import GrubCard from "../GrubCard/GrubCard";
+import WorkoutCard from "../_cards/WorkoutCard";
+import GrubCard from "../_cards/GrubCard";
 
 
 function DayLogPageForm() {

@@ -4,13 +4,13 @@ import "./CardsPage.css";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../SearchBar";
+import SearchBar from "../../components/_components/SearchBar";
 
 import { getWorkoutsAllThunk } from "../../redux/workouts";
 import { getGrubsAllThunk } from "../../redux/grubs";
 
-import WorkoutCard from "../WorkoutCard";
-import GrubCard from "../GrubCard";
+import WorkoutCard from "../_cards/WorkoutCard";
+import GrubCard from "../_cards/GrubCard";
 
 const CardsPage = ({ stuff }) => {
   const dispatch = useDispatch();
