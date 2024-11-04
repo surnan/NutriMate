@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import SplashGifDiv from "./SplashGifDiv";
-import { handleNavigation } from '../../utils/MyFunctions';
-
-import { handleNavigation } from '../../utils/MyFunctions';
+import { handleNavigation } from '../_utils/MyFunctions';
 
 const Splash = () => {
   const dispatch = useDispatch();

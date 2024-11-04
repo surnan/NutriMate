@@ -4,7 +4,8 @@ import 'react-calendar/dist/Calendar.css';
 import './CustomCalendar.css';
 
 import { useEffect } from "react";
-import { getDailyLogsAllThunk } from "../../redux/daylogs";
+// import { getDailyLogsAllThunk } from "../../redux/daylogs";
+import { getDailyLogsAllThunk } from "../../../redux/daylogs";
 import { useDispatch, useSelector } from "react-redux";
 
 

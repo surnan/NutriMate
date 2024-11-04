@@ -1,7 +1,5 @@
 // frontend/src/components/_components/AWS.js
 
-import { useDispatch } from 'react-redux';
-
 export const updatedImgFromPC = async (e, setPreviewUrl, setImgUrl, setShowUpload) => {
   const file = e.target.files[0];
   const reader = new FileReader();

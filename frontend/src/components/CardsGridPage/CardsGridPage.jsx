@@ -1,18 +1,18 @@
-// frontend/src/components/CardsPage/CardsPage.jsx
+// frontend/src/components/CardsGridPage/CardsGridPage.jsx
 
-import "./CardsPage.css";
+import "./CardsGridPage.css";
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import SearchBar from "../../components/_components/SearchBar";
+import SearchBar from "../_utils/SearchBar";
 
 import { getWorkoutsAllThunk } from "../../redux/workouts";
 import { getGrubsAllThunk } from "../../redux/grubs";
 
-import WorkoutCard from "../_cards/WorkoutCard";
-import GrubCard from "../_cards/GrubCard";
+import WorkoutCard from "../../components/_cards/WorkoutCard";
+import GrubCard from "../../components/_cards/GrubCard";
 
-const CardsPage = ({ stuff }) => {
+const CardsGridPage = ({ stuff }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
@@ -77,7 +77,7 @@ const CardsPage = ({ stuff }) => {
 
   return (
     <div className="mainBodyStyle">
-      <h3>CardsPage.jsx</h3>
+      <h3>CardsGridPage.jsx</h3>
       <h3>Email = {sessionUser?.email}</h3>
 
       <div className="max_HFlex workout_btn_div">
@@ -98,4 +98,4 @@ const CardsPage = ({ stuff }) => {
   );
 };
 
-export default CardsPage;
+export default CardsGridPage;
