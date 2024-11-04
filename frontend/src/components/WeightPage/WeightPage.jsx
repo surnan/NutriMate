@@ -8,7 +8,8 @@ import { getWeightsAllThunk } from "../../redux/weight";
 import { useNavigate } from "react-router-dom"
 import WeightCard from "../_cards/WeightCard";
 // import WeightChart from "../WeightChart/WeightChart";
-import LineGraph from "../LineGraph";
+// import LineGraph from "../LineGraph";
+import LineGraph from "../_components/LineGraph";
 
 
 
