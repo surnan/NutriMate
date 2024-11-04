@@ -208,10 +208,17 @@ const handleBack = async () => {
     navigate(-1);
 };
 
+<<<<<<< HEAD
 return (
     <div className="mainBodyStyle">
         {/* <h1>GrubForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3> */}
+=======
+    return (
+        <div className="mainBodyStyle">
+            <h1>GrubForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
+>>>>>>> af89958 (Consolidate WorkoutPage & GrubPage into CardsPage)
 
         <div className="grubPageForm_hFlex">
             <button

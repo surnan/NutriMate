@@ -164,6 +164,8 @@ function DayLogPageForm() {
 
     return (
         <div className="mainBodyStyle">
+             <h3>DayLogPageForm.jsx</h3>
+             <h3>Email = {sessionUser?.email}</h3>
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
