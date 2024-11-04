@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import SplashGifDiv from "./SplashGifDiv";
 import { handleNavigation } from '../../utils/MyFunctions';
 
-import { handleNavigation } from '../../utils/MyFunctions';
-
 const Splash = () => {
   const dispatch = useDispatch();
   const nav = useNavigate()
