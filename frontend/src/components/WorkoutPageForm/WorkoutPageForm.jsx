@@ -7,7 +7,9 @@ import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, g
 import { getWorkoutImagesForWorkoutThunk, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import { resetWorkoutImages } from "../../redux/workoutImages";
 
-import DeleteModal from "../DeleteModal/DeleteModal";
+// import DeleteModal from "../DeleteModal/DeleteModal";
+import DeleteModal from "../_modal/DeleteModal";
+
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'

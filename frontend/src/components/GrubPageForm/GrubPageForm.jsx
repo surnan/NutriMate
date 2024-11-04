@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
 import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
-import DeleteModal from "../DeleteModal/DeleteModal";
+// import DeleteModal from "../+++DeleteModal/DeleteModal";
+import DeleteModal from "../_modal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions'
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
