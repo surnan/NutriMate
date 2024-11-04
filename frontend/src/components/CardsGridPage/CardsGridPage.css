@@ -1,0 +1,20 @@
+/* CardsPage.css */
+
+
+.cards_grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1100px;
+    padding: 5px;
+    gap: 2rem;
+    column-gap: 1rem;
+    min-height: 3rem;
+}
+
+.search_div {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 4rem;
+}
