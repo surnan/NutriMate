@@ -7,12 +7,12 @@ import Layout from './Layout';
 import Splash from '../components/Splash';
 import WeightPage from '../components/WeightPage'
 import DayLogPage from '../components/DayLogPage';
-import CardsPage from '../components/CardsPage'
+import CardsPage from '../components/CardsGridPage'
 
-import WeightPageForm from '../components/WeightPageForm/WeightPageForm';
+import WeightPageForm from '../components/WeightPageForm';
 import WorkoutPageForm from '../components/WorkoutPageForm'
 import DayLogPageForm from '../components/DayLogPageForm';
-import GrubPageForm from '../components/GrubPageForm/GrubPageForm';
+import GrubPageForm from '../components/GrubPageForm';
 
 
 export const router = createBrowserRouter([
