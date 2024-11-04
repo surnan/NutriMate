@@ -7,7 +7,7 @@ import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
 import DayLogCard from "../DayLogCard";
 import CustomCalendar from "../CustomCalendar";
-import { format_Month_Date_Year } from "../../utils/MyFunctions"
+import { format_Month_Date_Year } from "../_utils/MyFunctions"
 
 
 
