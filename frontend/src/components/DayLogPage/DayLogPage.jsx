@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
-import DayLogCard from "../DayLogCard";
-import CustomCalendar from "../CustomCalendar";
+// import DayLogCard from "../DayLogCard";
+import DayLogCard from "../_cards/DayLogCard";
+import CustomCalendar from "../_components/CustomCalendar";
 import { format_Month_Date_Year } from "../_utils/MyFunctions"
 
 
