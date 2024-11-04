@@ -115,13 +115,12 @@ function WeightPageForm() {
             day: formatDate(currentData?.day),
             userId: currentData?.userId || sessionUser.id
         });
-        // navigate(-1);  // This navigateigates back to the previous page
     };
 
     return (
         <div className="mainBodyStyle">
-            {/* <h1>WeightPageForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3> */}
+            <h1>WeightPageForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="max_HFlex">
                 <button
