@@ -1,15 +1,15 @@
-// frontend/src/components/WorkoutPageForm/WorkoutImageDisplay.jsx
+// frontend/src/components/WorkoutPageForm/ImageDisplay.jsx
 import { useEffect, useState } from "react";
 
-function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handleImgClick }) {
+function ImageDisplay({ imgArr, downloadGIF, placeholderIMG, handleImgClick }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (workoutImgArr && workoutImgArr.length > 0) {
+    if (imgArr && imgArr.length > 0) {
       let loadedImages = 0;
-      const totalImages = workoutImgArr.length;
+      const totalImages = imgArr.length;
 
-      workoutImgArr.forEach((image) => {
+      imgArr.forEach((image) => {
         const img = new Image();
         img.src = image.url;
         img.onload = () => {
@@ -22,7 +22,7 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
     } else {
       setLoading(false); 
     }
-  }, [workoutImgArr]);
+  }, [imgArr]);
 
   return (
     <div>
@@ -32,8 +32,8 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
         </div>
       ) : (
         <div>
-          {workoutImgArr && workoutImgArr.length > 0 ? (
-            workoutImgArr.map((currentImg) => (
+          {imgArr && imgArr.length > 0 ? (
+            imgArr.map((currentImg) => (
               <div key={currentImg.id}>
                 <img
                   src={currentImg.url}
@@ -46,7 +46,7 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
             ))
           ) : null} 
           
-          {workoutImgArr && workoutImgArr.length === 0 && ( 
+          {imgArr && imgArr.length === 0 && ( 
               <div key="666666">
               <img
                 src={placeholderIMG}
@@ -63,7 +63,7 @@ function WorkoutImageDisplay({ workoutImgArr, downloadGIF, placeholderIMG, handl
   );
 }
 
-export default WorkoutImageDisplay;
+export default ImageDisplay;
 
 
 
@@ -77,8 +77,8 @@ export default WorkoutImageDisplay;
 //       </div>
 //     ) : (
 //       <div>
-//         {workoutImgArr && workoutImgArr.length > 0 ? (
-//           workoutImgArr.map((currentImg) => (
+//         {imgArr && imgArr.length > 0 ? (
+//           imgArr.map((currentImg) => (
 //             <div key={currentImg.id}>
 //               <img
 //                 src={currentImg.url}
@@ -91,7 +91,7 @@ export default WorkoutImageDisplay;
 //           ))
 //         ) : null} 
         
-//         {workoutImgArr && workoutImgArr.length === 0 && ( 
+//         {imgArr && imgArr.length === 0 && ( 
 //           <div>
 //             <br />
 //             <img

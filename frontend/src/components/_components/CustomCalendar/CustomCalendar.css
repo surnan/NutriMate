@@ -1,19 +1,31 @@
-/* Make events in month view display inline */
-.rbc-month-view .rbc-event-content {
-  display: inline-block; /* Align events side by side */
-  vertical-align: top;
-  width: auto; /* Allow width to adjust for each event */
-  max-width: 45%; /* Adjust to fit as many events as possible */
-  margin-right: 2px; /* Add space between events */
+/* Bring events to the front and hide the time slot borders */
+.rbc-event {
+  position: relative;
+  z-index: 3; /* Higher z-index to ensure events are on top */
+}
+
+/* Hide the grid line by removing the border color or setting it to none */
+.rbc-time-slot {
+  border-top: none; /* Removes the border that acts as a grid line */
+}
+
+/* Alternative: Use a subtle box-shadow if you still want a line effect */
+.rbc-time-slot {
+  border-top: none;
+  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1); /* Optional: Add faint line effect */
+}
+
+/* Additional styling for events */
+.rbc-event-content {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/* Optional: Additional styling for compact events */
-.rbc-event {
-  padding: 0 4px;
-  height: auto;
-  font-size: 0.75rem;
-  line-height: 1.2; /* Adjust line height for compact display */
+/* Customize event appearance further if needed */
+.rbc-time-slot .rbc-event {
+  background-color: #3174ad;
+  opacity: 0.9;
+  color: white;
+  font-size: 0.8rem;
 }

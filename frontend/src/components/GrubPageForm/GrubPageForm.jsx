@@ -10,7 +10,7 @@ import DeleteModal from "../_modal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions'
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
-import GrubImageDisplay from "./GrubImageDisplay";
+import ImageDisplay from "../../components/_components/ImageDisplay";
 
 
 function GrubPageForm() {
@@ -422,8 +422,8 @@ function GrubPageForm() {
 
             <div className="abc123 vertical_center_flex">
                 {/* <h1>Your GRUB Page Form</h1> */}
-                <GrubImageDisplay
-                    grubImgArr={grubImgArr}
+                <ImageDisplay
+                    imgArr={grubImgArr}
                     downloadGIF={downloadGIF}
                     placeholderIMG={placeholderIMG}
                     handleImgClick={handleImgClick}
