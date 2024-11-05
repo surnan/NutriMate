@@ -136,7 +136,7 @@ const DayLogPage = () => {
             <div className="calender_div">
                 <CustomCalendar
                     value={selectedDate}
-                    onChange={handleDateChange} // Update selected date on calendar change
+                    onChange={handleDateChange} 
                 />
             </div>
 
