@@ -21,4 +21,7 @@ export default defineConfig((mode) => ({
       }
     }
   },
+  optimizeDeps: {
+    include: ['react-big-calendar', 'date-fns', 'date-fns/locale/en-US'],
+  },
 }));
