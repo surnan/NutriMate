@@ -76,8 +76,8 @@ const DayLogPage = () => {
                     <CustomCalendar
                         value={selectedDate}
                         onChange={handleDateChange}
-                        width="80%"
-                        height="600px"
+                        width="100%"
+                        height="900px"
                     />
                 </div>
             </div>

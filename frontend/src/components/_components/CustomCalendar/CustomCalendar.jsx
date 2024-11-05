@@ -38,7 +38,7 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
     const userEvents = dayLogsArr
       .filter(log => log.userId === sessionUser?.id)
       .map(log => ({
-        title: log.title || 'Event', // Customize as per your data
+        title: `${log.name}: ${log.calories}` || 'Event', 
         start: new Date(log.timestamp),
         end: new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000), // Assuming 1-hour events
         id: log.id,
@@ -60,6 +60,55 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
     }
   };
 
+
+  // trying to incrase day to show more than 2 events in monthly view
+  const EventWrapper = ({ events = [] }) => {
+    const displayedEvents = events.slice(0, 4);
+    const extraCount = events.length > 4 ? events.length - 4 : 0;
+
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
+        {displayedEvents.map((event, idx) => (
+          <div
+            key={idx}
+            style={{
+              fontSize: '0.85rem',
+            }}
+          >
+            {event.title}
+          </div>
+        ))}
+        {extraCount > 0 && (
+          <div style={{ fontStyle: 'italic', color: '#555' }}>
+            +{extraCount} more
+          </div>
+        )}
+      </div>
+    );
+  };
+  
+
+  //prevent events from overlapping in views
+  const eventStyleGetter = (event) => {
+    return {
+      style: {
+        backgroundColor: event.color || '#3174ad',
+        borderRadius: '4px',
+        opacity: 0.9,
+        color: 'white',
+        fontSize: '0.8rem',
+        padding: '2px',
+        height: '18px',
+        overflow: 'hidden',
+      },
+    };
+  };
+
+  const formats = {
+    eventTimeRangeFormat: () => '', // Empty string hides time range for events
+  };
+  
+
   return (
     <BigCalendar
       localizer={localizer}
@@ -72,6 +121,9 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
       onSelectEvent={handleSelectEvent}
       views={['day', 'week', 'month']}
       defaultView="day"
+      eventPropGetter={eventStyleGetter}
+      formats={formats} 
+      
     />
   );
 };

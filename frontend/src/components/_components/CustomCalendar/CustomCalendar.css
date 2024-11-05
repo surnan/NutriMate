@@ -1,40 +1,19 @@
-
-/* CustomCalendar.css */
-
-  
-  .react-calendar {
-    border: 2px solid black; 
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); 
+/* Make events in month view display inline */
+.rbc-month-view .rbc-event-content {
+  display: inline-block; /* Align events side by side */
+  vertical-align: top;
+  width: auto; /* Allow width to adjust for each event */
+  max-width: 45%; /* Adjust to fit as many events as possible */
+  margin-right: 2px; /* Add space between events */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-  .react-calendar__tile--now {
-    background-color: #ffeb3b; /* Highlight today's date */
-    color: black;
-    border-radius: 50%;
-  }
-  
-  .react-calendar__tile--active {
-    background-color: limegreen; /* Active date color */
-    color: white;
-    border-radius: 50%;
-  }
-  
-  .highlighted-date {
-    background-color: rgba(0, 132, 255, 0.667); /* Specific dates you want to highlight */
-    color: white;
-    border-radius: 50%;
-  }
-  
-  /* weekend colors */
-  .react-calendar__month-view__days__day--weekend {
-    color: red;
-  }
-  
-  .calenar_div {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-  }
-  
+/* Optional: Additional styling for compact events */
+.rbc-event {
+  padding: 0 4px;
+  height: auto;
+  font-size: 0.75rem;
+  line-height: 1.2; /* Adjust line height for compact display */
+}
