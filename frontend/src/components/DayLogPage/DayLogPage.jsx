@@ -17,11 +17,7 @@ const DayLogPage = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const sessionUser = useSelector((state) => state.session.user);
-    const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
-    const dayLogsById = useSelector(state => state.daylogs.byId);
 
-    const filteredAndSortedArray = dayLogsArr
-        .filter(dayLog => dayLog.userId === sessionUser.id)
 
     useEffect(() => {
         dispatch(getDailyLogsAllThunk())
@@ -32,7 +28,7 @@ const DayLogPage = () => {
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }
 
-    
+
     // Handle date change from the calendar
     const handleDateChange = (date) => {
         setSelectedDate(date);
@@ -40,45 +36,50 @@ const DayLogPage = () => {
 
 
     return (
-        <div className="vertical_center_flex container-width">
-            {/* top buttons */}
-            <div className="max_HFlex workout_btn_div container-width">
-                <button
-                    className="back_btn navBlue"
-                    onClick={handleBack}
-                >
-                    <i className="fa-solid fa-arrow-rotate-left"></i>
-                </button>
-                <div>
+        <div className="container-width">
+            <h1>DayLogPage.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3>
+            <br/>
+            <div className="vertical_center_flex ">
+                {/* top buttons */}
+                <div className="max_HFlex workout_btn_div container-width">
                     <button
-                        className="_button orange"
-                        onClick={handlePlusWorkout}
+                        className="back_btn navBlue"
+                        onClick={handleBack}
                     >
-                        + Workout
+                        <i className="fa-solid fa-arrow-rotate-left"></i>
                     </button>
+                    <div>
+                        <button
+                            className="_button orange"
+                            onClick={handlePlusWorkout}
+                        >
+                            + Workout
+                        </button>
 
-                    <button
-                        className="_button green"
-                        onClick={handlePlusGrub}
-                    >
-                        + Grub
-                    </button>
-                    <button
-                        className="_button dkPink"
-                        onClick={handleWeights}
-                    >
-                        + Weight
-                    </button>
+                        <button
+                            className="_button green"
+                            onClick={handlePlusGrub}
+                        >
+                            + Grub
+                        </button>
+                        <button
+                            className="_button dkPink"
+                            onClick={handleWeights}
+                        >
+                            + Weight
+                        </button>
+                    </div>
                 </div>
-            </div>
 
-            <div className="calender_div">
-                <CustomCalendar
-                    value={selectedDate}
-                    onChange={handleDateChange} 
-                    width="80%"
-                    height="600px"
-                />
+                <div className="calender_div">
+                    <CustomCalendar
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        width="100%"
+                        height="900px"
+                    />
+                </div>
             </div>
         </div>
     );
