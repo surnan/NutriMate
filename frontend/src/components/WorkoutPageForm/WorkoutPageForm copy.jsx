@@ -13,8 +13,7 @@ import DeleteModal from "../_modal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
-// import ImageDisplay from "./ImageDisplay";
-import ImageDisplay from "../../components/_components/ImageDisplay";
+import WorkoutImageDisplay from "./WorkoutImageDisplay";
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -275,8 +274,8 @@ function WorkoutPageForm() {
       <br/>
       <div className="abc123 vertical_center_flex">
         {/* <h1>Your Workout Page Form</h1> */}
-        <ImageDisplay
-          imgArr={workoutImgArr}
+        <WorkoutImageDisplay
+          workoutImgArr={workoutImgArr}
           downloadGIF={downloadGIF}
           placeholderIMG={placeholderIMG}
           handleImgClick={handleImgClick}

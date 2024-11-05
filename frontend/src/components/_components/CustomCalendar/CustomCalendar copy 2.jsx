@@ -6,7 +6,6 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import './CustomCalendar.css'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -56,8 +55,11 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
   };
 
   const handleSelectEvent = (event) => {
-    //clicking calendar event
     console.log("...handleSelectEvent = ", event)
+
+    // if (window.confirm(`????Would you like to remove the event: ${event.title}?`)) {
+    //   dispatch(deleteDailyLogsThunkById)
+    // }
   };
 
 
@@ -123,7 +125,7 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
       defaultView="day"
       eventPropGetter={eventStyleGetter}
       formats={formats} 
-      dayLayoutAlgorithm="no-overlap" 
+      
     />
   );
 };
