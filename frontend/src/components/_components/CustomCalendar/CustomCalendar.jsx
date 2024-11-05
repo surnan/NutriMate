@@ -1,71 +1,79 @@
-// frontend/src/componenets/CustomCalendar.jsx
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import './CustomCalendar.css';
+// frontend/src/components/CustomCalendar.jsx
+import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import startOfWeek from 'date-fns/startOfWeek';
+import getDay from 'date-fns/getDay';
+import enUS from 'date-fns/locale/en-US';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
 
-import { useEffect } from "react";
-// import { getDailyLogsAllThunk } from "../../redux/daylogs";
-import { getDailyLogsAllThunk } from "../../../redux/daylogs";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getDailyLogsAllThunk } from '../../../redux/daylogs';
 
+const locales = {
+  'en-US': enUS,
+};
 
-// function MyCalendar() {  //ORIGINAL
-const MyCalendar = ({ value, onChange }) => {
-  const dispatch = useDispatch()
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
-  const sessionUser = useSelector((state) => state.session.user);
+const CustomCalendar = ({ width = '100%', height = '800px' }) => {
+  const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
 
+  const [events, setEvents] = useState([]);
+
   useEffect(() => {
-    dispatch(getDailyLogsAllThunk())
-  }, [dispatch])
+    dispatch(getDailyLogsAllThunk());
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log('==> CustomCalendar +++++ => dayLogsArr updated ==> ', dayLogsArr);
-  // }, [dayLogsArr]);
+  useEffect(() => {
+    const userEvents = dayLogsArr
+      .filter(log => log.userId === sessionUser?.id)
+      .map(log => ({
+        title: log.title || 'Event', // Customize as per your data
+        start: new Date(log.timestamp),
+        end: new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000), // Assuming 1-hour events
+        id: log.id,
+      }));
+    setEvents(userEvents);
+  }, [dayLogsArr, sessionUser]);
 
-
-  // const highlightDates = dayLogsArr.reduce((acc, log) => {
-  //   const date = new Date(log.timestamp);
-  //   const dateString = date.toDateString();
-  //   // Add only unique dates to the accumulator
-  //   if (!acc.some(d => d.toDateString() === dateString)) {
-  //     acc.push(date);
-  //   }
-  //   return acc;
-  // }, []);
-
-  const highlightDates = dayLogsArr.reduce((acc, log) => {
-    if (log.userId === sessionUser?.id) { // Check if the log belongs to the current user
-      const date = new Date(log.timestamp);
-      const dateString = date.toDateString();
-      // Add only unique dates to the accumulator
-      if (!acc.some(d => d.toDateString() === dateString)) {
-        acc.push(date);
-      }
+  const handleSelectSlot = ({ start, end }) => {
+    const title = prompt('Enter event title');
+    if (title) {
+      setEvents([...events, { title, start, end }]);
     }
-    return acc;
-  }, []);
+  };
 
-  
-
-  const tileClassName = ({ date, view }) => {
-    if (view === 'month') {
-      if (highlightDates.some((highlightDate) => highlightDate.toDateString() === date.toDateString())) {
-        return 'highlighted-date';
-      }
+  const handleSelectEvent = (event) => {
+    if (window.confirm(`Would you like to remove the event: ${event.title}?`)) {
+      // Dispatch action to delete event from your Redux store
+      setEvents(events.filter(e => e.id !== event.id));
     }
-    return null;
   };
 
   return (
-    <Calendar
-      onChange={onChange}
-      value={value}
-      tileClassName={tileClassName}
-      locale="en-US"
+    <BigCalendar
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+      style={{ height, width }}
+      selectable
+      onSelectSlot={handleSelectSlot}
+      onSelectEvent={handleSelectEvent}
+      views={['day', 'week', 'month']}
+      defaultView="day"
     />
   );
-}
+};
 
-export default MyCalendar;
+export default CustomCalendar;
