@@ -34,12 +34,22 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
+    // const handleClick = (event111)=>{
+    //     console.log("...handleClick = ", event111)
+    // }
+
+
+    const handleClick = (event111) => {
+        console.log("...handleClick = ", event111)
+        navigate(`/daylog/${event111.id}`)
+    }
+
 
     return (
         <div className="container-width">
             <h1>DayLogPage.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
-            <br/>
+            <br />
             <div className="vertical_center_flex ">
                 {/* top buttons */}
                 <div className="max_HFlex workout_btn_div container-width">
@@ -78,6 +88,7 @@ const DayLogPage = () => {
                         onChange={handleDateChange}
                         width="100%"
                         height="900px"
+                        handler={handleClick}
                     />
                 </div>
             </div>
