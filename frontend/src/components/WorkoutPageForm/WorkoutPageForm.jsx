@@ -4,16 +4,11 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
-import { getWorkoutImagesForWorkoutThunk, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
-import { resetWorkoutImages } from "../../redux/workoutImages";
-
-// import DeleteModal from "../DeleteModal/DeleteModal";
+import { getWorkoutImagesForWorkoutThunk, resetWorkoutImages, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../_modal/DeleteModal";
-
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
-// import ImageDisplay from "./ImageDisplay";
 import ImageDisplay from "../../components/_components/ImageDisplay";
 
 function WorkoutPageForm() {
@@ -35,7 +30,6 @@ function WorkoutPageForm() {
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState({});
-  // const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
     description: '',
