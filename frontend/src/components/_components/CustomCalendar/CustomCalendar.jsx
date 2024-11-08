@@ -24,7 +24,7 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
-const CustomCalendar = ({ width = '100%', height = '800px' }) => {
+const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -49,44 +49,15 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
 
   const handleSelectSlot = ({ start, end }) => {
     console.log(`...{ start, end} = , {${start}, ${end}}`)
-    // const title = prompt('!!!!!Enter event title');
-    // if (title) {
-    //   setEvents([...events, { title, start, end }]);
-    // }
   };
 
   const handleSelectEvent = (event) => {
-    //clicking calendar event
-    console.log("...handleSelectEvent = ", event)
+    handler(event); // Pass the event as a parameter to the handler
   };
-
-
-  // trying to incrase day to show more than 2 events in monthly view
-  // const EventWrapper = ({ events = [] }) => {
-  //   const displayedEvents = events.slice(0, 4);
-  //   const extraCount = events.length > 4 ? events.length - 4 : 0;
-
-  //   return (
-  //     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
-  //       {displayedEvents.map((event, idx) => (
-  //         <div
-  //           key={idx}
-  //           style={{
-  //             fontSize: '0.85rem',
-  //           }}
-  //         >
-  //           {event.title}
-  //         </div>
-  //       ))}
-  //       {extraCount > 0 && (
-  //         <div style={{ fontStyle: 'italic', color: '#555' }}>
-  //           +{extraCount} more
-  //         </div>
-  //       )}
-  //     </div>
-  //   );
-  // };
   
+
+
+
 
   //prevent events from overlapping in views
   const eventStyleGetter = (event) => {
@@ -129,3 +100,32 @@ const CustomCalendar = ({ width = '100%', height = '800px' }) => {
 };
 
 export default CustomCalendar;
+
+
+
+  // trying to incrase day to show more than 2 events in monthly view
+  // const EventWrapper = ({ events = [] }) => {
+  //   const displayedEvents = events.slice(0, 4);
+  //   const extraCount = events.length > 4 ? events.length - 4 : 0;
+
+  //   return (
+  //     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
+  //       {displayedEvents.map((event, idx) => (
+  //         <div
+  //           key={idx}
+  //           style={{
+  //             fontSize: '0.85rem',
+  //           }}
+  //         >
+  //           {event.title}
+  //         </div>
+  //       ))}
+  //       {extraCount > 0 && (
+  //         <div style={{ fontStyle: 'italic', color: '#555' }}>
+  //           +{extraCount} more
+  //         </div>
+  //       )}
+  //     </div>
+  //   );
+  // };
+  

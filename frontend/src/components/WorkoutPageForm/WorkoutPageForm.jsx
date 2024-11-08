@@ -89,7 +89,6 @@ function WorkoutPageForm() {
       alert("Please save Workout to database before adding image")
       return
     }
-
     console.log("A - ...handleImgClick..id = ", id)
     console.log("...newworkout = ", newWorkout)
 
@@ -117,17 +116,6 @@ function WorkoutPageForm() {
       name: "abc",
       url: imgUrl
     }
-
-    console.log(">>>")
-    console.log(">>>")
-    console.log("..temp == ", temp)
-    console.log("..workoutObj == ", workoutObj)
-    console.log(">>>")
-    console.log(">>>")
-    console.log(">>>")
-
-    console.log("...temp = B4 if STATEMENT B4 .....", temp)
-    console.log("...workoutObj = B4 if STATEMENT B4 .....", workoutObj)
     if (workoutObj?.WorkoutImages.length === 0 ){
       console.log("POST")
       const updatedTemp = { ...temp, workoutId: workoutObj?.id };
@@ -138,7 +126,6 @@ function WorkoutPageForm() {
       console.log("...temp B4 ... PUT ....", temp)
       await dispatch(updateWorkoutImagesOneThunk(temp))
     }
-
     setClickedWorkoutImgId(0)
   }
 

@@ -117,6 +117,7 @@ const daylogsReducer = (state = initialState, action) => {
             return newState;
         }
         case LOAD_DAYLOGS_ONE: {
+            console.log("... reducer ...", action.payload)
             return {
                 ...state,
                 single: action.payload
