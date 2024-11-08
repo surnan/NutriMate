@@ -4,14 +4,12 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
-import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk } from "../../redux/grubImages";
-// import DeleteModal from "../+++DeleteModal/DeleteModal";
+import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk, postGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../_modal/DeleteModal";
 import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions'
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";
-
 
 function GrubPageForm() {
     const navigate = useNavigate();
@@ -29,7 +27,6 @@ function GrubPageForm() {
     const [showUpload, setShowUpload] = useState(true); //  //show image?
     const [previewUrl, setPreviewUrl] = useState("");  //img url in react
     const [clickedGrubImgId, setClickedGrubImgId] = useState(0);  //object.id of clicked image
-
 
     const [showDeleteModal, setShowDeletetModal] = useState(false);
     const [errors, setErrors] = useState({});
@@ -50,17 +47,17 @@ function GrubPageForm() {
     const initializeForm = useCallback(() => {
         if (!newGrub && grubObj) {
             setForm({
-                name: grubObj?.name || "",
-                description: grubObj?.description || "",
-                servingUnit: grubObj?.servingUnit || '',
-                servingSize: grubObj?.servingSize || '',
-                calories: grubObj?.calories || '',
-                protein: grubObj?.protein || '',
-                fats: grubObj?.fats || '',
-                carbs: grubObj?.carbs || '',
-                sugar: grubObj?.sugar || '',
-                company: grubObj?.company || '',
-                userId: grubObj?.userId || sessionUser?.id || 1
+                name: grubObj.name || "",
+                description: grubObj.description || "",
+                servingUnit: grubObj.servingUnit || '',
+                servingSize: grubObj.servingSize || '',
+                calories: grubObj.calories || '',
+                protein: grubObj.protein || '',
+                fats: grubObj.fats || '',
+                carbs: grubObj.carbs || '',
+                sugar: grubObj.sugar || '',
+                company: grubObj.company || '',
+                userId: grubObj.userId || sessionUser?.id || 1
             })
         }
     }, [newGrub, grubObj, sessionUser]);
@@ -111,8 +108,22 @@ function GrubPageForm() {
     }, [form])
 
     //AWS
+    // const handleImgClick = (id) => {
+    //     setClickedGrubImgId(id)
+    // }
+
     const handleImgClick = (id) => {
-        // console.log("A - ...handleImgClick..id = ", id)
+        if (newGrub) {
+            alert("Please save Grub to database before adding image")
+            return
+        }
+        console.log("A - ...handleImgClick..id = ", id)
+        console.log("...newGrub = ", newGrub)
+
+        if (!id) {
+            id = 666666
+        }
+
         setClickedGrubImgId(id)
     }
 
@@ -126,6 +137,18 @@ function GrubPageForm() {
         setShowUpload(false);
     };
 
+    // const handleImgSubmit = async () => {
+    //     console.log('handleImgSubmit')
+    //     let temp = {
+    //         grubId: clickedGrubImgId,
+    //         name: "abc",
+    //         url: imgUrl
+    //     }
+    //     await dispatch(updateGrubImagesOneThunk(temp))
+    //     setClickedGrubImgId(0)
+    // }
+
+
     const handleImgSubmit = async () => {
         console.log('handleImgSubmit')
         let temp = {
@@ -133,9 +156,22 @@ function GrubPageForm() {
             name: "abc",
             url: imgUrl
         }
-        await dispatch(updateGrubImagesOneThunk(temp))
+        console.log("...temp = ", temp)
+        console.log("...grubObj = ", grubObj)
+        if (grubObj?.GrubImages.length === 0) {
+            console.log("POST")
+            const updatedTemp = { ...temp, grubId: grubObj?.id };
+            console.log("...updatedTemp B4 ... POST ....", updatedTemp)
+            await dispatch(postGrubImagesOneThunk(updatedTemp))
+        } else {
+            console.log("PUT")
+            console.log("...temp B4 ... PUT ....", temp)
+            await dispatch(updateGrubImagesOneThunk(temp))
+        }
+        // await dispatch(updateGrubImagesOneThunk(temp))
         setClickedGrubImgId(0)
     }
+
 
     const handleReset = () => setForm(initializeForm());
 
@@ -285,6 +321,7 @@ function GrubPageForm() {
                         <option value="cups">cups</option>
                         <option value="grams">grams</option>
                         <option value="oz">ounces</option>
+                        <option value="scoops">scoops</option>
                         <option value="tablespoon">tablespoon</option>
                         <option value="teaspoon">teaspoon</option>
                     </select>

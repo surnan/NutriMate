@@ -74,7 +74,40 @@ export const getGrubImagesForGrubThunk = (id) => async (dispatch) => {
     }
 }
 
-export const postGrubImagesOneThunk = ({ body }) => async (dispatch) => {
+export const postGrubImagesOneThunk = ( body ) => async (dispatch) => {
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("body ... ", body)
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    console.log("...")
+    const { grubId, url, name } = body
+
+    try {
+        const formData = new FormData(); //AWS requires FormData class
+        formData.append('grubId', grubId) //append, NOT push
+        formData.append("image", url);
+        formData.append("name", name)
+
+        const option = {
+            method: "POST",
+            headers: { 'Content-Type': 'multipart/form-data' }, //"form-data" <-- required for AWS
+            body: formData
+        }
+        const response = await csrfFetch(`/api/grubimages`, option)
+
+        if (response.ok) {
+            const currentGrub = await response.json()
+            dispatch(updateGrubImagesOne(currentGrub))
+        }
+        return response
+    } catch (e) {
+        return e
+    }
+
     const response = await csrfFetch('/api/grubimages', {
         method: "POST",
         headers: { "Content-Type": "application/json" },

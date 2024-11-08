@@ -173,7 +173,7 @@ router.put('/:id/update',
     })
 
     // AWS
-router.post('/:grubId',
+router.post('/',
     singleMulterUpload('image'),
     async (req, res, next) => {
         try {
@@ -182,8 +182,8 @@ router.post('/:grubId',
             if (req.file) {
                 imgUrl = await singlePublicFileUpload(req.file); //converts data from form
             }
-            const grubId = parseInt(req.params.grubId)
-            const currentWorkoutImage = await WorkoutImage.create({
+            const grubId = parseInt(req.body.grubId)
+            const currentGrubImage = await GrubImage.create({
                 url: imgUrl,
                 grubId
             })
