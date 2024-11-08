@@ -46,7 +46,7 @@ function DayLogPageForm() {
     const initializeForm = useCallback(() => {
         return {
             name: dayLogObj.name || newWorkoutObj?.name || newGrubObj?.name || "",
-            timestamp: dayLogObj.timestamp || Date.now(),
+            timestamp: newDayLog ? Date.now() : dayLogObj.timestamp,
             calories: dayLogObj.calories || "",
             units: dayLogObj.units || "",
             unitType: dayLogObj.unitType || (newGrubObj ? "servings" : "hours"),

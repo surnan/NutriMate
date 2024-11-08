@@ -35,10 +35,6 @@ const updateWorkoutsOne = (data) => ({
     payload: data
 })
 
-// const loadWorkoutsUser = (data) => ({
-//         type: LOAD_WORKOUTS_USER,
-//         payload: data
-// })
 
 // Thunks
 export const getWorkoutsAllThunk = () => async (dispatch) => {
