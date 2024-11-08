@@ -285,6 +285,7 @@ function GrubPageForm() {
                         <option value="cups">cups</option>
                         <option value="grams">grams</option>
                         <option value="oz">ounces</option>
+                        <option value="scoops">scoops</option>
                         <option value="tablespoon">tablespoon</option>
                         <option value="teaspoon">teaspoon</option>
                     </select>
