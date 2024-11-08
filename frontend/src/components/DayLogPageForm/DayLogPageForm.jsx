@@ -54,7 +54,6 @@ function DayLogPageForm() {
             workoutId: dayLogObj.workoutId || newWorkoutObj?.id || null,
             userId: dayLogObj.userId || sessionUser?.id || 1
         }
-
     }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
 
     useEffect(() => {
@@ -87,7 +86,7 @@ function DayLogPageForm() {
             if (!form[key]) {
                 newErrors[key] = `${capitalizeFirstLetter(key)} is required`;
             } else {
-                if (parseInt(form[key]) <= 0) {
+                if (Number(form[key]) <= 0) {
                     newErrors[key] = `${capitalizeFirstLetter(key)} must be > 0`;
                 }
             }
