@@ -12,9 +12,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { deleteDailyLogsThunkById, getDailyLogsAllThunk } from '../../../redux/daylogs';
 
-const locales = {
-  'en-US': enUS,
-};
+const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"]
+const locales = { 'en-US': enUS };
 
 const localizer = dateFnsLocalizer({
   format,
@@ -35,17 +34,41 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
     dispatch(getDailyLogsAllThunk());
   }, [dispatch]);
 
+  const newDate = log => {
+    if (log?.Workout) {
+      const workoutType = String(log.unitType).toLowerCase()
+      const workoutUnits = Number(log.units)
+      switch (workoutType) {
+        case "minutes":
+          return new Date(new Date(log.timestamp).getTime() + 60 * workoutUnits * 1000)
+        case "hours":
+          return new Date(new Date(log.timestamp).getTime() + 60 * workoutUnits * 60 * 1000)
+        default:
+          return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000)
+      }
+    } else {
+      // console.log(".........GRUB !!!1")
+      return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000)
+    }
+  }
+
+  const newColor = event => {
+    //colorArray
+    return colorArray[Math.floor(Math.random() * colorArray.length)];
+  }
+
   useEffect(() => {
     const userEvents = dayLogsArr
       .filter(log => log.userId === sessionUser?.id)
       .map(log => ({
-        title: `${log.name}: ${log.calories}` || 'Event', 
+        title: `${log.name}: ${log.calories}` || 'Event',
         start: new Date(log.timestamp),
-        end: new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000), // Assuming 1-hour events
+        end: newDate(log),  // calculate the ending Time for event
         id: log.id,
+        color: newColor()
       }));
     setEvents(userEvents);
-  }, [dayLogsArr, sessionUser]);
+  }, [dayLogsArr, sessionUser.id]);
 
   const handleSelectSlot = ({ start, end }) => {
     console.log(`...{ start, end} = , {${start}, ${end}}`)
@@ -54,16 +77,15 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
   const handleSelectEvent = (event) => {
     handler(event); // Pass the event as a parameter to the handler
   };
-  
-
 
 
 
   //prevent events from overlapping in views
   const eventStyleGetter = (event) => {
+    // console.log('...event = ', event)
     return {
       style: {
-        backgroundColor: event.color || '#3174ad',
+        backgroundColor: event.color,
         borderRadius: '4px',
         opacity: 0.9,
         color: 'white',
@@ -78,7 +100,7 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
   const formats = {
     eventTimeRangeFormat: () => '', // Empty string hides time range for events
   };
-  
+
 
   return (
     <BigCalendar
@@ -93,8 +115,8 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
       views={['day', 'week', 'month']}
       defaultView="day"
       eventPropGetter={eventStyleGetter}
-      formats={formats} 
-      dayLayoutAlgorithm="no-overlap" 
+      formats={formats}
+      dayLayoutAlgorithm="no-overlap"
     />
   );
 };
@@ -103,29 +125,28 @@ export default CustomCalendar;
 
 
 
-  // trying to incrase day to show more than 2 events in monthly view
-  // const EventWrapper = ({ events = [] }) => {
-  //   const displayedEvents = events.slice(0, 4);
-  //   const extraCount = events.length > 4 ? events.length - 4 : 0;
+// trying to incrase day to show more than 2 events in monthly view
+// const EventWrapper = ({ events = [] }) => {
+//   const displayedEvents = events.slice(0, 4);
+//   const extraCount = events.length > 4 ? events.length - 4 : 0;
 
-  //   return (
-  //     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
-  //       {displayedEvents.map((event, idx) => (
-  //         <div
-  //           key={idx}
-  //           style={{
-  //             fontSize: '0.85rem',
-  //           }}
-  //         >
-  //           {event.title}
-  //         </div>
-  //       ))}
-  //       {extraCount > 0 && (
-  //         <div style={{ fontStyle: 'italic', color: '#555' }}>
-  //           +{extraCount} more
-  //         </div>
-  //       )}
-  //     </div>
-  //   );
-  // };
-  
+//   return (
+//     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
+//       {displayedEvents.map((event, idx) => (
+//         <div
+//           key={idx}
+//           style={{
+//             fontSize: '0.85rem',
+//           }}
+//         >
+//           {event.title}
+//         </div>
+//       ))}
+//       {extraCount > 0 && (
+//         <div style={{ fontStyle: 'italic', color: '#555' }}>
+//           +{extraCount} more
+//         </div>
+//       )}
+//     </div>
+//   );
+// };
