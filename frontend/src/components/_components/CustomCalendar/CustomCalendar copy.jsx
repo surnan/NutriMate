@@ -1,4 +1,5 @@
 // frontend/src/components/CustomCalendar.jsx
+import { useRef } from 'react';
 import { Calendar as BigCalendar, dateFnsLocalizer } from 'react-big-calendar';
 import format from 'date-fns/format';
 import parse from 'date-fns/parse';
@@ -8,7 +9,6 @@ import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './CustomCalendar.css'
 
-import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { deleteDailyLogsThunkById, getDailyLogsAllThunk } from '../../../redux/daylogs';
@@ -23,27 +23,26 @@ const localizer = dateFnsLocalizer({
   locales: { 'en-US': enUS },
 });
 
-const CustomEventWrapper = ({ event }) => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', padding: '2px' }}>
-      <div
-        style={{
-          // fontSize: '0.85rem',
-          textOverflow: 'ellipsis',
-          overflow: 'hidden',
-          whiteSpace: 'nowrap'
-        }}
-      >
-        {event.title}
-      </div>
-    </div>
-  );
-};
+const CustomCalendar = ({ value, width = '100%', height = '1200px', handler }) => { // Adjusted height
+  // const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) => {
 
-
-const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
   const timeContentRef = useRef(null);
   const timeGutterRef = useRef(null);
+
+  useEffect(() => {
+    const syncGutterHeight = () => {
+      if (timeContentRef.current && timeGutterRef.current) {
+        const contentHeight = timeContentRef.current.getBoundingClientRect().height;
+        timeGutterRef.current.style.height = `${contentHeight}px`;
+      }
+    };
+    syncGutterHeight();
+    window.addEventListener("resize", syncGutterHeight);
+    return () => window.removeEventListener("resize", syncGutterHeight);
+  }, []);
+
+
+
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -121,7 +120,38 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
     eventTimeRangeFormat: () => '', // Empty string hides time range for events
   };
 
-  //test comment
+  useEffect(() => {
+    const adjustHeights = () => {
+      if (timeContentRef.current && timeGutterRef.current) {
+        const contentHeight = timeContentRef.current.scrollHeight;
+        timeGutterRef.current.style.height = `${contentHeight}px`;
+      }
+    };
+    
+    adjustHeights();
+    window.addEventListener("resize", adjustHeights);
+    return () => window.removeEventListener("resize", adjustHeights);
+  }, []);
+  
+
+  
+  // return (
+  //   <BigCalendar
+  //     localizer={localizer}
+  //     events={events}
+  //     startAccessor="start"
+  //     endAccessor="end"
+  //     style={{ height, width }}
+  //     selectable
+  //     onSelectSlot={handleSelectSlot}
+  //     onSelectEvent={handleSelectEvent}
+  //     views={['day', 'week', 'month']}
+  //     defaultView="day"
+  //     eventPropGetter={eventStyleGetter}
+  //     formats={formats}
+  //     dayLayoutAlgorithm="no-overlap"
+  //   />
+  // );
 
   return (
     <BigCalendar
@@ -129,7 +159,7 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
       events={events}
       startAccessor="start"
       endAccessor="end"
-      style={{ height, width }}
+      style={{ width }} // Only set width, no fixed height
       selectable
       onSelectSlot={handleSelectSlot}
       onSelectEvent={handleSelectEvent}
@@ -138,8 +168,40 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
       eventPropGetter={eventStyleGetter}
       formats={formats}
       dayLayoutAlgorithm="no-overlap"
+      components={{
+        timeGutterHeader: (props) => <div ref={timeGutterRef} {...props} />,
+        timeContent: (props) => <div ref={timeContentRef} {...props} />,
+      }}
     />
   );
 };
 
 export default CustomCalendar;
+
+
+
+// trying to incrase day to show more than 2 events in monthly view
+// const EventWrapper = ({ events = [] }) => {
+//   const displayedEvents = events.slice(0, 4);
+//   const extraCount = events.length > 4 ? events.length - 4 : 0;
+
+//   return (
+//     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
+//       {displayedEvents.map((event, idx) => (
+//         <div
+//           key={idx}
+//           style={{
+//             fontSize: '0.85rem',
+//           }}
+//         >
+//           {event.title}
+//         </div>
+//       ))}
+//       {extraCount > 0 && (
+//         <div style={{ fontStyle: 'italic', color: '#555' }}>
+//           +{extraCount} more
+//         </div>
+//       )}
+//     </div>
+//   );
+// };

@@ -1,31 +1,62 @@
-/* Bring events to the front and hide the time slot borders */
+/* Event Styling */
 .rbc-event {
   position: relative;
-  z-index: 3; /* Higher z-index to ensure events are on top */
+  z-index: 3; /* Ensure events are displayed above other elements */
 }
 
-/* Hide the grid line by removing the border color or setting it to none */
-.rbc-time-slot {
-  border-top: none; /* Removes the border that acts as a grid line */
-}
-
-/* Alternative: Use a subtle box-shadow if you still want a line effect */
-.rbc-time-slot {
-  border-top: none;
-  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1); /* Optional: Add faint line effect */
-}
-
-/* Additional styling for events */
+/* Event Content Styling */
 .rbc-event-content {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
-/* Customize event appearance further if needed */
+.rbc-day-view .rbc-event-content {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Customize individual event appearance */
 .rbc-time-slot .rbc-event {
   background-color: #3174ad;
   opacity: 0.9;
   color: white;
   font-size: 0.8rem;
+}
+
+/* Time Slot and Grid Line Styling */
+.rbc-time-slot {
+  border-top: none; /* Remove the default grid line */
+  box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1); /* Optional faint line effect */
+}
+
+/* Calendar Layout Adjustments */
+
+/* Remove extra padding and margin at the top of the calendar */
+.rbc-time-view {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Time Header Styling - Remove padding, margin, and borders */
+.rbc-time-header {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+/* Hide the header cell above the first time slot */
+.rbc-time-header-cell {
+  display: none;
+}
+
+/* Hide the entire time header section to eliminate extra space */
+.rbc-time-header,
+.rbc-time-header-gutter,
+.rbc-time-header-content {
+  display: none !important;
 }
