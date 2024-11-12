@@ -25,11 +25,9 @@
 /* Hide the time header and gutter to eliminate extra spacing */
 .rbc-time-header,
 .rbc-time-header-gutter {
-  display: none !important; /* Hides any default headers to prevent offset */
-  padding: 0 !important;
+  display: none !important; 
   margin: 0 !important;
-  line-height: normal !important; /* Ensures exact alignment without additional space */
-}
+  line-height: normal !important; 
 
 /* Ensure consistent row spacing and remove extra margin */
 .rbc-time-content > * + * > .rbc-timeslot-group {

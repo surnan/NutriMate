@@ -8,22 +8,42 @@ import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './CustomCalendar.css'
 
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { deleteDailyLogsThunkById, getDailyLogsAllThunk } from '../../../redux/daylogs';
 
 const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"]
-const locales = { 'en-US': enUS };
 
 const localizer = dateFnsLocalizer({
   format,
   parse,
   startOfWeek,
   getDay,
-  locales,
+  locales: { 'en-US': enUS },
 });
 
-const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) => {
+const CustomEventWrapper = ({ event }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', padding: '2px' }}>
+      <div
+        style={{
+          // fontSize: '0.85rem',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
+          whiteSpace: 'nowrap'
+        }}
+      >
+        {event.title}
+      </div>
+    </div>
+  );
+};
+
+
+const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
+  const timeContentRef = useRef(null);
+  const timeGutterRef = useRef(null);
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -101,6 +121,7 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
     eventTimeRangeFormat: () => '', // Empty string hides time range for events
   };
 
+  //test comment
 
   return (
     <BigCalendar
@@ -122,31 +143,3 @@ const CustomCalendar = ({ value, width = '100%', height = '800px', handler }) =>
 };
 
 export default CustomCalendar;
-
-
-
-// trying to incrase day to show more than 2 events in monthly view
-// const EventWrapper = ({ events = [] }) => {
-//   const displayedEvents = events.slice(0, 4);
-//   const extraCount = events.length > 4 ? events.length - 4 : 0;
-
-//   return (
-//     <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '2px' }}>
-//       {displayedEvents.map((event, idx) => (
-//         <div
-//           key={idx}
-//           style={{
-//             fontSize: '0.85rem',
-//           }}
-//         >
-//           {event.title}
-//         </div>
-//       ))}
-//       {extraCount > 0 && (
-//         <div style={{ fontStyle: 'italic', color: '#555' }}>
-//           +{extraCount} more
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
