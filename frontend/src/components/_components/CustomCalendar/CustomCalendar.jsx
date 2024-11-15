@@ -13,6 +13,8 @@ import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDailyLogsAllThunk } from '../../../redux/daylogs';
 
+import { useCallback } from 'react';
+
 const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"];
 
 const localizer = dateFnsLocalizer({
@@ -69,7 +71,7 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
   }, [dayLogsArr, sessionUser.id]);
 
   const handleSelectSlot = ({ start, end }) => {
-    console.log(`Selected slot: Start = ${start}, End = ${end}`);
+    console.log(`!!! Selected slot: Start = ${start}, End = ${end}`);
   };
 
   const handleSelectEvent = (event) => {
@@ -92,38 +94,122 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
   // const WeekdayHeader = ({ label }) => {
   //   return <div>{label}</div>;
   // };
-  
+
   const WeekdayHeader = ({ date }) => {
-  return <div>{formatDate(date, 'EEEE')}</div>;
-};
+    return <div>{formatDate(date, 'EEEE')}</div>;
+  };
 
 
   const formats = {
-    weekdayFormat: (date) => formatDate(date, 'EEEE'), 
+    weekdayFormat: (date) => formatDate(date, 'EEEE'),
     eventTimeRangeFormat: () => '', // Hide time range for events
   };
+
+  const handleOnRangeChange = useCallback(
+    (range) => {
+      console.log("..handleOnRangeChange..");
+
+      // Log the incoming range and all events for debugging
+      console.log("Range:", range);
+      console.log("All Events:", events.map(event => ({
+        title: event.title,
+        start: event.start,
+        end: event.end,
+      })));
+
+      let visibleEvents = [];
+      if (Array.isArray(range)) {
+        console.log("...A...")
+        // For day/week view
+
+        // /*
+        const start = new Date(range[0]);
+        const end = new Date(range[range.length - 1]);
+
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 999);
+        
+        console.log("...start = ", start)
+        console.log("...end = ", end)
+        
+        visibleEvents = events.filter(
+          (event) => event.start <= end && event.end >= start
+        );
+        // */
+        console.log("Visible Events:", visibleEvents.map((event) => event.title));
+
+      } else if (range.start && range.end) {
+        // For month view
+        console.log("..B..")
+
+        // /*
+        const start = new Date(range.start);
+        const end = new Date(range.end);
   
+        // Adjust to cover the entire day in local time
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 999);
   
+        // Log the adjusted start and end times for debugging
+        console.log("Adjusted Start for Day View (Local):", start);
+        console.log("Adjusted End for Day View (Local):", end);
   
+        visibleEvents = events.filter((event) => {
+          const eventStart = new Date(event.start);
+          const eventEnd = new Date(event.end);
+  
+          // Check if the event falls within the range
+          const isEventInRange =
+            (eventStart >= start && eventStart <= end) ||  // Event starts within the range
+            (eventEnd >= start && eventEnd <= end) ||      // Event ends within the range
+            (eventStart <= start && eventEnd >= end);      // Event spans across the entire range
+  
+          // Log each condition for debugging
+          // console.log(`Event: ${event.title}, Event Start: ${eventStart}, Event End: ${eventEnd}, In Range: ${isEventInRange}`);
+          
+          return isEventInRange;
+        });
+         console.log("Visible Events:", visibleEvents.map((event) => event.title));
+        // */
+
+      }
+
+      // console.log("Visible Events:", visibleEvents.map((event) => event.title));
+    },
+    [events]
+  );
+
+
+
+  useEffect(() => {
+    if (events.length > 0) {
+      handleOnRangeChange({
+        start: new Date(events[0].start),
+        end: new Date(events[events.length - 1].end),
+      });
+    }
+  }, [events, handleOnRangeChange]);
+
 
   return (
     <BigCalendar
       localizer={localizer}
       events={events}
-      startAccessor="start"
-      endAccessor="end"
       style={{ height, width }}
-      selectable
-      onSelectSlot={handleSelectSlot}
-      onSelectEvent={handleSelectEvent}
+      selectable  //alows select
+      onSelectSlot={handleSelectSlot}   //click on time slot & not Event
+      onSelectEvent={handleSelectEvent} //click on event inside time slot
       views={['day', 'week', 'month']}
       defaultView="day"
-      eventPropGetter={eventStyleGetter}
-      formats={formats}
+      eventPropGetter={eventStyleGetter} //css even styling
+      formats={formats} //non-css-format of time/date data
       dayLayoutAlgorithm="no-overlap"
-      components={{
-        week: { header: WeekdayHeader }, // Use custom header component for week view
+      scrollToTime={new Date(new Date().setHours(5, 0, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
+      components={{ //'component' overrides default
+        week: { header: WeekdayHeader },
       }}
+      step={15}
+      onRangeChange={handleOnRangeChange}
     />
   );
 };
