@@ -29,11 +29,6 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
 
   const [events, setEvents] = useState([]);
-  // const [totalCalories, setTotalCalorie] = useState(0)
-  // const [totalProtein, setTotalProtein] = useState(0)
-  // const [totalCarbs, setTotalCarbs] = useState(0)
-  // const [totalFats, setTotalFats] = useState(0)
-  // const [totalSugars, setTotalSugars] = useState(0)
 
   useEffect(() => {
     dispatch(getDailyLogsAllThunk());
@@ -98,8 +93,8 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
         // Day & Week view
         const start = new Date(range[0]);
         const end = new Date(range[range.length - 1]);
-        start.setHours(0, 0, 0, 0);
-        end.setHours(23, 59, 59, 999);
+        start.setHours(0, 0, 0, 0);     //needed for daily
+        end.setHours(23, 59, 59, 999);  //needed for daily
 
         visibleEvents = events.filter(
           (event) => event.start <= end && event.end >= start
@@ -214,9 +209,6 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
         weekdayFormat: (date) => formatDate(date, 'EEEE'),
         eventTimeRangeFormat: () => '',
       }}
-
-
-
 
       dayLayoutAlgorithm="no-overlap"
       scrollToTime={new Date(new Date().setHours(5, 0, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
