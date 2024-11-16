@@ -91,10 +91,6 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
     },
   });
 
-  // const WeekdayHeader = ({ label }) => {
-  //   return <div>{label}</div>;
-  // };
-
   const WeekdayHeader = ({ date }) => {
     return <div>{formatDate(date, 'EEEE')}</div>;
   };
@@ -102,94 +98,83 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
 
   const formats = {
     weekdayFormat: (date) => formatDate(date, 'EEEE'),
-    eventTimeRangeFormat: () => '', // Hide time range for events
+    eventTimeRangeFormat: () => '',
   };
 
   const handleOnRangeChange = useCallback(
     (range) => {
-      console.log("..handleOnRangeChange..");
+      // console.log("..handleOnRangeChange..");
 
       // Log the incoming range and all events for debugging
       console.log("Range:", range);
-      console.log("All Events:", events.map(event => ({
+      console.log("'events:'", events.map(event => ({
         title: event.title,
         start: event.start,
         end: event.end,
       })));
 
       let visibleEvents = [];
-      if (Array.isArray(range)) {
-        console.log("...A...")
-        // For day/week view
-
-        // /*
+      if (Array.isArray(range)) { // Day & Week view
         const start = new Date(range[0]);
         const end = new Date(range[range.length - 1]);
-
         start.setHours(0, 0, 0, 0);
         end.setHours(23, 59, 59, 999);
-        
-        console.log("...start = ", start)
-        console.log("...end = ", end)
-        
+
+        console.log("...A...")
+        // console.log("...start = ", start)
+        // console.log("...end = ", end)
+
         visibleEvents = events.filter(
           (event) => event.start <= end && event.end >= start
         );
-        // */
-        console.log("Visible Events:", visibleEvents.map((event) => event.title));
-
-      } else if (range.start && range.end) {
-        // For month view
+      } else if (range.start && range.end) {          // For month view
         console.log("..B..")
 
-        // /*
         const start = new Date(range.start);
         const end = new Date(range.end);
-  
+
         // Adjust to cover the entire day in local time
         start.setHours(0, 0, 0, 0);
         end.setHours(23, 59, 59, 999);
-  
-        // Log the adjusted start and end times for debugging
-        console.log("Adjusted Start for Day View (Local):", start);
-        console.log("Adjusted End for Day View (Local):", end);
-  
+
         visibleEvents = events.filter((event) => {
           const eventStart = new Date(event.start);
           const eventEnd = new Date(event.end);
-  
+
           // Check if the event falls within the range
           const isEventInRange =
             (eventStart >= start && eventStart <= end) ||  // Event starts within the range
             (eventEnd >= start && eventEnd <= end) ||      // Event ends within the range
             (eventStart <= start && eventEnd >= end);      // Event spans across the entire range
-  
-          // Log each condition for debugging
-          // console.log(`Event: ${event.title}, Event Start: ${eventStart}, Event End: ${eventEnd}, In Range: ${isEventInRange}`);
-          
+
           return isEventInRange;
         });
-         console.log("Visible Events:", visibleEvents.map((event) => event.title));
-        // */
-
       }
-
-      // console.log("Visible Events:", visibleEvents.map((event) => event.title));
+      console.log("Visible Events:", visibleEvents.map((event) => event.title));
     },
     [events]
   );
 
+  // useEffect(() => {
+  //   if (events.length > 0) {
+  //     handleOnRangeChange({
+  //       start: new Date(events[0].start),
+  //       end: new Date(events[events.length - 1].end),
+  //     });
+  //   }
+  // }, [events, handleOnRangeChange]);
 
 
   useEffect(() => {
     if (events.length > 0) {
-      handleOnRangeChange({
-        start: new Date(events[0].start),
-        end: new Date(events[events.length - 1].end),
-      });
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setHours(23, 59, 59, 999);
+      handleOnRangeChange({ start: today, end: tomorrow });
     }
   }, [events, handleOnRangeChange]);
-
+  
 
   return (
     <BigCalendar
