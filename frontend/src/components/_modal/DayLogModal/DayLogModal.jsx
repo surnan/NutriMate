@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const DayLogModal = ({ _stuff, onClose }) => {
     // const dispatch = useDispatch();
-    console.log('_stuff  = ', _stuff )
+    console.log('_stuff  = ', _stuff)
     const nav = useNavigate()
 
     const handleDeleteBtn = async () => {
@@ -18,11 +18,11 @@ const DayLogModal = ({ _stuff, onClose }) => {
     const handleGrubsBtn = () => { nav("/grubs") }
 
     return (
-        <div className="daylog_modal_under_layer">
-            <div className="daily_extend_modal_window_all shadow">
+        <div className="modal_under_layer">
+            <div className="modal_window_all shadow">
+            {/* <div className="modal_window_all day_width shadow"> */}
                 <h2 className='center'>Click to Add:</h2>
                 <div className="daily_btn_font_size_grid">
-
                     <button
                         onClick={handleWorkoutsBtn}
                         className="round daily_btn_font_size shadow blue"
@@ -37,12 +37,15 @@ const DayLogModal = ({ _stuff, onClose }) => {
                         <i className="fa-solid fa-utensils"></i>
                     </button>
 
+                    {
                     <button
-                        onClick={handleDeleteBtn}
+                        // onClick={handleDeleteBtn}
+                        onClick={onClose}
                         className="round daily_btn_font_size shadow red"
                     >
                         <i className="fas fa-trash-alt" />
-                    </button>
+                    </button> 
+                    }
                 </div>
             </div>
         </div>

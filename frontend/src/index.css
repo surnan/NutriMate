@@ -138,6 +138,8 @@ select._input {
 .yellow {background-color: yellow}
 
 
+
+
   .modal_under_layer {
     position: fixed;
     top: 0;
@@ -148,6 +150,7 @@ select._input {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 9999;
 }
 
 .modal_window_all {
@@ -161,7 +164,10 @@ select._input {
     flex-direction: column;
     gap: 1rem;
     width: 24rem;
+    z-index: 10000;
 }
+
+/* .day_width {width: 30rem} */
 
 .delete_btn {
     display: block;
