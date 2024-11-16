@@ -22,8 +22,7 @@ const localizer = dateFnsLocalizer({
   locales: { 'en-US': enUS },
 });
 
-// const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
-const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals }) => {
+const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -197,20 +196,11 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
       setTotalFats(newTotalFats)
       setTotalCarbs(newTotalCarbs)
       setTotalSugars(newTotalSugar)
-
-      setTotals({
-        calories: newTotalCalorie,
-        protein: newTotalProtein,
-        fats: newTotalFats,
-        carbs: newTotalCarbs,
-        sugars: newTotalSugar,
-      });
-
     },
     [events]
   );
 
-  useEffect(() => {
+  useEffect(()=>{
     console.log('====> totalCalories ==> ', totalCalories)
     console.log('====> totalProtein ==> ', totalProtein)
     console.log('====> totalCarbs ==> ', totalCarbs)

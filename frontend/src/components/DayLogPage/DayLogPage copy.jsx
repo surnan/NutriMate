@@ -18,14 +18,6 @@ const DayLogPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
 
-    const [totals, setTotals] = useState({
-        calories: 0,
-        protein: 0,
-        fats: 0,
-        carbs: 0,
-        sugars: 0,
-    });
-
 
     useEffect(() => {
         dispatch(getDailyLogsAllThunk())
@@ -58,15 +50,6 @@ const DayLogPage = () => {
             <h1>DayLogPage.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
             <br />
-            <div>
-                <p>Total Calories: {totals.calories}</p>
-                <p>Total Protein: {totals.protein}g</p>
-                <p>Total Fats: {totals.fats}g</p>
-                <p>Total Carbs: {totals.carbs}g</p>
-                <p>Total Sugars: {totals.sugars}g</p>
-            </div>
-            <br/>
-
             <div className="vertical_center_flex ">
                 {/* top buttons */}
                 <div className="max_HFlex workout_btn_div container-width">
@@ -106,7 +89,6 @@ const DayLogPage = () => {
                         width="100%"
                         height="900px"
                         handler={handleClick}
-                        setTotals={setTotals}
                     />
                 </div>
             </div>
