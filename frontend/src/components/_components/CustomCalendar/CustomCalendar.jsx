@@ -164,6 +164,7 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
 
   const handleSelectSlot = ({ start, end }) => {
     console.log(`!!! Selected slot: Start = ${start}, End = ${end}`);
+    handler(); // Call the function passed as a prop
   };
 
   const handleSelectEvent = (event) => {
