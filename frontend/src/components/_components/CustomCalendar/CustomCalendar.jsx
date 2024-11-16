@@ -155,14 +155,26 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
     [events]
   );
 
+  // useEffect(() => {
+  //   if (events.length > 0) {
+  //     handleOnRangeChange({
+  //       start: new Date(events[0].start),
+  //       end: new Date(events[events.length - 1].end),
+  //     });
+  //   }
+  // }, [events, handleOnRangeChange]);
+
+
   useEffect(() => {
     if (events.length > 0) {
-      handleOnRangeChange({
-        start: new Date(events[0].start),
-        end: new Date(events[events.length - 1].end),
-      });
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setHours(23, 59, 59, 999);
+      handleOnRangeChange({ start: today, end: tomorrow });
     }
   }, [events, handleOnRangeChange]);
+  
 
   return (
     <BigCalendar
