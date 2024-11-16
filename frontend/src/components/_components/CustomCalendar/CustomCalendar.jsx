@@ -8,12 +8,9 @@ import enUS from 'date-fns/locale/en-US';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './CustomCalendar.css';
 import { format as formatDate } from 'date-fns';
-
-import { useRef, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDailyLogsAllThunk } from '../../../redux/daylogs';
-
-import { useCallback } from 'react';
 
 const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"];
 
@@ -26,13 +23,16 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
-  const timeContentRef = useRef(null);
-  const timeGutterRef = useRef(null);
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
 
   const [events, setEvents] = useState([]);
+  const [totalCalories, setTotalCalorie] = useState(0)
+  const [totalProtein, setTotalProtein] = useState(0)
+  const [totalCarbs, setTotalCarbs] = useState(0)
+  const [totalFats, setTotalFats] = useState(0)
+  const [totalSugars, setTotalSugars] = useState(0)
 
   useEffect(() => {
     dispatch(getDailyLogsAllThunk());
@@ -40,34 +40,49 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
 
   const newDate = log => {
     if (log?.Workout) {
-      const workoutType = String(log.unitType).toLowerCase();
+      //Input = Workout.units & Workout.unitTypes 
+      //Output = Calculate "End-Time" for Big-Calendar
+      const workoutType = String(log.unitType).toLowerCase(); //{minutes, hours, reps}
       const workoutUnits = Number(log.units);
+
       switch (workoutType) {
         case "minutes":
           return new Date(new Date(log.timestamp).getTime() + 60 * workoutUnits * 1000);
         case "hours":
           return new Date(new Date(log.timestamp).getTime() + 60 * workoutUnits * 60 * 1000);
         default:
-          return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000);
       }
-    } else {
-      return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000);
     }
+    return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000);
   };
 
   const newColor = () => colorArray[Math.floor(Math.random() * colorArray.length)];
 
+  //calendar is fully populated at loadup
   useEffect(() => {
-    const userEvents = dayLogsArr
-      .filter(log => log.userId === sessionUser?.id)
-      .map(log => ({
-        title: `${log.name}: ${log.calories}` || 'Event',
-        start: new Date(log.timestamp),
-        end: newDate(log),
-        id: log.id,
-        color: newColor()
-      }));
+    const userEvents = [];
+    for (let i = 0; i < dayLogsArr.length; i++) {
+      const log = dayLogsArr[i];
+      if (log.userId === sessionUser?.id) {
+        userEvents.push({
+          title: `${log.name}: ${log.calories}` || 'Event',
+          start: new Date(log.timestamp),
+          end: newDate(log),
+          id: log.id,
+          color: newColor(),
+          fats: log?.Grub?.fats || 0,
+          carbs: log?.Grub?.carbs || 0,
+          protein: log?.Grub?.protein || 0,
+          sugar: log?.Grub?.sugar || 0,
+          calories: log.calories || 0,
+          isWorkout: log?.Workout ? true : false
+        });
+      }
+    }
+
     setEvents(userEvents);
+    console.log("==== DD ... events ... ", events)
+    console.log("==== DD ... dayLogsArr ... ", dayLogsArr)
   }, [dayLogsArr, sessionUser.id]);
 
   const handleSelectSlot = ({ start, end }) => {
@@ -92,6 +107,7 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
   });
 
   const WeekdayHeader = ({ date }) => {
+    //WeekView.topRow = {Sunday, Monday, etc...}
     return <div>{formatDate(date, 'EEEE')}</div>;
   };
 
@@ -105,15 +121,17 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
     (range) => {
       // console.log("..handleOnRangeChange..");
 
-      // Log the incoming range and all events for debugging
-      console.log("Range:", range);
-      console.log("'events:'", events.map(event => ({
-        title: event.title,
-        start: event.start,
-        end: event.end,
-      })));
+      console.log("...EE...119...Range:", range);
+      console.log("...EE...120...Events: ", events)
 
       let visibleEvents = [];
+
+      let newTotalCalorie = 0;
+      let newTotalProtein = 0;
+      let newTotalFats = 0;
+      let newTotalCarbs = 0;
+      let newTotalSugar = 0;
+
       if (Array.isArray(range)) { // Day & Week view
         const start = new Date(range[0]);
         const end = new Date(range[range.length - 1]);
@@ -121,9 +139,6 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
         end.setHours(23, 59, 59, 999);
 
         console.log("...A...")
-        // console.log("...start = ", start)
-        // console.log("...end = ", end)
-
         visibleEvents = events.filter(
           (event) => event.start <= end && event.end >= start
         );
@@ -133,15 +148,10 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
         const start = new Date(range.start);
         const end = new Date(range.end);
 
-        // Adjust to cover the entire day in local time
-        start.setHours(0, 0, 0, 0);
-        end.setHours(23, 59, 59, 999);
-
         visibleEvents = events.filter((event) => {
           const eventStart = new Date(event.start);
           const eventEnd = new Date(event.end);
 
-          // Check if the event falls within the range
           const isEventInRange =
             (eventStart >= start && eventStart <= end) ||  // Event starts within the range
             (eventEnd >= start && eventEnd <= end) ||      // Event ends within the range
@@ -150,20 +160,53 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
           return isEventInRange;
         });
       }
-      console.log("Visible Events:", visibleEvents.map((event) => event.title));
+      console.log("visibleEvents.title:", visibleEvents.map((event) => event.title));
+      console.log("====")
+      console.log("visibleEvents:", visibleEvents);
+
+
+      /*
+      //bug due to asynch timing.  Values not guaranteed to be zero prior to adding
+      setTotalCalorie(0)
+      setTotalProtein(0)
+      console.log("b4...totalcalorie = ", totalCalorie)
+      console.log("b4...totalprotein = ", totalProtein)
+      */
+
+      console.log("++ START +++++++++++++++++++++")
+      visibleEvents.forEach(e => {
+        console.log(">>> INSIDE LOOP >>>")
+        console.log("e = ", e)
+        newTotalCalorie += e.calories
+        newTotalProtein += e.protein
+        newTotalFats += e.fats
+        newTotalCarbs += e.carbs
+        newTotalSugar += e.sugar
+      })
+      console.log("++ FINISH +++++++++++++++++++++")
+
+      console.log("newTotalCalorie = ", newTotalCalorie)
+      console.log("newTotalProtein = ", newTotalProtein)
+      console.log("newTotalFats = ", newTotalFats)
+      console.log("newTotalCarbs = ", newTotalCarbs)
+      console.log("newTotalSugar = ", newTotalSugar)
+
+      setTotalCalorie(newTotalCalorie)
+      setTotalProtein(newTotalProtein)
+      setTotalFats(newTotalFats)
+      setTotalCarbs(newTotalCarbs)
+      setTotalSugars(newTotalSugar)
     },
     [events]
   );
 
-  // useEffect(() => {
-  //   if (events.length > 0) {
-  //     handleOnRangeChange({
-  //       start: new Date(events[0].start),
-  //       end: new Date(events[events.length - 1].end),
-  //     });
-  //   }
-  // }, [events, handleOnRangeChange]);
-
+  useEffect(()=>{
+    console.log('====> totalCalories ==> ', totalCalories)
+    console.log('====> totalProtein ==> ', totalProtein)
+    console.log('====> totalCarbs ==> ', totalCarbs)
+    console.log('====> totalFats ==> ', totalFats)
+    console.log('====> totalSugars ==> ', totalSugars)
+  }, [totalSugars])
 
   useEffect(() => {
     if (events.length > 0) {
@@ -174,7 +217,21 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
       handleOnRangeChange({ start: today, end: tomorrow });
     }
   }, [events, handleOnRangeChange]);
-  
+
+
+  //by default, BIG-CALENDAR only displayes "".title"
+  const CustomEvent = ({ event }) => {
+    return (
+      <div className="cc_event_hflex">
+        <strong>{event.title}</strong>
+        <div>Fats: {event.fats}g</div>
+        <div>Carbs: {event.carbs}g</div>
+        <div>Protein: {event.protein}g</div>
+        <div>Sugar: {event.sugar}g</div>
+        <div>Calories: {event.calories}</div>
+      </div>
+    );
+  };
 
   return (
     <BigCalendar
@@ -192,6 +249,8 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
       scrollToTime={new Date(new Date().setHours(5, 0, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
       components={{ //'component' overrides default
         week: { header: WeekdayHeader },
+        day: { event: CustomEvent }
+        // event: CustomEvent //applies to: day/week/monthly
       }}
       step={15}
       onRangeChange={handleOnRangeChange}

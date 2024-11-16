@@ -24,6 +24,12 @@
   display: none;
 }
 
+.cc_event_hflex{
+  display: flex;
+  justify-content: space-around;
+  background-color: blue;
+}
+
 /* Time Slot and Grid Line */
 /* .rbc-time-slot { */
   /* border-top: none;  */
