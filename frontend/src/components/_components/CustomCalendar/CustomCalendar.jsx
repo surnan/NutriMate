@@ -22,18 +22,18 @@ const localizer = dateFnsLocalizer({
   locales: { 'en-US': enUS },
 });
 
-// const CustomCalendar = ({ width = '100%', height = '1200px', handler }) => {
+
 const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
 
   const [events, setEvents] = useState([]);
-  const [totalCalories, setTotalCalorie] = useState(0)
-  const [totalProtein, setTotalProtein] = useState(0)
-  const [totalCarbs, setTotalCarbs] = useState(0)
-  const [totalFats, setTotalFats] = useState(0)
-  const [totalSugars, setTotalSugars] = useState(0)
+  // const [totalCalories, setTotalCalorie] = useState(0)
+  // const [totalProtein, setTotalProtein] = useState(0)
+  // const [totalCarbs, setTotalCarbs] = useState(0)
+  // const [totalFats, setTotalFats] = useState(0)
+  // const [totalSugars, setTotalSugars] = useState(0)
 
   useEffect(() => {
     dispatch(getDailyLogsAllThunk());
@@ -82,49 +82,10 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
     }
 
     setEvents(userEvents);
-    console.log("==== DD ... events ... ", events)
-    console.log("==== DD ... dayLogsArr ... ", dayLogsArr)
   }, [dayLogsArr, sessionUser.id]);
-
-  const handleSelectSlot = ({ start, end }) => {
-    console.log(`!!! Selected slot: Start = ${start}, End = ${end}`);
-  };
-
-  const handleSelectEvent = (event) => {
-    handler(event);
-  };
-
-  const eventStyleGetter = (event) => ({
-    style: {
-      backgroundColor: event.color,
-      borderRadius: '4px',
-      opacity: 0.9,
-      color: 'white',
-      fontSize: '0.8rem',
-      padding: '2px',
-      height: '18px',
-      overflow: 'hidden',
-    },
-  });
-
-  const WeekdayHeader = ({ date }) => {
-    //WeekView.topRow = {Sunday, Monday, etc...}
-    return <div>{formatDate(date, 'EEEE')}</div>;
-  };
-
-
-  const formats = {
-    weekdayFormat: (date) => formatDate(date, 'EEEE'),
-    eventTimeRangeFormat: () => '',
-  };
 
   const handleOnRangeChange = useCallback(
     (range) => {
-      // console.log("..handleOnRangeChange..");
-
-      console.log("...EE...119...Range:", range);
-      console.log("...EE...120...Events: ", events)
-
       let visibleEvents = [];
 
       let newTotalCalorie = 0;
@@ -133,18 +94,18 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
       let newTotalCarbs = 0;
       let newTotalSugar = 0;
 
-      if (Array.isArray(range)) { // Day & Week view
+      if (Array.isArray(range)) {
+        // Day & Week view
         const start = new Date(range[0]);
         const end = new Date(range[range.length - 1]);
         start.setHours(0, 0, 0, 0);
         end.setHours(23, 59, 59, 999);
 
-        console.log("...A...")
         visibleEvents = events.filter(
           (event) => event.start <= end && event.end >= start
         );
-      } else if (range.start && range.end) {          // For month view
-        console.log("..B..")
+      } else if (range.start && range.end) {
+        // For month view
 
         const start = new Date(range.start);
         const end = new Date(range.end);
@@ -161,42 +122,14 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
           return isEventInRange;
         });
       }
-      console.log("visibleEvents.title:", visibleEvents.map((event) => event.title));
-      console.log("====")
-      console.log("visibleEvents:", visibleEvents);
 
-
-      /*
-      //bug due to asynch timing.  Values not guaranteed to be zero prior to adding
-      setTotalCalorie(0)
-      setTotalProtein(0)
-      console.log("b4...totalcalorie = ", totalCalorie)
-      console.log("b4...totalprotein = ", totalProtein)
-      */
-
-      console.log("++ START +++++++++++++++++++++")
       visibleEvents.forEach(e => {
-        console.log(">>> INSIDE LOOP >>>")
-        console.log("e = ", e)
         newTotalCalorie += e.calories
         newTotalProtein += e.protein
         newTotalFats += e.fats
         newTotalCarbs += e.carbs
         newTotalSugar += e.sugar
       })
-      console.log("++ FINISH +++++++++++++++++++++")
-
-      console.log("newTotalCalorie = ", newTotalCalorie)
-      console.log("newTotalProtein = ", newTotalProtein)
-      console.log("newTotalFats = ", newTotalFats)
-      console.log("newTotalCarbs = ", newTotalCarbs)
-      console.log("newTotalSugar = ", newTotalSugar)
-
-      setTotalCalorie(newTotalCalorie)
-      setTotalProtein(newTotalProtein)
-      setTotalFats(newTotalFats)
-      setTotalCarbs(newTotalCarbs)
-      setTotalSugars(newTotalSugar)
 
       setTotals({
         calories: newTotalCalorie,
@@ -205,18 +138,9 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
         carbs: newTotalCarbs,
         sugars: newTotalSugar,
       });
-
     },
     [events]
   );
-
-  useEffect(() => {
-    console.log('====> totalCalories ==> ', totalCalories)
-    console.log('====> totalProtein ==> ', totalProtein)
-    console.log('====> totalCarbs ==> ', totalCarbs)
-    console.log('====> totalFats ==> ', totalFats)
-    console.log('====> totalSugars ==> ', totalSugars)
-  }, [totalSugars])
 
   useEffect(() => {
     if (events.length > 0) {
@@ -243,6 +167,22 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
     );
   };
 
+  const handleSelectSlot = ({ start, end }) => {
+    console.log(`!!! Selected slot: Start = ${start}, End = ${end}`);
+  };
+
+  const handleSelectEvent = (event) => {
+    handler(event);
+  };
+
+  const WeekdayHeader = ({ date }) => {
+    //WeekView.topRow = {Sunday, Monday, etc...}
+    return <div>{formatDate(date, 'EEEE')}</div>;
+  };
+
+
+
+
   return (
     <BigCalendar
       localizer={localizer}
@@ -253,8 +193,31 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
       onSelectEvent={handleSelectEvent} //click on event inside time slot
       views={['day', 'week', 'month']}
       defaultView="day"
-      eventPropGetter={eventStyleGetter} //css even styling
-      formats={formats} //non-css-format of time/date data
+
+
+      //eventPropGetter={eventStyleGetter} //css even styling
+      eventPropGetter={(event) => ({
+        style: {
+          backgroundColor: event.color,
+          borderRadius: '4px',
+          opacity: 0.9,
+          color: 'white',
+          fontSize: '0.8rem',
+          padding: '2px',
+          height: '18px',
+          overflow: 'hidden',
+        },
+      })}
+
+      // formats={formats} //non-css-format of time/date data
+      formats={{
+        weekdayFormat: (date) => formatDate(date, 'EEEE'),
+        eventTimeRangeFormat: () => '',
+      }}
+
+
+
+
       dayLayoutAlgorithm="no-overlap"
       scrollToTime={new Date(new Date().setHours(5, 0, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
       components={{ //'component' overrides default
