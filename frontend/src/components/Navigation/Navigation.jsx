@@ -19,9 +19,9 @@ function Navigation() {
 
 
 
-  useEffect(()=>{
-    console.log("...Navigation->user = ", user)
-  }, [user])
+  // useEffect(()=>{
+  //   console.log("...Navigation->user = ", user)
+  // }, [user])
 
 
 
