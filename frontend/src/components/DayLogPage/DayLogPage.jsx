@@ -7,6 +7,8 @@ import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
 import CustomCalendar from "../_components/CustomCalendar";
 
+import DayLogModal from "../_modal/DayLogModal/DayLogModal";
+
 
 
 
@@ -15,6 +17,9 @@ const DayLogPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
+
+    // const [showDayLogModal, setShowDayLogModal] = useState(true);
+    const [showDayLogModal, setShowDayLogModal] = useState(false);
 
     const sessionUser = useSelector((state) => state.session.user);
 
@@ -52,6 +57,13 @@ const DayLogPage = () => {
         navigate(`/daylog/${event111.id}`)
     }
 
+    const handleModalClose = () => {
+        setShowDayLogModal(false);
+    };
+
+    const toggleDayLogModal = () => {
+        setShowDayLogModal((prevState) => !prevState);
+    };
 
     return (
         <div className="container-width">
@@ -65,7 +77,7 @@ const DayLogPage = () => {
                 <p>Total Carbs: {totals.carbs}g</p>
                 <p>Total Sugars: {totals.sugars}g</p>
             </div>
-            <br/>
+            <br />
 
             <div className="vertical_center_flex ">
                 {/* top buttons */}
@@ -105,11 +117,19 @@ const DayLogPage = () => {
                         onChange={handleDateChange}
                         width="100%"
                         height="900px"
-                        handler={handleClick}
+                        // handler={handleClick}
+                        handler={toggleDayLogModal}
                         setTotals={setTotals}
                     />
                 </div>
             </div>
+            {
+                showDayLogModal &&
+                <DayLogModal
+                    _stuff="!!hello world!!"
+                    onClose={handleModalClose}
+                />
+            }
         </div>
     );
 };

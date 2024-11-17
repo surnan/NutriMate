@@ -1,19 +1,12 @@
-
-
-.modal_under_layer .daily_extend_modal_window_all{
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;;
-    background-color: beige;
-    padding: 40px;
-    border-radius: 15px;
-}
+/* frontend/src/components/DeleteReviewModal/DeleteReviewModal.css */
 
 .daily_btn_font_size_grid{
     display: flex;
-    width: 500px;
+    /* width: 500px; */
+    width: 100%;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin: auto;
 }
 
 .daily_btn_font_size_grid button {
@@ -24,4 +17,18 @@
 .daily_btn_font_size{
     font-size: 30px;
     background-color: lightgray;
+}
+
+.dayLogPage_modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    border: solid 4px black;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 24rem;
+    z-index: 10000;
 }
