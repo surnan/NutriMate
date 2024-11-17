@@ -165,6 +165,11 @@ select._input {
     gap: 1rem;
     width: 24rem;
     z-index: 10000;
+    
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
 }
 
 /* .day_width {width: 30rem} */
