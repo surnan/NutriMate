@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-    background-color: white;
+    /* background-color: white; */
     padding: 2rem 3rem;
     border-radius: 10rem;
 }

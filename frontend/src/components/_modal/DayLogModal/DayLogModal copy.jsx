@@ -18,10 +18,9 @@ const DayLogModal = ({ _stuff, onClose }) => {
     const handleGrubsBtn = () => { nav("/grubs") }
 
     return (
-        <>
-            <div className="modal_under_layer" onClick={onClose} />
+        <div className="modal_under_layer">
             <div className="modal_window_all shadow">
-                {/* <div className="modal_window_all day_width shadow"> */}
+            {/* <div className="modal_window_all day_width shadow"> */}
                 <h2 className='center'>Click to Add:</h2>
                 <div className="daily_btn_font_size_grid">
                     <button
@@ -39,17 +38,17 @@ const DayLogModal = ({ _stuff, onClose }) => {
                     </button>
 
                     {
-                        <button
-                            // onClick={handleDeleteBtn}
-                            onClick={onClose}
-                            className="round daily_btn_font_size shadow red"
-                        >
-                            <i className="fas fa-trash-alt" />
-                        </button>
+                    <button
+                        // onClick={handleDeleteBtn}
+                        onClick={onClose}
+                        className="round daily_btn_font_size shadow red"
+                    >
+                        <i className="fas fa-trash-alt" />
+                    </button> 
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
