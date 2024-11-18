@@ -15,12 +15,12 @@ function ImageDisplay({ imgArr, downloadGIF, placeholderIMG, handleImgClick }) {
         img.onload = () => {
           loadedImages += 1;
           if (loadedImages === totalImages) {
-            setLoading(false); 
+            setLoading(false);
           }
         };
       });
     } else {
-      setLoading(false); 
+      setLoading(false);
     }
   }, [imgArr]);
 
@@ -31,23 +31,23 @@ function ImageDisplay({ imgArr, downloadGIF, placeholderIMG, handleImgClick }) {
           <img src={downloadGIF} alt="Loading..." className="downloadGIF" />
         </div>
       ) : (
-        <div>
+        <div className="border round">
           {imgArr && imgArr.length > 0 ? (
             imgArr.map((currentImg) => (
               <div key={currentImg.id}>
                 <img
                   src={currentImg.url}
                   style={{ height: "300px", width: "300px" }}
-                  alt="Workout Image"
+                  alt="image"
                   onClick={() => handleImgClick(currentImg.id)}
                   className="clickable round"
                 />
               </div>
             ))
-          ) : null} 
-          
-          {imgArr && imgArr.length === 0 && ( 
-              <div key="666666">
+          ) : null}
+
+          {imgArr && imgArr.length === 0 && (
+            <div key="666666">
               <img
                 src={placeholderIMG}
                 style={{ height: "300px", width: "300px" }}
