@@ -23,13 +23,13 @@
 }
 
 
-.search_div {
+/* .search_div {
     display: flex;
     margin: auto;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     gap: 4rem;
-}
+} */
 
 
 .daylog_page_form_grid{

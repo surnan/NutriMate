@@ -49,29 +49,30 @@ const WeightPage = () => {
 
   return (
     <div className="mainBodyStyle">
-      {/* <h3>WeightPage.jsx</h3>
-      <h3 >Email = {sessionUser?.email}</h3> */}
+      <h3>WeightPage.jsx</h3>
+      <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">
         <button
-          className="blue _button"
-          type="button"
           onClick={handleBackBtn}
+          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+          title="Back"
         >
-          BACK
-        </button>
-        <button
-          className="green _button"
-          onClick={handleNewWeight}
-        >
-          CREATE
+          <i className="fa-solid fa-chevron-left"></i>
         </button>
 
+        <button
+          onClick={handleNewWeight}
+          className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+          title="+ Create"
+        >
+          <i className="fa-solid fa-plus"></i>
+        </button>
       </div>
 
 
 
       <div>
-        <LineGraph weights={filteredAndSortedArray}/>
+        <LineGraph weights={filteredAndSortedArray} />
       </div>
 
       <div className="weight_page_grid">

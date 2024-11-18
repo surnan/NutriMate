@@ -123,29 +123,30 @@ function WeightPageForm() {
             <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="max_HFlex">
+
                 <button
-                    className="blue _button"
-                    type="button"
                     onClick={handleBackBtn}
+                    className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                    title="Back"
                 >
-                    BACK
+                    <i className="fa-solid fa-chevron-left"></i>
                 </button>
 
                 <div className="weightPageForm_hFlex">
                     <button
-                        className="orange _button"
-                        type="button"
                         onClick={handleResetBtn}
+                        className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+                        title="Reset"
                     >
-                        RESET
+                        <i className="fa-solid fa-rotate-left"></i>
                     </button>
+
                     <button
-                        className={`green _button`}
-                        type="button"
                         onClick={handleSubmit}
-                        disabled={hasError()}
+                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                        title="Save"
                     >
-                        SAVE
+                        <i className="fa-solid fa-bookmark"></i>
                     </button>
 
                 </div>
@@ -218,11 +219,11 @@ function WeightPageForm() {
             </div>
             <div className="weightPageForm_hFlex">
                 <button
-                    className="red _button"
-                    type="button"
                     onClick={handleDeleteBtn}
+                    className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                    title="Delete"
                 >
-                    DELETE
+                    <i className="fa-solid fa-trash-can"></i>
                 </button>
             </div>
             {showDeletetModal && (

@@ -73,8 +73,8 @@ const CardsPageGrid = ({ stuff }) => {
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
     dispatch(getGrubsAllThunk())
-    dispatch(getWorkoutImagesAllThunk())
-    dispatch(getGrubImagesAllThunk())
+    // dispatch(getWorkoutImagesAllThunk())
+    // dispatch(getGrubImagesAllThunk())
   }, [dispatch]);
 
 
@@ -92,6 +92,10 @@ const CardsPageGrid = ({ stuff }) => {
     }
   }
 
+  const handleRefresh = () => {
+    dispatch(getWorkoutImagesAllThunk())
+    dispatch(getGrubImagesAllThunk())
+  }
 
 
   return (
@@ -108,16 +112,26 @@ const CardsPageGrid = ({ stuff }) => {
           <i className="fa-solid fa-chevron-left"></i>
         </button>
 
-        <button
-          onClick={handleCreate}
-          className="round daily_btn_font_size shadow green clickable menuRoundBtn"
-          title="+ Create"
-        >
-          <i className="fa-solid fa-plus"></i>
-        </button>
+        <div className="wokoutPageForm_hFlex">
+          <button
+            onClick={handleRefresh}
+            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+            title="Reset"
+          >
+            <i className="fa-solid fa-rotate-left"></i>
+          </button>
+
+          <button
+            onClick={handleCreate}
+            className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+            title="+ Create"
+          >
+            <i className="fa-solid fa-plus"></i>
+          </button>
+        </div>
       </div>
 
-      <SearchBar onSearch={handleSearch} placeholder="Search Workouts..." />
+      <SearchBar onSearch={handleSearch} placeholder="Enter Name ..." />
 
       <div className="cards_grid">
         {filteredAndSortedWorkouts.map((data) => (
