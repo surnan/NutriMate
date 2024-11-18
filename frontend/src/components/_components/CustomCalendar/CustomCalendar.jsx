@@ -11,6 +11,7 @@ import { format as formatDate } from 'date-fns';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDailyLogsAllThunk } from '../../../redux/daylogs';
+import { useNavigate } from 'react-router-dom';
 
 const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"];
 
@@ -23,10 +24,12 @@ const localizer = dateFnsLocalizer({
 });
 
 
-const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals }) => {
+const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
+
+  const nav = useNavigate()
 
   const [events, setEvents] = useState([]);
 
@@ -163,12 +166,17 @@ const CustomCalendar = ({ width = '100%', height = '1200px', handler, setTotals 
   };
 
   const handleSelectSlot = ({ start, end }) => {
-    console.log(`!!! Selected slot: Start = ${start}, End = ${end}`);
+    console.log(`!!!!! handleSelectSlot: Start = ${start}, End = ${end}`);
     handler(); // Call the function passed as a prop
   };
 
   const handleSelectEvent = (event) => {
-    handler(event);
+    console.log(`+++++ handleSelectEvent`);
+    console.log('+++++ event = ', event)
+    onChange(event)
+    // handler(event);
+    //daylogform/:id
+    nav(`/daylogform/${event.id}`)
   };
 
   const WeekdayHeader = ({ date }) => {
