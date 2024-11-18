@@ -187,10 +187,6 @@ function WorkoutPageForm() {
       <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex">
-        {/* <button className="blue _button" type="button" onClick={handleBack}>
-          BACK
-        </button> */}
-
         <button
           onClick={handleBack}
           className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
@@ -202,10 +198,6 @@ function WorkoutPageForm() {
 
 
         <div className="wokoutPageForm_hFlex">
-          {/* <button className="orange _button" type="button" onClick={handleReset}>
-            RESET
-          </button> */}
-
           <button
             onClick={handleReset}
             className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
@@ -213,19 +205,6 @@ function WorkoutPageForm() {
           >
             <i className="fa-solid fa-rotate-left"></i>
           </button>
-
-
-
-
-
-          {/* <button
-            className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
-            type="button"
-            onClick={handleSubmitSave}
-          //disabled={!isEmpty(errors)}
-          >
-            SAVE
-          </button> */}
 
           <button
             onClick={handleSubmitSave}
@@ -268,25 +247,26 @@ function WorkoutPageForm() {
       </div>
 
       <div className="max_HFlex">
-        {/* <button className="red _button" type="button" onClick={handleDelete}>
-          DELETE
-        </button> */}
+        {
+          !newWorkout &&
+          <div>
+            <button
+              onClick={handleDelete}
+              className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+              title="Delete"
+            >
+              <i className="fa-solid fa-trash-can"></i>
+            </button>
 
-        <button
-          onClick={handleDeleteBtn}
-          className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-          title="Delete"
-        >
-          <i className="fa-solid fa-trash-can"></i>
-        </button>
-
-        <button
-          onClick={handleAddToLog}
-          className="round daily_btn_font_size shadow white clickable menuRoundBtn"
-          title="Add to Log"
-        >
-          <i className="fa-solid fa-thumbtack"></i>
-        </button>
+            <button
+              onClick={handleAddToLog}
+              className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+              title="Add to Log"
+            >
+              <i className="fa-solid fa-thumbtack"></i>
+            </button>
+          </div>
+        }
 
       </div>
       <br />
