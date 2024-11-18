@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 const DayLogModal = ({ _stuff, onClose }) => {
-    console.log('_stuff  = ', _stuff)
+    // console.log('_stuff  = ', _stuff)
     const nav = useNavigate()
 
     const handleDeleteBtn = async () => {
