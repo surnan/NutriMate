@@ -105,19 +105,35 @@ const CardsPageGrid = ({ stuff }) => {
 
   return (
     <div className="mainBodyStyle">
-      <h3>CardsPageGrid.jsx</h3>
-      <h3>Email = {sessionUser?.email}</h3>
+      {/* <h3>CardsPageGrid.jsx</h3>
+      <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex workout_btn_div">
-        <button className="blue _button" onClick={handleBack}>BACK</button>
-        <button className="green _button" onClick={handleCreate}>CREATE</button>
+        {/* <button className="blue _button" onClick={handleBack}>BACK</button> */}
+        <button
+          onClick={handleBack}
+          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+          title="Back"
+        >
+          <i className="fa-solid fa-chevron-left"></i>
+        </button>
+
+
+        {/* <button className="green _button" onClick={handleCreate}>CREATE</button> */}
+        <button
+          onClick={handleCreate}
+          className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+          title="+ Create"
+        >
+          <i className="fa-solid fa-plus"></i>
+        </button>
       </div>
 
       <SearchBar onSearch={handleSearch} placeholder="Search Workouts..." />
 
       <div className="cards_grid">
         {filteredAndSortedWorkouts.map((data) => (
-          <div key={data.id} onClick={() => handleCardClick(data)}>
+          <div key={data.id} className="clickable" onClick={() => handleCardClick(data)}>
             {whichCard(data)}
           </div>
         ))}
