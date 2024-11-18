@@ -178,7 +178,6 @@ function WorkoutPageForm() {
   const handleModalClose = () => {
     setShowDeleteModal(false);
     resetWorkoutImages()
-    navigate(-1);
   };
 
   //downloadGIF

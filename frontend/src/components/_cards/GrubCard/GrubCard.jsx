@@ -1,8 +1,8 @@
 // frontend/src/components/GrubCard/GrubCard.jsx
 import "./GrubCard.css";
 
-const GrubCard = ({ grub }) => {
-
+// const GrubCard = ({ grub }) => {
+const GrubCard = ({ workout, imageUrl }) => {
   const { name, servingUnit, servingSize, calories } = grub
   const { User, company, protein, carbs, fats } = grub
 
