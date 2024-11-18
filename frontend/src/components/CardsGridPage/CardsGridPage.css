@@ -3,7 +3,7 @@
 
 .cards_grid{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     max-width: 1100px;
     padding: 5px;
     gap: 2rem;
@@ -15,6 +15,5 @@
     display: flex;
     margin: auto;
     justify-content: center;
-    /* align-items: center; */
     gap: 4rem;
 }

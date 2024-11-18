@@ -1,28 +1,37 @@
-/* workcard.css */
+/* frontend/src/components/WorkoutCard/WorkoutCard.css */
 
 .workout_card_grid{
     display: grid;
     padding: 5px;
-    border: 2px black solid;
     max-width: 1100px;
+    border: 2px black solid;
     grid-template-columns: 1fr;
     gap: 0.5rem;
     border: 2px black solid;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604);
+    padding: 1rem;
 }
 
 .workout_card_grid > :first-child {
     display: grid;
     font-size: 1.5rem;
+    /* background-color: orange; */
+    font-weight: 600;
+    line-height: 1.5rem; 
+    /* guarantee height for 2 line text */
+    min-height: calc(1.5rem * 2);
 }
 
 .workout_card_grid > :nth-child(2) {
     display: grid;
-    height: 3rem;
+    text-align: none;
+    height: calc(1.5rem * 2);
+    /* background-color: yellow; */
 }
 
 .workout_card_grid > :nth-child(3) {
     display: grid;
-    justify-content: right;
-    
+    /* background-color: pink; */
+    justify-content: center;
+    padding: 1rem 2rem;
 }
