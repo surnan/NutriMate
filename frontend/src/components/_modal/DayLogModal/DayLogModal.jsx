@@ -26,14 +26,14 @@ const DayLogModal = ({ _stuff, onClose }) => {
                 <div className="daily_btn_font_size_grid">
                     <button
                         onClick={handleWorkoutsBtn}
-                        className="round daily_btn_font_size shadow blue"
+                        className="round daily_btn_font_size shadow blue clickable"
                     >
                         <i className="fa-solid fa-person-running"></i>
                     </button>
 
                     <button
                         onClick={handleGrubsBtn}
-                        className="round daily_btn_font_size shadow green"
+                        className="round daily_btn_font_size shadow green clickable"
                     >
                         <i className="fa-solid fa-utensils"></i>
                     </button>

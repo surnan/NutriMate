@@ -87,7 +87,7 @@ function WorkoutPageForm() {
     console.log("...newworkout = ", newWorkout)
 
     if (!id) {
-      id= 666666
+      id = 666666
     }
 
     setClickedWorkoutImgId(id)
@@ -110,7 +110,7 @@ function WorkoutPageForm() {
       name: "abc",
       url: imgUrl
     }
-    if (workoutObj?.WorkoutImages.length === 0 ){
+    if (workoutObj?.WorkoutImages.length === 0) {
       console.log("POST")
       const updatedTemp = { ...temp, workoutId: workoutObj?.id };
       console.log("...updatedTemp B4 ... POST ....", updatedTemp)
@@ -183,24 +183,56 @@ function WorkoutPageForm() {
   //downloadGIF
   return (
     <div className="mainBodyStyle">
-      <h1>WorkoutPageForm.jsx</h1>
-      <h3>Email = {sessionUser?.email}</h3>
+      {/* <h1>WorkoutPageForm.jsx</h1>
+      <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex">
-        <button className="blue _button" type="button" onClick={handleBack}>
+        {/* <button className="blue _button" type="button" onClick={handleBack}>
           BACK
+        </button> */}
+
+        <button
+          onClick={handleBack}
+          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+          title="Back"
+        >
+          <i className="fa-solid fa-chevron-left"></i>
         </button>
+
+
+
         <div className="wokoutPageForm_hFlex">
-          <button className="orange _button" type="button" onClick={handleReset}>
+          {/* <button className="orange _button" type="button" onClick={handleReset}>
             RESET
-          </button>
+          </button> */}
+
           <button
+            onClick={handleReset}
+            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+            title="Reset"
+          >
+            <i className="fa-solid fa-rotate-left"></i>
+          </button>
+
+
+
+
+
+          {/* <button
             className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
             type="button"
             onClick={handleSubmitSave}
           //disabled={!isEmpty(errors)}
           >
             SAVE
+          </button> */}
+
+          <button
+            onClick={handleSubmitSave}
+            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+            title="Save"
+          >
+            <i className="fa-solid fa-bookmark"></i>
           </button>
         </div>
       </div>
@@ -236,23 +268,51 @@ function WorkoutPageForm() {
       </div>
 
       <div className="max_HFlex">
-        <button className="red _button" type="button" onClick={handleDelete}>
+        {/* <button className="red _button" type="button" onClick={handleDelete}>
           DELETE
-        </button>
+        </button> */}
+
         <button
+          onClick={handleDeleteBtn}
+          className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+          title="Delete"
+        >
+          <i className="fa-solid fa-trash-can"></i>
+        </button>
+
+
+
+
+
+        {/* <button
           className="black _button white_font"
           type="button"
           onClick={handleAddToLog}
         //disabled={!isEmpty(errors)}
         >
           Add To Log
+        </button> */}
+
+
+        <button
+          onClick={handleAddToLog}
+          className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+          title="Add to Log"
+        >
+          <i className="fa-solid fa-thumbtack"></i>
         </button>
+
+
+
+
+
+
       </div>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <hr />
-      <br/>
-      <br/>
+      <br />
+      <br />
       <div className="abc123 vertical_center_flex">
         {/* <h1>Your Workout Page Form</h1> */}
         <ImageDisplay
