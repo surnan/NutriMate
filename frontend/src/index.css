@@ -120,10 +120,10 @@ select._input {
 .red_font {color: red !important}
 .white_font {color: white !important}
 
-.blue {background-color: rgba(0, 115, 255, 0.665)}
+.blue {background-color: rgba(105, 169, 247, 0.665)}
 .bluegreen {background-color: rgba(0, 247, 255, 0.665)}
 .black {background-color: black}
-.green {background-color: green}
+.green {background-color: rgb(112, 195, 112)}
 .ltcoral {background-color: lightcoral}
 .ltskyblue {background-color: lightskyblue}
 .ltltskyblue {background-color: rgba(135, 206, 250, 0.586)}
@@ -135,7 +135,7 @@ select._input {
 .pink {background-color: pink}
 .dkPink {background-color: rgb(210, 144, 155)}
 .red {background-color: red}
-.yellow {background-color: yellow}
+.yellow {background-color: rgb(247, 247, 125)}
 
 
 

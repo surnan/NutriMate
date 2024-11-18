@@ -251,24 +251,40 @@ function GrubPageForm() {
             <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="grubPageForm_hFlex">
-                <button
+                {/* <button
                     className="orange _button"
                     type="button"
                     onClick={handleBack}
                 >
                     BACK
+                </button> */}
+
+                <button
+                    onClick={handleBack}
+                    className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                    title="Back"
+                >
+                    <i className="fa-solid fa-chevron-left"></i>
                 </button>
 
                 <div className="grubPageForm_hFlex">
-                    <button
+                    {/* <button
                         className="blue _button"
                         type="button"
                         onClick={handleReset}
                     >
                         RESET
-                    </button>
+                    </button> */}
 
                     <button
+                        onClick={handleReset}
+                        className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+                        title="Reset"
+                    >
+                        <i className="fa-solid fa-rotate-left"></i>
+                    </button>
+
+                    {/* <button
                         className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
                         onClick={handleSubmitSave}
@@ -276,7 +292,16 @@ function GrubPageForm() {
                         disabled={isEmpty(errors)}
                     >
                         SAVE
+                    </button> */}
+
+                    <button
+                        onClick={handleSubmitSave}
+                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                        title="Save"
+                    >
+                        <i className="fa-solid fa-bookmark"></i>
                     </button>
+
                 </div>
             </div>
 
@@ -432,23 +457,44 @@ function GrubPageForm() {
 
             </div>
             <div className="max_HFlex">
-                <div >
-                    <button
+                {/* <div > */}
+                    {/* <button
                         className="red _button"
                         type="button"
                         onClick={handleDeleteBtn}
                     >
                         DELETE
+                    </button> */}
+
+                    <button
+                        onClick={handleDeleteBtn}
+                        className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                        title="Delete"
+                    >
+                        <i className="fa-solid fa-trash-can"></i>
                     </button>
-                </div>
-                <button
+
+
+                {/* </div> */}
+                {/* <button
                     className="black _button white_font"
                     type="button"
                     onClick={handleAddToLog}
                 //disabled={!isEmpty(errors)}
                 >
                     Add To Log
+                </button> */}
+
+                <button
+                    onClick={handleAddToLog}
+                    className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+                    title="Add to Log"
+                >
+                    <i className="fa-solid fa-thumbtack"></i>
                 </button>
+
+
+
             </div>
 
             <br />

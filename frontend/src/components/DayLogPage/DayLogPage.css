@@ -54,3 +54,13 @@
     margin-top: 2rem;
     padding: 1rem;
 }
+
+.circle_buttons_h_flex{
+    display: flex;
+    gap: 2rem;
+}
+
+.circle_buttons_h_flex button {
+    height: 60px;  
+    width: 60px;   
+}

@@ -47,9 +47,6 @@ const DayLogPage = () => {
         setSelectedDate(date);
     };
 
-    // const handleClick = (event111)=>{
-    //     console.log("...handleClick = ", event111)
-    // }
 
 
     const handleClick = (event111) => {
@@ -88,25 +85,29 @@ const DayLogPage = () => {
                     >
                         <i className="fa-solid fa-arrow-rotate-left"></i>
                     </button>
-                    <div>
+                    <div className="circle_buttons_h_flex">
                         <button
-                            className="_button orange"
                             onClick={handlePlusWorkout}
+                            className="round daily_btn_font_size shadow blue clickable"
+                            title="Add Workout"
                         >
-                            + Workout
+                            <i className="fa-solid fa-person-running"></i>
                         </button>
 
                         <button
-                            className="_button green"
                             onClick={handlePlusGrub}
+                            className="round daily_btn_font_size shadow yellow clickable"
+                            title="Add Meal"
                         >
-                            + Grub
+                            <i className="fa-solid fa-utensils"></i>
                         </button>
+
                         <button
-                            className="_button dkPink"
                             onClick={handleWeights}
+                            className="round daily_btn_font_size shadow green clickable"
+                            title="Record Weight"
                         >
-                            + Weight
+                            <i className="fa-solid fa-weight-scale"></i>
                         </button>
                     </div>
                 </div>
@@ -115,7 +116,7 @@ const DayLogPage = () => {
                     <CustomCalendar
                         value={selectedDate}
                         onChange={handleDateChange}
-                        width="100%"
+                        width="100%"                    
                         height="900px"
                         // handler={handleClick}
                         handler={toggleDayLogModal}
