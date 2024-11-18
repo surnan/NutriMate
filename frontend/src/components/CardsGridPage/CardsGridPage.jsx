@@ -8,9 +8,15 @@ import SearchBar from "../_components/SearchBar";
 
 import { getWorkoutsAllThunk } from "../../redux/workouts";
 import { getGrubsAllThunk } from "../../redux/grubs";
+import { getGrubImagesAllThunk } from "../../redux/grubImages";
+import { getWorkoutImagesAllThunk } from "../../redux/workoutImages";
+
 
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
+import WorkoutDetailCard from "../_cards/WorkoutCard";
+import GrubDetailCard from "../_cards/GrubCard";
+
 
 const CardsPageGrid = ({ stuff }) => {
   const dispatch = useDispatch();
@@ -20,6 +26,9 @@ const CardsPageGrid = ({ stuff }) => {
   const sessionUser = useSelector(state => state.session.user);
   const workoutsArr = useSelector(state => state.workouts.allWorkouts);
   const grubsArr = useSelector(state => state.grubs.allGrubs);
+  const workoutImgArr = useSelector(state => state.workoutimages.allWorkoutImages);
+  const grubImgArr = useSelector(state => state.grubimages.allGrubImages);
+
 
   const handleSearch = query => setSearchQuery(query.toLowerCase());
   const handleBack = () => navigate(-1);
@@ -47,7 +56,7 @@ const CardsPageGrid = ({ stuff }) => {
         default:
       }
     },
-      [navigate, stuff]
+    [navigate, stuff]
   );
 
   const filteredAndSortedWorkouts = useMemo(() => {
@@ -63,17 +72,36 @@ const CardsPageGrid = ({ stuff }) => {
 
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
+    dispatch(getWorkoutImagesAllThunk())
     dispatch(getGrubsAllThunk())
+    dispatch(getGrubImagesAllThunk())
   }, [dispatch]);
 
+  // const whichCard = (data) => {
+  //   const dataArr = stuff === "workout" ? workoutsArr : grubsArr
+  //   switch (stuff) {
+  //     case "workout": return <WorkoutCard workout={data} />
+  //     case "grub": return <GrubCard grub={data} />
+  //     default:
+  //   }
+  // }
+
+
   const whichCard = (data) => {
-    const dataArr = stuff === "workout" ? workoutsArr : grubsArr
-    switch (stuff) {
-      case "workout": return <WorkoutCard workout={data} />
-      case "grub": return <GrubCard grub={data} />
-      default:
+    let imageUrl;
+
+    if (stuff === "workout") {
+      const workoutImage = workoutImgArr.find(image => image.workoutId === data.id);
+      imageUrl = workoutImage ? workoutImage.url : null; // Replace `url` with your image URL field name
+      return <WorkoutCard workout={data} imageUrl={imageUrl} />;
+    } else if (stuff === "grub") {
+      const grubImage = grubImgArr.find(image => image.grubId === data.id);
+      imageUrl = grubImage ? grubImage.url : null; // Replace `url` with your image URL field name
+      return <GrubCard grub={data} imageUrl={imageUrl} />;
     }
   }
+
+
 
   return (
     <div className="mainBodyStyle">
