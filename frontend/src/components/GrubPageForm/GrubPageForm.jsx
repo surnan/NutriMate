@@ -137,18 +137,6 @@ function GrubPageForm() {
         setShowUpload(false);
     };
 
-    // const handleImgSubmit = async () => {
-    //     console.log('handleImgSubmit')
-    //     let temp = {
-    //         grubId: clickedGrubImgId,
-    //         name: "abc",
-    //         url: imgUrl
-    //     }
-    //     await dispatch(updateGrubImagesOneThunk(temp))
-    //     setClickedGrubImgId(0)
-    // }
-
-
     const handleImgSubmit = async () => {
         console.log('handleImgSubmit')
         let temp = {
@@ -168,7 +156,6 @@ function GrubPageForm() {
             console.log("...temp B4 ... PUT ....", temp)
             await dispatch(updateGrubImagesOneThunk(temp))
         }
-        // await dispatch(updateGrubImagesOneThunk(temp))
         setClickedGrubImgId(0)
     }
 
@@ -251,14 +238,6 @@ function GrubPageForm() {
             <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="grubPageForm_hFlex">
-                {/* <button
-                    className="orange _button"
-                    type="button"
-                    onClick={handleBack}
-                >
-                    BACK
-                </button> */}
-
                 <button
                     onClick={handleBack}
                     className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
@@ -268,14 +247,6 @@ function GrubPageForm() {
                 </button>
 
                 <div className="grubPageForm_hFlex">
-                    {/* <button
-                        className="blue _button"
-                        type="button"
-                        onClick={handleReset}
-                    >
-                        RESET
-                    </button> */}
-
                     <button
                         onClick={handleReset}
                         className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
@@ -283,16 +254,6 @@ function GrubPageForm() {
                     >
                         <i className="fa-solid fa-rotate-left"></i>
                     </button>
-
-                    {/* <button
-                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
-                        type="button"
-                        onClick={handleSubmitSave}
-                        // disabled={hasError()}
-                        disabled={isEmpty(errors)}
-                    >
-                        SAVE
-                    </button> */}
 
                     <button
                         onClick={handleSubmitSave}
@@ -457,33 +418,13 @@ function GrubPageForm() {
 
             </div>
             <div className="max_HFlex">
-                {/* <div > */}
-                    {/* <button
-                        className="red _button"
-                        type="button"
-                        onClick={handleDeleteBtn}
-                    >
-                        DELETE
-                    </button> */}
-
-                    <button
-                        onClick={handleDeleteBtn}
-                        className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-                        title="Delete"
-                    >
-                        <i className="fa-solid fa-trash-can"></i>
-                    </button>
-
-
-                {/* </div> */}
-                {/* <button
-                    className="black _button white_font"
-                    type="button"
-                    onClick={handleAddToLog}
-                //disabled={!isEmpty(errors)}
+                <button
+                    onClick={handleDeleteBtn}
+                    className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                    title="Delete"
                 >
-                    Add To Log
-                </button> */}
+                    <i className="fa-solid fa-trash-can"></i>
+                </button>
 
                 <button
                     onClick={handleAddToLog}
@@ -492,9 +433,6 @@ function GrubPageForm() {
                 >
                     <i className="fa-solid fa-thumbtack"></i>
                 </button>
-
-
-
             </div>
 
             <br />

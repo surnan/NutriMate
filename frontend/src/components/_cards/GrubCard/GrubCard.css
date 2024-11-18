@@ -12,11 +12,6 @@
     padding: 1rem;
 }
 
-/* .grub_card_flex {
-    display: flex;
-    justify-content: space-between;
-} */
-
 .grub_card_grid > :first-child {
     display: grid;
     font-size: 1.5rem;
