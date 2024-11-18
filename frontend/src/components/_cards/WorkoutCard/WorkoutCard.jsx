@@ -4,7 +4,7 @@ import "./WorkoutCard.css";
 // function WorkoutCard({ workout }) {
 const WorkoutCard = ({ workout, imageUrl }) => {
 
-  const { name, description, User } = workout
+  const { name, description } = workout
 
   return (
     <div className="workout_card_grid center">
