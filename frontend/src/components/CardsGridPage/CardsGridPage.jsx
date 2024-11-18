@@ -72,19 +72,10 @@ const CardsPageGrid = ({ stuff }) => {
 
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
-    dispatch(getWorkoutImagesAllThunk())
     dispatch(getGrubsAllThunk())
+    dispatch(getWorkoutImagesAllThunk())
     dispatch(getGrubImagesAllThunk())
   }, [dispatch]);
-
-  // const whichCard = (data) => {
-  //   const dataArr = stuff === "workout" ? workoutsArr : grubsArr
-  //   switch (stuff) {
-  //     case "workout": return <WorkoutCard workout={data} />
-  //     case "grub": return <GrubCard grub={data} />
-  //     default:
-  //   }
-  // }
 
 
   const whichCard = (data) => {
@@ -109,7 +100,6 @@ const CardsPageGrid = ({ stuff }) => {
       <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex workout_btn_div">
-        {/* <button className="blue _button" onClick={handleBack}>BACK</button> */}
         <button
           onClick={handleBack}
           className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
@@ -118,8 +108,6 @@ const CardsPageGrid = ({ stuff }) => {
           <i className="fa-solid fa-chevron-left"></i>
         </button>
 
-
-        {/* <button className="green _button" onClick={handleCreate}>CREATE</button> */}
         <button
           onClick={handleCreate}
           className="round daily_btn_font_size shadow green clickable menuRoundBtn"

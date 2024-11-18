@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const DayLogModal = ({ _stuff, onClose }) => {
-    // const dispatch = useDispatch();
     console.log('_stuff  = ', _stuff)
     const nav = useNavigate()
 
@@ -21,7 +20,6 @@ const DayLogModal = ({ _stuff, onClose }) => {
         <>
             <div className="modal_under_layer" onClick={onClose} />
             <div className="modal_window_all shadow">
-                {/* <div className="modal_window_all day_width shadow"> */}
                 <h2 className='center'>Click to Add:</h2>
                 <div className="daily_btn_font_size_grid">
                     <button
@@ -40,7 +38,6 @@ const DayLogModal = ({ _stuff, onClose }) => {
 
                     {
                         <button
-                            // onClick={handleDeleteBtn}
                             onClick={onClose}
                             className="round daily_btn_font_size shadow red"
                         >
