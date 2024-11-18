@@ -73,9 +73,12 @@ const CardsPageGrid = ({ stuff }) => {
   useEffect(() => {
     dispatch(getWorkoutsAllThunk())
     dispatch(getGrubsAllThunk())
-    // dispatch(getWorkoutImagesAllThunk())
-    // dispatch(getGrubImagesAllThunk())
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getWorkoutImagesAllThunk())
+    dispatch(getGrubImagesAllThunk())
+  }, []);
 
 
   const whichCard = (data) => {
