@@ -68,13 +68,12 @@ const WeightPage = () => {
 
       </div>
 
-      {/* <WeightChart weights={filteredAndSortedArray} /> */}
+
 
       <div>
         <LineGraph weights={filteredAndSortedArray}/>
       </div>
 
-      {/* <h4 className="red_font center twenty_padding">Click Card below for Update/Delete</h4> */}
       <div className="weight_page_grid">
         {
           filteredAndSortedArray.map((weight, idx) => (

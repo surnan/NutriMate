@@ -75,17 +75,8 @@ export const getGrubImagesForGrubThunk = (id) => async (dispatch) => {
 }
 
 export const postGrubImagesOneThunk = ( body ) => async (dispatch) => {
-    console.log("...")
-    console.log("...")
-    console.log("...")
-    console.log("...")
     console.log("body ... ", body)
-    console.log("...")
-    console.log("...")
-    console.log("...")
-    console.log("...")
     const { grubId, url, name } = body
-
     try {
         const formData = new FormData(); //AWS requires FormData class
         formData.append('grubId', grubId) //append, NOT push
