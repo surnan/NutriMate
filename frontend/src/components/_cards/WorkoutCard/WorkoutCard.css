@@ -10,6 +10,7 @@
     border: 2px black solid;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604);
     padding: 1rem;
+    border-radius: 1rem;
 }
 
 .workout_card_grid > :first-child {

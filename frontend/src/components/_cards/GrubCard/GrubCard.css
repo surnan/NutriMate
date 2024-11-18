@@ -10,6 +10,7 @@
     gap: 0.5rem;
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604);
     padding: 1rem;
+    border-radius: 1rem;
 }
 
 .grub_card_grid > :first-child {
