@@ -280,20 +280,6 @@ function WorkoutPageForm() {
           <i className="fa-solid fa-trash-can"></i>
         </button>
 
-
-
-
-
-        {/* <button
-          className="black _button white_font"
-          type="button"
-          onClick={handleAddToLog}
-        //disabled={!isEmpty(errors)}
-        >
-          Add To Log
-        </button> */}
-
-
         <button
           onClick={handleAddToLog}
           className="round daily_btn_font_size shadow white clickable menuRoundBtn"
@@ -301,11 +287,6 @@ function WorkoutPageForm() {
         >
           <i className="fa-solid fa-thumbtack"></i>
         </button>
-
-
-
-
-
 
       </div>
       <br />

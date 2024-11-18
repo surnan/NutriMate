@@ -78,15 +78,7 @@ export const getWorkoutImagesForWorkoutThunk = (id) => async (dispatch) => {
 }
 
 export const postWorkoutImagesOneThunk = (body ) => async (dispatch) => {
-    console.log("...")
-    console.log("...")
-    console.log("...")
-    console.log("...")
     console.log("body ... ", body)
-    console.log("...")
-    console.log("...")
-    console.log("...")
-    console.log("...")
     const { workoutId, url, name } = body
 
     try {
@@ -110,19 +102,6 @@ export const postWorkoutImagesOneThunk = (body ) => async (dispatch) => {
     } catch (e) {
         return e
     }
-
-
-    // const response = await csrfFetch('/api/workoutimages', {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(body)
-    // })
-
-    // if (response.ok) {
-    //     const workoutData = await response.json()
-    //     await dispatch(postWorkoutImagesOne(workoutData))
-    //     return workoutData
-    // }
 }
 
 
@@ -166,11 +145,6 @@ export const updateWorkoutImagesOneThunk = (body) => async (dispatch) => {
     }
 }
 
-
-// export const resetWorkoutImages = () => (dispatch) => {
-//     dispatch({ type: "RESET_WORKOUT_IMAGES" });
-// };
-
 export const resetWorkoutImages = () => (dispatch) => {
     dispatch(resetWorkoutImagesForWorkout());
 };
@@ -190,11 +164,6 @@ const workoutImagesReducer = (state = initialState, action) => {
             console.log(".... case RESET_WORKOUT_IMAGES.....")
             console.log("...initialState = ", initialState)
             console.log(".... case RESET_WORKOUT_IMAGES.....")
-
-            // return {
-            //     ...state,
-            //     currentworkout: [],
-            // };
             return initialState
         }
         case LOAD_WORKOUTIMAGES_ALL: {

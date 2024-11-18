@@ -21,7 +21,6 @@
     justify-content: space-between;
 }
 
-/* .grubDetail_card_grid > :nth-child(3), */
 .grubDetail_card_grid > :nth-child(2){
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -33,7 +32,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     background-color: pink;
 }
-
 
 .grubDetail_card_grid > :nth-child(4){
     display: grid;

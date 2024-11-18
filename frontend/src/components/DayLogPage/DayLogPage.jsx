@@ -17,8 +17,6 @@ const DayLogPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
-
-    // const [showDayLogModal, setShowDayLogModal] = useState(true);
     const [showDayLogModal, setShowDayLogModal] = useState(false);
 
     const sessionUser = useSelector((state) => state.session.user);
@@ -118,7 +116,6 @@ const DayLogPage = () => {
                         onChange={handleDateChange}
                         width="100%"                    
                         height="900px"
-                        // handler={handleClick}
                         handler={toggleDayLogModal}
                         setTotals={setTotals}
                     />

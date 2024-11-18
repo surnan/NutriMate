@@ -17,15 +17,6 @@ function Navigation() {
     //dispatch([user]) causes infinite renders
   }, [dispatch, user?.email]);
 
-
-
-  // useEffect(()=>{
-  //   console.log("...Navigation->user = ", user)
-  // }, [user])
-
-
-
-
   return (
     <div className="nav_flex container-width navBlue">
       <NavLink to="/">

@@ -46,16 +46,6 @@ export const getWorkoutsAllThunk = () => async (dispatch) => {
     }
 }
 
-// export const getWorkoutOneThunk = (id) => async (dispatch) => {
-//     const response = await csrfFetch(`/api/workouts/${id}`)
-//     if (response.ok) {
-//         const data = await response.json();
-//         console.log("===> data ==> ", data)
-//         await dispatch(loadWorkoutsOne(data))
-//         return data
-//     }
-// }
-
 export const getWorkoutOneThunk = (id) => async (dispatch) => {
     const response = await csrfFetch(`/api/workouts/${id}`);
     if (response.ok) {

@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
 import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/MyFunctions'
-// import DeleteModal from "../DeleteModal/DeleteModal";
 import DeleteModal from "../_modal/DeleteModal";
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
@@ -96,7 +95,6 @@ function DayLogPageForm() {
 
 
     const handleSubmitSave = async (e) => {
-        console.log("hello")
         e.preventDefault();
         try {
             const { name, timestamp, calories, units, unitType, userId, grubId, workoutId } = form;
@@ -144,7 +142,6 @@ function DayLogPageForm() {
         const calculateGrubCalories = () => {
             if (newGrubObj && form.units) {
                 const newCalories = newGrubObj.calories * form.units;
-                // setGrubCalories(newCalories);
                 console.log("....grubCalories (updated) = ", newCalories);
                 const e = {
                     target: {
