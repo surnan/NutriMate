@@ -266,3 +266,104 @@ select._input {
     height: 3rem; 
     border: 1px solid black;
 }
+
+
+
+/*  */
+/*  */
+/*  */
+/*  */
+@keyframes borderGlow {
+    0% {
+      border-color: #ff0000; /* Red */
+      box-shadow: 0 0 10px #ff0000;
+    }
+    25% {
+      border-color: #ffa500; /* Orange */
+      box-shadow: 0 0 10px #ffa500;
+    }
+    50% {
+      border-color: #ffff00; /* Yellow */
+      box-shadow: 0 0 10px #ffff00;
+    }
+    75% {
+      border-color: #00ff00; /* Green */
+      box-shadow: 0 0 10px #00ff00;
+    }
+    100% {
+      border-color: #ff0000; /* Back to Red */
+      box-shadow: 0 0 10px #ff0000;
+    }
+  }
+  
+  .attention-button {
+    background-color: #fff; /* Button background */
+    color: #000; /* Button text color */
+    border: 3px solid #ff0000; /* Initial border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Font weight */
+    cursor: pointer; /* Pointer cursor */
+    animation: borderGlow 2s infinite; /* Apply animation */
+    transition: transform 0.2s; /* Smooth scaling effect */
+  }
+  
+  .attention-button:hover {
+    transform: scale(1.1); 
+    /* animation: none; */
+  }
+  
+
+
+  .attention-button2 {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    background-color: #fff;
+    border: none; /* Remove the default border */
+    border-radius: 10px; /* Optional rounded corners */
+    cursor: pointer;
+    z-index: 0;
+    overflow: hidden; /* Ensures the animation stays within the button */
+  }
+  
+  .attention-button2::before {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: -3px;
+    right: -3px;
+    bottom: -3px;
+    background: linear-gradient(
+      0deg,
+      red,
+      orange,
+      yellow,
+      green,
+      blue,
+      indigo,
+      violet
+    );
+    border-radius: 10px; /* Match button border radius */
+    z-index: -1;
+    animation: rainbowBorder 3s linear infinite;
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: destination-out;
+    padding: 3px; /* Create the illusion of a border */
+  }
+  
+  @keyframes rainbowBorder {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
