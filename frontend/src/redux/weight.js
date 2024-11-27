@@ -8,7 +8,7 @@ const LOAD_WEIGHTS_ONE = "weights/loadWeightsOne"
 const POST_WEIGHTS_ONE = "weights/postWeightsOne"
 const UPDATE_WEIGHTS_ONE = "weights/updateWeightsOne"
 const REMOVE_WEIGHTS_ONE = "weights/removeWeightsOne"
-const REMOVE_WEIGHTS_USER = "weights/removeWeightsUser"
+// const REMOVE_WEIGHTS_USER = "weights/removeWeightsUser"
 
 // Actions
 const loadWeightsAll = (data) => {

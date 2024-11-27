@@ -8,7 +8,7 @@ import ImageDisplay from "../../_components/ImageDisplay";
 
 const GrubDetailCard = ({ grub }) => {
   const { id, name, servingUnit, servingSize, calories } = grub
-  const { User, company, protein, carbs, fats } = grub
+  // const { User, company, protein, carbs, fats } = grub
 
   const dispatch = useDispatch();
 
