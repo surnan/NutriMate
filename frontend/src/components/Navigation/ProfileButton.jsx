@@ -1,3 +1,5 @@
+// frontend/src/components/Navigation/ProfileButton.jsx
+
 // "useRef" & "ref={ulRef}" <=== create alias to DOM element
 // "e.target" <=== DOM element that was clicked.  You will always be a DOM element
 import { useState, useEffect, useRef } from "react";
@@ -16,8 +18,13 @@ function ProfileButton() {
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
+  const [isAnimationActive, setIsAnimationActive] = useState(true);
+
+
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
+    // setAllowAnimate(false)
+    if (isAnimationActive) setIsAnimationActive(false);
     setShowMenu(!showMenu);
   };
 
@@ -46,9 +53,13 @@ function ProfileButton() {
 
   return (
     <div className="profile_anchor">
-      <button className="profile_btn _button" onClick={toggleMenu}>
+      <button
+        className={`profile_btn _button ${isAnimationActive ? "attention-button" : ""}`}
+        onClick={toggleMenu}
+      >
         <i className="fas fa-user-circle black_font" />
       </button>
+
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
