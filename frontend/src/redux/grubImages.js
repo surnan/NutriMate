@@ -5,7 +5,7 @@ const LOAD_GRUBIMAGES_ALL = "grubimages/loadGrubImagesAll"
 const LOAD_GRUBIMAGES_ONE = "grubimages/loadGrubImagesOne"
 const LOAD_GRUBIMAGES_GRUB = "grubimages/loadGrubImagesGrubAll"
 const REMOVE_GRUB_ONE = "grubimages/removeGrubImagesOne"
-const POST_GRUB_ONE = "grubimages/postGrubImagesOne"
+// const POST_GRUB_ONE = "grubimages/postGrubImagesOne"
 const UPDATE_GRUB_ONE = "grubimages/updateGrubImagesOne"
 const RESET_GRUB_IMAGES = "grubimages/resetGrubImages";
 
@@ -30,10 +30,10 @@ const removeGrubImagesOne = (data) => ({
     payload: data
 })
 
-const postGrubImagesOne = (data) => ({
-    type: POST_GRUB_ONE,
-    payload: data
-})
+// const postGrubImagesOne = (data) => ({
+//     type: POST_GRUB_ONE,
+//     payload: data
+// })
 
 const loadGrubImagesForGrub = (data) => ({
     type: LOAD_GRUBIMAGES_GRUB,
@@ -97,18 +97,6 @@ export const postGrubImagesOneThunk = ( body ) => async (dispatch) => {
         return response
     } catch (e) {
         return e
-    }
-
-    const response = await csrfFetch('/api/grubimages', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body)
-    })
-
-    if (response.ok) {
-        const grubData = await response.json()
-        await dispatch(postGrubImagesOne(grubData))
-        return grubData
     }
 }
 
@@ -187,12 +175,12 @@ const grubImagesReducer = (state = initialState, action) => {
             newState.single = action.payload;
             return newState;
         }
-        case POST_GRUB_ONE: {
-            let newState = { ...state };
-            newState.allGrubImages = [action.payload, ...newState.allGrubImages];
-            newState.byId[action.payload.id] = action.payload;
-            return newState;
-        }
+        // case POST_GRUB_ONE: {
+        //     let newState = { ...state };
+        //     newState.allGrubImages = [action.payload, ...newState.allGrubImages];
+        //     newState.byId[action.payload.id] = action.payload;
+        //     return newState;
+        // }
         case REMOVE_GRUB_ONE: {
             let newState = { ...state };
             newState.allGrubImages = newState.allGrubImages.filter(

@@ -4,14 +4,15 @@ import './DayLogModal.css'
 import { useNavigate } from 'react-router-dom';
 
 
-const DayLogModal = ({ _stuff, onClose }) => {
+// const DayLogModal = ({ _, onClose }) => {
+const DayLogModal = ({onClose }) => {
     // console.log('_stuff  = ', _stuff)
     const nav = useNavigate()
 
-    const handleDeleteBtn = async () => {
-        console.log("BUTTON PRESSED")
-        onClose();
-    };
+    // const handleDeleteBtn = async () => {
+    //     console.log("BUTTON PRESSED")
+    //     onClose();
+    // };
 
     const handleWorkoutsBtn = () => { nav("/workouts") }
     const handleGrubsBtn = () => { nav("/grubs") }

@@ -1,4 +1,6 @@
 // frontend/src/components/Splash/Splash.jsx
+
+/*
 import "./Splash.css"
 import { useState, useEffect } from 'react';
 import { updateUserThunk } from '../../redux/session';
@@ -97,3 +99,5 @@ const Splash = () => {
 }
 
 export default Splash;
+
+*/
