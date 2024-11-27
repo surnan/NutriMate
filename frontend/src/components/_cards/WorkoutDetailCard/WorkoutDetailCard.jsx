@@ -7,7 +7,8 @@ import { getWorkoutImagesForWorkoutThunk } from "../../../redux/workoutImages";
 import ImageDisplay from "../../_components/ImageDisplay";
 
 function WorkoutDetailCard({ workout }) {
-  const { id, name, description, User } = workout;
+  // const { id, name, description, User } = workout;
+  const { id, name, description} = workout;
   const dispatch = useDispatch();
 
   useEffect(() => {

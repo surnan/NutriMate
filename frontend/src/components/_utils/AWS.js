@@ -12,5 +12,5 @@ export const updatedImgFromPC = async (e, setPreviewUrl, setImgUrl, setShowUploa
 export const uploadProfileImage = async (imgUrl, userId, dispatch, thunk) => {
   const form = { img_url: imgUrl };
   await dispatch(thunk(userId, form));
-  resetImageStates()
+  // resetImageStates()
 };

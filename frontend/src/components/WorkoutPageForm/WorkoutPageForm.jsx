@@ -6,7 +6,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import { getWorkoutImagesForWorkoutThunk, resetWorkoutImages, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../_modal/DeleteModal";
-import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions';
+import { capitalizeFirstLetter} from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";

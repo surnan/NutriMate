@@ -14,8 +14,8 @@ import { getWorkoutImagesAllThunk } from "../../redux/workoutImages";
 
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
-import WorkoutDetailCard from "../_cards/WorkoutCard";
-import GrubDetailCard from "../_cards/GrubCard";
+// import WorkoutDetailCard from "../_cards/WorkoutCard";
+// import GrubDetailCard from "../_cards/GrubCard";
 
 
 const CardsPageGrid = ({ stuff }) => {

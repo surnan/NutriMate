@@ -47,10 +47,10 @@ const DayLogPage = () => {
 
 
 
-    const handleClick = (event111) => {
-        console.log("...handleClick = ", event111)
-        navigate(`/daylog/${event111.id}`)
-    }
+    // const handleClick = (event111) => {
+    //     console.log("...handleClick = ", event111)
+    //     navigate(`/daylog/${event111.id}`)
+    // }
 
     const handleModalClose = () => {
         setShowDayLogModal(false);

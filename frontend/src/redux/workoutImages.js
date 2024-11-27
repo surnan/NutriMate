@@ -6,7 +6,7 @@ const LOAD_WORKOUTIMAGES_ALL = "workoutimages/loadWorkoutImagesAll"
 const LOAD_WORKOUTIMAGES_ONE = "workoutimages/loadWorkoutImagesOne"
 const LOAD_WORKOUTIMAGES_WORKOUT = "workoutimages/loadWorkoutImagesWorkoutAll"
 const REMOVE_WORKOUTIMAGES_ONE = "workoutimages/removeWorkoutImagesOne"
-const POST_WORKOUTIMAGES_ONE = "workoutimages/postWorkoutImagesOne"
+// const POST_WORKOUTIMAGES_ONE = "workoutimages/postWorkoutImagesOne"
 const UPDATE_WORKOUTIMAGES_ONE = "workoutimages/updateWorkoutImagesOne"
 const RESET_WORKOUT_IMAGES = "workoutimages/resetWorkoutImages";
 
@@ -32,10 +32,10 @@ const removeWorkoutImagesOne = (data) => ({
     payload: data
 })
 
-const postWorkoutImagesOne = (data) => ({
-    type: POST_WORKOUTIMAGES_ONE,
-    payload: data
-})
+// const postWorkoutImagesOne = (data) => ({
+//     type: POST_WORKOUTIMAGES_ONE,
+//     payload: data
+// })
 
 const loadWorkoutImagesForWorkout = (data) => ({
     type: LOAD_WORKOUTIMAGES_WORKOUT,
@@ -179,12 +179,12 @@ const workoutImagesReducer = (state = initialState, action) => {
             newState.single = action.payload;
             return newState;
         }
-        case POST_WORKOUTIMAGES_ONE: {
-            let newState = { ...state };
-            newState.allWorkoutImages = [action.payload, ...newState.allWorkoutImages];
-            newState.byId[action.payload.id] = action.payload;
-            return newState;
-        }
+        // case POST_WORKOUTIMAGES_ONE: {
+        //     let newState = { ...state };
+        //     newState.allWorkoutImages = [action.payload, ...newState.allWorkoutImages];
+        //     newState.byId[action.payload.id] = action.payload;
+        //     return newState;
+        // }
         case REMOVE_WORKOUTIMAGES_ONE: {
             let newState = { ...state };
             newState.allWorkoutImages = newState.allWorkoutImages.filter(
