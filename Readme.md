@@ -1,6 +1,13 @@
 <!-- "Frontend > Backend > AWS > Backend > Database > Backend > Frontend" -->
 
-# Calorie Mate
+## Calorie Mate
+[Live Site](https://nutrimate.onrender.com)
+
+Nutrimate is an app that helps in tracking, saving and calculating exercise, food and body weight. Charts and Calendar components are used to give a more intuitive way to input and view data trends. Calendar components enable historical tracking as well as Charts for analyzing body weight changes over time.
+
+## Features
+
+
 
 ## Database Schema Design
 ![db-schema](./images/CalorieMateSchema.png)
