@@ -28,12 +28,17 @@ function LoginFormModal() {
       // If server responds with errors, set them to display in the UI
       setErrors(serverResponse);
     } else {
-      // Close modal on successful login
+      // closeModal();
+      // navigate("/daylog");
+      if (credentials.email === "user2@user.io") {
+        navigate("/settings");
+      } else {
+        navigate("/daylog");
+      }
       closeModal();
-      navigate("/daylog");
     }
   };
-  
+
 
   return (
     <>
@@ -41,13 +46,13 @@ function LoginFormModal() {
       {errors.server && <p className="error-message">{errors.server}</p>}
       <form className="login_hGrid modal_css" onSubmit={(e) => handleLogin(e)}>
         <h1 className="center">Log In</h1>
-        
+
         {/* Email input */}
         <label>
           Email&nbsp;&nbsp;
           <input
 
-          className="_input"
+            className="_input"
             type="text"
             value={email}
             name="email"
@@ -60,7 +65,7 @@ function LoginFormModal() {
         <label>
           Password&nbsp;&nbsp;
           <input
-          className="_input"
+            className="_input"
             type="password"
             value={password}
             name="password"

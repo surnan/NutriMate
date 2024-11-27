@@ -14,6 +14,9 @@ import WorkoutPageForm from '../components/WorkoutPageForm'
 import DayLogPageForm from '../components/DayLogPageForm';
 import GrubPageForm from '../components/GrubPageForm';
 
+// import SettingsPage from '../components/SettingsPage';
+import SettingsPage from '../components/SettingsPage/SettingsPage';
+
 
 export const router = createBrowserRouter([
   {
@@ -30,7 +33,6 @@ export const router = createBrowserRouter([
       { path: "grubs", element: <CardsPage stuff="grub"/> },
       { path: "workouts", element: <CardsPage stuff="workout"/> },
       
-      
       { path: "weightform", element: <WeightPageForm /> },
       { path: "daylogform", element: <DayLogPageForm /> },
       { path: "grubform", element: <GrubPageForm /> },
@@ -40,6 +42,8 @@ export const router = createBrowserRouter([
       { path: "workoutform/:id", element: <WorkoutPageForm /> },
       { path: "daylog/:id", element: <DayLogPageForm /> },
       { path: "daylogform/:id", element: <DayLogPageForm /> },
+
+      { path: "settings", element: <SettingsPage /> },
       
       { path: "*", element: <p> == Page NOT Found ==</p> },
     ],
