@@ -1,5 +1,5 @@
 // frontend/src/router/index.jsx
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
@@ -16,36 +16,39 @@ import GrubPageForm from '../components/GrubPageForm';
 
 // import SettingsPage from '../components/SettingsPage';
 import SettingsPage from '../components/SettingsPage/SettingsPage';
-
+import ProtectRoute from '../components/_components/ProtectRoute/ProtectRoute';
 
 export const router = createBrowserRouter([
   {
-    element: <Layout />,
+    element: (
+      <Layout />
+    ),
     children: [
+      //Public Routes
       { path: "/", element: <Splash /> },
-      // { path: "/", element: <DayLogPage />  },
-
       { path: "login", element: <LoginFormPage /> },
       { path: "signup", element: <SignupFormPage /> },
-      
-      { path: "weights", element: <WeightPage /> },
-      { path: "daylog", element: <DayLogPage /> },
-      { path: "grubs", element: <CardsPage stuff="grub"/> },
-      { path: "workouts", element: <CardsPage stuff="workout"/> },
-      
-      { path: "weightform", element: <WeightPageForm /> },
-      { path: "daylogform", element: <DayLogPageForm /> },
-      { path: "grubform", element: <GrubPageForm /> },
-      { path: "workoutform", element: <WorkoutPageForm /> },
-      
-      { path: "grubform/:id", element: <GrubPageForm /> },
-      { path: "workoutform/:id", element: <WorkoutPageForm /> },
-      { path: "daylog/:id", element: <DayLogPageForm /> },
-      { path: "daylogform/:id", element: <DayLogPageForm /> },
 
-      { path: "settings", element: <SettingsPage /> },
-      
-      { path: "*", element: <p> == Page NOT Found ==</p> },
+      //Protected Routes
+      {
+        element: <ProtectRoute/>,
+        children: [
+          { path: "weights", element: <WeightPage /> },
+          { path: "daylog", element: <DayLogPage /> },
+          { path: "grubs", element: <CardsPage stuff="grub" /> },
+          { path: "workouts", element: <CardsPage stuff="workout" /> },
+          { path: "weightform", element: <WeightPageForm /> },
+          { path: "daylogform", element: <DayLogPageForm /> },
+          { path: "grubform", element: <GrubPageForm /> },
+          { path: "workoutform", element: <WorkoutPageForm /> },
+          { path: "grubform/:id", element: <GrubPageForm /> },
+          { path: "workoutform/:id", element: <WorkoutPageForm /> },
+          { path: "daylog/:id", element: <DayLogPageForm /> },
+          { path: "daylogform/:id", element: <DayLogPageForm /> },
+          { path: "settings", element: <SettingsPage /> },
+        ]
+      },
+      { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
 
