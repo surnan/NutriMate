@@ -367,3 +367,29 @@ select._input {
     }
   }
   
+
+  /*  */
+  /*  */
+  /*  */
+  /*  */
+  .floating-arrow {
+    position: absolute;
+    top: -40px; /* Position above the button */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%);
+    z-index: 0; /* Appear below the button */
+    animation: float 1.5s ease-in-out infinite;
+    font-size: 24px; /* Adjust arrow size */
+    color: #FF4500; /* Arrow color */
+  }
+  
+  /* Floating Animation */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(-50%, -10px);
+    }
+    50% {
+      transform: translate(-50%, 0);
+    }
+  }
+  
