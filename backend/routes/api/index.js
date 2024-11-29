@@ -12,6 +12,8 @@ const weightsRouter = require('./weights.js');
 const workoutimagesRouter = require('./workoutImages.js');
 const workoutsRouter = require('./workouts.js');
 
+const scrapeRouter = require('./scraper.js');
+
 
 router.get('/hello/world', (req, res) => {
     res.send('api/routes ---> Hello World! password -2');
@@ -31,6 +33,7 @@ router.use('/daylogs', daylogsRouter);
 router.use('/grubs', grubRouter);
 router.use('/grubimages', grubimagesRouter);
 router.use('/session', sessionRouter);
+router.use('/scraper', scrapeRouter)
 router.use('/users', usersRouter);
 router.use('/weights', weightsRouter);
 router.use('/workoutimages', workoutimagesRouter);                                                                                                                                                                                            
