@@ -24,27 +24,55 @@ const SettingsPage = () => {
             if (data.success) {
                 console.log("Scraped Data:", data.data);
                 setScrapedData(data.data);
+                alert("Scraping completed successfully!");
             } else {
                 console.error("Error:", data.message);
             }
         } catch (error) {
             console.error("Error fetching scraped data:", error);
+            alert("Scraping failed.");
         }
     };
 
-    return (
+    // Function to handle bulk import
+    const handleBulkImport = async () => {
+        try {
+            const response = await csrfFetch("/api/grubs/import-scraped-data", {
+                method: "POST",
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log("Bulk Import Success:", data);
+                alert("Data imported successfully into Grubs table!");
+            } else {
+                console.error("Error during bulk import:", data.message);
+                alert("Import failed. See console for details.");
+            }
+        } catch (error) {
+            console.error("Error importing data:", error);
+            alert("An error occurred during import.");
+        }
+    };
+
+
+return (
         <div>
-            <br/>
+            <br />
             <h2>Settings Page</h2>
-            <h3 >Email = {sessionUser?.email}</h3>
-            <br/>
-            <button
-                onClick={handleScrape}
-                className="_button black_font"
-            >
+            <h3>Email = {sessionUser?.email}</h3>
+            <br />
+            {/* Button to trigger scraping */}
+            <button onClick={handleScrape} className="_button black_font">
                 &nbsp;&nbsp;Scrape Nutrition Data&nbsp;&nbsp;
             </button>
+            <br />
+            <br />
+            {/* Button to trigger bulk import */}
+            <button onClick={handleBulkImport} className="_button black_font">
+                &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
+            </button>
 
+            {/* Display scraped data */}
             {scrapedData && (
                 <div>
                     <h3>Scraped Data:</h3>
