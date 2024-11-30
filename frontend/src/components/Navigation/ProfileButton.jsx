@@ -54,7 +54,9 @@ function ProfileButton() {
   return (
     <div className="profile_anchor">
       <button
-        className={`profile_btn _button ${isAnimationActive ? "attention-button" : ""}`}
+        // className={`profile_btn _button ${isAnimationActive ? "attention-button" : ""}`}
+        // className={`profile_btn _button attention-button`}
+        className={`profile_btn _button ${user ? "" : "attention-button"}`}
         onClick={toggleMenu}
       >
         <i className="fas fa-user-circle black_font" />
