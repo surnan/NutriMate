@@ -15,8 +15,16 @@ function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const nav = useNavigate();
-  const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
+  
+  const user = useSelector((store) => store.session.user);
+
+  useEffect = (() => {
+    console.log("USEEFFECT: user = ", user)
+
+  }, [user?.id, dispatch])
+
+
 
   const [isAnimationActive, setIsAnimationActive] = useState(true);
 
@@ -53,12 +61,7 @@ function ProfileButton() {
 
   return (
     <div className="profile_anchor">
-      <button
-        className={`profile_btn _button ${isAnimationActive ? "attention-button" : ""}`}
-        onClick={toggleMenu}
-      >
-        <i className="fas fa-user-circle black_font" />
-      </button>
+
 
       {showMenu && (
         <ul className={"profile-dropdown"} ref={ulRef}>
