@@ -1,6 +1,6 @@
 //frontend/src/components/Navigation/Navigation.jsx
 import { NavLink, useNavigate } from "react-router-dom";
-import ProfileButton from "./ProfileButton2";
+import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../fe_images/nutimate_logo.png";
