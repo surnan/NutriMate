@@ -1,6 +1,6 @@
 // backend/db/models/grub.js
 'use strict';
-const {Model, Validator} = require('sequelize');
+const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Grub extends Model {
         static associate(models) {
@@ -127,7 +127,13 @@ module.exports = (sequelize, DataTypes) => {
             attributes: {
                 exclude: ["createdAt", "updatedAt"]
             }
-        }
+        },
+        indexes: [
+            {
+                unique: true,
+                fields: ['company', 'name']
+            }
+        ]
     });
     return Grub;
 };
