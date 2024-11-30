@@ -60,6 +60,7 @@ function ProfileButton() {
         onClick={toggleMenu}
       >
         <i className="fas fa-user-circle black_font" />
+        {!user && <div className="arrow"></div>}
       </button>
 
       {showMenu && (
