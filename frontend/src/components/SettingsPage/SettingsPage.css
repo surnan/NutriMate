@@ -1,0 +1,45 @@
+/* frontend/src/components/SettingsPage/SettingPage.css */
+
+/* Container for the toggle switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Hide the default checkbox input */
+  .toggle-switch input[type="checkbox"] {display: none}
+  
+  /* Label styled as the toggle */
+  .toggle-switch .toggle-label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* The toggle slider */
+  .toggle-switch .toggle-slider {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Dark mode styling */
+  .toggle-switch input[type="checkbox"]:checked + .toggle-label {
+    background-color: #4caf50; /* Green for dark mode */
+  }
+  
+  .toggle-switch input[type="checkbox"]:checked + .toggle-label .toggle-slider {
+    transform: translateX(30px); /* Move the slider to the right */
+  }
+  

@@ -6,10 +6,13 @@ import { csrfFetch } from "../../redux/csrf";
 import { useSelector } from "react-redux";
 import { useState } from 'react';
 
+import { useTheme } from "../../context/ThemeContext"
+
 const SettingsPage = () => {
     const [scrapedData, setScrapedData] = useState(null);
 
     const sessionUser = useSelector((state) => state.session.user);
+    const { theme, toggleTheme } = useTheme();
 
     const handleScrape = async () => {
         const url = 'https://www.justsalad.com/';
@@ -52,7 +55,7 @@ const SettingsPage = () => {
             console.error("Error importing data:", error);
             if (error instanceof Response) {
                 try {
-                    const errorData = await error.json(); 
+                    const errorData = await error.json();
                     console.error("Parsed error data:", errorData);
                     alert(`An error occurred: ${errorData.message}`);
                 } catch (jsonError) {
@@ -66,11 +69,28 @@ const SettingsPage = () => {
     };
 
 
-return (
-        <div>
+    return (
+        <div className="mainBodyStyle">
             <br />
             <h2>Settings Page</h2>
             <h3>Email = {sessionUser?.email}</h3>
+            <br />
+            <br />
+            <br />
+            <div className="toggle-switch">
+                <input
+                    type="checkbox"
+                    id="theme-toggle"
+                    checked={theme === "dark"}
+                    onChange={toggleTheme}
+                />
+                <label htmlFor="theme-toggle" className="toggle-label">
+                    <span className="toggle-slider" />
+                </label>
+                <p>Current Theme: {theme}</p>
+            </div>
+            <br />
+            <br />
             <br />
             {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">
@@ -102,28 +122,3 @@ return (
 
 export default SettingsPage;
 
-
-
-
-/*
-
-    const handleBulkImport = async () => {
-        try {
-            const response = await csrfFetch("/api/grubs/import-scraped-data", {
-                method: "POST",
-            });
-            const data = await response.json();
-            if (response.ok) {
-                console.log("Bulk Import Success:", data);
-                alert("Data imported successfully into Grubs table!");
-            } else {
-                console.error("Error during bulk import:", data.message);
-                alert("Import failed. See console for details.");
-            }
-        } catch (error) {
-            console.error("Error importing data:", error);
-            alert("An error occurred during import.");
-        }
-    };
-
-*/
