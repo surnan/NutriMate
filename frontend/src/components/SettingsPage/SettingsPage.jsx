@@ -4,7 +4,7 @@ import "./SettingsPage.css";
 import { csrfFetch } from "../../redux/csrf";
 
 import { useSelector } from "react-redux";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useTheme } from "../../context/ThemeContext"
 
@@ -13,6 +13,13 @@ const SettingsPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
     const { theme, toggleTheme } = useTheme();
+
+
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+    }, [theme])
+
+
 
     const handleScrape = async () => {
         const url = 'https://www.justsalad.com/';
@@ -75,6 +82,7 @@ const SettingsPage = () => {
             <h2>Settings Page</h2>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
+            <p>{`Theme = ${theme}`}</p>
             <br />
             <br />
             <div className="toggle-switch">
