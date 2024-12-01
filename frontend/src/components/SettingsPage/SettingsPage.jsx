@@ -91,9 +91,6 @@ const SettingsPage = () => {
                 {`Theme = ${theme}`}
             </p>
 
-
-
-
             <br />
             <br />
             <div className="toggle-switch">
@@ -110,6 +107,13 @@ const SettingsPage = () => {
             </div>
             <br />
             <br />
+
+
+            <br />
+            <br />
+
+
+
             <br />
             {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">

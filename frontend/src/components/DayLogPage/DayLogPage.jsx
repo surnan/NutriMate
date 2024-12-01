@@ -11,8 +11,6 @@ import DayLogModal from "../_modal/DayLogModal/DayLogModal";
 import { useTheme } from "../../context/ThemeContext"
 
 
-
-
 const DayLogPage = () => {
 
     const dispatch = useDispatch()
@@ -45,13 +43,6 @@ const DayLogPage = () => {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
-
-
-
-    // const handleClick = (event111) => {
-    //     console.log("...handleClick = ", event111)
-    //     navigate(`/daylog/${event111.id}`)
-    // }
 
     const handleModalClose = () => {
         setShowDayLogModal(false);
