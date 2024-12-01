@@ -1,7 +1,5 @@
 /* frontend/src/components/DayLogPage/DayLogPage.css */
 
-
-
 .dp_header {
     display: flex;
     justify-content: space-between; 
@@ -16,7 +14,6 @@
     font-size: 25px;
     background-color: transparent;
     border: 2px solid black;
-
 }
 
 .dph_btn:active {filter: brightness(1.33)}
@@ -43,16 +40,6 @@
     height: 4rem;
 }
 .dpgh_label {font-weight: 600}
-
-.calendarStuff {
-    width: 50%;
-    height: 50%;
-    background-color: yellow;
-    color: purple;
-    margin: auto;
-    margin-top: 2rem;
-    padding: 1rem;
-}
 
 .circle_buttons_h_flex{
     display: flex;

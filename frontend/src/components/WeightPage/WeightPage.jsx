@@ -10,9 +10,7 @@ import WeightCard from "../_cards/WeightCard";
 // import WeightChart from "../WeightChart/WeightChart";
 // import LineGraph from "../LineGraph";
 import LineGraph from "../_components/LineGraph";
-
-
-
+import { useTheme } from "../../context/ThemeContext";
 
 const WeightPage = () => {
   const dispatch = useDispatch()
@@ -20,6 +18,7 @@ const WeightPage = () => {
 
   const sessionUser = useSelector((state) => state.session.user);
   const weightsArr = useSelector(state => state.weights.allWeights);
+  const { theme, toggleTheme } = useTheme();
 
   const filteredAndSortedArray = weightsArr
     .filter(weight => weight.userId === sessionUser.id)
@@ -47,8 +46,17 @@ const WeightPage = () => {
   const handleNewWeight = () => { navigate('/weightform') }
   const handleBackBtn = () => { navigate(-1) };
 
+  useEffect(() => {
+    console.log(`Theme ===> `, theme)
+    document.body.classList.remove("light-mode", "dark-mode");
+    document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
+  }, [theme])
+
   return (
-    <div className="mainBodyStyle">
+    <div className={`
+      mainBodyStyle settingsPageFlex
+      ${theme === "dark" ? "dkBody smoke_font" : ""}
+      `}>
       <h3>WeightPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">

@@ -2,27 +2,28 @@
 
 import "./SettingsPage.css";
 import { csrfFetch } from "../../redux/csrf";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
-
 import { useTheme } from "../../context/ThemeContext";
-
 import { updateUserThunk } from '../../redux/session';
 
-
 const SettingsPage = () => {
-    const [scrapedData, setScrapedData] = useState(null);
     const dispatch = useDispatch();
-
     const sessionUser = useSelector((state) => state.session.user);
+    
+    const [scrapedData, setScrapedData] = useState(null);
+    const [showSelect, setShowSelect] = useState(false);
     const { theme, toggleTheme } = useTheme();
-
-    const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+    const [imgUrl, setImgUrl] = useState("");   
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
 
-
+    // AWS
+    const handleImgClick = () =>{
+        console.log("click image")
+        setShowSelect(!showSelect)
+        console.log("showSelect = ", showSelect)
+    }
 
     const updatedImgFromPC = async (e) => {
         const file = e.target.files[0];
@@ -42,8 +43,6 @@ const SettingsPage = () => {
         setShowUpload(true);
         setPreviewUrl("");
     }
-
-
 
     const handleScrape = async () => {
         const url = 'https://www.justsalad.com/';
@@ -99,26 +98,20 @@ const SettingsPage = () => {
         }
     };
 
-
     useEffect(() => {
         console.log(`Theme ===> `, theme)
+        document.body.classList.remove("light-mode", "dark-mode");
+        document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
     }, [theme])
 
-
     return (
-        <div className={`mainBodyStyle ${theme === "dark" ? "dkBody smoke_font" : ""}`}>
+        <div className={`
+            mainBodyStyle settingsPageFlex
+            ${theme === "dark" ? "dkBody smoke_font" : ""}
+            `}>
             <br />
-            <h2>Settings Page</h2>
-            <h3>Name = {sessionUser.username}</h3>
+            <h1>SettingsPage.jsx</h1>
             <h3>Email = {sessionUser?.email}</h3>
-            <br />
-            <p
-                className={`TEST-ELEMENT center ${theme === "dkBody" ? "red white_font" : ""}`}
-            >
-                {`Theme = ${theme}`}
-            </p>
-
-            <br />
             <br />
             <div className="toggle-switch">
                 <input
@@ -133,27 +126,14 @@ const SettingsPage = () => {
                 <p>Current Theme: {theme}</p>
             </div>
             <br />
-            <br />
-
-
-            <br />
-            <br />
-
-
-
-            <br />
-            {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">
-                &nbsp;&nbsp;Scrape Nutrition Data&nbsp;&nbsp;
+                SCRAP <strong>JustSalad.com</strong>
             </button>
             <br />
-            <br />
-            {/* Button to trigger bulk import */}
             <button onClick={handleBulkImport} className="_button black_font">
                 &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
             </button>
-
-            {/* Display scraped data */}
+            <br />
             {scrapedData && (
                 <div>
                     <h3>Scraped Data:</h3>
@@ -166,23 +146,22 @@ const SettingsPage = () => {
                     </ul>
                 </div>
             )}
-
-
+            <br/>
+            <h3>Click Image to change Profile Picture</h3>
+            <br/>
             <div>
                 <img
-                    className="round"
+                    className="round clickable"
                     style={{ height: "300px", width: "300px" }}
-                    // src="https://nutrimatebucket.s3.amazonaws.com/1733079909225.jpeg"
                     src={sessionUser.profileImg}
+                    onClick={handleImgClick}
                 />
             </div>
-
-
+            <br />
             <div className="center">
-                <h3>Change Your Profile Picture</h3>
                 <br />
                 <br />
-                {showUpload && (
+                {showSelect && showUpload && (
                     <label htmlFor='file-upload'> Select From Computer
                         <input
                             type='file'
@@ -211,10 +190,6 @@ const SettingsPage = () => {
                     </div>
                 )}
             </div>
-
-
-
-
         </div>
     );
 };

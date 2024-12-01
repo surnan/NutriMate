@@ -3,10 +3,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Oswald:wght@200..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+.clickable {cursor: pointer}
+.errorMessage {color: red}
+.hidden {display: none}
+.center {text-align: center}
+.shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
+.twenty_margin {margin: 20px}
+.twenty_padding {padding: 20px}
+
+.black_font {color: black !important}
+.red_font {color: red !important}
+.white_font {color: white !important}
+.smoke_font {color: whitesmoke !important}
+
+.blue {background-color: rgba(105, 169, 247, 0.665)}
+.bluegreen {background-color: rgba(0, 247, 255, 0.665)}
+.black {background-color: black}
+.green {background-color: rgb(112, 195, 112)}
+.ltcoral {background-color: lightcoral}
+.ltskyblue {background-color: lightskyblue}
+.ltltskyblue {background-color: rgba(135, 206, 250, 0.586)}
+.ltYellow {background-color: lightyellow}
+.orange {background-color: orange}
+.white  {background-color: white;}
+
+.navBlue {background-color: rgb(33, 45, 87)}
+.pink {background-color: pink}
+.dkPink {background-color: rgb(210, 144, 155)}
+.red {background-color: red}
+.yellow {background-color: rgb(247, 247, 125)}
+
+.dkBody {background-color: rgb(51, 51, 51);}
+.dkNav {background-color: rgb(35, 35, 35);}
+
 
 /* .max_HFlex { */
     /* background: yellow !important; */
 /* } */
+
+:root {
+  --max-page-width: 1200px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 2px red solid; */
+}
+
+/* Light mode */
+body.light-mode {
+  background-color: whitesmoke; 
+  color: black; 
+}
+
+/* Dark mode */
+body.dark-mode {
+  background-color: rgb(45, 45, 45);
+  color: whitesmoke;  
+}
+
 
 .calender_div {
     /* background: orange !important;  */
@@ -34,25 +91,6 @@
     width: 100%;
     display: flex;
     justify-content: left;
-}
-
-
-
-
-
-:root {
-    --max-page-width: 1200
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /* border: 2px red solid; */
-}
-
-body {
-    background-color: lightblue;
 }
 
 .modal_css {
@@ -86,13 +124,9 @@ button:disabled {
 
 
 ._button:active .back_btn:active{filter: brightness(1.33)}
-
 ._select, ._input, ._label {height: 2rem}
 input {padding-left: 1rem}
-
-select._input {
-    padding: 0.5rem; /* Or adjust as needed */
-}
+select._input {padding: 0.5rem}
 
 .max_HFlex {
     display: flex;
@@ -102,50 +136,14 @@ select._input {
 }
 
 .mainBodyStyle {
-    background-color: rgba(252, 253, 250);
+    /* background-color: rgba(252, 253, 250); */
     padding: 25px;
-    min-height: 100vw;
-    max-width: 1200px;
+    min-height: 100vh;
+    /* max-width: 1200px; */
+    max-width: var(--max-page-width);
     margin: auto;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
 }
-
-.clickable {cursor: pointer}
-.errorMessage {color: red}
-.hidden {display: none}
-.center {text-align: center}
-.shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
-.twenty_margin {margin: 20px}
-.twenty_padding {padding: 20px}
-
-
-
-.black_font {color: black !important}
-.red_font {color: red !important}
-.white_font {color: white !important}
-.smoke_font {color: whitesmoke !important}
-
-.blue {background-color: rgba(105, 169, 247, 0.665)}
-.bluegreen {background-color: rgba(0, 247, 255, 0.665)}
-.black {background-color: black}
-.green {background-color: rgb(112, 195, 112)}
-.ltcoral {background-color: lightcoral}
-.ltskyblue {background-color: lightskyblue}
-.ltltskyblue {background-color: rgba(135, 206, 250, 0.586)}
-.ltYellow {background-color: lightyellow}
-.orange {background-color: orange}
-.white  {background-color: white;}
-
-.navBlue {background-color: rgb(33, 45, 87)}
-.pink {background-color: pink}
-.dkPink {background-color: rgb(210, 144, 155)}
-.red {background-color: red}
-.yellow {background-color: rgb(247, 247, 125)}
-
-.dkBody {background-color: rgb(51, 51, 51);}
-.dkNav {background-color: rgb(5, 5, 5);}
-
-
 
   .modal_under_layer {
     position: fixed;
@@ -178,8 +176,6 @@ select._input {
     left: 50%;
     transform: translate(-50%, -50%); 
 }
-
-/* .day_width {width: 30rem} */
 
 .delete_btn {
     display: block;
@@ -218,11 +214,7 @@ select._input {
     border-radius: 5px;
 }
 
-.round{
-    border-radius: 50%;
-}
-
-
+.round{border-radius: 50%}
 
 ._button {
     border-radius: 10px;
@@ -249,17 +241,10 @@ select._input {
 .vertical_center_flex{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
-.block {
-    display: block;
-}
-
-.border {
-    border: 1px solid rgba(0, 0, 0, 0.548);
-}
+.block {display: block}
+.border {border: 1px solid rgba(0, 0, 0, 0.548)}
 
 .search_div ._input {
     padding: 1rem;
@@ -370,11 +355,6 @@ select._input {
     }
   }
   
-
-  /*  */
-  /*  */
-  /*  */
-  /*  */
   .floating-arrow {
     position: absolute;
     top: -40px; /* Position above the button */

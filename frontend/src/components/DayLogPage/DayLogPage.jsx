@@ -12,13 +12,20 @@ import { useTheme } from "../../context/ThemeContext"
 
 
 const DayLogPage = () => {
-
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDayLogModal, setShowDayLogModal] = useState(false);
 
     const sessionUser = useSelector((state) => state.session.user);
+    const { theme, toggleTheme } = useTheme();
+
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+        document.body.classList.remove("light-mode", "dark-mode");
+        document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
+    }, [theme])
+
 
     const [totals, setTotals] = useState({
         calories: 0,
@@ -52,34 +59,34 @@ const DayLogPage = () => {
         setShowDayLogModal((prevState) => !prevState);
     };
 
-    const { theme, toggleTheme } = useTheme();
 
-    useEffect(() => {
-        console.log(`Theme ===> `, theme)
-    }, [theme])
 
     return (
-        <div 
-        // className="container-width"
-        className={`container-width
+        <div
+            className={`
+            mainBodyStyle
             ${theme === "dark" ? "dkBody smoke_font" : ""}
             `}
         >
-            <h1>DayLogPage.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3>
-            <br />
             <div>
-                <p>Total Calories: {totals.calories}</p>
-                <p>Total Protein: {totals.protein}g</p>
-                <p>Total Fats: {totals.fats}g</p>
-                <p>Total Carbs: {totals.carbs}g</p>
-                <p>Total Sugars: {totals.sugars}g</p>
+                <h1>DayLogPage.jsx</h1>
+                <h3 >Email = {sessionUser?.email}</h3>
+                <br />
+                <div>
+                    <p>Total Calories: {totals.calories}</p>
+                    <p>Total Protein: {totals.protein}g</p>
+                    <p>Total Fats: {totals.fats}g</p>
+                    <p>Total Carbs: {totals.carbs}g</p>
+                    <p>Total Sugars: {totals.sugars}g</p>
+                </div>
+                <br />
             </div>
-            <br />
+
 
             <div className="vertical_center_flex ">
                 {/* top buttons */}
-                <div className="max_HFlex workout_btn_div container-width">
+                {/* <div className="max_HFlex workout_btn_div container-width"> */}
+                <div className="max_HFlex workout_btn_div">
                     <button
                         className="back_btn navBlue"
                         onClick={handleBack}
@@ -117,7 +124,7 @@ const DayLogPage = () => {
                     <CustomCalendar
                         value={selectedDate}
                         onChange={handleDateChange}
-                        width="100%"                    
+                        width="100%"
                         height="900px"
                         handler={toggleDayLogModal}
                         setTotals={setTotals}

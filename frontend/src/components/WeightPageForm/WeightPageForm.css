@@ -1,4 +1,4 @@
-/* weightPageForm.css */
+/* frontend/src/components/WeightPageForm/weightPageForm.css */
 
 .weight_page_form_grid{
     display: grid;
@@ -27,17 +27,7 @@
     gap: 2rem;
 }
 
-.back_btn{
-    display: block;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 5px;
-}
+.weight_page_form_grid > input._input{width: 15rem}
 
 .weightPageForm_hFlex {
     display: flex;
