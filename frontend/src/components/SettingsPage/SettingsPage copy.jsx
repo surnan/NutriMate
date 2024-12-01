@@ -14,7 +14,6 @@ const SettingsPage = () => {
     const handleScrape = async () => {
         const url = 'https://www.justsalad.com/';
         try {
-            // const response = await fetch('/api/scraper/scrape', {
             const response = await csrfFetch('/api/scraper', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -66,24 +65,30 @@ const SettingsPage = () => {
     };
 
 
-return (
-        <div>
+
+    
+
+
+    return (
+        <div className="mainBodyStyle">
             <br />
             <h2>Settings Page</h2>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
-            {/* Button to trigger scraping */}
-            <button onClick={handleScrape} className="_button black_font">
-                &nbsp;&nbsp;Scrape Nutrition Data&nbsp;&nbsp;
-            </button>
             <br />
-            <br />
-            {/* Button to trigger bulk import */}
-            <button onClick={handleBulkImport} className="_button black_font">
-                &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
-            </button>
 
-            {/* Display scraped data */}
+            <div className="settings-page-grid">
+                <p> JustSalad.com</p>
+                <button onClick={handleScrape} className="_button black_font orange">
+                    &nbsp;&nbsp;Scrape Nutrition Data&nbsp;&nbsp;
+                </button>
+
+                <p> Import Data</p>
+                <button onClick={handleBulkImport} className="_button black_font yellow">
+                    &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
+                </button>
+            </div>
+
             {scrapedData && (
                 <div>
                     <h3>Scraped Data:</h3>
@@ -101,29 +106,3 @@ return (
 };
 
 export default SettingsPage;
-
-
-
-
-/*
-
-    const handleBulkImport = async () => {
-        try {
-            const response = await csrfFetch("/api/grubs/import-scraped-data", {
-                method: "POST",
-            });
-            const data = await response.json();
-            if (response.ok) {
-                console.log("Bulk Import Success:", data);
-                alert("Data imported successfully into Grubs table!");
-            } else {
-                console.error("Error during bulk import:", data.message);
-                alert("Import failed. See console for details.");
-            }
-        } catch (error) {
-            console.error("Error importing data:", error);
-            alert("An error occurred during import.");
-        }
-    };
-
-*/

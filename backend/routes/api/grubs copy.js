@@ -91,6 +91,11 @@ router.post('/', requireAuth, async (req, res, next) => {
                 userId: parseInt(userId)
             }
         )
+        console.log("")
+        console.log("")
+        console.log("body ====> ", body)
+        console.log("")
+        console.log("")
         let newWorkoutJSON = newGrub.toJSON();
         let responseBody = { ...newWorkoutJSON }
         responseBody.createdAt = newWorkoutJSON.createdAt
@@ -161,6 +166,78 @@ router.post('/import-scraped-data', requireAuth, async (req, res, next) => {
     try {
         // Path to the JSON file created by the scraper
         const filePath = path.join(__dirname, '../../someDATA/nutritionData.json');
+        // Check if the file exists
+        if (!fs.existsSync(filePath)) {
+            return res.status(404).json({ message: 'Scraped JSON file not found.' });
+        }
+        // Read and parse the JSON file
+        const fileData = fs.readFileSync(filePath, 'utf8');
+        const nutritionData = JSON.parse(fileData);
+
+        // Filter out duplicates based on the "name", "company", and "userId"
+        const uniqueData = [];
+        for (const item of nutritionData) {
+            const existingGrub = await Grub.findOne({
+                where: {
+                    name: item.name,
+                    company: 'Just Salad', // Example value, adjust if dynamic
+                    userId: req.user.id,
+                }
+            });
+            if (!existingGrub) {
+                uniqueData.push({
+                    name: item.name,
+                    calories: parseInt(item.calories) || 0,
+                    protein: parseInt(item.protein) || 0,
+                    fats: 0, // Default value if not provided
+                    carbs: 0, // Default value if not provided
+                    sugar: 0, // Default value if not provided
+                    servingSize: 1, // Default value
+                    servingUnit: 'unit', // Default value
+                    company: 'Just Salad', // Example value
+                    description: `${item.name} - Imported from scraped data`,
+                    userId: req.user.id, // Use the logged-in user's ID
+                });
+            } else {
+                throw new Error(`Duplicate data found: ${item.name}`);
+            }
+        }
+
+        await Grub.bulkCreate(grubsToInsert);
+
+        return res.status(201).json({ message: 'Scraped data imported successfully!', imported: grubsToInsert });
+    } catch (error) {
+        console.log("")
+        console.log("")
+        console.log("")
+        console.log("ERROR --->", error)
+        console.log("")
+        console.log("")
+        console.log("")
+        if (error.message.startsWith('Duplicate data found')) {
+            // return res.status(400).json({ message: "duplicate data" });
+            return res.status(400).json({ message: error.message });
+        }
+        console.error('Error during bulk import:', error);
+        return res.status(500).json({ message: 'Failed to import scraped data.', error: error.message });
+    }
+});
+
+
+
+
+
+module.exports = router;
+
+
+
+
+/*
+
+router.post('/import-scraped-data', requireAuth, async (req, res, next) => {
+    try {
+        // Path to the JSON file created by the scraper
+        const filePath = path.join(__dirname, '../../someDATA/nutritionData.json');
 
         // Check if the file exists
         if (!fs.existsSync(filePath)) {
@@ -181,39 +258,33 @@ router.post('/import-scraped-data', requireAuth, async (req, res, next) => {
                     userId: req.user.id,
                 }
             });
-            if (existingGrub) {
-                // Throw an error with details about the duplicate
+            if (!existingGrub) {
+                uniqueData.push({
+                    name: item.name,
+                    calories: parseInt(item.calories) || 0,
+                    protein: parseInt(item.protein) || 0,
+                    fats: 0, // Default value if not provided
+                    carbs: 0, // Default value if not provided
+                    sugar: 0, // Default value if not provided
+                    servingSize: 1, // Default value
+                    servingUnit: 'unit', // Default value
+                    company: 'Just Salad', // Example value
+                    description: `${item.name} - Imported from scraped data`,
+                    userId: req.user.id, // Use the logged-in user's ID
+                });
+            } else {
                 throw new Error(`Duplicate data found: ${item.name}`);
             }
-            uniqueData.push({
-                name: item.name,
-                calories: parseInt(item.calories) || 0,
-                protein: parseInt(item.protein) || 0,
-                fats: 0, // Default value if not provided
-                carbs: 0, // Default value if not provided
-                sugar: 0, // Default value if not provided
-                servingSize: 1, // Default value
-                servingUnit: 'unit', // Default value
-                company: 'Just Salad', // Example value
-                description: `${item.name} - Imported from scraped data`,
-                userId: req.user.id, // Use the logged-in user's ID
-            });
         }
 
-        // Proceed with bulk creation if no duplicates were found
-        await Grub.bulkCreate(uniqueData);
+        await Grub.bulkCreate(grubsToInsert);
 
-        return res.status(201).json({ message: 'Scraped data imported successfully!', imported: uniqueData });
+        return res.status(201).json({ message: 'Scraped data imported successfully!', imported: grubsToInsert });
     } catch (error) {
-        // Check if the error is a duplicate error
-        if (error.message.startsWith('Duplicate data found')) {
-            return res.status(400).json({ message: error.message });
-        }
         console.error('Error during bulk import:', error);
         return res.status(500).json({ message: 'Failed to import scraped data.', error: error.message });
     }
 });
 
 
-
-module.exports = router;
+*/
