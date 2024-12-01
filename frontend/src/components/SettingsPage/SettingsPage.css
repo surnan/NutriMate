@@ -43,3 +43,8 @@
     transform: translateX(30px); /* Move the slider to the right */
   }
   
+  .settingsPageFlex{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }

@@ -13,12 +13,12 @@ function Navigation() {
   const user = useSelector((state) => state.session.user);
   const navigate = useNavigate();
   const dispatch = useDispatch()
-  
+
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     console.log(`Navigation -> Theme ===> `, theme)
-}, [theme])
+  }, [theme])
 
   useEffect(() => {
     dispatch(thunkAuthenticate());
@@ -26,9 +26,8 @@ function Navigation() {
   }, [dispatch, user?.email]);
 
   return (
-    <div 
-    // className="nav_flex container-width navBlue">
-    className={`nav_flex container-width navBlue
+    <div
+      className={`nav_flex navBlue
       ${theme === "dark" ? "dkNav smoke_font" : ""}
     `}>
       <NavLink to="/">
@@ -47,7 +46,7 @@ function Navigation() {
                 src={user.profileImg}
                 style={{ height: "70px", width: '70px', borderRadius: "50%" }}
                 className="clickable"
-                onClick={()=>navigate("/")}
+                onClick={() => navigate("/")}
               /> : null}
           </p>
         )}

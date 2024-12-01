@@ -50,7 +50,8 @@
     position: relative;
     height: 95px;
     margin: auto;
-    padding: 25px;
+    padding: 25px 2rem;
+    max-width: var(--max-page-width);
 }
 
 .profile-dropdown {
