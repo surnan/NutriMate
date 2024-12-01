@@ -7,10 +7,18 @@ import logo from "../../fe_images/nutimate_logo.png";
 import { useEffect } from "react";
 import { thunkAuthenticate } from "../../redux/session";
 
+import { useTheme } from "../../context/ThemeContext"
+
 function Navigation() {
   const user = useSelector((state) => state.session.user);
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    console.log(`Navigation -> Theme ===> `, theme)
+}, [theme])
 
   useEffect(() => {
     dispatch(thunkAuthenticate());
@@ -18,7 +26,11 @@ function Navigation() {
   }, [dispatch, user?.email]);
 
   return (
-    <div className="nav_flex container-width navBlue">
+    <div 
+    // className="nav_flex container-width navBlue">
+    className={`nav_flex container-width navBlue
+      ${theme === "dark" ? "dkNav smoke_font" : ""}
+    `}>
       <NavLink to="/">
         <img
           src={logo}
