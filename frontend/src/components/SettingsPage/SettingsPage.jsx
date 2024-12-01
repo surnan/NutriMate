@@ -22,6 +22,13 @@ const SettingsPage = () => {
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
 
+    const [showSelect, setShowSelect] = useState(false);
+
+    const handleImgClick = () =>{
+        console.log("click image")
+        setShowSelect(!showSelect)
+        console.log("showSelect = ", showSelect)
+    }
 
 
     const updatedImgFromPC = async (e) => {
@@ -102,6 +109,8 @@ const SettingsPage = () => {
 
     useEffect(() => {
         console.log(`Theme ===> `, theme)
+        document.body.classList.remove("light-mode", "dark-mode");
+        document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
     }, [theme])
 
 
@@ -152,19 +161,22 @@ const SettingsPage = () => {
                 </div>
             )}
             <br/>
+            <h3>Click Image to change Profile Picture</h3>
+            <br/>
             <div>
                 <img
-                    className="round"
+                    className="round clickable"
                     style={{ height: "300px", width: "300px" }}
                     src={sessionUser.profileImg}
+                    onClick={handleImgClick}
                 />
             </div>
             <br />
             <div className="center">
-                <h3>Change Your Profile Picture</h3>
+                {/* <h3>Change Your Profile Picture</h3> */}
                 <br />
                 <br />
-                {showUpload && (
+                {showSelect && showUpload && (
                     <label htmlFor='file-upload'> Select From Computer
                         <input
                             type='file'
