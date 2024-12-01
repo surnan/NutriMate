@@ -2,34 +2,28 @@
 
 import "./SettingsPage.css";
 import { csrfFetch } from "../../redux/csrf";
-
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
-
 import { useTheme } from "../../context/ThemeContext";
-
 import { updateUserThunk } from '../../redux/session';
 
-
 const SettingsPage = () => {
-    const [scrapedData, setScrapedData] = useState(null);
     const dispatch = useDispatch();
-
     const sessionUser = useSelector((state) => state.session.user);
+    
+    const [scrapedData, setScrapedData] = useState(null);
+    const [showSelect, setShowSelect] = useState(false);
     const { theme, toggleTheme } = useTheme();
-
-    const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+    const [imgUrl, setImgUrl] = useState("");   
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
 
-    const [showSelect, setShowSelect] = useState(false);
-
+    // AWS
     const handleImgClick = () =>{
         console.log("click image")
         setShowSelect(!showSelect)
         console.log("showSelect = ", showSelect)
     }
-
 
     const updatedImgFromPC = async (e) => {
         const file = e.target.files[0];
@@ -49,8 +43,6 @@ const SettingsPage = () => {
         setShowUpload(true);
         setPreviewUrl("");
     }
-
-
 
     const handleScrape = async () => {
         const url = 'https://www.justsalad.com/';
@@ -106,13 +98,11 @@ const SettingsPage = () => {
         }
     };
 
-
     useEffect(() => {
         console.log(`Theme ===> `, theme)
         document.body.classList.remove("light-mode", "dark-mode");
         document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
     }, [theme])
-
 
     return (
         <div className={`
@@ -120,8 +110,7 @@ const SettingsPage = () => {
             ${theme === "dark" ? "dkBody smoke_font" : ""}
             `}>
             <br />
-            <h2>Settings Page</h2>
-            <h3>Name = {sessionUser.username}</h3>
+            <h1>SettingsPage.jsx</h1>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
             <div className="toggle-switch">
@@ -137,17 +126,14 @@ const SettingsPage = () => {
                 <p>Current Theme: {theme}</p>
             </div>
             <br />
-            {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">
                 SCRAP <strong>JustSalad.com</strong>
             </button>
             <br />
-            {/* Button to trigger bulk import */}
             <button onClick={handleBulkImport} className="_button black_font">
                 &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
             </button>
             <br />
-            {/* Display scraped data */}
             {scrapedData && (
                 <div>
                     <h3>Scraped Data:</h3>
@@ -173,7 +159,6 @@ const SettingsPage = () => {
             </div>
             <br />
             <div className="center">
-                {/* <h3>Change Your Profile Picture</h3> */}
                 <br />
                 <br />
                 {showSelect && showUpload && (

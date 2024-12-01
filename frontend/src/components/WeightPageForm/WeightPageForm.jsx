@@ -1,17 +1,19 @@
 // frontend/src/componenets/WeightPageForm/WeightPageForm.jsx
+
 import "./WeightPageForm.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postWeightsOneThunk, updateWeightThunkById } from "../../redux/weight";
 import DeleteWeightModal from '../_modal/DeleteWeightModal'
-
+import { useTheme } from "../../context/ThemeContext";
 
 function WeightPageForm() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
+    const { theme, toggleTheme } = useTheme();
 
     const { newWeight, currentData } = location.state || {};
 
@@ -82,11 +84,8 @@ function WeightPageForm() {
             console.log("===> ERRORS = ", errors)
             return
         }
-
         e.preventDefault();
-
         const { id, metricSystem, start, goal, current, day, userId } = form;
-
         const body = {
             "id": parseInt(id),
             "metricSystem": metricSystem || false,
@@ -117,13 +116,21 @@ function WeightPageForm() {
         });
     };
 
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+        document.body.classList.remove("light-mode", "dark-mode");
+        document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
+    }, [theme])
+
     return (
-        <div className="mainBodyStyle">
+        <div className={`
+            mainBodyStyle settingsPageFlex
+            ${theme === "dark" ? "dkBody smoke_font" : ""}
+            `}>
             <h1>WeightPageForm.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="max_HFlex">
-
                 <button
                     onClick={handleBackBtn}
                     className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
@@ -167,56 +174,43 @@ function WeightPageForm() {
 
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} Starting Weight (number):
+                    {errors.start && <span style={{ color: 'red' }}>{errors.start}&nbsp;&nbsp;</span>} Starting Weight ( lbs ):
                 </label>
                 <input
                     className="_input"
                     type="number"
                     name="start"
                     onChange={updateSetForm}
-                    placeholder="Please enter starting weight as integer"
+                    placeholder="Please enter starting weight"
                     value={form.start}
                 />
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} Goal Weight (number):
+                    {errors.goal && <span style={{ color: 'red' }}>{errors.goal}&nbsp;&nbsp;</span>} Goal Weight ( lbs ):
                 </label>
                 <input
                     className="_input"
                     type="number"
                     name="goal"
                     onChange={updateSetForm}
-                    placeholder="Please enter goal weight as integer"
+                    placeholder="Please enter goal weight"
                     value={form.goal}
                 />
 
 
                 <label style={{ display: 'inline-flex' }}>
-                    {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} Current Weight (number):
+                    {errors.current && <span style={{ color: 'red' }}>{errors.current}&nbsp;&nbsp;</span>} Current Weight ( lbs ):
                 </label>
                 <input
                     type="number"
                     name="current"
                     className="_input"
                     onChange={updateSetForm}
-                    placeholder="Please enter current weight as integer"
+                    placeholder="Please enter current weight"
                     value={form.current}
                 />
-
-                <label style={{ display: 'inline-flex' }}>
-                    metricSystem:
-                </label>
-
-                <input
-                    type="checkbox"
-                    name="metricSystem"
-                    onChange={updateSetForm}
-                    checked={form.metricSystem}
-                />
-
-
-
             </div>
+            
             <div className="weightPageForm_hFlex">
                 <button
                     onClick={handleDeleteBtn}
