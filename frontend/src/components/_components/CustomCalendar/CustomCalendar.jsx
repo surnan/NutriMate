@@ -220,7 +220,7 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
       }}
 
       dayLayoutAlgorithm="no-overlap"
-      scrollToTime={new Date(new Date().setHours(5, 0, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
+      scrollToTime={new Date(new Date().setHours(9, 30, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
       components={{ //'component' overrides default
         week: { header: WeekdayHeader },
         day: { event: CustomEvent }

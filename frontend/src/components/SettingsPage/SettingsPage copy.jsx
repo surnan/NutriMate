@@ -15,9 +15,7 @@ const SettingsPage = () => {
     const { theme, toggleTheme } = useTheme();
 
 
-    useEffect(() => {
-        console.log(`Theme ===> `, theme)
-    }, [theme])
+
 
 
 
@@ -76,13 +74,26 @@ const SettingsPage = () => {
     };
 
 
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+    }, [theme])
+
+
     return (
-        <div className="mainBodyStyle">
+        <div className={`mainBodyStyle ${theme === "dark" ? "dkBody smoke_font" : ""}`}>
             <br />
             <h2>Settings Page</h2>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
-            <p>{`Theme = ${theme}`}</p>
+            <p
+                className={`TEST-ELEMENT center ${theme === "dkBody" ? "red white_font" : ""}`}
+            >
+                {`Theme = ${theme}`}
+            </p>
+
+
+
+
             <br />
             <br />
             <div className="toggle-switch">
@@ -99,6 +110,16 @@ const SettingsPage = () => {
             </div>
             <br />
             <br />
+            <div class="time-picker">
+                <label for="time">Choose a time:</label>
+                <input type="time" id="time" name="time" required/>
+            </div>
+
+            <br />
+            <br />
+
+
+
             <br />
             {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">

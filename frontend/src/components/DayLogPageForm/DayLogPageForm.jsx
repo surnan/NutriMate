@@ -206,14 +206,14 @@ function DayLogPageForm() {
             </div>
 
             <div className="daylog_page_form_grid">
-                <p>Name</p>
+                <p>Name:</p>
                 <input
                     className="_input"
                     value={form.name}
                     readOnly={true}
                 />
 
-                <p>Date</p>
+                <p>Date:</p>
                 <input
                     className="_input"
                     type="datetime-local"
