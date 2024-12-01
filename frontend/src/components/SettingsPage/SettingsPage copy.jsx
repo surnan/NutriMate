@@ -15,7 +15,9 @@ const SettingsPage = () => {
     const { theme, toggleTheme } = useTheme();
 
 
-
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+    }, [theme])
 
 
 
@@ -74,26 +76,13 @@ const SettingsPage = () => {
     };
 
 
-    useEffect(() => {
-        console.log(`Theme ===> `, theme)
-    }, [theme])
-
-
     return (
-        <div className={`mainBodyStyle ${theme === "dark" ? "dkBody smoke_font" : ""}`}>
+        <div className="mainBodyStyle">
             <br />
             <h2>Settings Page</h2>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
-            <p
-                className={`TEST-ELEMENT center ${theme === "dkBody" ? "red white_font" : ""}`}
-            >
-                {`Theme = ${theme}`}
-            </p>
-
-
-
-
+            <p>{`Theme = ${theme}`}</p>
             <br />
             <br />
             <div className="toggle-switch">
