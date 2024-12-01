@@ -33,19 +33,23 @@ export const router = createBrowserRouter([
       {
         element: <ProtectRoute/>,
         children: [
-          { path: "weights", element: <WeightPage /> },
           { path: "daylog", element: <DayLogPage /> },
-          { path: "grubs", element: <CardsPage stuff="grub" /> },
-          { path: "workouts", element: <CardsPage stuff="workout" /> },
-          { path: "weightform", element: <WeightPageForm /> },
-          { path: "daylogform", element: <DayLogPageForm /> },
-          { path: "grubform", element: <GrubPageForm /> },
-          { path: "workoutform", element: <WorkoutPageForm /> },
-          { path: "grubform/:id", element: <GrubPageForm /> },
-          { path: "workoutform/:id", element: <WorkoutPageForm /> },
           { path: "daylog/:id", element: <DayLogPageForm /> },
-          { path: "daylogform/:id", element: <DayLogPageForm /> },
+          { path: "daylogform", element: <DayLogPageForm /> },
+          { path: "daylogform/:id", element: <DayLogPageForm /> },    
+          
+          { path: "grubs", element: <CardsPage stuff="grub" /> },
+          { path: "grubform", element: <GrubPageForm /> },
+          { path: "grubform/:id", element: <GrubPageForm /> },
+
           { path: "settings", element: <SettingsPage /> },
+      
+          { path: "workouts", element: <CardsPage stuff="workout" /> },
+          { path: "workoutform", element: <WorkoutPageForm /> },
+          { path: "workoutform/:id", element: <WorkoutPageForm /> },
+          
+          { path: "weights", element: <WeightPage /> },
+          { path: "weightform", element: <WeightPageForm /> },
         ]
       },
       { path: "*", element: <Navigate to="/" replace /> },
