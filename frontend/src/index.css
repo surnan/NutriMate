@@ -64,6 +64,9 @@ body.dark-mode {
   color: whitesmoke;  
 }
 
+body.dark-mode button {
+  opacity: 0.4;
+}
 
 .calender_div {
     /* background: orange !important;  */
