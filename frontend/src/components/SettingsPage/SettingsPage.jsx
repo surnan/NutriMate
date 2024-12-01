@@ -106,19 +106,14 @@ const SettingsPage = () => {
 
 
     return (
-        <div className={`mainBodyStyle ${theme === "dark" ? "dkBody smoke_font" : ""}`}>
+        <div className={`
+            mainBodyStyle settingsPageFlex
+            ${theme === "dark" ? "dkBody smoke_font" : ""}
+            `}>
             <br />
             <h2>Settings Page</h2>
             <h3>Name = {sessionUser.username}</h3>
             <h3>Email = {sessionUser?.email}</h3>
-            <br />
-            <p
-                className={`TEST-ELEMENT center ${theme === "dkBody" ? "red white_font" : ""}`}
-            >
-                {`Theme = ${theme}`}
-            </p>
-
-            <br />
             <br />
             <div className="toggle-switch">
                 <input
@@ -133,26 +128,16 @@ const SettingsPage = () => {
                 <p>Current Theme: {theme}</p>
             </div>
             <br />
-            <br />
-
-
-            <br />
-            <br />
-
-
-
-            <br />
             {/* Button to trigger scraping */}
             <button onClick={handleScrape} className="_button black_font">
-                &nbsp;&nbsp;Scrape Nutrition Data&nbsp;&nbsp;
+                SCRAP <strong>JustSalad.com</strong>
             </button>
-            <br />
             <br />
             {/* Button to trigger bulk import */}
             <button onClick={handleBulkImport} className="_button black_font">
                 &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
             </button>
-
+            <br />
             {/* Display scraped data */}
             {scrapedData && (
                 <div>
@@ -166,18 +151,15 @@ const SettingsPage = () => {
                     </ul>
                 </div>
             )}
-
-
+            <br/>
             <div>
                 <img
                     className="round"
                     style={{ height: "300px", width: "300px" }}
-                    // src="https://nutrimatebucket.s3.amazonaws.com/1733079909225.jpeg"
                     src={sessionUser.profileImg}
                 />
             </div>
-
-
+            <br />
             <div className="center">
                 <h3>Change Your Profile Picture</h3>
                 <br />
@@ -211,10 +193,6 @@ const SettingsPage = () => {
                     </div>
                 )}
             </div>
-
-
-
-
         </div>
     );
 };
