@@ -10,6 +10,7 @@ import { capitalizeFirstLetter} from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";
+import { updateUserThunk } from "../../redux/session";
 
 function WorkoutPageForm() {
   const navigate = useNavigate();
@@ -114,7 +115,7 @@ function WorkoutPageForm() {
       console.log("POST")
       const updatedTemp = { ...temp, workoutId: workoutObj?.id };
       console.log("...updatedTemp B4 ... POST ....", updatedTemp)
-      await dispatch(postWorkoutImagesOneThunk(updatedTemp))
+      await dispatch(updateUserThunk(updatedTemp))
     } else {
       console.log("PUT")
       console.log("...temp B4 ... PUT ....", temp)

@@ -3,19 +3,45 @@
 import "./SettingsPage.css";
 import { csrfFetch } from "../../redux/csrf";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from 'react';
 
-import { useTheme } from "../../context/ThemeContext"
+import { useTheme } from "../../context/ThemeContext";
+
+import { updateUserThunk } from '../../redux/session';
+
 
 const SettingsPage = () => {
     const [scrapedData, setScrapedData] = useState(null);
+    const dispatch = useDispatch();
 
     const sessionUser = useSelector((state) => state.session.user);
     const { theme, toggleTheme } = useTheme();
 
+    const [imgUrl, setImgUrl] = useState("");   //image url to send to aws
+    const [showUpload, setShowUpload] = useState(true);
+    const [previewUrl, setPreviewUrl] = useState("");
 
 
+
+    const updatedImgFromPC = async (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => setPreviewUrl(reader.result)
+        setImgUrl(file);
+        setShowUpload(false);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const img_url = imgUrl;
+        const form = { img_url };
+        await dispatch(updateUserThunk(sessionUser.id, form))
+        setImgUrl("");
+        setShowUpload(true);
+        setPreviewUrl("");
+    }
 
 
 
@@ -83,6 +109,7 @@ const SettingsPage = () => {
         <div className={`mainBodyStyle ${theme === "dark" ? "dkBody smoke_font" : ""}`}>
             <br />
             <h2>Settings Page</h2>
+            <h3>Name = {sessionUser.username}</h3>
             <h3>Email = {sessionUser?.email}</h3>
             <br />
             <p
@@ -139,6 +166,55 @@ const SettingsPage = () => {
                     </ul>
                 </div>
             )}
+
+
+            <div>
+                <img
+                    className="round"
+                    style={{ height: "300px", width: "300px" }}
+                    // src="https://nutrimatebucket.s3.amazonaws.com/1733079909225.jpeg"
+                    src={sessionUser.profileImg}
+                />
+            </div>
+
+
+            <div className="center">
+                <h3>Change Your Profile Picture</h3>
+                <br />
+                <br />
+                {showUpload && (
+                    <label htmlFor='file-upload'> Select From Computer
+                        <input
+                            type='file'
+                            id='file-upload'
+                            name="img_url"
+                            onChange={updatedImgFromPC}
+                            accept='.jpg, .jpeg, .png, .gif'
+                        />
+                    </label>
+                )}
+                <br /><br /><br /><br />
+                {!showUpload && (
+                    <div className="vertical_center_flex">
+                        <img
+                            src={previewUrl}
+                            alt="preview"
+                            style={{ height: "300px", width: "300px" }}
+                            className="round"
+                        />
+                        <button
+                            onClick={handleSubmit}
+                            className="_button black block twenty_margin"
+                        >
+                            Change Profile
+                        </button>
+                    </div>
+                )}
+            </div>
+
+
+
+
         </div>
     );
 };
