@@ -109,10 +109,6 @@ function GrubPageForm() {
     }, [form])
 
     //AWS
-    // const handleImgClick = (id) => {
-    //     setClickedGrubImgId(id)
-    // }
-
     const handleImgClick = (id) => {
         if (newGrub) {
             alert("Please save Grub to database before adding image")
