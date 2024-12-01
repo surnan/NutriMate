@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import CustomCalendar from "../_components/CustomCalendar";
 
 import DayLogModal from "../_modal/DayLogModal/DayLogModal";
+import { useTheme } from "../../context/ThemeContext"
 
 
 
@@ -60,8 +61,19 @@ const DayLogPage = () => {
         setShowDayLogModal((prevState) => !prevState);
     };
 
+    const { theme, toggleTheme } = useTheme();
+
+    useEffect(() => {
+        console.log(`Theme ===> `, theme)
+    }, [theme])
+
     return (
-        <div className="container-width">
+        <div 
+        // className="container-width"
+        className={`container-width
+            ${theme === "dark" ? "dkBody smoke_font" : ""}
+            `}
+        >
             <h1>DayLogPage.jsx</h1>
             <h3 >Email = {sessionUser?.email}</h3>
             <br />

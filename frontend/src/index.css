@@ -123,6 +123,7 @@ select._input {
 .black_font {color: black !important}
 .red_font {color: red !important}
 .white_font {color: white !important}
+.smoke_font {color: whitesmoke !important}
 
 .blue {background-color: rgba(105, 169, 247, 0.665)}
 .bluegreen {background-color: rgba(0, 247, 255, 0.665)}
@@ -141,6 +142,8 @@ select._input {
 .red {background-color: red}
 .yellow {background-color: rgb(247, 247, 125)}
 
+.dkBody {background-color: rgb(51, 51, 51);}
+.dkNav {background-color: rgb(5, 5, 5);}
 
 
 
