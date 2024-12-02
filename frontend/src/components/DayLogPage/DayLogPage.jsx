@@ -45,6 +45,8 @@ const DayLogPage = () => {
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }
 
+    const [showTotals, setShowTotals] = useState(false); // Collapsible state
+
 
     // Handle date change from the calendar
     const handleDateChange = (date) => {
@@ -60,6 +62,9 @@ const DayLogPage = () => {
     };
 
 
+    const toggleTotals = () => {
+        setShowTotals((prevState) => !prevState); // Toggle visibility
+    };
 
     return (
         <div
@@ -73,11 +78,26 @@ const DayLogPage = () => {
                 <h3 >Email = {sessionUser?.email}</h3>
                 <br />
                 <div>
-                    <p>Total Calories: {totals.calories}</p>
-                    <p>Total Protein: {totals.protein}g</p>
-                    <p>Total Fats: {totals.fats}g</p>
-                    <p>Total Carbs: {totals.carbs}g</p>
-                    <p>Total Sugars: {totals.sugars}g</p>
+                    <button
+                        className="toggle-totals-btn transparent _button"
+                        onClick={toggleTotals}
+                    >
+                        {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
+                    </button>
+                    {showTotals && (
+                        <div className="totals-section">
+                            <p>Total Calories: </p>
+                            <p>{totals.calories}</p>
+                            <p>Total Protein: </p>
+                            <p>{totals.protein}g</p>
+                            <p>Total Fats: </p>
+                            <p>{totals.fats}g</p>
+                            <p>Total Carbs:</p>
+                            <p>{totals.carbs}g</p>
+                            <p>Total Sugars: </p>
+                            <p>{totals.sugars}g</p>
+                        </div>
+                    )}
                 </div>
                 <br />
             </div>
@@ -104,7 +124,7 @@ const DayLogPage = () => {
 
                         <button
                             onClick={handlePlusGrub}
-                            className="round daily_btn_font_size shadow yellow clickable"
+                            className="round daily_btn_font_size shadow orange clickable"
                             title="Add Meal"
                         >
                             <i className="fa-solid fa-utensils"></i>
