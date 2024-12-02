@@ -155,14 +155,18 @@ function DayLogPageForm() {
         calculateGrubCalories();
     }, [newGrubObj, form.units]);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("...dayLogObj = ", dayLogObj)
     }, [dayLogObj.id])
 
     return (
-        <div className="mainBodyStyle">
-             <h3>DayLogPageForm.jsx</h3>
-             <h3>Email = {sessionUser?.email}</h3>
+        // <div className="mainBodyStyle">
+        <div className={`
+            mainBodyStyle settingsPageFlex
+            ${theme === "dark" ? "dkBody smoke_font" : ""}
+            `}>
+            <h3>DayLogPageForm.jsx</h3>
+            <h3>Email = {sessionUser?.email}</h3>
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
