@@ -438,7 +438,7 @@ function GrubPageForm() {
             <br />
             <br />
 
-            <div className="abc123 vertical_center_flex">
+            <div className="vertical_center_flex">
                 {/* <h1>Your GRUB Page Form</h1> */}
                 <ImageDisplay
                     imgArr={grubImgArr}
