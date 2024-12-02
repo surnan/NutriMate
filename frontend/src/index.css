@@ -64,8 +64,8 @@ body.dark-mode {
   color: whitesmoke;  
 }
 
-body.dark-mode button {
-  opacity: 0.4;
+body.dark-mode button, input, textarea, select {
+  opacity: 0.7;
 }
 
 .calender_div {
@@ -244,6 +244,7 @@ select._input {padding: 0.5rem}
 .vertical_center_flex{
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .block {display: block}
@@ -288,16 +289,16 @@ select._input {padding: 0.5rem}
   }
   
   .attention-button {
-    background-color: #fff; /* Button background */
-    color: #000; /* Button text color */
-    border: 3px solid #ff0000; /* Initial border color */
-    border-radius: 5px; /* Rounded corners */
-    padding: 10px 20px; /* Padding */
-    font-size: 16px; /* Font size */
-    font-weight: bold; /* Font weight */
-    cursor: pointer; /* Pointer cursor */
-    animation: borderGlow 2s infinite; /* Apply animation */
-    transition: transform 0.2s; /* Smooth scaling effect */
+    background-color: #fff; 
+    color: #000; 
+    border: 3px solid #ff0000;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer;
+    animation: borderGlow 2s infinite;
+    transition: transform 0.2s; 
   }
   
   .attention-button:hover {
