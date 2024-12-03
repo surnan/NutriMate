@@ -115,7 +115,8 @@ function WorkoutPageForm() {
       console.log("POST")
       const updatedTemp = { ...temp, workoutId: workoutObj?.id };
       console.log("...updatedTemp B4 ... POST ....", updatedTemp)
-      await dispatch(updateUserThunk(updatedTemp))
+      // await dispatch(updateUserThunk(updatedTemp))
+      await dispatch(postWorkoutImagesOneThunk(updatedTemp))
     } else {
       console.log("PUT")
       console.log("...temp B4 ... PUT ....", temp)
