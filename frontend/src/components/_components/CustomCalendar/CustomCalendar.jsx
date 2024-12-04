@@ -185,6 +185,15 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
   };
 
 
+  let scrollToTime = new Date();
+
+  if (defaultStartTime) {
+    const [hours, minutes] = defaultStartTime.split(':').map(Number);
+    scrollToTime.setHours(hours, minutes, 0, 0);
+  } else {
+    // If no defaultStartTime provided, fall back to 9:30 AM
+    scrollToTime.setHours(9, 30, 0, 0);
+  }
 
 
   return (
@@ -220,7 +229,8 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
       }}
 
       dayLayoutAlgorithm="no-overlap"
-      scrollToTime={new Date(new Date().setHours(9, 30, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
+      // scrollToTime={new Date(new Date().setHours(9, 30, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
+      scrollToTime={scrollToTime}
       components={{ //'component' overrides default
         week: { header: WeekdayHeader },
         day: { event: CustomEvent }
