@@ -20,5 +20,8 @@
 
 .menuRoundBtn{
     height: 60px;  
-    width: 60px;   
+    width: 60px;
+    cursor: pointer;
+    border-radius: 30px;   
+    font-size: 30px;
 }

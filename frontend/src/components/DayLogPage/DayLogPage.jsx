@@ -2,7 +2,7 @@
 
 import "./DayLogPage.css";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getDailyLogsAllThunk } from "../../redux/daylogs"
 import { useNavigate } from "react-router-dom"
 import CustomCalendar from "../_components/CustomCalendar";
@@ -17,15 +17,6 @@ const DayLogPage = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDayLogModal, setShowDayLogModal] = useState(false);
-
-    const sessionUser = useSelector((state) => state.session.user);
-
-    useEffect(() => {
-        if (!sessionUser.id) {
-            navigate("/")
-        }
-    }, [sessionUser.id])
-
 
     const { theme, showProtein, showCarbs, showFats, showSugars, timeValue } = useTheme();
 
@@ -100,7 +91,6 @@ const DayLogPage = () => {
                         </button>
 
                         <div className={`totals-section-horizontal ${showTotals ? "visible" : "hidden"}`}>
-                        {/* <div className={`totals-section-horizontal showTotals visible`}> */}
                             <p>Calories: {totals.calories}</p>
                             {showProtein && <p>Protein: {totals.protein} g</p>}
                             {showFats && <p>Fats: {totals.fats} g</p>}
@@ -114,7 +104,7 @@ const DayLogPage = () => {
                         <div className="tooltip">
                             <button
                                 onClick={handlePlusWorkout}
-                                className="round daily_btn_font_size shadow blue clickable"
+                                className="shadow blue menuRoundBtn"
                                 title="Add Workout"
                             >
                                 <i className="fa-solid fa-person-running"></i>
@@ -125,7 +115,7 @@ const DayLogPage = () => {
                         <div className="tooltip">
                             <button
                                 onClick={handlePlusGrub}
-                                className="round daily_btn_font_size shadow orange clickable"
+                                className="shadow orange menuRoundBtn"
                                 title="Add Meal"
                             >
                                 <i className="fa-solid fa-utensils"></i>
@@ -136,7 +126,7 @@ const DayLogPage = () => {
                         <div className="tooltip">
                             <button
                                 onClick={handleWeights}
-                                className="round daily_btn_font_size shadow green clickable"
+                                className="shadow green menuRoundBtn"
                                 title="Record Weight"
                             >
                                 <i className="fa-solid fa-weight-scale"></i>
@@ -147,16 +137,13 @@ const DayLogPage = () => {
                         <div className="tooltip">
                             <button
                                 onClick={handleSettings}
-                                className="round daily_btn_font_size shadow yellow clickable"
+                                className="shadow yellow menuRoundBtn"
                                 title="Change Settings"
                             >
                                 <i className="fa-solid fa-gear"></i>
                             </button>
                             <span className="tooltiptext">Settings</span>
                         </div>
-
-
-
                     </div>
                 </div>
 

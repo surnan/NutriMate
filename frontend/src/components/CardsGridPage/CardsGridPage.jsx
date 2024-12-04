@@ -32,6 +32,7 @@ const CardsPageGrid = ({ stuff }) => {
 
   const handleSearch = query => setSearchQuery(query.toLowerCase());
   const handleBack = () => navigate(-1);
+  const handleSettings = () => { navigate("/settings") }
 
   const handleCreate = () => {
     console.log("...stuff = ", stuff)
@@ -86,11 +87,11 @@ const CardsPageGrid = ({ stuff }) => {
 
     if (stuff === "workout") {
       const workoutImage = workoutImgArr.find(image => image.workoutId === data.id);
-      imageUrl = workoutImage ? workoutImage.url : null; // Replace `url` with your image URL field name
+      imageUrl = workoutImage ? workoutImage.url : null; 
       return <WorkoutCard workout={data} imageUrl={imageUrl} />;
     } else if (stuff === "grub") {
       const grubImage = grubImgArr.find(image => image.grubId === data.id);
-      imageUrl = grubImage ? grubImage.url : null; // Replace `url` with your image URL field name
+      imageUrl = grubImage ? grubImage.url : null; 
       return <GrubCard grub={data} imageUrl={imageUrl} />;
     }
   }
@@ -124,7 +125,7 @@ const CardsPageGrid = ({ stuff }) => {
           <div className="tooltip">
             <button
               onClick={handleRefresh}
-              className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+              className="shadow orange menuRoundBtn"
               title="Reset"
             >
               <i className="fa-solid fa-rotate-left"></i>
@@ -135,12 +136,23 @@ const CardsPageGrid = ({ stuff }) => {
           <div className="tooltip">
             <button
               onClick={handleCreate}
-              className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+              className="shadow green menuRoundBtn"
               title="+ Create"
             >
               <i className="fa-solid fa-plus"></i>
             </button>
             <span className="tooltiptext letter_spacing">CREATE</span>
+          </div>
+
+          <div className="tooltip">
+            <button
+              onClick={handleSettings}
+              className="shadow yellow menuRoundBtn"
+              title="Change Settings"
+            >
+              <i className="fa-solid fa-gear"></i>
+            </button>
+            <span className="tooltiptext">Settings</span>
           </div>
         </div>
       </div>
