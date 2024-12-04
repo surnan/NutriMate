@@ -45,8 +45,8 @@ function Navigation() {
               <img
                 src={user.profileImg}
                 style={{ height: "70px", width: '70px', borderRadius: "50%" }}
-                className="clickable"
-                onClick={() => navigate("/")}
+                // className="clickable"
+                // onClick={() => navigate("/settings")}
               /> : null}
           </p>
         )}

@@ -52,6 +52,7 @@ const DayLogPage = () => {
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }
+    const handleSettings = () => {navigate("/settings")}
 
     const [showTotals, setShowTotals] = useState(false); // Collapsible state
 
@@ -74,6 +75,7 @@ const DayLogPage = () => {
         setShowTotals((prevState) => !prevState);
     };
 
+
     return (
         <div
             className={`
@@ -81,14 +83,12 @@ const DayLogPage = () => {
             ${theme === "dark" ? "dkBody smoke_font" : ""}
             `}
         >
-            <div>
+            {/* <div>
                 <h1>DayLogPage.jsx</h1>
                 <h3 >Email = {sessionUser?.email}</h3>
-                {/* <p>showProtein = {showProtein ? showProtein : "not-exist"}</p>
-                <p>showCarbs = {showCarbs ? showCarbs: "not-exist"}</p> */}
                 <br />
                 <br />
-            </div>
+            </div> */}
 
 
             <div className="vertical_center_flex ">
@@ -141,6 +141,14 @@ const DayLogPage = () => {
                             title="Record Weight"
                         >
                             <i className="fa-solid fa-weight-scale"></i>
+                        </button>
+
+                        <button
+                            onClick={handleSettings}
+                            className="round daily_btn_font_size shadow yellow clickable"
+                            title="Change Settings"
+                        >
+                            <i className="fa-solid fa-gear"></i>
                         </button>
                     </div>
                 </div>
