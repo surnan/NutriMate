@@ -126,11 +126,11 @@ const SettingsPage = () => {
                 <p>Current Theme: {theme}</p>
             </div>
             <br />
-            <button onClick={handleScrape} className="_button black_font">
+            <button onClick={handleScrape} className="_button black_font settingsBtn">
                 SCRAP <strong>JustSalad.com</strong>
             </button>
             <br />
-            <button onClick={handleBulkImport} className="_button black_font">
+            <button onClick={handleBulkImport} className="_button black_font settingsBtn">
                 &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
             </button>
             <br />

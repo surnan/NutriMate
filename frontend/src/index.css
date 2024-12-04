@@ -137,7 +137,8 @@ select._input {padding: 0.5rem}
 .max_HFlex {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+    align-items: top;
     width: 100%;
 }
 
