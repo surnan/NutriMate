@@ -11,15 +11,17 @@ import DayLogModal from "../_modal/DayLogModal/DayLogModal";
 import { useTheme } from "../../context/ThemeContext"
 
 
+
 const DayLogPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDayLogModal, setShowDayLogModal] = useState(false);
-
+    
     const sessionUser = useSelector((state) => state.session.user);
-    const { theme, toggleTheme } = useTheme();
-
+    // const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
+    
     useEffect(() => {
         console.log(`Theme ===> `, theme)
         document.body.classList.remove("light-mode", "dark-mode");
@@ -34,6 +36,12 @@ const DayLogPage = () => {
         carbs: 0,
         sugars: 0,
     });
+
+    useEffect(()=>{
+        console.log("showProtein = ", showProtein)
+        console.log("showCarbs = ", showCarbs)
+
+    }, [showProtein, showCarbs])
 
 
     useEffect(() => {
@@ -76,6 +84,8 @@ const DayLogPage = () => {
             <div>
                 <h1>DayLogPage.jsx</h1>
                 <h3 >Email = {sessionUser?.email}</h3>
+                {/* <p>showProtein = {showProtein ? showProtein : "not-exist"}</p>
+                <p>showCarbs = {showCarbs ? showCarbs: "not-exist"}</p> */}
                 <br />
                 <br />
             </div>
@@ -96,14 +106,14 @@ const DayLogPage = () => {
                             <div className="totals-section">
                                 <p>Calories: </p>
                                 <p>{totals.calories}</p>
-                                <p>Protein: </p>
-                                <p>{totals.protein} g</p>
-                                <p>Fats: </p>
-                                <p>{totals.fats} g</p>
-                                <p>Carbs:</p>
-                                <p>{totals.carbs} g</p>
-                                <p>Sugars: </p>
-                                <p>{totals.sugars} g</p>
+                                {showProtein && <p>Protein: </p>}
+                                {showProtein && <p>{totals.protein} g</p>}
+                                {showFats && <p>Fats: </p>}
+                                {showFats && <p>{totals.fats} g</p>}
+                                {showCarbs && <p>Carbs:</p>}
+                                {showCarbs && <p>{totals.carbs} g</p>}
+                                {showSugars && <p>Sugars: </p>}
+                                {showSugars && <p>{totals.sugars} g</p>}
                             </div>
                         )}
                     </div>
