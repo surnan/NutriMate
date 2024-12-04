@@ -20,11 +20,10 @@ const DayLogPage = () => {
 
     const sessionUser = useSelector((state) => state.session.user);
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!sessionUser.id) {
             navigate("/")
         }
-
     }, [sessionUser.id])
 
 
@@ -99,22 +98,15 @@ const DayLogPage = () => {
                         >
                             {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
                         </button>
-                        <br />
-                        <br />
-                        {showTotals && (
-                            <div className="totals-section">
-                                <p>Calories: </p>
-                                <p>{totals.calories}</p>
-                                {showProtein && <p>Protein: </p>}
-                                {showProtein && <p>{totals.protein} g</p>}
-                                {showFats && <p>Fats: </p>}
-                                {showFats && <p>{totals.fats} g</p>}
-                                {showCarbs && <p>Carbs:</p>}
-                                {showCarbs && <p>{totals.carbs} g</p>}
-                                {showSugars && <p>Sugars: </p>}
-                                {showSugars && <p>{totals.sugars} g</p>}
-                            </div>
-                        )}
+
+                        <div className={`totals-section-horizontal ${showTotals ? "visible" : "hidden"}`}>
+                        {/* <div className={`totals-section-horizontal showTotals visible`}> */}
+                            <p>Calories: {totals.calories}</p>
+                            {showProtein && <p>Protein: {totals.protein} g</p>}
+                            {showFats && <p>Fats: {totals.fats} g</p>}
+                            {showCarbs && <p>Carbs: {totals.carbs} g</p>}
+                            {showSugars && <p>Sugars: {totals.sugars} g</p>}
+                        </div>
                     </div>
 
                     <div className="circle_buttons_h_flex">
@@ -153,14 +145,14 @@ const DayLogPage = () => {
                         </div>
 
                         <div className="tooltip">
-                        <button
-                            onClick={handleSettings}
-                            className="round daily_btn_font_size shadow yellow clickable"
-                            title="Change Settings"
-                        >
-                            <i className="fa-solid fa-gear"></i>
-                        </button>
-                        <span className="tooltiptext">Settings</span>
+                            <button
+                                onClick={handleSettings}
+                                className="round daily_btn_font_size shadow yellow clickable"
+                                title="Change Settings"
+                            >
+                                <i className="fa-solid fa-gear"></i>
+                            </button>
+                            <span className="tooltiptext">Settings</span>
                         </div>
 
 

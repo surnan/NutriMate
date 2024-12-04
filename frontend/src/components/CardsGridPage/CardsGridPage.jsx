@@ -107,34 +107,45 @@ const CardsPageGrid = ({ stuff }) => {
       <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex workout_btn_div">
-        <button
-          onClick={handleBack}
-          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-          title="Back"
-        >
-          <i className="fa-solid fa-chevron-left"></i>
-        </button>
+
+        <div className="tooltip">
+          <button
+            onClick={handleBack}
+            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+            title="Back"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <span className="tooltiptext letter_spacing">BACK</span>
+        </div>
+
 
         <div className="wokoutPageForm_hFlex">
-          <button
-            onClick={handleRefresh}
-            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-            title="Reset"
-          >
-            <i className="fa-solid fa-rotate-left"></i>
-          </button>
+          <div className="tooltip">
+            <button
+              onClick={handleRefresh}
+              className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+              title="Reset"
+            >
+              <i className="fa-solid fa-rotate-left"></i>
+            </button>
+            <span className="tooltiptext letter_spacing">UNDO</span>
+          </div>
 
-          <button
-            onClick={handleCreate}
-            className="round daily_btn_font_size shadow green clickable menuRoundBtn"
-            title="+ Create"
-          >
-            <i className="fa-solid fa-plus"></i>
-          </button>
+          <div className="tooltip">
+            <button
+              onClick={handleCreate}
+              className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+              title="+ Create"
+            >
+              <i className="fa-solid fa-plus"></i>
+            </button>
+            <span className="tooltiptext letter_spacing">CREATE</span>
+          </div>
         </div>
       </div>
 
-      <SearchBar onSearch={handleSearch} placeholder="Enter Name ..." />
+      <SearchBar onSearch={handleSearch} placeholder="Search..." />
 
       <div className="cards_grid">
         {filteredAndSortedWorkouts.map((data) => (
