@@ -24,7 +24,7 @@ const localizer = dateFnsLocalizer({
 });
 
 
-const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals }) => {
+const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);

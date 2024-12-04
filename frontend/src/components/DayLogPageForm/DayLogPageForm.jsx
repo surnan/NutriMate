@@ -9,6 +9,7 @@ import DeleteModal from "../_modal/DeleteModal";
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
 
+import { useTheme } from "../../context/ThemeContext"
 
 function DayLogPageForm() {
     const navigate = useNavigate();
@@ -17,7 +18,8 @@ function DayLogPageForm() {
     const { id } = useParams();
     const dayLogId = parseInt(id);
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
-
+    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
+    
     useEffect(() => {
         console.log("")
         console.log("")
