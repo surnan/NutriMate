@@ -6,7 +6,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postWorkoutsOneThunk, updateWorkoutsOneThunk, deleteWorkoutThunkById, getWorkoutOneThunk } from "../../redux/workouts";
 import { getWorkoutImagesForWorkoutThunk, resetWorkoutImages, postWorkoutImagesOneThunk, updateWorkoutImagesOneThunk } from "../../redux/workoutImages";
 import DeleteModal from "../_modal/DeleteModal";
-import { capitalizeFirstLetter} from '../_utils/MyFunctions';
+import { capitalizeFirstLetter } from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";
@@ -180,6 +180,7 @@ function WorkoutPageForm() {
   const handleModalClose = () => {
     setShowDeleteModal(false);
     resetWorkoutImages()
+    navigate(-1);
   };
 
   //downloadGIF
@@ -189,32 +190,56 @@ function WorkoutPageForm() {
       <h3>Email = {sessionUser?.email}</h3> */}
 
       <div className="max_HFlex">
-        <button
-          onClick={handleBack}
-          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-          title="Back"
-        >
-          <i className="fa-solid fa-chevron-left"></i>
-        </button>
+
+        <div className="tooltip">
+          <button
+            onClick={handleBack}
+            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+            title="Back"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <span className="tooltiptext letter_spacing">BACK</span>
+        </div>
 
 
 
         <div className="wokoutPageForm_hFlex">
-          <button
-            onClick={handleReset}
-            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-            title="Reset"
-          >
-            <i className="fa-solid fa-rotate-left"></i>
-          </button>
+          <div className="tooltip">
+            <button
+              onClick={handleReset}
+              className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+              title="Reset"
+            >
+              <i className="fa-solid fa-rotate-left"></i>
+            </button>
+            <span className="tooltiptext letter_spacing">UNDO</span>
+          </div>
 
-          <button
-            onClick={handleSubmitSave}
-            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-            title="Save"
-          >
-            <i className="fa-solid fa-bookmark"></i>
-          </button>
+          <div className="tooltip">
+            <button
+              onClick={handleSubmitSave}
+              className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+              title="Save"
+            >
+              <i className="fa-solid fa-bookmark"></i>
+            </button>
+            <span className="tooltiptext letter_spacing">SAVE</span>
+          </div>
+
+          <div className="tooltip">
+            <button
+              onClick={handleAddToLog}
+              className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+              title="Add to Log"
+            >
+              <i className="fa-solid fa-thumbtack"></i>
+            </button>
+            <span className="tooltiptext letter_spacing">LOG</span>
+          </div>
+
+
+
         </div>
       </div>
 
@@ -249,9 +274,10 @@ function WorkoutPageForm() {
       </div>
 
       <div className="max_HFlex">
+        <br />
         {
           !newWorkout &&
-          <div>
+          <div className="tooltip">
             <button
               onClick={handleDelete}
               className="round daily_btn_font_size shadow red clickable menuRoundBtn"
@@ -259,21 +285,15 @@ function WorkoutPageForm() {
             >
               <i className="fa-solid fa-trash-can"></i>
             </button>
-
-            <button
-              onClick={handleAddToLog}
-              className="round daily_btn_font_size shadow white clickable menuRoundBtn"
-              title="Add to Log"
-            >
-              <i className="fa-solid fa-thumbtack"></i>
-            </button>
+            <span className="tooltiptext_below letter_spacing">DELETE</span>
           </div>
+
         }
 
       </div>
       <br />
       <br />
-      <hr />
+      <h3 className="center">Click Image to change Profile Picture</h3>
       <br />
       <br />
       <div className="vertical_center_flex">

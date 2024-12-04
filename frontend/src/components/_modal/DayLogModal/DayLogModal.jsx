@@ -4,16 +4,8 @@ import './DayLogModal.css'
 import { useNavigate } from 'react-router-dom';
 
 
-// const DayLogModal = ({ _, onClose }) => {
-const DayLogModal = ({onClose }) => {
-    // console.log('_stuff  = ', _stuff)
+const DayLogModal = ({ onClose }) => {
     const nav = useNavigate()
-
-    // const handleDeleteBtn = async () => {
-    //     console.log("BUTTON PRESSED")
-    //     onClose();
-    // };
-
     const handleWorkoutsBtn = () => { nav("/workouts") }
     const handleGrubsBtn = () => { nav("/grubs") }
 
@@ -22,28 +14,39 @@ const DayLogModal = ({onClose }) => {
             <div className="modal_under_layer" onClick={onClose} />
             <div className="modal_window_all shadow">
                 <h2 className='center'>Click to Add:</h2>
+                <br />
                 <div className="daily_btn_font_size_grid">
-                    <button
-                        onClick={handleWorkoutsBtn}
-                        className="round daily_btn_font_size shadow blue clickable"
-                    >
-                        <i className="fa-solid fa-person-running"></i>
-                    </button>
 
-                    <button
-                        onClick={handleGrubsBtn}
-                        className="round daily_btn_font_size shadow green clickable"
-                    >
-                        <i className="fa-solid fa-utensils"></i>
-                    </button>
+                    <div className="tooltip">
+                        <button
+                            onClick={handleWorkoutsBtn}
+                            className="round daily_btn_font_size shadow blue clickable"
+                        >
+                            <i className="fa-solid fa-person-running"></i>
+                        </button>
+                        <span className="tooltiptext">Add Excercise</span>
+                    </div>
+
+                    <div className="tooltip">
+                        <button
+                            onClick={handleGrubsBtn}
+                            className="round daily_btn_font_size shadow green clickable"
+                        >
+                            <i className="fa-solid fa-utensils"></i>
+                        </button>
+                        <span className="tooltiptext">Add Food</span>
+                    </div>
 
                     {
-                        <button
-                            onClick={onClose}
-                            className="round daily_btn_font_size shadow red"
-                        >
-                            <i className="fas fa-trash-alt" />
-                        </button>
+                        <div className="tooltip">
+                            <button
+                                onClick={onClose}
+                                className="round daily_btn_font_size shadow red"
+                            >
+                                <i className="fas fa-trash-alt" />
+                            </button>
+                            <span className="tooltiptext">Delete</span>
+                        </div>
                     }
                 </div>
             </div>

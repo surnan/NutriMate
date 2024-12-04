@@ -9,7 +9,7 @@ textarea {
 .wokoutPageForm_hFlex {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    /* padding: 0 20px; */
     gap: 2rem
 }
 
@@ -55,23 +55,5 @@ textarea {
     width: 10rem;
     height: 3rem;
     border-radius: 5px;
-}
-
-.back_btn{
-    display: block;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 5px;
-}
-
-.workoutPageForm_hFlex {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
 }
 

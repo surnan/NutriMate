@@ -50,3 +50,16 @@
     height: 60px;  
     width: 60px;   
 }
+
+.totals-section-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    visibility: hidden;
+    padding: 1rem;
+}
+
+.totals-section-horizontal.visible {
+    visibility: visible
+}

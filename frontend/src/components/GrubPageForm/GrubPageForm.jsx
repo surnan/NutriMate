@@ -231,34 +231,55 @@ function GrubPageForm() {
 
     return (
         <div className="mainBodyStyle">
-            <h1>GrubForm.jsx</h1>
-            <h3 >Email = {sessionUser?.email}</h3>
+            {/* <h1>GrubForm.jsx</h1>
+            <h3 >Email = {sessionUser?.email}</h3> */}
 
             <div className="grubPageForm_hFlex">
-                <button
-                    onClick={handleBack}
-                    className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                    title="Back"
-                >
-                    <i className="fa-solid fa-chevron-left"></i>
-                </button>
+
+                <div className="tooltip">
+                    <button
+                        onClick={handleBack}
+                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                        title="Back"
+                    >
+                        <i className="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <span className="tooltiptext letter_spacing">BACK</span>
+                </div>
 
                 <div className="grubPageForm_hFlex">
-                    <button
-                        onClick={handleReset}
-                        className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-                        title="Reset"
-                    >
-                        <i className="fa-solid fa-rotate-left"></i>
-                    </button>
+                    <div className="tooltip">
+                        <button
+                            onClick={handleReset}
+                            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+                            title="Reset"
+                        >
+                            <i className="fa-solid fa-rotate-left"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">UNDO</span>
+                    </div>
 
-                    <button
-                        onClick={handleSubmitSave}
-                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                        title="Save"
-                    >
-                        <i className="fa-solid fa-bookmark"></i>
-                    </button>
+                    <div className="tooltip">
+                        <button
+                            onClick={handleSubmitSave}
+                            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                            title="Save"
+                        >
+                            <i className="fa-solid fa-bookmark"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">SAVE</span>
+                    </div>
+
+                    <div className="tooltip">
+                        <button
+                            onClick={handleAddToLog}
+                            className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+                            title="Add to Log"
+                        >
+                            <i className="fa-solid fa-thumbtack"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">LOG</span>
+                    </div>
 
                 </div>
             </div>
@@ -414,30 +435,26 @@ function GrubPageForm() {
 
 
             </div>
+            < br />
             <div className="max_HFlex">
-                <button
-                    onClick={handleDeleteBtn}
-                    className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-                    title="Delete"
-                >
-                    <i className="fa-solid fa-trash-can"></i>
-                </button>
-
-                <button
-                    onClick={handleAddToLog}
-                    className="round daily_btn_font_size shadow white clickable menuRoundBtn"
-                    title="Add to Log"
-                >
-                    <i className="fa-solid fa-thumbtack"></i>
-                </button>
+                <br />
+                <div className="tooltip">
+                    <button
+                        onClick={handleDeleteBtn}
+                        className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                        title="Delete"
+                    >
+                        <i className="fa-solid fa-trash-can"></i>
+                    </button>
+                    <span className="tooltiptext_below letter_spacing">DELETE</span>
+                </div>
             </div>
 
             <br />
             <br />
-            <hr />
+            <h3 className="center">Click Image to change Profile Picture</h3>
             <br />
             <br />
-
             <div className="vertical_center_flex">
                 {/* <h1>Your GRUB Page Form</h1> */}
                 <ImageDisplay
@@ -464,6 +481,8 @@ function GrubPageForm() {
                 <br /><br /><br /><br />
                 {(clickedGrubImgId > 0) && !showUpload && (
                     <div className="vertical_center_flex">
+                        <h3>Click Image to change Profile Picture</h3>
+
                         <img
                             src={previewUrl}
                             style={{ height: "300px", width: "300px" }}

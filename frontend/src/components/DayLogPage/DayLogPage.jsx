@@ -17,11 +17,18 @@ const DayLogPage = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [showDayLogModal, setShowDayLogModal] = useState(false);
-    
+
     const sessionUser = useSelector((state) => state.session.user);
-    // const { theme, toggleTheme } = useTheme();
-    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars, timeValue } = useTheme();
-    
+
+    useEffect(() => {
+        if (!sessionUser.id) {
+            navigate("/")
+        }
+    }, [sessionUser.id])
+
+
+    const { theme, showProtein, showCarbs, showFats, showSugars, timeValue } = useTheme();
+
     useEffect(() => {
         console.log(`Theme ===> `, theme)
         document.body.classList.remove("light-mode", "dark-mode");
@@ -37,7 +44,7 @@ const DayLogPage = () => {
         sugars: 0,
     });
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("showProtein = ", showProtein)
         console.log("showCarbs = ", showCarbs)
 
@@ -48,10 +55,10 @@ const DayLogPage = () => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
-    const handleBack = () => navigate(-1)
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }
+    const handleSettings = () => { navigate("/settings") }
 
     const [showTotals, setShowTotals] = useState(false); // Collapsible state
 
@@ -74,6 +81,7 @@ const DayLogPage = () => {
         setShowTotals((prevState) => !prevState);
     };
 
+
     return (
         <div
             className={`
@@ -81,16 +89,6 @@ const DayLogPage = () => {
             ${theme === "dark" ? "dkBody smoke_font" : ""}
             `}
         >
-            <div>
-                <h1>DayLogPage.jsx</h1>
-                <h3 >Email = {sessionUser?.email}</h3>
-                {/* <p>showProtein = {showProtein ? showProtein : "not-exist"}</p>
-                <p>showCarbs = {showCarbs ? showCarbs: "not-exist"}</p> */}
-                <br />
-                <br />
-            </div>
-
-
             <div className="vertical_center_flex ">
                 <div className="max_HFlex workout_btn_div">
                     <div>
@@ -100,48 +98,65 @@ const DayLogPage = () => {
                         >
                             {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
                         </button>
-                        <br />
-                        <br />
-                        {showTotals && (
-                            <div className="totals-section">
-                                <p>Calories: </p>
-                                <p>{totals.calories}</p>
-                                {showProtein && <p>Protein: </p>}
-                                {showProtein && <p>{totals.protein} g</p>}
-                                {showFats && <p>Fats: </p>}
-                                {showFats && <p>{totals.fats} g</p>}
-                                {showCarbs && <p>Carbs:</p>}
-                                {showCarbs && <p>{totals.carbs} g</p>}
-                                {showSugars && <p>Sugars: </p>}
-                                {showSugars && <p>{totals.sugars} g</p>}
-                            </div>
-                        )}
+
+                        <div className={`totals-section-horizontal ${showTotals ? "visible" : "hidden"}`}>
+                        {/* <div className={`totals-section-horizontal showTotals visible`}> */}
+                            <p>Calories: {totals.calories}</p>
+                            {showProtein && <p>Protein: {totals.protein} g</p>}
+                            {showFats && <p>Fats: {totals.fats} g</p>}
+                            {showCarbs && <p>Carbs: {totals.carbs} g</p>}
+                            {showSugars && <p>Sugars: {totals.sugars} g</p>}
+                        </div>
                     </div>
 
                     <div className="circle_buttons_h_flex">
-                        <button
-                            onClick={handlePlusWorkout}
-                            className="round daily_btn_font_size shadow blue clickable"
-                            title="Add Workout"
-                        >
-                            <i className="fa-solid fa-person-running"></i>
-                        </button>
 
-                        <button
-                            onClick={handlePlusGrub}
-                            className="round daily_btn_font_size shadow orange clickable"
-                            title="Add Meal"
-                        >
-                            <i className="fa-solid fa-utensils"></i>
-                        </button>
+                        <div className="tooltip">
+                            <button
+                                onClick={handlePlusWorkout}
+                                className="round daily_btn_font_size shadow blue clickable"
+                                title="Add Workout"
+                            >
+                                <i className="fa-solid fa-person-running"></i>
+                            </button>
+                            <span className="tooltiptext">Add Excercise</span>
+                        </div>
 
-                        <button
-                            onClick={handleWeights}
-                            className="round daily_btn_font_size shadow green clickable"
-                            title="Record Weight"
-                        >
-                            <i className="fa-solid fa-weight-scale"></i>
-                        </button>
+                        <div className="tooltip">
+                            <button
+                                onClick={handlePlusGrub}
+                                className="round daily_btn_font_size shadow orange clickable"
+                                title="Add Meal"
+                            >
+                                <i className="fa-solid fa-utensils"></i>
+                            </button>
+                            <span className="tooltiptext">Add Food</span>
+                        </div>
+
+                        <div className="tooltip">
+                            <button
+                                onClick={handleWeights}
+                                className="round daily_btn_font_size shadow green clickable"
+                                title="Record Weight"
+                            >
+                                <i className="fa-solid fa-weight-scale"></i>
+                            </button>
+                            <span className="tooltiptext">Record Weight</span>
+                        </div>
+
+                        <div className="tooltip">
+                            <button
+                                onClick={handleSettings}
+                                className="round daily_btn_font_size shadow yellow clickable"
+                                title="Change Settings"
+                            >
+                                <i className="fa-solid fa-gear"></i>
+                            </button>
+                            <span className="tooltiptext">Settings</span>
+                        </div>
+
+
+
                     </div>
                 </div>
 
