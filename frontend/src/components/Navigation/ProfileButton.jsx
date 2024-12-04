@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom"
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const user = useSelector((store) => store.session.user);
   const ulRef = useRef();
 
@@ -44,11 +44,16 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
+  const handleSettings = (e) => {
+    e.preventDefault();
+    navigate("/settings")
+  };
+
   const logout = (e) => {
     e.preventDefault();
     dispatch(thunkLogout());
     closeMenu();
-    nav("/")
+    navigate("/")
   };
 
   return (
@@ -67,6 +72,8 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="profile_dropdown_grid">
+              <br/>
+              <button className="_button black_font" onClick={handleSettings}>SETTINGS</button>
               <p>{user.email}</p>
               <button className="_button black_font" onClick={logout}>Log Out</button>
             </div>
