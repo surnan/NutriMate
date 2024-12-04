@@ -20,27 +20,15 @@ export const ThemeProvider = ({ children }) => {
   };
 
 
-  // const [showProtein, setShowProtein] = useState(() => {
-  //   return JSON.parse(localStorage.getItem('showProtein')) ?? true;
-  // });
+  const getStoredValue = (key, defaultValue) => {
+    return localStorage.getItem(key) ?? defaultValue;
+  };
+  
   const [showProtein, setShowProtein] = useState(() => getStoredBoolean('showProtein', true));
-
-  // const [showCarbs, setShowCarbs] = useState(() => {
-  //   return JSON.parse(localStorage.getItem('showCarbs')) ?? true;
-  // });
   const [showCarbs, setShowCarbs] = useState(() => getStoredBoolean('showCarbs', true));
-
-  // const [showFats, setShowFats] = useState(() => {
-  //   return JSON.parse(localStorage.getItem('showFats')) ?? true;
-  // });
   const [showFats, setShowFats] = useState(() => getStoredBoolean('showFats', true));
-
-
-  // const [showSugars, setShowSugars] = useState(() => {
-  //   return JSON.parse(localStorage.getItem('showSugars')) ?? true;
-  // });
-
   const [showSugars, setShowSugars] = useState(() => getStoredBoolean('showSugars', true));
+  const [timeValue, setTimeValue] = useState(() => getStoredValue('timeValue', ''));
 
 
 
@@ -75,13 +63,19 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem('showSugars', JSON.stringify(newValue));
   };
 
+  const updateTimeValue = (newValue) => {
+    setTimeValue(newValue);
+    localStorage.setItem('timeValue', newValue);
+  };
+
   useEffect(() => {
     localStorage.setItem('theme', theme);
     localStorage.setItem('showProtein', JSON.stringify(showProtein));
     localStorage.setItem('showCarbs', JSON.stringify(showCarbs));
     localStorage.setItem('showFats', JSON.stringify(showFats));
     localStorage.setItem('showSugars', JSON.stringify(showSugars));
-  }, [theme, showProtein, showCarbs, showFats, showSugars]);
+    localStorage.setItem('timeValue', timeValue);
+  }, [theme, showProtein, showCarbs, showFats, showSugars, timeValue]);
 
 
   useEffect(() => {
@@ -101,7 +95,10 @@ export const ThemeProvider = ({ children }) => {
         showFats, 
         toggleShowFats, 
         showSugars, 
-        toggleShowSugars 
+        toggleShowSugars,
+        timeValue,
+        updateTimeValue
+         
       }}
     >
       {children}

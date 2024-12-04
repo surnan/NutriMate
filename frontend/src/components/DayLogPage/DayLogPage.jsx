@@ -20,7 +20,7 @@ const DayLogPage = () => {
     
     const sessionUser = useSelector((state) => state.session.user);
     // const { theme, toggleTheme } = useTheme();
-    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
+    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars, timeValue } = useTheme();
     
     useEffect(() => {
         console.log(`Theme ===> `, theme)
@@ -153,6 +153,7 @@ const DayLogPage = () => {
                         height="900px"
                         handler={toggleDayLogModal}
                         setTotals={setTotals}
+                        defaultStartTime={timeValue}
                     />
                 </div>
             </div>
