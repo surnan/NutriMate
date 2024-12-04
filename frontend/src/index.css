@@ -195,6 +195,7 @@ select._input {padding: 0.5rem}
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.604);
     font-family: "Noto+Sans", Arial, Helvetica, sans-serif;
     font-weight: 900;
+    cursor: pointer;
 }
 
 .vertical_center_flex{
