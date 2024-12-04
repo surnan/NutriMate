@@ -19,8 +19,16 @@ const DayLogPage = () => {
     const [showDayLogModal, setShowDayLogModal] = useState(false);
 
     const sessionUser = useSelector((state) => state.session.user);
-    // const { theme, toggleTheme } = useTheme();
-    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars, timeValue } = useTheme();
+
+    useEffect(()=>{
+        if (!sessionUser.id) {
+            navigate("/")
+        }
+
+    }, [sessionUser.id])
+
+
+    const { theme, showProtein, showCarbs, showFats, showSugars, timeValue } = useTheme();
 
     useEffect(() => {
         console.log(`Theme ===> `, theme)
@@ -48,7 +56,6 @@ const DayLogPage = () => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
-    const handleBack = () => navigate(-1)
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }

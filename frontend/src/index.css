@@ -147,11 +147,12 @@ select._input {padding: 0.5rem}
 }
 
 .mainBodyStyle {
-    padding: 25px 0;
+    padding: 40px 10px;
     min-height: 100vh;
     max-width: var(--max-page-width);
     margin: auto;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
+    background-color: white;
 }
 
   .modal_under_layer {
