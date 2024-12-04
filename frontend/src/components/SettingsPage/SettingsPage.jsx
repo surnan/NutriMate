@@ -10,16 +10,18 @@ import { updateUserThunk } from '../../redux/session';
 const SettingsPage = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    
+
     const [scrapedData, setScrapedData] = useState(null);
     const [showSelect, setShowSelect] = useState(false);
-    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
-    const [imgUrl, setImgUrl] = useState("");   
+    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars,
+        timeValue, updateTimeValue
+     } = useTheme();
+    const [imgUrl, setImgUrl] = useState("");
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
 
     // AWS
-    const handleImgClick = () =>{
+    const handleImgClick = () => {
         console.log("click image")
         setShowSelect(!showSelect)
         console.log("showSelect = ", showSelect)
@@ -98,6 +100,12 @@ const SettingsPage = () => {
         }
     };
 
+    const handleTimeChange = (e) => {
+        updateTimeValue(e.target.value);
+    };
+
+
+
     useEffect(() => {
         console.log(`Theme ===> `, theme)
         document.body.classList.remove("light-mode", "dark-mode");
@@ -133,56 +141,67 @@ const SettingsPage = () => {
                 <input
                     type="checkbox"
                     id="protein-toggle"
-                    checked={showProtein} 
+                    checked={showProtein}
                     onChange={toggleShowProtein}
                 />
                 <label htmlFor="protein-toggle" className="toggle-label">
                     <span className="toggle-slider" />
                 </label>
-                <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p> 
+                <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p>
             </div>
 
-            <br/>
+            <br />
             <div className="toggle-switch">
                 <input
                     type="checkbox"
                     id="carbs-toggle"
-                    checked={showCarbs} 
+                    checked={showCarbs}
                     onChange={toggleShowCarbs}
                 />
                 <label htmlFor="carbs-toggle" className="toggle-label">
                     <span className="toggle-slider" />
                 </label>
-                <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p> 
+                <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p>
             </div>
 
-            <br/>
+            <br />
             <div className="toggle-switch">
                 <input
                     type="checkbox"
                     id="fats-toggle"
-                    checked={showFats} 
+                    checked={showFats}
                     onChange={toggleShowFats}
                 />
                 <label htmlFor="fats-toggle" className="toggle-label">
                     <span className="toggle-slider" />
                 </label>
-                <p>Show Fats: {showFats ? 'Yes' : 'No'}</p> 
+                <p>Show Fats: {showFats ? 'Yes' : 'No'}</p>
             </div>
 
-            <br/>
+            <br />
             <div className="toggle-switch">
                 <input
                     type="checkbox"
                     id="sugars-toggle"
-                    checked={showSugars} 
+                    checked={showSugars}
                     onChange={toggleShowSugars}
                 />
                 <label htmlFor="sugars-toggle" className="toggle-label">
                     <span className="toggle-slider" />
                 </label>
-                <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p> 
+                <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
             </div>
+
+
+            <p>Time:</p>
+            <input
+                className="_input"
+                type="time"
+                name="timestamp"
+                value={timeValue}
+                onChange={handleTimeChange}
+            />
+
 
             <br />
             <button onClick={handleScrape} className="_button black_font settingsBtn">
@@ -205,9 +224,9 @@ const SettingsPage = () => {
                     </ul>
                 </div>
             )}
-            <br/>
+            <br />
             <h3>Click Image to change Profile Picture</h3>
-            <br/>
+            <br />
             <div>
                 <img
                     className="round clickable"
