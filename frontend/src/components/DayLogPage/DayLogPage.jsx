@@ -63,7 +63,7 @@ const DayLogPage = () => {
 
 
     const toggleTotals = () => {
-        setShowTotals((prevState) => !prevState); // Toggle visibility
+        setShowTotals((prevState) => !prevState);
     };
 
     return (
@@ -77,42 +77,37 @@ const DayLogPage = () => {
                 <h1>DayLogPage.jsx</h1>
                 <h3 >Email = {sessionUser?.email}</h3>
                 <br />
-                <div>
-                    <button
-                        className="toggle-totals-btn transparent _button"
-                        onClick={toggleTotals}
-                    >
-                        {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
-                    </button>
-                    {showTotals && (
-                        <div className="totals-section">
-                            <p>Total Calories: </p>
-                            <p>{totals.calories}</p>
-                            <p>Total Protein: </p>
-                            <p>{totals.protein}g</p>
-                            <p>Total Fats: </p>
-                            <p>{totals.fats}g</p>
-                            <p>Total Carbs:</p>
-                            <p>{totals.carbs}g</p>
-                            <p>Total Sugars: </p>
-                            <p>{totals.sugars}g</p>
-                        </div>
-                    )}
-                </div>
                 <br />
             </div>
 
 
             <div className="vertical_center_flex ">
-                {/* top buttons */}
-                {/* <div className="max_HFlex workout_btn_div container-width"> */}
                 <div className="max_HFlex workout_btn_div">
-                    <button
-                        className="back_btn navBlue"
-                        onClick={handleBack}
-                    >
-                        <i className="fa-solid fa-arrow-rotate-left"></i>
-                    </button>
+                    <div>
+                        <button
+                            className="toggle-totals-btn transparent _button"
+                            onClick={toggleTotals}
+                        >
+                            {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
+                        </button>
+                        <br />
+                        <br />
+                        {showTotals && (
+                            <div className="totals-section">
+                                <p>Calories: </p>
+                                <p>{totals.calories}</p>
+                                <p>Protein: </p>
+                                <p>{totals.protein} g</p>
+                                <p>Fats: </p>
+                                <p>{totals.fats} g</p>
+                                <p>Carbs:</p>
+                                <p>{totals.carbs} g</p>
+                                <p>Sugars: </p>
+                                <p>{totals.sugars} g</p>
+                            </div>
+                        )}
+                    </div>
+
                     <div className="circle_buttons_h_flex">
                         <button
                             onClick={handlePlusWorkout}

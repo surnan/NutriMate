@@ -49,7 +49,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 2px red solid;
+  /* border: 2px red solid; */
 }
 
 /* Light mode */
@@ -137,7 +137,8 @@ select._input {padding: 0.5rem}
 .max_HFlex {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
+    align-items: top;
     width: 100%;
 }
 
