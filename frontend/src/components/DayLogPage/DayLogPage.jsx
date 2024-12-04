@@ -90,18 +90,20 @@ const DayLogPage = () => {
                         >
                             {showTotals ? "▼ Hide Totals" : "▶ Show Totals"}
                         </button>
+                        <br />
+                        <br />
                         {showTotals && (
                             <div className="totals-section">
-                                <p>Total Calories: </p>
+                                <p>Calories: </p>
                                 <p>{totals.calories}</p>
-                                <p>Total Protein: </p>
-                                <p>{totals.protein}g</p>
-                                <p>Total Fats: </p>
-                                <p>{totals.fats}g</p>
-                                <p>Total Carbs:</p>
-                                <p>{totals.carbs}g</p>
-                                <p>Total Sugars: </p>
-                                <p>{totals.sugars}g</p>
+                                <p>Protein: </p>
+                                <p>{totals.protein} g</p>
+                                <p>Fats: </p>
+                                <p>{totals.fats} g</p>
+                                <p>Carbs:</p>
+                                <p>{totals.carbs} g</p>
+                                <p>Sugars: </p>
+                                <p>{totals.sugars} g</p>
                             </div>
                         )}
                     </div>
