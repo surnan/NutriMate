@@ -77,18 +77,6 @@
     border-radius: 5px;
 }
 
-.back_btn{
-    display: block;
-    background-color: gray;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin: 10px;
-    width: 5rem;
-    height: 2rem;
-    border-radius: 5px;
-}
-
 .grubPageForm_hFlex {
     display: flex;
     justify-content: space-between;

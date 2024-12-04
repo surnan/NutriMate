@@ -31,7 +31,7 @@ function ImageDisplay({ imgArr, downloadGIF, placeholderIMG, handleImgClick }) {
           <img src={downloadGIF} alt="Loading..." className="downloadGIF" />
         </div>
       ) : (
-        <div className="border round">
+        <div className="round">
           {imgArr && imgArr.length > 0 ? (
             imgArr.map((currentImg) => (
               <div key={currentImg.id}>

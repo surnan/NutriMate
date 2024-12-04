@@ -72,8 +72,6 @@ function ProfileButton() {
         <ul className={"profile-dropdown"} ref={ulRef}>
           {user ? (
             <div className="profile_dropdown_grid">
-              <br/>
-              <button className="_button black_font" onClick={handleSettings}>SETTINGS</button>
               <p>{user.email}</p>
               <button className="_button black_font" onClick={logout}>Log Out</button>
             </div>

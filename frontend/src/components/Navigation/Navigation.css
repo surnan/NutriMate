@@ -40,7 +40,7 @@
     position: relative;
     height: 95px;
     margin: auto;
-    padding: 25px 2rem;
+    padding: 25px 2rem 25px 0;
     max-width: var(--max-page-width);
 }
 
