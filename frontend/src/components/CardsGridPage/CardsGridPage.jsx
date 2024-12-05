@@ -11,6 +11,7 @@ import { getGrubsAllThunk } from "../../redux/grubs";
 import { getGrubImagesAllThunk } from "../../redux/grubImages";
 import { getWorkoutImagesAllThunk } from "../../redux/workoutImages";
 
+import placeholderIMG from '../../fe_images/none_image.png'
 
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
@@ -91,7 +92,8 @@ const CardsPageGrid = ({ stuff }) => {
       return <WorkoutCard workout={data} imageUrl={imageUrl} />;
     } else if (stuff === "grub") {
       const grubImage = grubImgArr.find(image => image.grubId === data.id);
-      imageUrl = grubImage ? grubImage.url : null; 
+      // imageUrl = grubImage ? grubImage.url : null; 
+      imageUrl = grubImage ? grubImage.url : placeholderIMG; 
       return <GrubCard grub={data} imageUrl={imageUrl} />;
     }
   }
@@ -103,6 +105,7 @@ const CardsPageGrid = ({ stuff }) => {
 
 
   return (
+<div className="mainBodyStyle">
     <div className="mainBodyStyle">
       {/* <h3>CardsPageGrid.jsx</h3>
       <h3>Email = {sessionUser?.email}</h3> */}
@@ -166,6 +169,7 @@ const CardsPageGrid = ({ stuff }) => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };
