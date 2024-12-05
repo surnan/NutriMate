@@ -94,6 +94,7 @@ function WorkoutPageForm() {
     setClickedWorkoutImgId(id)
   }
 
+  //1
   const updatedImgFromPC = async (e) => {
     console.log("updatedImgFromPC")
     const file = e.target.files[0];
@@ -104,6 +105,7 @@ function WorkoutPageForm() {
     setShowUpload(false);
   };
 
+  //2
   const handleImgSubmit = async () => {
     console.log('handleImgSubmit')
     let temp = {
@@ -129,6 +131,13 @@ function WorkoutPageForm() {
   const handleReset = () => {
     initializeForm;
     setPreviewUrl(""); // Clear preview URL on reset
+  }
+
+  const handleCancel = () => {
+    setClickedWorkoutImgId(0); // Reset the clicked image ID
+    setShowUpload(true); // Reset to show the "Select From Computer" option
+    setPreviewUrl(""); // Clear the preview URL
+    setImgUrl(""); // Clear the selected file
   }
 
   const updateSetForm = (e) => {
@@ -185,168 +194,178 @@ function WorkoutPageForm() {
 
   //downloadGIF
   return (
+
     <div className="mainBodyStyle">
-      {/* <h1>WorkoutPageForm.jsx</h1>
+      <div className="mainBodyStyle">
+        {/* <h1>WorkoutPageForm.jsx</h1>
       <h3>Email = {sessionUser?.email}</h3> */}
 
-      <div className="max_HFlex">
-
-        <div className="tooltip">
-          <button
-            onClick={handleBack}
-            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-            title="Back"
-          >
-            <i className="fa-solid fa-chevron-left"></i>
-          </button>
-          <span className="tooltiptext letter_spacing">BACK</span>
-        </div>
-
-
-
-        <div className="wokoutPageForm_hFlex">
-          <div className="tooltip">
-            <button
-              onClick={handleReset}
-              className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-              title="Reset"
-            >
-              <i className="fa-solid fa-rotate-left"></i>
-            </button>
-            <span className="tooltiptext letter_spacing">UNDO</span>
-          </div>
-
-          <div className="tooltip">
-            <button
-              onClick={handleSubmitSave}
-              className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-              title="Save"
-            >
-              <i className="fa-solid fa-bookmark"></i>
-            </button>
-            <span className="tooltiptext letter_spacing">SAVE</span>
-          </div>
-
-          <div className="tooltip">
-            <button
-              onClick={handleAddToLog}
-              className="round daily_btn_font_size shadow white clickable menuRoundBtn"
-              title="Add to Log"
-            >
-              <i className="fa-solid fa-thumbtack"></i>
-            </button>
-            <span className="tooltiptext letter_spacing">LOG</span>
-          </div>
-
-
-
-        </div>
-      </div>
-
-      <div className="workout_page_form_grid">
-        <label style={{ display: 'inline-flex' }}>
-          {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>}
-          Name:
-        </label>
-        <input
-          className="_input"
-          type="text"
-          name="name"
-          onChange={updateSetForm}
-          placeholder="Enter name"
-          value={form.name}
-        />
-
-        <label style={{ display: 'inline-flex' }}>
-          {errors.description && (
-            <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>
-          )}
-          Description:
-        </label>
-        <textarea
-          className="_textarea"
-          maxLength="498"
-          name="description"
-          onChange={updateSetForm}
-          placeholder="Enter description"
-          value={form.description}
-        />
-      </div>
-
-      <div className="max_HFlex">
+        <h1 className="center">Excercise Details</h1>
         <br />
-        {
-          !newWorkout &&
+        <div className="max_HFlex">
+
           <div className="tooltip">
             <button
-              onClick={handleDelete}
-              className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-              title="Delete"
+              onClick={handleBack}
+              className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+              title="Back"
             >
-              <i className="fa-solid fa-trash-can"></i>
+              <i className="fa-solid fa-chevron-left"></i>
             </button>
-            <span className="tooltiptext_below letter_spacing">DELETE</span>
+            <span className="tooltiptext letter_spacing">BACK</span>
           </div>
 
-        }
-
-      </div>
-      <br />
-      <br />
-      <h3 className="center">Click Image to change Profile Picture</h3>
-      <br />
-      <br />
-      <div className="vertical_center_flex">
-        {/* <h1>Your Workout Page Form</h1> */}
-        <ImageDisplay
-          imgArr={workoutImgArr}
-          downloadGIF={downloadGIF}
-          placeholderIMG={placeholderIMG}
-          handleImgClick={handleImgClick}
-        />
-      </div>
 
 
-      <div className="vertical_center_flex">
-        {(clickedWorkoutImgId > 0) && showUpload && (
-          <label htmlFor='file-upload'> Select From Computer
-            <input
-              type='file'
-              id='file-upload'
-              name="img_url"
-              onChange={updatedImgFromPC}
-              accept='.jpg, .jpeg, .png, .gif'
-            />
+          <div className="wokoutPageForm_hFlex">
+            <div className="tooltip">
+              <button
+                onClick={handleReset}
+                className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+                title="Reset"
+              >
+                <i className="fa-solid fa-rotate-left"></i>
+              </button>
+              <span className="tooltiptext letter_spacing">UNDO</span>
+            </div>
+
+            <div className="tooltip">
+              <button
+                onClick={handleSubmitSave}
+                className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                title="Save"
+              >
+                <i className="fa-solid fa-bookmark"></i>
+              </button>
+              <span className="tooltiptext letter_spacing">SAVE</span>
+            </div>
+
+            <div className="tooltip">
+              <button
+                onClick={handleAddToLog}
+                className="round daily_btn_font_size shadow white clickable menuRoundBtn"
+                title="Add to Log"
+              >
+                <i className="fa-solid fa-thumbtack"></i>
+              </button>
+              <span className="tooltiptext letter_spacing">LOG</span>
+            </div>
+
+            {
+              !newWorkout &&
+              <div className="tooltip">
+                <button
+                  onClick={handleDelete}
+                  className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                  title="Delete"
+                >
+                  <i className="fa-solid fa-trash-can"></i>
+                </button>
+                <span className="tooltiptext_below letter_spacing">DELETE</span>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div className="workout_page_form_grid">
+          <label style={{ display: 'inline-flex' }}>
+            {errors.name && <span style={{ color: 'red' }}>{errors.name}&nbsp;&nbsp;</span>}
+            Name:
           </label>
-        )}
-        <br /><br /><br /><br />
-        {(clickedWorkoutImgId > 0) && !showUpload && (
-          <div className="vertical_center_flex">
-            <img
-              src={previewUrl}
-              style={{ height: "300px", width: "300px" }}
-              alt="preview"
-              className="round"
-            />
-            <button
-              onClick={handleImgSubmit}
-              className="_button black block twenty_margin"
-            >Change Profile
-            </button>
-          </div>
+          <input
+            className="_input"
+            type="text"
+            name="name"
+            onChange={updateSetForm}
+            placeholder="Enter name"
+            value={form.name}
+          />
+
+          <label style={{ display: 'inline-flex' }}>
+            {errors.description && (
+              <span style={{ color: 'red' }}>{errors.description}&nbsp;&nbsp;</span>
+            )}
+            Description:
+          </label>
+          <textarea
+            className="_textarea"
+            maxLength="498"
+            name="description"
+            onChange={updateSetForm}
+            placeholder="Enter description"
+            value={form.description}
+          />
+        </div>
+
+        <br />
+        <br />
+        <h3 className="center">
+          {clickedWorkoutImgId > 0 && !showUpload ? "Original Image" : "Click Below to change Excercise Image"}
+        </h3>
+        <h3 className="center">&#9660;</h3>
+        <br />
+        <br />
+        <div className="vertical_center_flex">
+          {/* <h1>Your Workout Page Form</h1> */}
+          <ImageDisplay
+            imgArr={workoutImgArr}
+            downloadGIF={downloadGIF}
+            placeholderIMG={placeholderIMG}
+            handleImgClick={handleImgClick}
+          />
+        </div>
+
+
+        <div className="vertical_center_flex">
+          {(clickedWorkoutImgId > 0) && showUpload && (
+            <label htmlFor='file-upload'> Select From Computer
+              <input
+                type='file'
+                id='file-upload'
+                name="img_url"
+                onChange={updatedImgFromPC}
+                accept='.jpg, .jpeg, .png, .gif'
+              />
+            </label>
+          )}
+          <br /><br /><br /><br />
+          {(clickedWorkoutImgId > 0) && !showUpload && (
+            <div className="vertical_center_flex">
+              <h3>Preview Image</h3>
+              <h3>&#9660;</h3>
+              <br />
+              <img
+                src={previewUrl}
+                style={{ height: "300px", width: "300px" }}
+                alt="preview"
+                className="round"
+              />
+              <button
+                onClick={handleImgSubmit}
+                className="_button black block twenty_margin"
+              >Update
+              </button>
+              <button
+                className="_button black_font"
+                onClick={handleCancel}
+              >Cancel
+              </button>
+            </div>
+          )}
+        </div>
+
+
+        {showDeleteModal && (
+          <DeleteModal
+            item={workoutObj}
+            itemType="workout"
+            deleteThunk={deleteWorkoutThunkById}
+            onClose={handleModalClose}
+          />
         )}
       </div>
-
-
-      {showDeleteModal && (
-        <DeleteModal
-          item={workoutObj}
-          itemType="workout"
-          deleteThunk={deleteWorkoutThunkById}
-          onClose={handleModalClose}
-        />
-      )}
     </div>
+
   );
 }
 
