@@ -15,7 +15,7 @@ const SettingsPage = () => {
     const [showSelect, setShowSelect] = useState(false);
     const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars,
         timeValue, updateTimeValue
-     } = useTheme();
+    } = useTheme();
     const [imgUrl, setImgUrl] = useState("");
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
@@ -119,89 +119,92 @@ const SettingsPage = () => {
             `}>
             <br />
             <h1>SettingsPage.jsx</h1>
+
+            <h3>Username = {sessionUser?.username}</h3>
             <h3>Email = {sessionUser?.email}</h3>
 
             <br />
-            <div className="toggle-switch">
+            <div className="settings_grid">
+                <div className="toggle-switch">
+                    <input
+                        type="checkbox"
+                        id="theme-toggle"
+                        checked={theme === "dark"}
+                        onChange={toggleTheme}
+                    />
+                    <label htmlFor="theme-toggle" className="toggle-label">
+                        <span className="toggle-slider" />
+                    </label>
+                    <p>Current Theme: {theme}</p>
+                </div>
+
+
+                <br />
+                <div className="toggle-switch">
+                    <input
+                        type="checkbox"
+                        id="protein-toggle"
+                        checked={showProtein}
+                        onChange={toggleShowProtein}
+                    />
+                    <label htmlFor="protein-toggle" className="toggle-label">
+                        <span className="toggle-slider" />
+                    </label>
+                    <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p>
+                </div>
+
+                <br />
+                <div className="toggle-switch">
+                    <input
+                        type="checkbox"
+                        id="carbs-toggle"
+                        checked={showCarbs}
+                        onChange={toggleShowCarbs}
+                    />
+                    <label htmlFor="carbs-toggle" className="toggle-label">
+                        <span className="toggle-slider" />
+                    </label>
+                    <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p>
+                </div>
+
+                <br />
+                <div className="toggle-switch">
+                    <input
+                        type="checkbox"
+                        id="fats-toggle"
+                        checked={showFats}
+                        onChange={toggleShowFats}
+                    />
+                    <label htmlFor="fats-toggle" className="toggle-label">
+                        <span className="toggle-slider" />
+                    </label>
+                    <p>Show Fats: {showFats ? 'Yes' : 'No'}</p>
+                </div>
+
+                <br />
+                <div className="toggle-switch">
+                    <input
+                        type="checkbox"
+                        id="sugars-toggle"
+                        checked={showSugars}
+                        onChange={toggleShowSugars}
+                    />
+                    <label htmlFor="sugars-toggle" className="toggle-label">
+                        <span className="toggle-slider" />
+                    </label>
+                    <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
+                </div>
+
+                <p>Time:</p>
                 <input
-                    type="checkbox"
-                    id="theme-toggle"
-                    checked={theme === "dark"}
-                    onChange={toggleTheme}
+                    className="_input timeinput"
+                    type="time"
+                    name="timestamp"
+                    value={timeValue}
+                    onChange={handleTimeChange}
                 />
-                <label htmlFor="theme-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Current Theme: {theme}</p>
+
             </div>
-
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="protein-toggle"
-                    checked={showProtein}
-                    onChange={toggleShowProtein}
-                />
-                <label htmlFor="protein-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="carbs-toggle"
-                    checked={showCarbs}
-                    onChange={toggleShowCarbs}
-                />
-                <label htmlFor="carbs-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="fats-toggle"
-                    checked={showFats}
-                    onChange={toggleShowFats}
-                />
-                <label htmlFor="fats-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Fats: {showFats ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="sugars-toggle"
-                    checked={showSugars}
-                    onChange={toggleShowSugars}
-                />
-                <label htmlFor="sugars-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
-            </div>
-
-
-            <p>Time:</p>
-            <input
-                className="_input"
-                type="time"
-                name="timestamp"
-                value={timeValue}
-                onChange={handleTimeChange}
-            />
-
 
             <br />
             <button onClick={handleScrape} className="_button black_font settingsBtn">

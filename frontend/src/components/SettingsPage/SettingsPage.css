@@ -52,3 +52,7 @@
   .settingsBtn{
     width: 200px;
   }
+
+  .settings_grid .timeinput{
+    width: 10rem;
+  }
