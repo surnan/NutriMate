@@ -156,10 +156,10 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
     return (
       <div className="cc_event_hflex">
         <strong>{event.title}</strong>
-        <div>Fats: {event.fats}g</div>
+        {/* <div>Fats: {event.fats}g</div>
         <div>Carbs: {event.carbs}g</div>
         <div>Protein: {event.protein}g</div>
-        <div>Sugar: {event.sugar}g</div>
+        <div>Sugar: {event.sugar}g</div> */}
         <div>Calories: {event.calories}</div>
       </div>
     );

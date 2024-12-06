@@ -15,7 +15,7 @@ const SettingsPage = () => {
     const [showSelect, setShowSelect] = useState(false);
     const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars,
         timeValue, updateTimeValue
-     } = useTheme();
+    } = useTheme();
     const [imgUrl, setImgUrl] = useState("");
     const [showUpload, setShowUpload] = useState(true);
     const [previewUrl, setPreviewUrl] = useState("");
@@ -113,160 +113,176 @@ const SettingsPage = () => {
     }, [theme])
 
     return (
-        <div className={`
-            mainBodyStyle settingsPageFlex
-            ${theme === "dark" ? "dkBody smoke_font" : ""}
-            `}>
-            <br />
-            <h1>SettingsPage.jsx</h1>
-            <h3>Email = {sessionUser?.email}</h3>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="theme-toggle"
-                    checked={theme === "dark"}
-                    onChange={toggleTheme}
-                />
-                <label htmlFor="theme-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Current Theme: {theme}</p>
-            </div>
-
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="protein-toggle"
-                    checked={showProtein}
-                    onChange={toggleShowProtein}
-                />
-                <label htmlFor="protein-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="carbs-toggle"
-                    checked={showCarbs}
-                    onChange={toggleShowCarbs}
-                />
-                <label htmlFor="carbs-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="fats-toggle"
-                    checked={showFats}
-                    onChange={toggleShowFats}
-                />
-                <label htmlFor="fats-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Fats: {showFats ? 'Yes' : 'No'}</p>
-            </div>
-
-            <br />
-            <div className="toggle-switch">
-                <input
-                    type="checkbox"
-                    id="sugars-toggle"
-                    checked={showSugars}
-                    onChange={toggleShowSugars}
-                />
-                <label htmlFor="sugars-toggle" className="toggle-label">
-                    <span className="toggle-slider" />
-                </label>
-                <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
-            </div>
-
-
-            <p>Time:</p>
-            <input
-                className="_input"
-                type="time"
-                name="timestamp"
-                value={timeValue}
-                onChange={handleTimeChange}
-            />
-
-
-            <br />
-            <button onClick={handleScrape} className="_button black_font settingsBtn">
-                SCRAP <strong>JustSalad.com</strong>
-            </button>
-            <br />
-            <button onClick={handleBulkImport} className="_button black_font settingsBtn">
-                &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
-            </button>
-            <br />
-            {scrapedData && (
-                <div>
-                    <h3>Scraped Data:</h3>
-                    <ul>
-                        {scrapedData.map((item, index) => (
-                            <li key={index}>
-                                <strong>{item.name}</strong>: {item.calories} calories, {item.protein} protein
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            )}
-            <br />
-            <h3>Click Image to change Profile Picture</h3>
-            <br />
-            <div>
-                <img
-                    className="round clickable"
-                    style={{ height: "300px", width: "300px" }}
-                    src={sessionUser.profileImg}
-                    onClick={handleImgClick}
-                />
-            </div>
-            <br />
-            <div className="center">
+        // <div className={`
+        //     mainBodyStyle settingsPageFlex
+        //     ${theme === "dark" ? "dkBody smoke_font" : ""}
+        //     `}>
+        <div className="mainBodyStyle">
+            <div
+                className={`mainBodyStyle settingsPageFlex2 
+                ${theme === "dark" ? "dkBody smoke_font" : ""}
+                `}>
                 <br />
+                <h1>SettingsPage.jsx</h1>
+
+                <h3>Username = {sessionUser?.username}</h3>
+                <h3>Email = {sessionUser?.email}</h3>
+
                 <br />
-                {showSelect && showUpload && (
-                    <label htmlFor='file-upload'> Select From Computer
+                <div className="settings_grid">
+                    <div className="toggle-switch">
                         <input
-                            type='file'
-                            id='file-upload'
-                            name="img_url"
-                            onChange={updatedImgFromPC}
-                            accept='.jpg, .jpeg, .png, .gif'
+                            type="checkbox"
+                            id="theme-toggle"
+                            checked={theme === "dark"}
+                            onChange={toggleTheme}
                         />
-                    </label>
-                )}
-                <br /><br /><br /><br />
-                {!showUpload && (
-                    <div className="vertical_center_flex">
-                        <img
-                            src={previewUrl}
-                            alt="preview"
-                            style={{ height: "300px", width: "300px" }}
-                            className="round"
+                        <label htmlFor="theme-toggle" className="toggle-label">
+                            <span className="toggle-slider" />
+                        </label>
+                        <p>Current Theme: {theme}</p>
+                    </div>
+
+
+                    <br />
+                    <div className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            id="protein-toggle"
+                            checked={showProtein}
+                            onChange={toggleShowProtein}
                         />
-                        <button
-                            onClick={handleSubmit}
-                            className="_button black block twenty_margin"
-                        >
-                            Change Profile
+                        <label htmlFor="protein-toggle" className="toggle-label">
+                            <span className="toggle-slider" />
+                        </label>
+                        <p>Show Protein: {showProtein ? 'Yes' : 'No'}</p>
+                    </div>
+
+                    <br />
+                    <div className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            id="carbs-toggle"
+                            checked={showCarbs}
+                            onChange={toggleShowCarbs}
+                        />
+                        <label htmlFor="carbs-toggle" className="toggle-label">
+                            <span className="toggle-slider" />
+                        </label>
+                        <p>Show Carbs: {showCarbs ? 'Yes' : 'No'}</p>
+                    </div>
+
+                    <br />
+                    <div className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            id="fats-toggle"
+                            checked={showFats}
+                            onChange={toggleShowFats}
+                        />
+                        <label htmlFor="fats-toggle" className="toggle-label">
+                            <span className="toggle-slider" />
+                        </label>
+                        <p>Show Fats: {showFats ? 'Yes' : 'No'}</p>
+                    </div>
+
+                    <br />
+                    <div className="toggle-switch">
+                        <input
+                            type="checkbox"
+                            id="sugars-toggle"
+                            checked={showSugars}
+                            onChange={toggleShowSugars}
+                        />
+                        <label htmlFor="sugars-toggle" className="toggle-label">
+                            <span className="toggle-slider" />
+                        </label>
+                        <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
+                    </div>
+                </div>
+
+                <p className="center setting-time-p"><strong>Daily Calendar will auto-scroll to time below on startup</strong></p>
+                <div className="ten_margin">
+                    <div className="h-flex">
+                        <p className="center"><strong>Time:</strong></p>
+                        <input
+                            className="_input timeinput block"
+                            type="time"
+                            name="timestamp"
+                            value={timeValue}
+                            onChange={handleTimeChange}
+                        />
+                    </div>
+
+                    <div className="setting-btn-flex">
+                        <button onClick={handleScrape} className="_button black_font settingsBtn block width100">
+                            SCRAP <strong>JustSalad.com</strong>
+                        </button>
+
+                        <button onClick={handleBulkImport} className="_button black_font settingsBtn block width100">
+                            &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
                         </button>
                     </div>
-                )}
+
+                    {scrapedData && (
+                        <div>
+                            <h3>Scraped Data:</h3>
+                            <ul>
+                                {scrapedData.map((item, index) => (
+                                    <li key={index}>
+                                        <strong>{item.name}</strong>: {item.calories} calories, {item.protein} protein
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
+
+                <br />
+                <h3>Click Image to change Profile Picture</h3>
+                <br />
+                <div>
+                    <img
+                        className="round clickable"
+                        style={{ height: "300px", width: "300px" }}
+                        src={sessionUser.profileImg}
+                        onClick={handleImgClick}
+                    />
+                </div>
+                <br />
+                <div className="center">
+                    <br />
+                    <br />
+                    {showSelect && showUpload && (
+                        <label htmlFor='file-upload'> Select From Computer
+                            <input
+                                type='file'
+                                id='file-upload'
+                                name="img_url"
+                                onChange={updatedImgFromPC}
+                                accept='.jpg, .jpeg, .png, .gif'
+                            />
+                        </label>
+                    )}
+                    <br /><br /><br /><br />
+                    {!showUpload && (
+                        <div className="vertical_center_flex">
+                            <img
+                                src={previewUrl}
+                                alt="preview"
+                                style={{ height: "300px", width: "300px" }}
+                                className="round"
+                            />
+                            <button
+                                onClick={handleSubmit}
+                                className="_button black block twenty_margin"
+                            >
+                                Change Profile
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

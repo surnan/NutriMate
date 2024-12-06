@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 2px red solid; */
+  border: 2px red solid;
 }
 
 .clickable {cursor: pointer}
@@ -17,6 +17,8 @@
 .shadow { box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604)}
 .twenty_margin {margin: 20px}
 .twenty_padding {padding: 20px}
+.thirty_margin {margin: 30px}
+.thirty_padding {padding: 30px}
 
 .black_font {color: black !important}
 .red_font {color: red !important}
@@ -45,6 +47,9 @@
 .transparent {background-color:  purple}
 .letter_spacing{letter-spacing: 0.25rem}
 .round{border-radius: 50%}
+.width100 {width: 100%}
+.block {display: block}
+.border {border: 1px solid rgba(0, 0, 0, 0.548)}
 
 
 :root {
@@ -153,7 +158,7 @@ select._input {padding: 0.5rem}
     max-width: var(--max-page-width);
     margin: auto;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-    background-color: white;
+    /* background-color: white; */
 }
 
   .modal_under_layer {
@@ -181,7 +186,6 @@ select._input {padding: 0.5rem}
     gap: 1rem;
     width: 24rem;
     z-index: 10000;
-    
     position: absolute;
     top: 50%; 
     left: 50%;
@@ -206,8 +210,7 @@ select._input {padding: 0.5rem}
     align-items: center;
 }
 
-.block {display: block}
-.border {border: 1px solid rgba(0, 0, 0, 0.548)}
+
 
 .search_div ._input {
     padding: 1rem;
@@ -391,4 +394,18 @@ select._input {padding: 0.5rem}
 .tooltip:hover .tooltiptext_below {
   visibility: visible;
   opacity: 1;
+}
+
+.h-flex{
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 12rem;
+}
+
+.setting-btn-flex{
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  margin: 1rem;
 }
