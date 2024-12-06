@@ -49,6 +49,13 @@
     align-items: center;
   }
 
+  .settingsPageFlex2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350px;
+  }
+  
   .settingsBtn{
     width: 200px;
   }

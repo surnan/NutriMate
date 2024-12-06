@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 2px red solid; */
+  border: 2px red solid;
 }
 
 .clickable {cursor: pointer}
@@ -45,6 +45,7 @@
 .transparent {background-color:  purple}
 .letter_spacing{letter-spacing: 0.25rem}
 .round{border-radius: 50%}
+.width100 {width: 100%}
 
 
 :root {
@@ -153,7 +154,7 @@ select._input {padding: 0.5rem}
     max-width: var(--max-page-width);
     margin: auto;
     font-family: "Roboto", Arial, Helvetica, sans-serif;
-    background-color: white;
+    /* background-color: white; */
 }
 
   .modal_under_layer {
