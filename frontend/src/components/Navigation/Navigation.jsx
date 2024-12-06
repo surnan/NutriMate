@@ -8,7 +8,7 @@ import { thunkAuthenticate } from "../../redux/session";
 
 import { useTheme } from "../../context/ThemeContext"
 
-import logo from "../../fe_images/nutimate_logo.png";
+// import logo from "../../fe_images/nutimate_logo.png";
 import blue_logo from "../../fe_images/blue_logo.png"
 import dark_logo from "../../fe_images/dark_logo.png"
 

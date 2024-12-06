@@ -199,38 +199,46 @@ const SettingsPage = () => {
                         </label>
                         <p>Show Sugars: {showSugars ? 'Yes' : 'No'}</p>
                     </div>
-
-                    <p>Time:</p>
-
-                    <input
-                        className="_input timeinput block width100"
-                        type="time"
-                        name="timestamp"
-                        value={timeValue}
-                        onChange={handleTimeChange}
-                    />
-                    
-                    <button onClick={handleScrape} className="_button black_font settingsBtn block width100">
-                        SCRAP <strong>JustSalad.com</strong>
-                    </button>
-                    
-                    <button onClick={handleBulkImport} className="_button black_font settingsBtn block width100">
-                        &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
-                    </button>
-
                 </div>
-                {scrapedData && (
-                    <div>
-                        <h3>Scraped Data:</h3>
-                        <ul>
-                            {scrapedData.map((item, index) => (
-                                <li key={index}>
-                                    <strong>{item.name}</strong>: {item.calories} calories, {item.protein} protein
-                                </li>
-                            ))}
-                        </ul>
+
+                <p className="center setting-time-p"><strong>Daily Calendar will auto-scroll to time below on startup</strong></p>
+                <div className="ten_margin">
+                    <div className="h-flex">
+                        <p className="center"><strong>Time:</strong></p>
+                        <input
+                            className="_input timeinput block"
+                            type="time"
+                            name="timestamp"
+                            value={timeValue}
+                            onChange={handleTimeChange}
+                        />
                     </div>
-                )}
+
+                    <div className="setting-btn-flex">
+                        <button onClick={handleScrape} className="_button black_font settingsBtn block width100">
+                            SCRAP <strong>JustSalad.com</strong>
+                        </button>
+
+                        <button onClick={handleBulkImport} className="_button black_font settingsBtn block width100">
+                            &nbsp;&nbsp;Import Data to Grubs Table&nbsp;&nbsp;
+                        </button>
+                    </div>
+
+                    {scrapedData && (
+                        <div>
+                            <h3>Scraped Data:</h3>
+                            <ul>
+                                {scrapedData.map((item, index) => (
+                                    <li key={index}>
+                                        <strong>{item.name}</strong>: {item.calories} calories, {item.protein} protein
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </div>
+
+
                 <br />
                 <h3>Click Image to change Profile Picture</h3>
                 <br />
