@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border: 2px red solid;
+  /* border: 2px red solid; */
 }
 
 .clickable {cursor: pointer}
@@ -36,13 +36,17 @@
 .orange {background-color: orange}
 .white  {background-color: white;}
 
-.navBlue {background-color: rgb(33, 45, 87)}
+.navBlue {background-color: rgb(28, 70, 169)}
+.navBlack {background-color: rgb(17, 38, 31)}
+
 .pink {background-color: pink}
 .dkPink {background-color: rgb(210, 144, 155)}
 .red {background-color: red}
+.white {background-color: white;}
 .yellow {background-color: rgb(247, 247, 125)}
 
-.dkBody {background-color: rgb(51, 51, 51);}
+/* .dkBody {background-color: rgb(51, 51, 51)} */
+.dkBody {background-color: rgb(15, 15, 15)}
 .dkNav {background-color: rgb(35, 35, 35);}
 .transparent {background-color:  purple}
 .letter_spacing{letter-spacing: 0.25rem}
@@ -66,7 +70,8 @@ body.light-mode {
 
 /* Dark mode */
 body.dark-mode {
-  background-color: rgb(45, 45, 45);
+  /* background-color: rgb(45, 45, 45); */
+  background-color: rgb(40, 40, 40);
   color: whitesmoke;  
 }
 
@@ -153,7 +158,7 @@ select._input {padding: 0.5rem}
 }
 
 .mainBodyStyle {
-    padding: 40px 10px;
+    padding: 80px 10px;
     min-height: 100vh;
     max-width: var(--max-page-width);
     margin: auto;
@@ -313,12 +318,8 @@ select._input {padding: 0.5rem}
   }
   
   @keyframes rainbowBorder {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    0% {transform: rotate(0deg)}
+    100% {transform: rotate(360deg)}
   }
   
   .floating-arrow {
@@ -409,3 +410,12 @@ select._input {padding: 0.5rem}
   flex-direction: column;
   margin: 1rem;
 }
+
+div.mainBodyStyle.relative{
+  margin: 0 auto;
+  padding: 0;
+  background-color: rgb(252, 253, 249);
+  /* background-color: green; */
+
+}
+

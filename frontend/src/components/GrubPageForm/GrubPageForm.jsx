@@ -288,7 +288,7 @@ function GrubPageForm() {
                             >
                                 <i className="fa-solid fa-thumbtack"></i>
                             </button>
-                            <span className="tooltiptext letter_spacing">LOG</span>
+                            <span className="tooltiptext letter_spacing">Add to Log</span>
                         </div>
 
                         {

@@ -135,3 +135,8 @@
         transform: translateY(-50%) translateX(-5px);
     }
 }
+
+.logo_size{
+    width: 200px;
+    height: auto;
+}

@@ -46,7 +46,7 @@ const Splash = () => {
   return (
     <div className="mainBodyStyle relative">
       {!sessionUser &&
-        <h1 className="twenty_margin ">Login to track your health!!</h1>
+        <h1 className="twenty_margin ">22Login to track your health!!</h1>
       }
 
       {sessionUser && (

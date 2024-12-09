@@ -36,13 +36,13 @@ function Navigation() {
   return (
     <div
       className={`nav_flex navBlue
-      ${theme === "dark" ? "dkNav smoke_font" : ""}
+      ${theme === "dark" ? "navBlack smoke_font" : ""}
     `}>
       <NavLink to="/">
         <img
           src={currentLogo}
           alt="Home"
-          className="logo"
+          className="logo logo_size"
         />
       </NavLink>
       <div className="navigation_right">
