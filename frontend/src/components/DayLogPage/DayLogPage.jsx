@@ -156,6 +156,7 @@ const DayLogPage = () => {
                         handler={toggleDayLogModal}
                         setTotals={setTotals}
                         defaultStartTime={timeValue}
+                        theme={theme}
                     />
                 </div>
             </div>

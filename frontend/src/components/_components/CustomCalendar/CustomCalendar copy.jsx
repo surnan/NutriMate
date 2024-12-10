@@ -24,7 +24,7 @@ const localizer = dateFnsLocalizer({
 });
 
 
-const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
+const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -197,51 +197,48 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
 
 
   return (
-    <div className={`custom-calendar ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}>
-
-      <BigCalendar
-        localizer={localizer}
-        events={events}
-        style={{ height, width }}
-        selectable  //alows select
-        onSelectSlot={handleSelectSlot}   //click on time slot & not Event
-        onSelectEvent={handleSelectEvent} //click on event inside time slot
-        views={['day', 'week', 'month']}
-        defaultView="day"
+    <BigCalendar
+      localizer={localizer}
+      events={events}
+      style={{ height, width }}
+      selectable  //alows select
+      onSelectSlot={handleSelectSlot}   //click on time slot & not Event
+      onSelectEvent={handleSelectEvent} //click on event inside time slot
+      views={['day', 'week', 'month']}
+      defaultView="day"
 
 
-        //eventPropGetter={eventStyleGetter} //css even styling
-        eventPropGetter={(event) => ({
-          style: {
-            backgroundColor: event.color,
-            borderRadius: '4px',
-            opacity: 0.9,
-            color: 'white',
-            fontSize: '0.8rem',
-            padding: '2px',
-            height: '18px',
-            overflow: 'hidden',
-          },
-        })}
+      //eventPropGetter={eventStyleGetter} //css even styling
+      eventPropGetter={(event) => ({
+        style: {
+          backgroundColor: event.color,
+          borderRadius: '4px',
+          opacity: 0.9,
+          color: 'white',
+          fontSize: '0.8rem',
+          padding: '2px',
+          height: '18px',
+          overflow: 'hidden',
+        },
+      })}
 
-        // formats={formats} //non-css-format of time/date data
-        formats={{
-          weekdayFormat: (date) => formatDate(date, 'EEEE'),
-          eventTimeRangeFormat: () => '',
-        }}
+      // formats={formats} //non-css-format of time/date data
+      formats={{
+        weekdayFormat: (date) => formatDate(date, 'EEEE'),
+        eventTimeRangeFormat: () => '',
+      }}
 
-        dayLayoutAlgorithm="no-overlap"
-        // scrollToTime={new Date(new Date().setHours(9, 30, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
-        scrollToTime={scrollToTime}
-        components={{ //'component' overrides default
-          week: { header: WeekdayHeader },
-          day: { event: CustomEvent }
-          // event: CustomEvent //applies to: day/week/monthly
-        }}
-        step={15}
-        onRangeChange={handleOnRangeChange}
-      />
-    </div>
+      dayLayoutAlgorithm="no-overlap"
+      // scrollToTime={new Date(new Date().setHours(9, 30, 0, 0))}  //Will stop short of 5am if whole calendar is on page.
+      scrollToTime={scrollToTime}
+      components={{ //'component' overrides default
+        week: { header: WeekdayHeader },
+        day: { event: CustomEvent }
+        // event: CustomEvent //applies to: day/week/monthly
+      }}
+      step={15}
+      onRangeChange={handleOnRangeChange}
+    />
   );
 };
 
