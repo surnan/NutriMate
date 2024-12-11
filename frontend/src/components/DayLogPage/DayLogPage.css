@@ -1,6 +1,6 @@
 /* frontend/src/components/DayLogPage/DayLogPage.css */
 
-.dp_header {
+/* .dp_header {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
@@ -22,20 +22,20 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2px;
-}
+} */
 
-.dp_grid > * {
+/* .dp_grid > * {
     display: grid;
     grid-template-columns: 4rem 1fr;
     height: 3rem;
     align-items: center;
     justify-content: center
-}
+} */
 
-.dp_grid > :nth-child(odd) {background-color: white}
-.dp_grid > :nth-child(even) {background-color: rgba(32, 41, 76, 0.138) }
+/* .dp_grid > :nth-child(odd) {background-color: white} */
+/* .dp_grid > :nth-child(even) {background-color: rgba(32, 41, 76, 0.138) } */
 
-.dpg_hour {
+/* .dpg_hour {
     font-size: larger;
     height: 4rem;
 }
@@ -62,4 +62,4 @@
 
 .totals-section-horizontal.visible {
     visibility: visible
-}
+} */
