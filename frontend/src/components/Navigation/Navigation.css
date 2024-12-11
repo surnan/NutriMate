@@ -40,7 +40,8 @@
     position: relative;
     height: 95px;
     margin: auto;
-    padding: 25px 2rem 25px 0;
+    /* padding: 25px 2rem 25px 0; */
+    padding: 4rem 2.5rem;
     max-width: var(--max-page-width);
 }
 
@@ -59,7 +60,7 @@
     display: flex;
     justify-content: right;
     align-items: center;
-    gap: 1rem;
+    gap: 1.25rem;
     background-color: transparent;
 }
 

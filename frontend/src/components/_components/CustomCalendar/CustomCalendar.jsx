@@ -238,7 +238,9 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
           day: { event: CustomEvent }
           // event: CustomEvent //applies to: day/week/monthly
         }}
-        step={15}
+        // step={15}
+        step={60} //60 minutes for each slot
+        // timeslots={1}  
         onRangeChange={handleOnRangeChange}
       />
     </div>
