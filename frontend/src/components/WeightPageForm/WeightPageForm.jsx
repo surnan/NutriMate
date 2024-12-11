@@ -131,30 +131,54 @@ function WeightPageForm() {
             <h3 >Email = {sessionUser?.email}</h3>
 
             <div className="max_HFlex">
-                <button
-                    onClick={handleBackBtn}
-                    className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                    title="Back"
-                >
-                    <i className="fa-solid fa-chevron-left"></i>
-                </button>
+                <div className="tooltip">
+                    <button
+                        onClick={handleBackBtn}
+                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                        title="Back"
+                    >
+                        <i className="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <span className="tooltiptext letter_spacing">BACK</span>
+                </div>
+
 
                 <div className="weightPageForm_hFlex">
-                    <button
-                        onClick={handleResetBtn}
-                        className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-                        title="Reset"
-                    >
-                        <i className="fa-solid fa-rotate-left"></i>
-                    </button>
+                    <div className="tooltip">
+                        <button
+                            onClick={handleResetBtn}
+                            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
+                            title="Reset"
+                        >
+                            <i className="fa-solid fa-rotate-left"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">UNDO</span>
+                    </div>
 
-                    <button
-                        onClick={handleSubmit}
-                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                        title="Save"
-                    >
-                        <i className="fa-solid fa-bookmark"></i>
-                    </button>
+
+                    <div className="tooltip">
+                        <button
+                            onClick={handleSubmit}
+                            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+                            title="Save"
+                        >
+                            <i className="fa-solid fa-bookmark"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">SAVE</span>
+                    </div>
+
+                    <div className="tooltip">
+                        <button
+                            onClick={handleDeleteBtn}
+                            className="round daily_btn_font_size shadow red clickable menuRoundBtn"
+                            title="Delete"
+                        >
+                            <i className="fa-solid fa-trash-can"></i>
+                        </button>
+                        <span className="tooltiptext letter_spacing">DELETE</span>
+                    </div>
+
+
 
                 </div>
             </div>
@@ -210,15 +234,15 @@ function WeightPageForm() {
                     value={form.current}
                 />
             </div>
-            
+
             <div className="weightPageForm_hFlex">
-                <button
+                {/* <button
                     onClick={handleDeleteBtn}
                     className="round daily_btn_font_size shadow red clickable menuRoundBtn"
                     title="Delete"
                 >
                     <i className="fa-solid fa-trash-can"></i>
-                </button>
+                </button> */}
             </div>
             {showDeletetModal && (
                 <DeleteWeightModal

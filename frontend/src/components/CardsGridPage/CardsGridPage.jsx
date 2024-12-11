@@ -114,15 +114,10 @@ const CardsPageGrid = ({ stuff }) => {
 
 
   return (
-    // <div className="mainBodyStyle">
-
-    <div className={`
+      <div className={`
       mainBodyStyle settingsPageFlex
       ${theme === "dark" ? "dkBody smoke_font" : ""}
       `}>
-
-
-      <div className="mainBodyStyle">
         {/* <h3>CardsPageGrid.jsx</h3>
       <h3>Email = {sessionUser?.email}</h3> */}
 
@@ -186,7 +181,8 @@ const CardsPageGrid = ({ stuff }) => {
           ))}
         </div>
       </div>
-    </div>
+      
+    // </div>
   );
 };
 

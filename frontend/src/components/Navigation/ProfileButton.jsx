@@ -64,7 +64,8 @@ function ProfileButton() {
         className={`profile_btn _button ${user ? "" : "attention-button"}`}
         onClick={toggleMenu}
       >
-        <i className="fas fa-user-circle black_font" />
+        {/* <i className="fas fa-user-circle black_font" /> */}
+        <i className="fas fa-person-walking-dashed-line-arrow-right black_font" />
         {!user && <div className="arrow"></div>}
       </button>
 

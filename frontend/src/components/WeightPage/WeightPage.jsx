@@ -60,21 +60,28 @@ const WeightPage = () => {
       <h3>WeightPage.jsx</h3>
       <h3 >Email = {sessionUser?.email}</h3>
       <div className="max_HFlex weight_btn_div">
-        <button
-          onClick={handleBackBtn}
-          className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-          title="Back"
-        >
-          <i className="fa-solid fa-chevron-left"></i>
-        </button>
 
-        <button
-          onClick={handleNewWeight}
-          className="round daily_btn_font_size shadow green clickable menuRoundBtn"
-          title="+ Create"
-        >
-          <i className="fa-solid fa-plus"></i>
-        </button>
+        <div className="tooltip">
+          <button
+            onClick={handleBackBtn}
+            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
+            title="Back"
+          >
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <span className="tooltiptext letter_spacing">BACK</span>
+        </div>
+
+        <div className="tooltip">
+          <button
+            onClick={handleNewWeight}
+            className="round daily_btn_font_size shadow green clickable menuRoundBtn"
+            title="+ Create"
+          >
+            <i className="fa-solid fa-plus"></i>
+          </button>
+          <span className="tooltiptext letter_spacing">Record Weight</span>
+        </div>
       </div>
 
 

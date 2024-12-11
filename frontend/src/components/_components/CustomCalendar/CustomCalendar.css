@@ -62,3 +62,45 @@
 /* Hide the header cell above the first time slot */
 
 
+/* Dark theme styles */
+.custom-calendar.dark-theme .rbc-today {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: whitesmoke;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.custom-calendar.dark-theme .rbc-off-range {
+  color: gray;
+  background-color: rgba(40, 40, 40, 1);
+}
+
+.custom-calendar.dark-theme .rbc-month-view {
+  background-color: rgb(40, 40, 40);
+  color: whitesmoke;
+}
+
+.custom-calendar.dark-theme .rbc-day-bg:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+/* Light theme styles (optional for clarity) */
+.custom-calendar.light-theme .rbc-today {
+  background-color: rgba(0, 0, 255, 0.1); /* Example: Blue for today */
+  color: black;
+}
+
+.custom-calendar.light-theme .rbc-off-range {
+  color: lightgray;
+  background-color: white;
+}
+
+.custom-calendar {
+  width: 100%; 
+  height: 100%;
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
+}
+
+

@@ -36,13 +36,13 @@ function Navigation() {
   return (
     <div
       className={`nav_flex navBlue
-      ${theme === "dark" ? "dkNav smoke_font" : ""}
+      ${theme === "dark" ? "navBlack smoke_font" : ""}
     `}>
       <NavLink to="/">
         <img
           src={currentLogo}
           alt="Home"
-          className="logo"
+          className="logo logo_size"
         />
       </NavLink>
       <div className="navigation_right">
@@ -53,8 +53,8 @@ function Navigation() {
               <img
                 src={user.profileImg}
                 style={{ height: "70px", width: '70px', borderRadius: "50%" }}
-                // className="clickable"
-                // onClick={() => navigate("/settings")}
+                className="clickable"
+                onClick={() => navigate("/settings")}
               /> : null}
           </p>
         )}
