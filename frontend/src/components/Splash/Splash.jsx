@@ -25,15 +25,12 @@ const Splash = () => {
 }, [theme])
 
   return (
-    // <div className="mainBodyStyle relative">
     <div className="mainBodyStyle relative splash-colors">
       {!sessionUser &&
-        // <h1 className="twenty_padding ">11Login to track your health!!</h1>
-        <h4 className="twenty_padding ">$$Login to track your health!!</h4>
+        <h2 className="twenty_padding ">Login to track your health!</h2>
       }
 
       {sessionUser && <DayLogPage />}
-
       {!sessionUser && <SplashGifDiv />}
     </div>
   );
