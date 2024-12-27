@@ -1,7 +1,7 @@
 /* frontend/src/components/Navigation/Navigation.css */
 .profile_anchor{
-    position: relative;
     /* holds the arrow and the menu underneath */
+    position: relative;
 }
 
 .profile-dropdown {
@@ -40,28 +40,9 @@
     position: relative;
     height: 95px;
     margin: auto;
-    /* padding: 25px 2rem 25px 0; */
     padding: 4rem 2.5rem;
     max-width: var(--max-page-width);
 }
-
-/* .profile-dropdown {
-    position: absolute;
-    top: 5rem;
-    right: 0;
-}
-
-.openModalBtn{
-    padding: 4px 20px;
-}
-
-.openModalBtn:hover{
-    color: black;
-    border: 1px solid black;
-    background-color:white;
-    border-radius: 10px;
-} */
-
 
 .openModalBtn {
     padding: 4px 20px;
