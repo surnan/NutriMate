@@ -10,6 +10,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import "./Navigation.css";
 import { useNavigate } from "react-router-dom"
+import { useTheme } from "../../context/ThemeContext"
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -19,6 +20,14 @@ function ProfileButton() {
   const ulRef = useRef();
 
   const [isAnimationActive, setIsAnimationActive] = useState(true);
+
+
+  const { theme } = useTheme();
+  useEffect(() => {
+    console.log(`Theme ===> `, theme)
+    document.body.classList.remove("light-mode", "dark-mode");
+    document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
+}, [theme])
 
 
   const toggleMenu = (e) => {
@@ -59,13 +68,10 @@ function ProfileButton() {
   return (
     <div className="profile_anchor">
       <button
-        // className={`profile_btn _button ${isAnimationActive ? "attention-button" : ""}`}
-        // className={`profile_btn _button attention-button`}
         className={`profile_btn _button ${user ? "" : "attention-button"}`}
         onClick={toggleMenu}
       >
-        {/* <i className="fas fa-user-circle black_font" /> */}
-        <i className="fas fa-person-walking-dashed-line-arrow-right black_font" />
+        <i className="fas fa-user black_font" />
         {!user && <div className="arrow"></div>}
       </button>
 
@@ -81,11 +87,13 @@ function ProfileButton() {
               <OpenModalMenuItem
                 itemText="Log In"
                 onItemClick={closeMenu}
+                className="openModalBtn"
                 modalComponent={<LoginFormModal />}
               />
               <OpenModalMenuItem
                 itemText="Sign Up"
                 onItemClick={closeMenu}
+                className="openModalBtn"
                 modalComponent={<SignupFormModal />}
               />
             </div>

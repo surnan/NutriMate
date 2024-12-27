@@ -14,26 +14,17 @@ const Splash = () => {
 
   useEffect(() => {
     console.log(`Theme ===> `, theme)
-    // document.body.classList.remove("light-mode", "dark-mode");
-    // document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
-
-    if (theme === 'dark'){
-      
-    }
-
-
+    document.body.classList.remove("light-mode", "dark-mode");
+    document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
 }, [theme])
 
   return (
-    // <div className="mainBodyStyle relative">
     <div className="mainBodyStyle relative splash-colors">
       {!sessionUser &&
-        // <h1 className="twenty_padding ">11Login to track your health!!</h1>
-        <h4 className="twenty_padding ">$$Login to track your health!!</h4>
+        <h2 className="twenty_padding ">Login to track your health!</h2>
       }
 
       {sessionUser && <DayLogPage />}
-
       {!sessionUser && <SplashGifDiv />}
     </div>
   );

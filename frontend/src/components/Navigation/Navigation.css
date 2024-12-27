@@ -6,8 +6,8 @@
 
 .profile-dropdown {
     position: absolute;
-    right: 100px;
-    top: 250px;
+    top: 5rem;
+    right: 0;
 }
 
 .logo {
@@ -45,15 +45,62 @@
     max-width: var(--max-page-width);
 }
 
-.profile-dropdown {
+/* .profile-dropdown {
     position: absolute;
     top: 5rem;
     right: 0;
 }
 
+.openModalBtn{
+    padding: 4px 20px;
+}
+
+.openModalBtn:hover{
+    color: black;
+    border: 1px solid black;
+    background-color:white;
+    border-radius: 10px;
+} */
+
+
+.openModalBtn {
+    padding: 4px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.light-mode .openModalBtn {
+    background-color: whitesmoke;
+    color: black;
+    border: 1px solid black;
+}
+
+body.dark-mode .openModalBtn {
+    background-color: black;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+}
+
+body.light-mode .openModalBtn:hover {
+    background-color: lightgray;
+    color: black;
+    border: 1px solid black;
+}
+
+body.dark-mode .openModalBtn:hover {
+    background-color: darkgray;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+}
+
+
+
 .popupDiv {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
+    z-index: 2000;
+    background-color: rgb(30, 24, 35);
+    font-size: larger;
 }
 
 .navigation_right{
@@ -66,15 +113,6 @@
 
 .p_profileImg {
     background-color: transparent;
-}
-
-.openModalBtn{
-    padding: 4px 20px;
-}
-
-.openModalBtn:hover{
-    background-color: darkblue;
-    color: white;
 }
 
 .container-width {
@@ -106,20 +144,23 @@
     gap: 0.3rem; 
 }
 
+/* horizontal of keyframe-arrow */
 .arrow::before {
     content: ''; 
     width: 20px; 
-    height: 2px; 
+    height: 6px; 
     background-color: red; 
 }
 
+/* arrowhead of keyframe-arrow */
 .arrow::after {
     content: '';
     width: 0;
     height: 0;
-    border-top: 7px solid transparent; 
-    border-bottom: 7px solid transparent;
-    border-left: 10px solid red;
+    border-top: 10px solid transparent; 
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid red;
+    /* border-radius: 50%; */
 }
 
 
