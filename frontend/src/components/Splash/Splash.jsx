@@ -14,14 +14,8 @@ const Splash = () => {
 
   useEffect(() => {
     console.log(`Theme ===> `, theme)
-    // document.body.classList.remove("light-mode", "dark-mode");
-    // document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
-
-    if (theme === 'dark'){
-      
-    }
-
-
+    document.body.classList.remove("light-mode", "dark-mode");
+    document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
 }, [theme])
 
   return (
