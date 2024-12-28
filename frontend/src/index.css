@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 2px red solid; */
+  border: 2px red solid;
 }
 
 .clickable {cursor: pointer}
@@ -229,6 +229,7 @@ select._input {padding: 0.5rem}
 
 
 
+
 /*  */
 /*  */
 /*  */
@@ -417,6 +418,21 @@ div.mainBodyStyle.relative{
   padding: 0;
   background-color: rgb(252, 253, 249);
   /* background-color: green; */
-
 }
 
+.card-description-txt{
+  margin-top: 1rem;
+  overflow-wrap: break-word; 
+  word-break: break-word;    
+  white-space: normal;  
+}
+
+.card-description{
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+}
+
+.card-img-div{
+  margin: 1rem;
+}

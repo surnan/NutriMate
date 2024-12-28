@@ -8,6 +8,8 @@ import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/M
 import DeleteModal from "../_modal/DeleteModal";
 import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
+import WorkoutDetailCard from "../_cards/WorkoutDetailCard"
+import GrubDetailCard from "../_cards/GrubDetailCard"
 
 import { useTheme } from "../../context/ThemeContext"
 
@@ -202,12 +204,14 @@ function DayLogPageForm() {
             <div className="card twenty_padding twenty_margin">
                 {
                     dayLogObj?.Workout &&
-                    <WorkoutCard workout={dayLogObj?.Workout} />
+                    // <WorkoutCard workout={dayLogObj?.Workout} />
+                    <WorkoutDetailCard workout={dayLogObj?.Workout} />
                 }
 
                 {
                     dayLogObj?.Grub &&
-                    <GrubCard grub={dayLogObj?.Grub} />
+                    // <GrubCard grub={dayLogObj?.Grub} />
+                    <GrubDetailCard grub={dayLogObj?.Grub} />
                 }
             </div>
 

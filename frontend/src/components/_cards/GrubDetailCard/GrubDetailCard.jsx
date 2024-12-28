@@ -6,26 +6,46 @@ import { useSelector, useDispatch } from "react-redux";
 import { getGrubImagesForGrubThunk } from "../../../redux/grubImages";
 import ImageDisplay from "../../_components/ImageDisplay";
 
-const GrubDetailCard = ({ grub }) => {
-  const { id, name, servingUnit, servingSize, calories } = grub
-  // const { User, company, protein, carbs, fats } = grub
+const GrubDetailCard = ({ grub, imageUrl }) => {
+  const { id, name, servingUnit, servingSize, calories, sugar } = grub
+  const { User, company, protein, carbs, fats, description } = grub
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (id) {
-      dispatch(getGrubImagesForGrubThunk(id));
-    }
-  }, [dispatch, id]);
-
-  const grubImg = useSelector((state) => state.grubimages.byGrubId[id] || []);
+  // const grubImgArr = useSelector(state => state.grubImages.allWorkoutImages);
+  const grubImgArr = useSelector(state => state.grubimages.allGrubImages);
+  const grubImage = grubImgArr.find(image => image.grubId === id);
+  imageUrl = grubImage ? grubImage.url : null;
 
   return (
-    <div>
-      <p>{name}</p>
-      <p><strong>Calories</strong>: {calories}</p>
-      <p>{servingSize} {servingUnit}</p>
-      <ImageDisplay imgArr={grubImg} className="rounded-image thick_border" height="100px" width="100px" />
+    <div className="grubDetail_card_grid">
+      <h1> {company} {name}</h1>
+      <h3>Per Serving: {servingSize} {servingUnit}</h3>
+
+      <h4>Calories: {calories}</h4>
+      <div className="grub-card-grid-facts">
+        <p>Protein: </p>
+        <p>{protein}</p>
+        <p>Fats: </p>
+        <p>{fats}</p>
+        <p>Carbs: </p>
+        <p>{carbs}</p>
+        <p>Sugar: </p>
+        <p>{sugar}</p>
+      </div>
+
+      <div className="grub-card-description">
+        <h3 className="card-description">DESCRIPTION</h3>
+        <p className="card-description-txt">{description}</p>
+      </div>
+
+      <div className="card-img-div">
+        <p>imageUrl = {imageUrl}</p>
+        <img
+          src={imageUrl}
+          alt="img"
+          style={{ height: "125px", width: "125px" }}
+          className="round orange"
+        />
+      </div>
     </div>
   );
 }

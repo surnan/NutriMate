@@ -46,6 +46,16 @@ const DayLogPage = () => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
+    const getImage = (type) => {
+        let str = ""
+        switch(type){
+            case "workouts": str = "!!!workouts!!!"; break;
+            case "grubs": str = "!!!grubs!!!"; break;
+        }
+        console.log("getImage = ", getImage)
+    }
+
+    //return navigate('/workoutform', { state: { newWorkout: true, newGrub: false } });
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }

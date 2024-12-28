@@ -92,17 +92,34 @@ const CardsPageGrid = ({ stuff }) => {
     document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
   }, [theme])
 
+  const getImage = (type) => {
+    let str = ""
+    switch(type){
+        case "workouts": str = "!!!workouts!!!"; break;
+        case "grubs": str = "!!!grubs!!!"; break;
+    }
+    console.log("getImage = ", getImage)
+}
+
   const whichCard = (data) => {
     let imageUrl;
+
+    console.log(">>>>>")
+    console.log(">>>>>")
+    console.log(">>> data = ", data)
+    console.log(">>>>>")
+    console.log(">>>>>")
 
     if (stuff === "workout") {
       const workoutImage = workoutImgArr.find(image => image.workoutId === data.id);
       imageUrl = workoutImage ? workoutImage.url : null;
+      console.log("-------> imageURL = ", imageUrl)
       return <WorkoutCard workout={data} imageUrl={imageUrl} />;
     } else if (stuff === "grub") {
       const grubImage = grubImgArr.find(image => image.grubId === data.id);
       // imageUrl = grubImage ? grubImage.url : null; 
       imageUrl = grubImage ? grubImage.url : placeholderIMG;
+      console.log("-------> imageURL = ", imageUrl)
       return <GrubCard grub={data} imageUrl={imageUrl} />;
     }
   }

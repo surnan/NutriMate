@@ -3,32 +3,34 @@
 .workoutDetail_card_grid{
     display: grid;
     padding: 5px;
-    border: 2px black solid;
+    /* border: 2px black solid; */
+    border: 5px yellow solid;
     max-width: 1100px;
+    min-width: 125px ;
     grid-template-columns: 1fr;
-    gap: 0.5rem;
-    border: 2px black solid;
+    /* gap: 1.5rem; */
     box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.604);
-    /* background-color: yellow; */
+    background-color: blue;
 }
 
 .workoutDetail_card_grid > :first-child {
     display: grid;
     font-size: 1.5rem;
-    /* background-color: pink; */
+    background-color: pink;
     font-weight: 600;
     padding: 1rem;
 }
 
 .workoutDetail_card_grid > :nth-child(2) {
     display: grid;
-    height: 3rem;
-    /* background-color: orange; */
+    /* height: 3rem; */
+    background-color: orange;
+    border: 3px dashed red;
 }
 
 .workoutDetail_card_grid > :nth-child(3) {
     display: grid;
     justify-content: center;
-    /* background-color: rebeccapurple; */
-    padding: 1rem;
+    background-color: rebeccapurple;
+    /* padding: 1rem; */
 }
