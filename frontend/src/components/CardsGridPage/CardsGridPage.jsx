@@ -76,15 +76,15 @@ const CardsPageGrid = ({ stuff }) => {
   }, [workoutsArr, grubsArr, sessionUser.id, searchQuery]);
 
 
-  useEffect(() => {
-    dispatch(getWorkoutsAllThunk())
-    dispatch(getGrubsAllThunk())
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getWorkoutsAllThunk())
+  //   dispatch(getGrubsAllThunk())
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(getWorkoutImagesAllThunk())
-    dispatch(getGrubImagesAllThunk())
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getWorkoutImagesAllThunk())
+  //   dispatch(getGrubImagesAllThunk())
+  // }, []);
 
   useEffect(() => {
     console.log(`Theme ===> `, theme)

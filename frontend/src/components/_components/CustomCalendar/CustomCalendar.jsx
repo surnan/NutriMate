@@ -24,7 +24,9 @@ const localizer = dateFnsLocalizer({
 });
 
 
-const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
+// const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
+// const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
+const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
@@ -156,10 +158,12 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
     return (
       <div className="cc_event_hflex">
         <strong>{event.title}</strong>
-        {/* <div>Fats: {event.fats}g</div>
+        {/* 
+        <div>Fats: {event.fats}g</div>
         <div>Carbs: {event.carbs}g</div>
         <div>Protein: {event.protein}g</div>
-        <div>Sugar: {event.sugar}g</div> */}
+        <div>Sugar: {event.sugar}g</div> 
+        */}
         <div>Calories: {event.calories}</div>
       </div>
     );
@@ -202,7 +206,8 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
       <BigCalendar
         localizer={localizer}
         events={events}
-        style={{ height, width }}
+        // style={{ height, width }}
+        // style={{ height, width }}
         selectable  //alows select
         onSelectSlot={handleSelectSlot}   //click on time slot & not Event
         onSelectEvent={handleSelectEvent} //click on event inside time slot
@@ -238,9 +243,8 @@ const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, 
           day: { event: CustomEvent }
           // event: CustomEvent //applies to: day/week/monthly
         }}
-        // step={15}
         step={60} //60 minutes for each slot
-        // timeslots={1}  
+        timeslots={1}  //display every hour on y-axis
         onRangeChange={handleOnRangeChange}
       />
     </div>

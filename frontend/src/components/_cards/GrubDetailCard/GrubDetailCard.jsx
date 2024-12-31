@@ -37,7 +37,7 @@ const GrubDetailCard = ({ grub, imageUrl }) => {
         <p className="card-description-txt">{description}</p>
       </div>
 
-      <div className="card-img-div">
+      {/* <div className="card-img-div">
         <p>imageUrl = {imageUrl}</p>
         <img
           src={imageUrl}
@@ -45,7 +45,7 @@ const GrubDetailCard = ({ grub, imageUrl }) => {
           style={{ height: "125px", width: "125px" }}
           className="round orange"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

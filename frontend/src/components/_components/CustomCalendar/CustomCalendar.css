@@ -30,6 +30,52 @@
   /* background-color: blue; */
 }
 
+
+/* Increase the font size for events */
+/* Optional: Make it bold */
+/* .rbc-event-content {
+  font-size: 1.2rem; 
+  font-weight: bold; 
+} */
+
+/* Adjust time grid font size */
+.rbc-time-content {
+  font-size: 1rem; 
+}
+
+/* Adjust header font size (e.g., weekdays like Monday, Tuesday) */
+.rbc-header {
+  font-size: 1.2rem; 
+}
+
+/* Adjust font size for date numbers in the month view */
+.rbc-month-view .rbc-date-cell {
+  font-size: 1rem; 
+}
+
+
+/* General font size for toolbar */
+.rbc-toolbar {
+  font-size: 1.5rem; 
+  font-weight: bold; 
+}
+
+.rbc-toolbar button {
+  font-size: 1.2rem; /* Font size for navigation buttons */
+  font-weight: bold; /* Optional: Bold text */
+  padding: 8px 12px; /* Adjust button padding */
+}
+
+.rbc-btn-group button {
+  font-size: 1.2rem; /* Font size for view options */
+  font-weight: bold; /* Optional: Bold text */
+  padding: 8px 12px; /* Adjust button padding */
+}
+
+button.rbc-active{
+  font-size: 1.4rem;
+}
+
 /* Time Slot and Grid Line */
 /* .rbc-time-slot { */
   /* border-top: none;  */
@@ -104,3 +150,7 @@
 }
 
 
+div.rbc-calendar{
+  width: 100%;
+  height: 100%;
+}

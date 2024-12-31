@@ -21,7 +21,7 @@ const Splash = () => {
   return (
     <div className="mainBodyStyle relative splash-colors">
       {!sessionUser &&
-        <h2 className="twenty_padding ">Login to track your health!</h2>
+        <h2 className="twenty_padding right">Login to track your health!</h2>
       }
 
       {sessionUser && <DayLogPage />}
