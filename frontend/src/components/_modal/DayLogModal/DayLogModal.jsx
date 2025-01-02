@@ -13,7 +13,7 @@ const DayLogModal = ({ onClose }) => {
         <>
             <div className="modal_under_layer" onClick={onClose} />
             <div className="modal_window_all shadow">
-                <h2 className='center'>Click to Add:</h2>
+                <h2 className='center black_font'>Click to Add:</h2>
                 <br />
                 <div className="daily_btn_font_size_grid">
 

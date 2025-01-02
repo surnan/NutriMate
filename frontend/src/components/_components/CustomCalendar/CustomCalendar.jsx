@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDailyLogsAllThunk } from '../../../redux/daylogs';
 import { useNavigate } from 'react-router-dom';
 
-const colorArray = ["#eeeeaf", "#7accc8", "#f82927", "#68af2c", '#cdb4a0', "#f1a9c7", "#b8b8ff", "#20b2aa"];
+const colorArray = ["#7accc8", "#f82927", "#68af2c", "#f1a9c7", "#b8b8ff", "#20b2aa", "#b96c5b", "#0f9b64", "#9b27d1", "#d127ca"];
 
 const localizer = dateFnsLocalizer({
   format,
@@ -23,21 +23,14 @@ const localizer = dateFnsLocalizer({
   locales: { 'en-US': enUS },
 });
 
-
-// const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
 // const CustomCalendar = ({ width = '100%', height = '1200px', onChange, handler, setTotals, defaultStartTime, theme }) => {
 const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
   const dayLogsArr = useSelector(state => state.daylogs.allDaylogs);
-
   const nav = useNavigate()
-
   const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    dispatch(getDailyLogsAllThunk());
-  }, [dispatch]);
+  const newColor = () => colorArray[Math.floor(Math.random() * colorArray.length)];
 
   const newDate = log => {
     if (log?.Workout) {
@@ -46,6 +39,7 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
       const workoutType = String(log.unitType).toLowerCase(); //{minutes, hours, reps}
       const workoutUnits = Number(log.units);
 
+      //workoutType is from Workout Object
       switch (workoutType) {
         case "minutes":
           return new Date(new Date(log.timestamp).getTime() + 60 * workoutUnits * 1000);
@@ -56,33 +50,6 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
     }
     return new Date(new Date(log.timestamp).getTime() + 60 * 60 * 1000);
   };
-
-  const newColor = () => colorArray[Math.floor(Math.random() * colorArray.length)];
-
-  //calendar is fully populated at loadup
-  useEffect(() => {
-    const userEvents = [];
-    for (let i = 0; i < dayLogsArr.length; i++) {
-      const log = dayLogsArr[i];
-      if (log.userId === sessionUser?.id) {
-        userEvents.push({
-          title: `${log.name}: ${log.calories}` || 'Event',
-          start: new Date(log.timestamp),
-          end: newDate(log),
-          id: log.id,
-          color: newColor(),
-          fats: log?.Grub?.fats || 0,
-          carbs: log?.Grub?.carbs || 0,
-          protein: log?.Grub?.protein || 0,
-          sugar: log?.Grub?.sugar || 0,
-          calories: log.calories || 0,
-          isWorkout: log?.Workout ? true : false
-        });
-      }
-    }
-
-    setEvents(userEvents);
-  }, [dayLogsArr, sessionUser.id]);
 
   const handleOnRangeChange = useCallback(
     (range) => {
@@ -142,33 +109,6 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
     [events]
   );
 
-  useEffect(() => {
-    if (events.length > 0) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      const tomorrow = new Date(today);
-      tomorrow.setHours(23, 59, 59, 999);
-      handleOnRangeChange({ start: today, end: tomorrow });
-    }
-  }, [events, handleOnRangeChange]);
-
-
-  //by default, BIG-CALENDAR only displayes "".title"
-  const CustomEvent = ({ event }) => {
-    return (
-      <div className="cc_event_hflex">
-        <strong>{event.title}</strong>
-        {/* 
-        <div>Fats: {event.fats}g</div>
-        <div>Carbs: {event.carbs}g</div>
-        <div>Protein: {event.protein}g</div>
-        <div>Sugar: {event.sugar}g</div> 
-        */}
-        <div>Calories: {event.calories}</div>
-      </div>
-    );
-  };
-
   const handleSelectSlot = ({ start, end }) => {
     console.log(`!!!!! handleSelectSlot: Start = ${start}, End = ${end}`);
     handler(); // Call the function passed as a prop
@@ -188,8 +128,69 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
     return <div>{formatDate(date, 'EEEE')}</div>;
   };
 
+  //by default, BIG-CALENDAR only displayes "".title"
+  const CustomEvent = ({ event }) => {
+    return (
+      <div className="cc_event_hflex">
+        <strong>{event.title}</strong>
+        {/* 
+          <div>Fats: {event.fats}g</div>
+          <div>Carbs: {event.carbs}g</div>
+          <div>Protein: {event.protein}g</div>
+          <div>Sugar: {event.sugar}g</div> 
+          */}
+        <div>Calories: {event.calories}</div>
+      </div>
+    );
+  };
+
+  useEffect(() => {
+    dispatch(getDailyLogsAllThunk());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (events.length > 0) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setHours(23, 59, 59, 999);
+      handleOnRangeChange({ start: today, end: tomorrow });
+    }
+  }, [events, handleOnRangeChange]);
+
+  //calendar is fully populated at loadup
+  useEffect(() => {
+    const userEvents = [];
+    for (let i = 0; i < dayLogsArr.length; i++) {
+      const log = dayLogsArr[i];
+      if (log.userId === sessionUser?.id) {
+        userEvents.push({
+          title: `${log.name}: ${log.calories}` || 'Event',
+          start: new Date(log.timestamp),
+          end: newDate(log),
+          id: log.id,
+          color: newColor(),
+          fats: log?.Grub?.fats || 0,
+          carbs: log?.Grub?.carbs || 0,
+          protein: log?.Grub?.protein || 0,
+          sugar: log?.Grub?.sugar || 0,
+          calories: log.calories || 0,
+          isWorkout: log?.Workout ? true : false
+        });
+      }
+    }
+
+    setEvents(userEvents);
+  }, [dayLogsArr, sessionUser.id]);
+
+
+
+
+
 
   let scrollToTime = new Date();
+
+  console.log("defaultStartTime = ", defaultStartTime)
 
   if (defaultStartTime) {
     const [hours, minutes] = defaultStartTime.split(':').map(Number);
@@ -216,18 +217,46 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
 
 
         //eventPropGetter={eventStyleGetter} //css even styling
-        eventPropGetter={(event) => ({
-          style: {
+        // eventPropGetter={(event) => ({
+        //   style: {
+        //     backgroundColor: event.color,
+        //     borderRadius: '4px',
+        //     opacity: 0.9,
+        //     color: 'white',
+        //     fontSize: '0.8rem',
+        //     padding: '2px',
+        //     height: '18px',
+        //     overflow: 'hidden',
+        //   },
+        // })}
+
+        eventPropGetter={(event) => {
+          let customStyle = {
             backgroundColor: event.color,
             borderRadius: '4px',
             opacity: 0.9,
             color: 'white',
-            fontSize: '0.8rem',
+            fontSize: '0.8rem', // Default font size
             padding: '2px',
-            height: '18px',
+            // height: '18px',
+            height: 'auto',
             overflow: 'hidden',
-          },
-        })}
+          };
+
+          customStyle.fontSize = '1.025rem'; // Larger font size for specific events
+          customStyle.fontWeight = 'bold';
+
+          // Larger font size for specific events
+          // if (event.title.toLowerCase().includes('cheese nachos') || event.title.toLowerCase().includes('cycling')) {
+          //   customStyle.fontSize = '1.025rem'; 
+          //   customStyle.fontWeight = 'bold';
+          // }
+
+          return { style: customStyle };
+        }}
+
+
+
 
         // formats={formats} //non-css-format of time/date data
         formats={{
