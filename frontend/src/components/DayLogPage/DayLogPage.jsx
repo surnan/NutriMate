@@ -10,6 +10,11 @@ import CustomCalendar from "../_components/CustomCalendar";
 import DayLogModal from "../_modal/DayLogModal/DayLogModal";
 import { useTheme } from "../../context/ThemeContext"
 
+import { getWorkoutsAllThunk } from "../../redux/workouts";
+import { getGrubsAllThunk } from "../../redux/grubs";
+import { getGrubImagesAllThunk } from "../../redux/grubImages";
+import { getWorkoutImagesAllThunk } from "../../redux/workoutImages";
+
 
 
 const DayLogPage = () => {
@@ -25,6 +30,16 @@ const DayLogPage = () => {
         document.body.classList.remove("light-mode", "dark-mode");
         document.body.classList.add(theme === "dark" ? "dark-mode" : "light-mode");
     }, [theme])
+
+    useEffect(() => {
+        dispatch(getWorkoutsAllThunk())
+        dispatch(getGrubsAllThunk())
+      }, []);
+    
+      useEffect(() => {
+        dispatch(getWorkoutImagesAllThunk())
+        dispatch(getGrubImagesAllThunk())
+      }, []);
 
 
     const [totals, setTotals] = useState({
@@ -46,6 +61,16 @@ const DayLogPage = () => {
         dispatch(getDailyLogsAllThunk())
     }, [dispatch])
 
+    const getImage = (type) => {
+        let str = ""
+        switch(type){
+            case "workouts": str = "!!!workouts!!!"; break;
+            case "grubs": str = "!!!grubs!!!"; break;
+        }
+        console.log("getImage = ", getImage)
+    }
+
+    //return navigate('/workoutform', { state: { newWorkout: true, newGrub: false } });
     const handlePlusWorkout = () => { navigate("/workouts") }
     const handlePlusGrub = () => { navigate("/grubs") }
     const handleWeights = () => { navigate("/weights") }
@@ -134,7 +159,7 @@ const DayLogPage = () => {
                             <span className="tooltiptext">Record Weight</span>
                         </div>
 
-                        <div className="tooltip">
+                        {/* <div className="tooltip">
                             <button
                                 onClick={handleSettings}
                                 className="shadow yellow menuRoundBtn"
@@ -143,7 +168,7 @@ const DayLogPage = () => {
                                 <i className="fa-solid fa-gear"></i>
                             </button>
                             <span className="tooltiptext">Settings</span>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
@@ -151,8 +176,6 @@ const DayLogPage = () => {
                     <CustomCalendar
                         value={selectedDate}
                         onChange={handleDateChange}
-                        width="100%"
-                        height="900px"
                         handler={toggleDayLogModal}
                         setTotals={setTotals}
                         defaultStartTime={timeValue}
