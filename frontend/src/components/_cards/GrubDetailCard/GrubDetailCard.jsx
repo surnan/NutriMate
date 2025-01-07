@@ -10,7 +10,6 @@ const GrubDetailCard = ({ grub, imageUrl }) => {
   const { id, name, servingUnit, servingSize, calories, sugar } = grub
   const { User, company, protein, carbs, fats, description } = grub
 
-  // const grubImgArr = useSelector(state => state.grubImages.allWorkoutImages);
   const grubImgArr = useSelector(state => state.grubimages.allGrubImages);
   const grubImage = grubImgArr.find(image => image.grubId === id);
   imageUrl = grubImage ? grubImage.url : null;
@@ -36,16 +35,6 @@ const GrubDetailCard = ({ grub, imageUrl }) => {
         <h3 className="card-description">DESCRIPTION</h3>
         <p className="card-description-txt">{description}</p>
       </div>
-
-      {/* <div className="card-img-div">
-        <p>imageUrl = {imageUrl}</p>
-        <img
-          src={imageUrl}
-          alt="img"
-          style={{ height: "125px", width: "125px" }}
-          className="round orange"
-        />
-      </div> */}
     </div>
   );
 }

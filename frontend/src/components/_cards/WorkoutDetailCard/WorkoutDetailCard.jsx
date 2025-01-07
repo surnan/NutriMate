@@ -19,16 +19,6 @@ function WorkoutDetailCard({ workout, imageUrl }) {
         <h3 className="card-description">DESCRIPTION</h3>
         <p className="card-description-txt">zzz {description}</p>
       </div>
-
-      {/* <div className="card-img-div">
-      <p>imageUrl = {imageUrl}</p>
-        <img
-          src={imageUrl}
-          alt="img"
-          style={{ height: "125px", width: "125px" }}
-          className="round orange"
-        />
-      </div> */}
     </div>
   );
 }

@@ -215,21 +215,6 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
         views={['day', 'week', 'month']}
         defaultView="day"
 
-
-        //eventPropGetter={eventStyleGetter} //css even styling
-        // eventPropGetter={(event) => ({
-        //   style: {
-        //     backgroundColor: event.color,
-        //     borderRadius: '4px',
-        //     opacity: 0.9,
-        //     color: 'white',
-        //     fontSize: '0.8rem',
-        //     padding: '2px',
-        //     height: '18px',
-        //     overflow: 'hidden',
-        //   },
-        // })}
-
         eventPropGetter={(event) => {
           let customStyle = {
             backgroundColor: event.color,

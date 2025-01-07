@@ -1,3 +1,5 @@
+// backend/utils/scraper.js
+
 const { chromium } = require('playwright');
 
 async function scrapeNutrition(url) {

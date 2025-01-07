@@ -81,8 +81,8 @@ router.get('/:dayLogId', async (req, res, next) => {
     }
 });
 
-// router.delete('/:dayLogId', requireAuth, async (req, res, next) => {
-router.delete('/:dayLogId', async (req, res, next) => {
+router.delete('/:dayLogId', requireAuth, async (req, res, next) => {
+// router.delete('/:dayLogId', async (req, res, next) => {
     try {
         const dayLogId = parseInt(req.params.dayLogId)
         const currentdayLog = await DayLog.findByPk(dayLogId)
@@ -99,8 +99,8 @@ router.delete('/:dayLogId', async (req, res, next) => {
     }
 })
 
-// router.post('/', requireAuth, async (req, res, next) => {
-router.post('/', async (req, res, next) => {
+router.post('/', requireAuth, async (req, res, next) => {
+// router.post('/', async (req, res, next) => {
     try {
         const { name, calories, units, unitType, grubId, userId, workoutId, timestamp } = req.body
 
@@ -128,8 +128,8 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-// router.put('/:dayLogId', requireAuth, async (req, res, next) => {
-router.put('/:dayLogId', async (req, res, next) => {
+router.put('/:dayLogId', requireAuth, async (req, res, next) => {
+// router.put('/:dayLogId', async (req, res, next) => {
     try {
         const dayLogId = parseInt(req.params.dayLogId)
         const currentdayLog = await DayLog.findByPk(dayLogId)

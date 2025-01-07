@@ -17,10 +17,6 @@ import WorkoutCard from "../_cards/WorkoutCard";
 import GrubCard from "../_cards/GrubCard";
 import { useTheme } from "../../context/ThemeContext";
 
-// import WorkoutDetailCard from "../_cards/WorkoutCard";
-// import GrubDetailCard from "../_cards/GrubCard";
-
-
 const CardsPageGrid = ({ stuff }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -75,17 +71,6 @@ const CardsPageGrid = ({ stuff }) => {
       .sort((a, b) => a.name.localeCompare(b.name));
   }, [workoutsArr, grubsArr, sessionUser.id, searchQuery]);
 
-
-  // useEffect(() => {
-  //   dispatch(getWorkoutsAllThunk())
-  //   dispatch(getGrubsAllThunk())
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   dispatch(getWorkoutImagesAllThunk())
-  //   dispatch(getGrubImagesAllThunk())
-  // }, []);
-
   useEffect(() => {
     console.log(`Theme ===> `, theme)
     document.body.classList.remove("light-mode", "dark-mode");
@@ -103,12 +88,6 @@ const CardsPageGrid = ({ stuff }) => {
 
   const whichCard = (data) => {
     let imageUrl;
-
-    console.log(">>>>>")
-    console.log(">>>>>")
-    console.log(">>> data = ", data)
-    console.log(">>>>>")
-    console.log(">>>>>")
 
     if (stuff === "workout") {
       const workoutImage = workoutImgArr.find(image => image.workoutId === data.id);
