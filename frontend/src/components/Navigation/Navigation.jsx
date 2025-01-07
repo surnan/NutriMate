@@ -50,12 +50,15 @@ function Navigation() {
         {user && (
           <p className="p_profileImg">
             {user.profileImg ?
-              <img
-                src={user.profileImg}
-                style={{ height: "70px", width: '70px', borderRadius: "50%" }}
-                className="clickable"
-                onClick={() => navigate("/settings")}
-              /> : null}
+              <div className="tooltip ">
+                <img
+                  src={user.profileImg}
+                  style={{ height: "70px", width: '70px', borderRadius: "50%" }}
+                  className="clickable profile_img_div"
+                  onClick={() => navigate("/settings")}
+                />
+                <span className="tooltiptext_below letter_spacing">Settings</span>
+              </div> : null}
           </p>
         )}
       </div>

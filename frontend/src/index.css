@@ -7,7 +7,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* border: 2px red solid; */
+  border: 2px red solid;
 }
 
 .clickable {cursor: pointer}
@@ -54,6 +54,7 @@
 .width100 {width: 100%}
 .block {display: block}
 .border {border: 1px solid rgba(0, 0, 0, 0.548)}
+.right {text-align: right}
 
 
 :root {
@@ -86,7 +87,8 @@ body.dark-mode button.rbc-active{color: black}
 .calender_div {
     /* background: orange !important;  */
     width: 100%;
-    height: auto;
+    /* height: auto; */
+    height: 100vh;
     display: flex;
     justify-content: center;
     margin: 20px 0;
@@ -142,8 +144,12 @@ button:disabled {
 
 
 button {transition: transform 0.2s, filter 0.2s}
-button:hover {transform: scale(1.05)}
+button:hover {transform: scale(1.15)}
 button:active {filter: brightness(0.8)}
+
+.profile_img_div {transition: transform 0.2s, filter 0.2s}
+.profile_img_div:hover {transform: scale(1.15)}
+.profile_img_div:active {filter: brightness(0.8)}
 
 ._select, ._input, ._label {height: 2rem}
 input {padding-left: 1rem}
@@ -226,6 +232,7 @@ select._input {padding: 0.5rem}
     height: 3rem; 
     border: 1px solid black;
 }
+
 
 
 
@@ -417,6 +424,30 @@ div.mainBodyStyle.relative{
   padding: 0;
   background-color: rgb(252, 253, 249);
   /* background-color: green; */
-
 }
 
+.card-description-txt{
+  margin-top: 1rem;
+  overflow-wrap: break-word; 
+  word-break: break-word;    
+  white-space: normal;  
+}
+
+.card-description{
+  text-decoration: underline;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+}
+
+.card-img-div{
+  margin: 1rem;
+}
+
+div.rbc-calendar{
+  width: 100%;
+  height: 100%;
+}
+
+button.toggle-totals-btn{
+  font-size: large;
+}

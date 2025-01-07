@@ -21,7 +21,7 @@ function DayLogPageForm() {
     const dayLogId = parseInt(id);
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
     const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
-
+    
     useEffect(() => {
         console.log("")
         console.log("")
@@ -173,43 +173,23 @@ function DayLogPageForm() {
             <h3>Email = {sessionUser?.email}</h3> */}
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
-
-
-                <div className="tooltip">
-                    <button
-                        onClick={handleBack}
-                        className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                        title="Back"
-                    >
-                        <i className="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <span className="tooltiptext letter_spacing">BACK</span>
-                </div>
+                <button
+                    className="blue _button"
+                    type="button"
+                    onClick={handleBack}
+                >
+                    BACK
+                </button>
 
                 <div className="wokoutPageForm_hFlex">
-
-                    {/* <button
+                    <button
                         className="orange _button"
                         type="button"
                         onClick={handleReset}
                     >
                         RESET
-                    </button> */}
-
-                    <div className="tooltip">
-                        <button
-                            onClick={handleReset}
-                            className="round daily_btn_font_size shadow orange clickable menuRoundBtn"
-                            title="Reset"
-                        >
-                            <i className="fa-solid fa-rotate-left"></i>
-                        </button>
-                        <span className="tooltiptext letter_spacing">UNDO</span>
-                    </div>
-
-
-
-                    {/* <button
+                    </button>
+                    <button
                         className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
                         type="button"
                         onClick={handleSubmitSave}
@@ -217,24 +197,7 @@ function DayLogPageForm() {
                         disabled={isEmpty(errors)}
                     >
                         SAVE
-                    </button> */}
-
-                    <div className="tooltip">
-                        <button
-                            onClick={handleSubmitSave}
-                            className="round daily_btn_font_size shadow blue clickable menuRoundBtn"
-                            title="Save"
-                        >
-                            <i className="fa-solid fa-bookmark"></i>
-                        </button>
-                        <span className="tooltiptext letter_spacing">SAVE</span>
-                    </div>
-
-
-
-
-
-
+                    </button>
                 </div>
             </div>
 
@@ -358,22 +321,9 @@ function DayLogPageForm() {
             <p></p>
             <br /><br />
             <div className="max_HFlex">
-                {/* <button className="red _button" type="button" onClick={handleDelete}>
+                <button className="red _button" type="button" onClick={handleDelete}>
                     DELETE
-                </button> */}
-
-
-                <div className="tooltip">
-                    <button
-                        onClick={handleDelete}
-                        className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-                        title="Delete"
-                    >
-                        <i className="fa-solid fa-trash-can"></i>
-                    </button>
-                    <span className="tooltiptext_below letter_spacing">DELETE</span>
-                </div>
-
+                </button>
             </div>
 
 
