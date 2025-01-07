@@ -169,8 +169,8 @@ function DayLogPageForm() {
             mainBodyStyle settingsPageFlex
             ${theme === "dark" ? "dkBody smoke_font" : ""}
             `}>
-            <h3>DayLogPageForm.jsx</h3>
-            <h3>Email = {sessionUser?.email}</h3>
+            {/* <h3>DayLogPageForm.jsx</h3>
+            <h3>Email = {sessionUser?.email}</h3> */}
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
                 <button
