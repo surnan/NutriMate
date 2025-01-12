@@ -3,7 +3,7 @@ import "./Splash.css"
 import { useSelector } from 'react-redux';
 import SplashGifDiv from "./SplashGifDiv";
 import DayLogPage from "../DayLogPage/DayLogPage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTheme } from "../../context/ThemeContext"
 
 const Splash = () => {

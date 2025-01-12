@@ -1,20 +1,16 @@
 // frontend/src/components/_components/AwsImagesUploader/AwsImagesUploader.jsx
 
-
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const AwsImageUploader = ({ onSubmit, buttonText = "Upload Image" }) => {
-  const dispatch = useDispatch();
-
   const [imgUrl, setImgUrl] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
   const [showUpload, setShowUpload] = useState(true);
 
-  const handleImgClick = () => {
-    console.log("click image");
-    setShowUpload(!showUpload);
-  };
+  // const handleImgClick = () => {
+  //   console.log("click image");
+  //   setShowUpload(!showUpload);
+  // };
 
   const updatedImgFromPC = async (e) => {
     const file = e.target.files[0];

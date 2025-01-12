@@ -13,7 +13,8 @@ function WeightPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
+    // const { theme, toggleTheme } = useTheme();
 
     const { newWeight, currentData } = location.state || {};
 

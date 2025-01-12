@@ -106,7 +106,7 @@ const CustomCalendar = ({ onChange, handler, setTotals, defaultStartTime, theme 
         sugars: newTotalSugar,
       });
     },
-    [events]
+    [events, setTotals]
   );
 
   const handleSelectSlot = ({ start, end }) => {
