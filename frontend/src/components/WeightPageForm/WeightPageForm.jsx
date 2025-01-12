@@ -13,7 +13,8 @@ function WeightPageForm() {
     const dispatch = useDispatch();
     const location = useLocation();
     const sessionUser = useSelector((state) => state.session.user);
-    const { theme, toggleTheme } = useTheme();
+    const { theme } = useTheme();
+    // const { theme, toggleTheme } = useTheme();
 
     const { newWeight, currentData } = location.state || {};
 
@@ -236,13 +237,6 @@ function WeightPageForm() {
             </div>
 
             <div className="weightPageForm_hFlex">
-                {/* <button
-                    onClick={handleDeleteBtn}
-                    className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-                    title="Delete"
-                >
-                    <i className="fa-solid fa-trash-can"></i>
-                </button> */}
             </div>
             {showDeletetModal && (
                 <DeleteWeightModal

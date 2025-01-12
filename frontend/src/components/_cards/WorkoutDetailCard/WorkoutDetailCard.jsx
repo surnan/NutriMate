@@ -1,16 +1,16 @@
 // frontend/src/components/_cards/WorkoutDetailCard/WorkoutDetailCard.jsx
 
 import "./WorkoutDetailCard.css"
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+// function WorkoutDetailCard({ workout, imageUrl }) {
 
-function WorkoutDetailCard({ workout, imageUrl }) {
-  const { id, name, description } = workout
+function WorkoutDetailCard({ workout}) {
+  const { name, description } = workout
 
-  const workoutImgArr = useSelector(state => state.workoutimages.allWorkoutImages);
-  const workoutImage = workoutImgArr.find(image => image.workoutId === id);
-  imageUrl = workoutImage ? workoutImage.url : null;
-
-
+  // const { id, name, description } = workout
+  // const workoutImgArr = useSelector(state => state.workoutimages.allWorkoutImages);
+  // const workoutImage = workoutImgArr.find(image => image.workoutId === id);
+  // imageUrl = workoutImage ? workoutImage.url : null;
   
   return (
     <div className="workoutDetail_card_grid">
@@ -19,16 +19,6 @@ function WorkoutDetailCard({ workout, imageUrl }) {
         <h3 className="card-description">DESCRIPTION</h3>
         <p className="card-description-txt">zzz {description}</p>
       </div>
-
-      {/* <div className="card-img-div">
-      <p>imageUrl = {imageUrl}</p>
-        <img
-          src={imageUrl}
-          alt="img"
-          style={{ height: "125px", width: "125px" }}
-          className="round orange"
-        />
-      </div> */}
     </div>
   );
 }

@@ -18,7 +18,8 @@ const WeightPage = () => {
 
   const sessionUser = useSelector((state) => state.session.user);
   const weightsArr = useSelector(state => state.weights.allWeights);
-  const { theme, toggleTheme } = useTheme();
+  // const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   const filteredAndSortedArray = weightsArr
     .filter(weight => weight.userId === sessionUser.id)

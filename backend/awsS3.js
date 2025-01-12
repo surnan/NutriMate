@@ -1,17 +1,11 @@
 const AWS = require("aws-sdk");
-// name of your bucket here
 const NAME_OF_BUCKET = process.env.AWS_BUCKET_NAME
 const multer = require("multer");
-
-//  make sure to set environment variables in production for:
-//  AWS_ACCESS_KEY_ID
-//  AWS_SECRET_ACCESS_KEY
-//  and aws will automatically use those environment variables
 
 const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 // --------------------------- Public UPLOAD ------------------------
-//These are middlewares for express
+//middlewares for express
 const singlePublicFileUpload = async (file) => {
     const { originalname, mimetype, buffer } = await file;
     const path = require("path");
@@ -37,7 +31,7 @@ const multiplePublicFileUpload = async (files) => {
 };
 
 // --------------------------- Prviate UPLOAD ------------------------
-//Also middlewares for express/
+//middlewares for express/
 const singlePrivateFileUpload = async (file) => {
     const { originalname, mimetype, buffer } = await file;
     const path = require("path");
@@ -49,7 +43,7 @@ const singlePrivateFileUpload = async (file) => {
         Body: buffer,
     };
     const result = await s3.upload(uploadParams).promise();
-    // save the name of the file in your bucket as the key in your database to retrieve for later
+    // save the name of the file in your bucket as the key in database 
     return result.Key;
 };
 

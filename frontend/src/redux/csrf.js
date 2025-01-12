@@ -6,8 +6,6 @@ export async function csrfFetch(url, options) {
         options.method = options.method || 'GET';
         options.headers = options.headers || {};
 
-        // !GET => "Content-Type" = application/json   
-        // !GET => "Content-Type" = "XSRF-TOKEN" to "xsrf-token" cookie
         if (options.method.toUpperCase() !== 'GET') {
             if(options.headers["Content-Type"] === "multipart/form-data"){  
                 delete options.headers["Content-Type"]; //"application/json" not good for file data

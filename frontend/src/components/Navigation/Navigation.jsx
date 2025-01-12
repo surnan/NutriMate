@@ -19,7 +19,8 @@ function Navigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
-  const { theme, toggleTheme } = useTheme();
+  // const { theme, toggleTheme } = useTheme();
+  const { theme } = useTheme();
 
   useEffect(() => {
     console.log(`Navigation -> Theme ===> `, theme)
