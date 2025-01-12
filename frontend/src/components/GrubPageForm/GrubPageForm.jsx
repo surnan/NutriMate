@@ -1,4 +1,5 @@
 // frontend/src/componenets/GrubPageForm/GrubPageForm.jsx
+
 import "./GrubPageForm.css";
 import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,9 +7,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postGrubsOneThunk, updateGrubsOneThunk, deleteGrubThunkById, getGrubsOneThunk } from "../../redux/grubs"
 import { resetGrubImages, getGrubImagesForGrubThunk, updateGrubImagesOneThunk, postGrubImagesOneThunk } from "../../redux/grubImages";
 import DeleteModal from "../_modal/DeleteModal";
-// import { capitalizeFirstLetter, isEmpty } from '../_utils/MyFunctions'
 import { capitalizeFirstLetter } from '../_utils/MyFunctions'
-// import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import placeholderIMG from '../../fe_images/none_image.png'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";
@@ -229,8 +228,6 @@ function GrubPageForm() {
         setShowDeletetModal(false)
         navigate(-1)
     };
-    // const handleBack = () => navigate(-1);
-    // const hasError = () => Object.keys(errors).length !== 0;
 
     const handleBack = async () => {
         dispatch(resetGrubImages()); // Clear workout images
@@ -459,21 +456,7 @@ function GrubPageForm() {
 
 
                 </div>
-                < br />
-                {/* <div className="max_HFlex">
-                    <br />
-                    <div className="tooltip">
-                        <button
-                            onClick={handleDeleteBtn}
-                            className="round daily_btn_font_size shadow red clickable menuRoundBtn"
-                            title="Delete"
-                        >
-                            <i className="fa-solid fa-trash-can"></i>
-                        </button>
-                        <span className="tooltiptext_below letter_spacing">DELETE</span>
-                    </div>
-                </div> */}
-
+                <br />
                 <br />
                 <br />
                 <h3 className="center">

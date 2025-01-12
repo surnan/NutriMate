@@ -158,17 +158,6 @@ const DayLogPage = () => {
                             </button>
                             <span className="tooltiptext">Record Weight</span>
                         </div>
-
-                        {/* <div className="tooltip">
-                            <button
-                                onClick={handleSettings}
-                                className="shadow yellow menuRoundBtn"
-                                title="Change Settings"
-                            >
-                                <i className="fa-solid fa-gear"></i>
-                            </button>
-                            <span className="tooltiptext">Settings</span>
-                        </div> */}
                     </div>
                 </div>
 

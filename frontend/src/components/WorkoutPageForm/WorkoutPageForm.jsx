@@ -10,7 +10,7 @@ import { capitalizeFirstLetter } from '../_utils/MyFunctions';
 import placeholderIMG from '../../fe_images/placeholder_image.jpg'
 import downloadGIF from '../../fe_images/download.gif'
 import ImageDisplay from "../../components/_components/ImageDisplay";
-import { updateUserThunk } from "../../redux/session";
+// import { updateUserThunk } from "../../redux/session";
 
 function WorkoutPageForm() {
   const navigate = useNavigate();

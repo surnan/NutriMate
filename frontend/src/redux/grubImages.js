@@ -145,10 +145,6 @@ export const resetGrubImages = () => (dispatch) => {
     dispatch(resetGrubImagesForGrub());
 };
 
-
-
-
-
 // State object
 const initialState = {
     allGrubImages: [],

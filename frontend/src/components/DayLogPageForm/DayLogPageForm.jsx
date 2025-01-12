@@ -6,8 +6,6 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
 import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/MyFunctions'
 import DeleteModal from "../_modal/DeleteModal";
-import WorkoutCard from "../_cards/WorkoutCard";
-import GrubCard from "../_cards/GrubCard";
 import WorkoutDetailCard from "../_cards/WorkoutDetailCard"
 import GrubDetailCard from "../_cards/GrubDetailCard"
 
@@ -22,13 +20,11 @@ function DayLogPageForm() {
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
     const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
 
-    useEffect(() => {
-        console.log("")
-        console.log("")
-        console.log("...location.state = ", location.state)
-        console.log("")
-        console.log("")
-    }, [location.state])
+    // useEffect(() => {
+    //     console.log("")
+    //     console.log("...location.state = ", location.state)
+    //     console.log("")
+    // }, [location.state])
 
     const sessionUser = useSelector((state) => state.session.user);
     const dayLogObj = useSelector((state) => state.daylogs.single)
@@ -60,7 +56,6 @@ function DayLogPageForm() {
     }, [dayLogObj, newDayLog, sessionUser, dayLogId, dispatch, newWorkoutObj, newGrubObj])
 
     useEffect(() => {
-        // console.log("...Z")
         setForm(initializeForm());
     }, [initializeForm]);
 
@@ -71,12 +66,9 @@ function DayLogPageForm() {
             dispatch(getDailyLogsOneThunk(dayLogId))
         }
     }, [dispatch, dayLogId, newDayLog])
-    // }, [dayLogId, newDayLog, dayLogObj])
 
     const handleReset = () => setForm(initializeForm)
     const handleBack = () => navigate(-1);
-
-
 
     useEffect(() => {
         // console.log("...C")
@@ -164,7 +156,6 @@ function DayLogPageForm() {
     }, [dayLogObj.id])
 
     return (
-        // <div className="mainBodyStyle">
         <div className={`
             mainBodyStyle settingsPageFlex
             ${theme === "dark" ? "dkBody smoke_font" : ""}
@@ -173,8 +164,6 @@ function DayLogPageForm() {
             <h3>Email = {sessionUser?.email}</h3> */}
             <div className="max_HFlex">
                 {/* TOP BUTTONS */}
-
-
                 <div className="tooltip">
                     <button
                         onClick={handleBack}
@@ -187,15 +176,6 @@ function DayLogPageForm() {
                 </div>
 
                 <div className="wokoutPageForm_hFlex">
-
-                    {/* <button
-                        className="orange _button"
-                        type="button"
-                        onClick={handleReset}
-                    >
-                        RESET
-                    </button> */}
-
                     <div className="tooltip">
                         <button
                             onClick={handleReset}
@@ -207,18 +187,6 @@ function DayLogPageForm() {
                         <span className="tooltiptext letter_spacing">UNDO</span>
                     </div>
 
-
-
-                    {/* <button
-                        className={`green _button ${isEmpty(errors) ? "disabled_btn" : ""}`}
-                        type="button"
-                        onClick={handleSubmitSave}
-                        // disabled={hasError()}
-                        disabled={isEmpty(errors)}
-                    >
-                        SAVE
-                    </button> */}
-
                     <div className="tooltip">
                         <button
                             onClick={handleSubmitSave}
@@ -229,25 +197,17 @@ function DayLogPageForm() {
                         </button>
                         <span className="tooltiptext letter_spacing">SAVE</span>
                     </div>
-
-
-
-
-
-
                 </div>
             </div>
 
             <div className="card twenty_padding twenty_margin">
                 {
                     dayLogObj?.Workout &&
-                    // <WorkoutCard workout={dayLogObj?.Workout} />
                     <WorkoutDetailCard workout={dayLogObj?.Workout} />
                 }
 
                 {
                     dayLogObj?.Grub &&
-                    // <GrubCard grub={dayLogObj?.Grub} />
                     <GrubDetailCard grub={dayLogObj?.Grub} />
                 }
             </div>
@@ -358,11 +318,6 @@ function DayLogPageForm() {
             <p></p>
             <br /><br />
             <div className="max_HFlex">
-                {/* <button className="red _button" type="button" onClick={handleDelete}>
-                    DELETE
-                </button> */}
-
-
                 <div className="tooltip">
                     <button
                         onClick={handleDelete}
@@ -375,9 +330,6 @@ function DayLogPageForm() {
                 </div>
 
             </div>
-
-
-
 
             {showDeleteModal && (
                 <DeleteModal

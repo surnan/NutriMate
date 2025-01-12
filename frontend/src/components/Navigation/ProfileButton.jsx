@@ -51,10 +51,10 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const handleSettings = (e) => {
-    e.preventDefault();
-    navigate("/settings")
-  };
+  // const handleSettings = (e) => {
+  //   e.preventDefault();
+  //   navigate("/settings")
+  // };
 
   const logout = (e) => {
     e.preventDefault();

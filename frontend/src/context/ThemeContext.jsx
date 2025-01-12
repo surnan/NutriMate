@@ -7,10 +7,6 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
 
   const [theme, setTheme] = useState(() => (localStorage.getItem('theme') || 'light'));
-  // const [theme, setTheme] = useState(() => {
-  //   return localStorage.getItem('theme') || 'light';
-  // });
-
   const getStoredBoolean = (key, defaultValue) => {
     try {
       return JSON.parse(localStorage.getItem(key)) ?? defaultValue;
