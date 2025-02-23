@@ -4,7 +4,8 @@ import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
 import { postDailyLogsOneThunk, updateDailyLogsOneThunk, deleteDailyLogsThunkById, getDailyLogsOneThunk } from "../../redux/daylogs"
-import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/MyFunctions'
+// import { capitalizeFirstLetter, isEmpty, formatDatetimeLocal } from '../_utils/MyFunctions'
+import { capitalizeFirstLetter, formatDatetimeLocal } from '../_utils/MyFunctions'
 import DeleteModal from "../_modal/DeleteModal";
 import WorkoutDetailCard from "../_cards/WorkoutDetailCard"
 import GrubDetailCard from "../_cards/GrubDetailCard"
@@ -18,7 +19,8 @@ function DayLogPageForm() {
     const { id } = useParams();
     const dayLogId = parseInt(id);
     const { newDayLog, newWorkoutObj, newGrubObj } = location.state || {};
-    const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
+    // const { theme, toggleTheme, showProtein, toggleShowProtein, showCarbs, toggleShowCarbs, showFats, toggleShowFats, showSugars, toggleShowSugars } = useTheme();
+    const { theme } = useTheme();
 
     // useEffect(() => {
     //     console.log("")
